@@ -1,0 +1,37 @@
+doctype html
+html.no-js(lang='es')
+  head
+    meta(charset='utf-8')
+    meta(name='description', content='Mumuki Classroom')
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title Mumuki - Classroom
+    link(rel='icon', href='images/favicon/favicon.ico')
+
+    // build:css styles/vendor.css
+    // bower:css
+    //- css bower dependencies, generated automatically
+    // endbower
+    // endbuild
+
+    link(type='text/css', href='styles/main.css')
+
+  body(ng-app='classroom')
+
+    //if lt IE 10
+      p.browserupgrade
+        | You are using an
+        strong outdated
+        |  browser. Please
+        a(href='http://browsehappy.com/') upgrade your browser
+        |  to improve your experience.
+
+    div {{ ['Mumuki', 'Classroom'].join(' ') }}
+
+    // build:js scripts/vendor.js
+    // bower:js
+    //- javascript bower dependencies, generated automatically
+    // endbower
+    // endbuild
+
+    script(type='text/javascript', src='scripts/main.js')
+

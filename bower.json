@@ -1,0 +1,20 @@
+{
+  "name": "mumuki-classroom",
+  "description": "Mumuki classroom angular app",
+  "authors": [
+    "Mumuki"
+  ],
+  "homepage": "https://github.com/mumuki/mumuki-classroom",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "lodash": "~4.0.0"
+  }
+}
