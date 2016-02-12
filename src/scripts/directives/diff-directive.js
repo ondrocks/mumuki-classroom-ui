@@ -31,7 +31,7 @@ angular
             'index fc56817..e8e7e49 100644',
             '--- a/submission',
             '+++ b/submission',
-            '@@ -0,0 +0,0 @@',
+            '@@ -1,1 +1,1 @@',
             ...diffLines
           ].join('\n');
 
@@ -40,8 +40,7 @@ angular
           angular.element('#diff').html(Diff2Html.getPrettyHtml(diffJson, {
             inputFormat: 'json',
             showFiles: false,
-            matching: 'lines',
-            outputFormat: 'side-by-side'
+            matching: 'lines'
           }));
 
         });
