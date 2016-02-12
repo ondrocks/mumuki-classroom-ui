@@ -29,6 +29,33 @@
 
   .row
     .col-sm-6(ng-repeat='submission in [ selectedDiff.left, selectedDiff.right ]')
+
+      .row(ng-if='submission.content', ng-init='submission.commentType = "success"')
+        .col-sm-9
+          textarea.form-control(
+              ng-model='submission.comment',
+              placeholder='Comentá esta solución',
+              class="textarea-{{submission.commentType}}"
+              rows='3')
+
+        .col-sm-3
+          .btn-group.btn-group-justified
+            .btn-group
+              button.btn.btn-success(ng-click='submission.commentType = "success"')
+            .btn-group
+              button.btn.btn-warning(ng-click='submission.commentType = "warning"')
+            .btn-group
+              button.btn.btn-danger(ng-click='submission.commentType = "danger"')
+          br
+          button.btn.btn-default.btn-block(ng-click='addComment(submission)')
+            | Comment
+
+      .bs-callout(ng-repeat='comment in comments(submission) | orderBy:$index:true', class='bs-callout-{{ comment.type }}')
+        h4 Comentario
+          small &nbsp;- {{ comment.email }} - {{ time(comment) }}
+        p(ng-repeat='line in comment.content.split("\n") track by $index')
+          | {{ line }}
+
       .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.test_results.length')
         h4 {{ 'tests' | translate }}
         p

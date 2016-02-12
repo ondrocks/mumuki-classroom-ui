@@ -14,6 +14,7 @@ angular
 
     $scope.diffs = diffs;
     $scope.progress = exerciseProgress;
+    $scope.lastSubmission = _.last(exerciseProgress.submissions);
 
     $scope.prev = () => $scope.selectDiff(diffs[prev()]);
     $scope.next = () => $scope.selectDiff(diffs[next()]);
@@ -22,5 +23,15 @@ angular
     $scope.isSelectedDiff = (diff) => _.isEqual($scope.selectedDiff, diff);
 
     $scope.selectDiff(diffs[MIN]);
+
+    $scope.comments = (submission) => submission.comments;
+    $scope.time = (comment) => moment(comment.date).fromNow();
+
+    $scope.addComment = (submission) => {
+      if (submission.comment) {
+        submission.addComment(submission.comment, submission.commentType);
+        submission.restartComment();
+      }
+    }
 
   });
