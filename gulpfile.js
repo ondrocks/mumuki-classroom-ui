@@ -50,7 +50,7 @@ gulp.task('jade:views', () => {
 
 gulp.task('jade:index', () => {
   return gulp.src([`${srcFolder}/index.jade`])
-    .pipe($.wiredep())
+    .pipe($.wiredep({ includeSelf: true }))
     .pipe($.jade({ pretty: true }))
     .pipe($.usemin({
       css: [$.minifyCss],
