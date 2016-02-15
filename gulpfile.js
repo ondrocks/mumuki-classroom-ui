@@ -101,6 +101,13 @@ gulp.task('dev:watch', () => {
   gulp.watch(`${srcFolder}/views/**/*.jade`, ['jade:views']);
 });
 
+gulp.task('prod:serve', ['prod:build'], () => {
+ return gulp.src(`${outFolder}`)
+   .pipe($.webserver({
+     port: process.env.PORT,
+   }));
+});
+
 gulp.task('dev', (done) => {
   process.env.NODE_ENV = 'development';
   runSequence('clean', 'dev:serve', 'dev:watch', done);
@@ -108,6 +115,6 @@ gulp.task('dev', (done) => {
 
 gulp.task('prod', (done) => {
   process.env.NODE_ENV = 'production';
-  runSequence('clean', 'prod:build', done);
+  runSequence('clean', 'prod:serve', done);
 });
 
