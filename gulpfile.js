@@ -105,6 +105,7 @@ gulp.task('prod:serve', ['prod:build'], () => {
  return gulp.src(`${outFolder}`)
    .pipe($.webserver({
      port: process.env.PORT,
+     host: '0.0.0.0'
    }));
 });
 
