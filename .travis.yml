@@ -7,3 +7,11 @@ after_success:
 before_install:
 - openssl aes-256-cbc -K $encrypted_cde8fe39d66d_key -iv $encrypted_cde8fe39d66d_iv
   -in escualo_rsa.enc -out escualo_rsa -d
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
