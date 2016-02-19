@@ -79,7 +79,10 @@ gulp.task('images', () => {
 gulp.task('jade', ['jade:index', 'jade:views']);
 
 gulp.task('dev:build',  ['dev:js',  'jade', 'scss', 'fonts', 'images']);
-gulp.task('prod:build', ['prod:js', 'jade', 'scss', 'fonts', 'images']);
+
+gulp.task('prod:build', (done) => {
+  runSequence('clean', ['prod:js', 'jade', 'scss', 'fonts', 'images'], done);
+});
 
 gulp.task('dev:serve', ['dev:build'], () => {
   return gulp.src(`${outFolder}`)
@@ -116,6 +119,6 @@ gulp.task('dev', (done) => {
 
 gulp.task('prod', (done) => {
   process.env.NODE_ENV = 'production';
-  runSequence('clean', 'prod:serve', done);
+  runSequence('prod:serve', done);
 });
 
