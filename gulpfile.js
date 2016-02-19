@@ -101,7 +101,7 @@ gulp.task('dev:watch', () => {
   gulp.watch(`${srcFolder}/views/**/*.jade`, ['jade:views']);
 });
 
-gulp.task('prod:serve', ['prod:build'], () => {
+gulp.task('prod:serve', () => {
  return gulp.src(`${outFolder}`)
    .pipe($.webserver({
      port: process.env.PORT,

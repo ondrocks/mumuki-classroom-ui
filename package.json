@@ -5,7 +5,8 @@
   "scripts": {
     "postinstall": "node_modules/.bin/bower install --allow-root",
     "start": "node_modules/.bin/gulp prod",
-    "test": "echo \"WARNING: this project has no tests\""
+    "test": "echo \"WARNING: this project has no tests\"",
+    "build": "node_modules/.bin/gulp prod:build"
   },
   "repository": {
     "type": "git",
