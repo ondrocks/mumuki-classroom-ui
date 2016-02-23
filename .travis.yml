@@ -1,6 +1,10 @@
 language: node_js
 node_js:
 - 4.2.4
+cache:
+  directories:
+    - node_modules
+    - src/bower_components
 after_success:
 - wget https://raw.githubusercontent.com/mumuki/mumuki-escualo/master/travis_deploy
   && chmod u+x travis_deploy && ./travis_deploy classroom classroom.mumuki.io
