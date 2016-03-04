@@ -88,7 +88,7 @@ angular
             templateUrl: 'views/guide-progress.html',
             controller: 'GuideProgressController',
             resolve: {
-              guideProgress: ($state, $stateParams, Api) => {
+              data: ($state, $stateParams, Api) => {
                 return Api
                   .getGuideProgress($stateParams)
                   .catch(() => $state.go('classroom.courses.guides', $stateParams, { location: 'replace' }));

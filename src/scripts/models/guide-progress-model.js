@@ -43,7 +43,6 @@ angular
       };
 
       static from(guideProgress) {
-        guideProgress.guide = Guide.from(guideProgress.guide);
         guideProgress.course = Course.from(guideProgress.course);
         guideProgress.student = Student.from(guideProgress.student);
         guideProgress.exercises = _.map(guideProgress.exercises, Exercise.from);

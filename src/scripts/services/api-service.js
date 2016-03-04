@@ -27,7 +27,7 @@ angular
     this.getGuideProgress = ({ org, course, repo }) => {
       return $http
         .get(`${API}/guide_progress/${org}/${course}/${repo}`, authenticated())
-        .then((res) => _.map(res.data.guides_progress, GuideProgress.from))
+        .then((res) => ({guide: res.data.guide, guideProgress: _.map(res.data.progress, GuideProgress.from)}))
     };
 
     this.getExerciseProgress = ({ org, course, repo, student, exercise }) => {
