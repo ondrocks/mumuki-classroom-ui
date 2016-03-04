@@ -1,15 +1,15 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, guideProgress, Api, DevIcon) {
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, data, Api, DevIcon) {
 
-    const guide = guideProgress[0].guide;
+    const guide = data.guide;
 
     const setGuideProgress = (guideProgress) => $scope.guideProgress = guideProgress;
 
-    const guideProgressFetcher = $interval(() => Api.getGuideProgress($stateParams).then(setGuideProgress), 5000);
+    const guideProgressFetcher = $interval(() => Api.getGuideProgress($stateParams).then((data) => setGuideProgress(data.guideProgress)), 5000);
 
-    setGuideProgress(guideProgress);
+    setGuideProgress(data.guideProgress);
 
     $scope.guide = guide;
     $scope.devicon = DevIcon.from;
