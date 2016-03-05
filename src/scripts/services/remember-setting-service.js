@@ -5,8 +5,9 @@ angular
     return function(scope, key) {
       const cookieName = $state.current.name + "-" + key;
       
-      scope[key] = $cookies.get(cookieName), scope.$watch(key, function(newValue, oldValue) {
-        newValue ? $cookies.put(cookieName, newValue) : $cookies.remove(cookieName);
+      scope[key] = _.get($cookies.getObject(cookieName), 'value'); 
+      scope.$watch(key, function(newValue, oldValue) {
+        newValue ? $cookies.putObject(cookieName, {value: newValue}) : $cookies.remove(cookieName);
       });
     };
   });
