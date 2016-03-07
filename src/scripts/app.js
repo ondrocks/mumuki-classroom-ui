@@ -6,5 +6,6 @@ angular.module('classroom', [
   'angular-jwt',
   'ngAnimate',
   'toastr',
-  'angular-clipboard'
+  'angular-clipboard',
+  'ngCookies'
 ]);

@@ -1,7 +1,9 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, data, Api, DevIcon) {
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, data, Api, DevIcon, RememberSetting) {
+    RememberSetting($scope, 'showDetails');
+    RememberSetting($scope, 'sortType');
 
     const guide = data.guide;
 
@@ -13,7 +15,10 @@ angular
 
     $scope.guide = guide;
     $scope.devicon = DevIcon.from;
-    $scope.sortType = 'progress';
+
+    if (_.isEmpty($scope.sortType)) {
+      $scope.sortType = 'progress';  
+    }    
 
     $scope.sortingCriteria = () => {
       return $scope.sortType === 'name' ?
@@ -22,5 +27,4 @@ angular
     };
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
-
   });
