@@ -16,7 +16,7 @@ angular
     $scope.guide = guide;
     $scope.devicon = DevIcon.from;
 
-    if (_.isEmpty($scope.sortType)) {
+    if (_.isNil($scope.sortType)) {
       $scope.sortType = 'progress';  
     }    
 

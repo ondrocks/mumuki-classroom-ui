@@ -7,7 +7,7 @@ angular
       
       scope[key] = _.get($cookies.getObject(cookieName), 'value'); 
       scope.$watch(key, (newValue, oldValue) => {
-        if (_.isEmpty(newValue)) { 
+        if (_.isNil(newValue)) { 
           $cookies.remove(cookieName)
         } else {
           $cookies.putObject(cookieName, {value: newValue})
