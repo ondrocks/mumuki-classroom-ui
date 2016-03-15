@@ -3,6 +3,7 @@
     h1
       img.rounded-x(ng-src='{{ progress.student.image_url }}', width='100px')
       span {{ progress.student.name }}
+      small &nbsp;- {{ progress.student.email }}
       small.show {{ progress.getName() }}
       small
         span {{ progress.submissionsCount() + ' soluciones enviadas' }}
