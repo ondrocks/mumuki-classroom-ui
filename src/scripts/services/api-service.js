@@ -32,7 +32,7 @@ angular
 
     this.getExerciseProgress = ({ org, course, repo, student, exercise }) => {
       return $http
-        .get(`${API}/guide_progress/${org}/${repo}/${student}/${exercise}`, authenticated())
+        .get(`${API}/guide_progress/${org}/${course}/${repo}/${student}/${exercise}`, authenticated())
         .then((res) => ExerciseProgress.from(res.data.exercise_progress))
     };
 
