@@ -17,12 +17,12 @@ angular
     $scope.devicon = DevIcon.from;
 
     if (_.isNil($scope.sortType)) {
-      $scope.sortType = 'progress';
-    }
+      $scope.sortType = 'progress';  
+    }    
 
     $scope.sortingCriteria = () => {
       return $scope.sortType === 'name' ?
-        ['student.last_name', 'student.first_name'] :
+        ['student.name'] :
         ['passedAverage()', 'exercises.length'];
     };
 
