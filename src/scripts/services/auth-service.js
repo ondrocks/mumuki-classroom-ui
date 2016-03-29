@@ -28,10 +28,11 @@ angular
       return _.some(this.permissions(), (p) => teacherRegex.test(p.split('/')[0]));
     }
 
-    this.signin = () => {
+    this.signin = (callback) => {
       auth.signin({ authParams: { scope: 'openid app_metadata' } }, (profile, token) => {
         store.set('profile', profile);
         store.set('token', token);
+        if (_.isFunction(callback)) callback();
       });
     };
 

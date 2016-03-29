@@ -3,8 +3,8 @@ angular
   .module('classroom')
   .controller('HomeController', function ($scope, $state, Auth) {
 
-    $scope.login = () => Auth.signin(() => $state.go('classroom.courses', {}, { reload: true }));
+    Auth.login = () => Auth.signin(() => $state.go('classroom.courses', {}, { reload: true }));
 
-    $scope.login();
+    Auth.login();
 
   });
