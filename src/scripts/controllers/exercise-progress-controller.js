@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $sce, exerciseProgress) {
+  .controller('ExerciseProgressController', function ($scope, $sce, exerciseProgress, Auth, Api) {
 
     const diffs = exerciseProgress.diffs;
 
@@ -26,10 +26,23 @@ angular
 
     $scope.comments = (submission) => submission.comments;
     $scope.time = (comment) => moment(comment.date).fromNow();
+    _.map(diffs, (sub) => {
+      console.log('aaaa');
+        return Api.getComments(sub.id)
+            .then((comments) => sub.comments = comments);
+    });
 
     $scope.addComment = (submission) => {
       if (submission.comment) {
-        submission.addComment(submission.comment, submission.commentType);
+        let data = { submission_id: submission.id, comment: {
+            content: submission.comment,
+            type: submission.commentType,
+            date: Date.now(),
+            email: Auth.profile().email
+            }
+        }
+        Api.comment(data)
+        submission.addComment(data);
         submission.restartComment();
       }
     }
