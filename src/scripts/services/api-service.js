@@ -60,7 +60,7 @@ angular
 
     this.comment = (data) => {
       return $http
-        .post(`${API}/comment`, { submission_id: data.submission_id, comment: data.comment }, authenticated())
+        .post(`${API}/comment`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
     }
 
   });

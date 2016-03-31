@@ -26,15 +26,19 @@ angular
 
     $scope.comments = (submission) => submission.comments;
     $scope.time = (comment) => moment(comment.date).fromNow();
-    _.map(diffs, (sub) => {
-      console.log('aaaa');
-        return Api.getComments(sub.id)
-            .then((comments) => sub.comments = comments);
-    });
-
+    const getComments = () => {
+      Api.getComments(exerciseProgress.exercise.id)
+          .then((data) => {
+            const groupedComments = _.groupBy(data.comments, 'submission_id');
+            _.each($scope.diffs, (submission, index) => {
+              submission.right.comments = groupedComments[submission.right.id];
+            });
+          });
+    };
+    getComments();
     $scope.addComment = (submission) => {
       if (submission.comment) {
-        let data = { submission_id: submission.id, comment: {
+        const data = { exercise_id: exerciseProgress.exercise.id, submission_id: submission.id, comment: {
             content: submission.comment,
             type: submission.commentType,
             date: Date.now(),
@@ -42,7 +46,7 @@ angular
             }
         }
         Api.comment(data)
-        submission.addComment(data);
+        getComments();
         submission.restartComment();
       }
     }
