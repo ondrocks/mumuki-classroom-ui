@@ -6,6 +6,8 @@ angular
     available_courses: 'Available Courses',
     by_name: 'By name',
     by_progress: 'By progress',
+    comment: 'Comment',
+    comment_solution: 'Comment',
     complete_form: 'Complete form',
     copied: 'Copied',
     expectations: 'Expectations',

@@ -6,6 +6,8 @@ angular
     available_courses: 'Cursos disponibles',
     by_name: 'Por nombre',
     by_progress: 'Por progreso',
+    comment: 'Comentario',
+    comment_solution: 'Comentar',
     complete_form: 'Cargar datos',
     copied: 'Copiado',
     expectations: 'Expectativas',
