@@ -52,7 +52,10 @@ gulp.task('jade:index', () => {
   return gulp.src([`${srcFolder}/index.jade`])
     .pipe($.wiredep())
     .pipe($.jade({ pretty: true }))
-    .pipe($.usemin())
+    .pipe($.usemin({
+      css: [$.minifyCss],
+      js: [$.uglify]
+    }))
     .pipe(gulp.dest(`${outFolder}`))
     .pipe($.livereload());
 });
