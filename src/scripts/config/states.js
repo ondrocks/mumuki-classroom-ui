@@ -64,11 +64,22 @@ angular
           }
         }
       })
-      .state('classroom.courses.guides', {
+      .state('classroom.courses.course', {
         url: '/:org/:course',
+        abstract: true,
         authenticated: true,
         views: {
           'content@classroom': {
+            templateUrl: 'views/course.html',
+            controller: 'CourseController'
+          }
+        }
+      })
+      .state('classroom.courses.course.guides', {
+        url: '/guides',
+        authenticated: true,
+        views: {
+          'main@classroom.courses.course': {
             templateUrl: 'views/select.html',
             controller: 'GuidesController',
             resolve: {
@@ -76,6 +87,25 @@ angular
                 return Api
                   .getGuides($stateParams)
                   .catch(() => $state.go('classroom.courses', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
+      })
+      .state('classroom.courses.course.students', {
+        url: '/students',
+        authenticated: true,
+        views: {
+          'main@classroom.courses.course': {
+            templateUrl: 'views/students.html',
+            controller: 'StudentsController',
+            resolve: {
+              students: ($state, $stateParams, Api) => {
+                return [
+                  { image_url: 'http://goo.gl/xyTc3Z', first_name: 'Foo1', last_name: 'Bar1', email: 'foobar1@gmail.com', name: 'foobar1' },
+                  { image_url: 'http://goo.gl/xyTc3Z', first_name: 'Foo2', last_name: 'Bar2', email: 'foobar2@gmail.com', name: 'foobar2' },
+                  { image_url: 'http://goo.gl/xyTc3Z', first_name: 'Foo3', last_name: 'Bar3', email: 'foobar3@gmail.com', name: 'foobar3' }
+                ];
               }
             }
           }
@@ -92,7 +122,7 @@ angular
               data: ($state, $stateParams, Api) => {
                 return Api
                   .getGuideProgress($stateParams)
-                  .catch(() => $state.go('classroom.courses.guides', $stateParams, { location: 'replace' }));
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }
           }

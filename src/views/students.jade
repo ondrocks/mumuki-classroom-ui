@@ -1,0 +1,18 @@
+.container
+
+  .input-group
+    i.input-group-addon.fa.fa-search
+    input.form-control(id='filter', placeholder='Filtrar estudiantes', ng-model='listSearch')
+
+  br
+
+  .col-md-12(ng-repeat='item in list | filter:listSearch')
+    .row.guide-progress-blog
+      span.col-sm-8
+        img.rounded-x(ng-src='{{ item.image_url }}')
+        .name-location
+          strong {{ item.fullName() }}
+        .name-location
+          strong {{ item.name }}
+        .name-location
+          small {{ item.email }}
