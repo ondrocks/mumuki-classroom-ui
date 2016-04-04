@@ -1,8 +1,10 @@
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $stateParams, students, Student) {
+  .controller('StudentsController', function ($scope, $state, $stateParams, students) {
 
-    $scope.list = _.map(students, Student.from);
+    $scope.list = students;
+
+    $scope.sortCriteria = (student) => student.fullName() ;
 
   });

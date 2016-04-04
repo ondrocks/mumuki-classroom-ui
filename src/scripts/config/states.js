@@ -101,11 +101,9 @@ angular
             controller: 'StudentsController',
             resolve: {
               students: ($state, $stateParams, Api) => {
-                return [
-                  { image_url: 'http://goo.gl/xyTc3Z', first_name: 'Foo1', last_name: 'Bar1', email: 'foobar1@gmail.com', name: 'foobar1' },
-                  { image_url: 'http://goo.gl/xyTc3Z', first_name: 'Foo2', last_name: 'Bar2', email: 'foobar2@gmail.com', name: 'foobar2' },
-                  { image_url: 'http://goo.gl/xyTc3Z', first_name: 'Foo3', last_name: 'Bar3', email: 'foobar3@gmail.com', name: 'foobar3' }
-                ];
+                return Api
+                  .getStudents($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }
           }

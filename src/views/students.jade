@@ -6,7 +6,7 @@
 
   br
 
-  .col-md-12(ng-repeat='item in list | filter:listSearch')
+  .col-md-12(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch')
     .row.guide-progress-blog
       span.col-sm-8
         img.rounded-x(ng-src='{{ item.image_url }}')
