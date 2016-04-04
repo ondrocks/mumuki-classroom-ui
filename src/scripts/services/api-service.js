@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Api', function ($http, $location, Course, Guide, GuideProgress, ExerciseProgress, Auth, Domain, CONFIG) {
+  .service('Api', function ($http, $location, Course, Guide, Student, GuideProgress, ExerciseProgress, Auth, Domain, CONFIG) {
 
     const subdomain = Domain.tenant;
     const API = `http://${subdomain}${CONFIG.classroom.url}`;
@@ -44,6 +44,12 @@ angular
     this.updateStudent = (course, { first_name, last_name }) => {
       return $http
         .post(`${API}/courses/${course}/students`, { first_name, last_name }, authenticated())
+    }
+
+    this.getStudents = ({ org, course }) => {
+      return $http
+        .get(`${API}/students/${org}/${course}`, authenticated())
+        .then((res) => _.map(res.data.students, Student.from));
     }
 
   });

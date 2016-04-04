@@ -64,11 +64,22 @@ angular
           }
         }
       })
-      .state('classroom.courses.guides', {
+      .state('classroom.courses.course', {
         url: '/:org/:course',
+        abstract: true,
         authenticated: true,
         views: {
           'content@classroom': {
+            templateUrl: 'views/course.html',
+            controller: 'CourseController'
+          }
+        }
+      })
+      .state('classroom.courses.course.guides', {
+        url: '/guides',
+        authenticated: true,
+        views: {
+          'main@classroom.courses.course': {
             templateUrl: 'views/select.html',
             controller: 'GuidesController',
             resolve: {
@@ -76,6 +87,23 @@ angular
                 return Api
                   .getGuides($stateParams)
                   .catch(() => $state.go('classroom.courses', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
+      })
+      .state('classroom.courses.course.students', {
+        url: '/students',
+        authenticated: true,
+        views: {
+          'main@classroom.courses.course': {
+            templateUrl: 'views/students.html',
+            controller: 'StudentsController',
+            resolve: {
+              students: ($state, $stateParams, Api) => {
+                return Api
+                  .getStudents($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }
           }
@@ -92,7 +120,7 @@ angular
               data: ($state, $stateParams, Api) => {
                 return Api
                   .getGuideProgress($stateParams)
-                  .catch(() => $state.go('classroom.courses.guides', $stateParams, { location: 'replace' }));
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }
           }

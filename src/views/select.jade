@@ -1,16 +1,5 @@
 .container
 
-  h2 {{ type }} Disponibles
-  div(ng-if='url()')
-    small.text-muted Dirección de suscripción de alumnos:&nbsp;
-    small.text-muted.text-primary {{ url() }}
-    span.clipboard
-      span &nbsp;
-      i.fa.fa-clipboard(ng-click='copy()')
-      small.text-muted(ng-show='isCopied') &nbsp; Copied!
-
-  br
-
   .input-group
     i.input-group-addon.fa.fa-search
     input.form-control(id='filter', placeholder='Filtrar {{ type | lowercase }} disponibles', ng-model='listSearch')
