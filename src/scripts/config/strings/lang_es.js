@@ -8,6 +8,7 @@ angular
     by_progress: 'Por progreso',
     comment: 'Comentario',
     comment_solution: 'Comentar',
+    comment_this_solution: 'Comentar esta solución',
     complete_form: 'Cargar datos',
     copied: 'Copiado',
     expectations: 'Expectativas',
