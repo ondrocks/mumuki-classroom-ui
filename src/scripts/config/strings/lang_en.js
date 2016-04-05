@@ -13,5 +13,9 @@ angular
     no_guides_to_show: 'There is no guides to show',
     my_courses: 'My courses',
     new_course: 'New course',
+    new_course_name: 'Course name',
+    new_course_name_error: 'Course name can only contain letters, numbers, dashes or underscores',
+    new_course_description: 'Course description',
+    new_course_description_error: 'Description is mandatory',
 
   });

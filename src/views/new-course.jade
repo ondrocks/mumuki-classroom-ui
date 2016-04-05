@@ -1,6 +1,6 @@
 .container
 
-  h3 Nuevo curso
+  h3 {{ 'new_course' | translate }}
 
   form(ng-submit='create()')
 
@@ -8,25 +8,26 @@
       input.form-control(
           type='text',
           ng-model='course.name',
-          placeholder='Nombre del curso',
+          placeholder='{{ "new_course_name" | translate }}',
           required,
           autofocus,
           ng-init='f1 = false'
           ng-change='f1 = true')
       div.error
         small.text-muted.text-danger(ng-show='!isValidName() && f1')
-          | El nombre del curso solo puede contener letras, números, guiónes o guiónes bajos
+          | {{ 'new_course_name_error' | translate }}
 
     fieldset.form-group
       input.form-control(
           type='text',
           ng-model='course.description',
-          placeholder='Descripcion del curso',
+          placeholder='{{ "new_course_description" | translate }}',
           required
           ng-init='f2 = false'
           ng-change='f2 = true')
       div.error
         small.text-muted.text-danger(ng-show='!isValidDescription() && f2')
-          | La descripción es obligatoria
+          | {{ 'new_course_description_error' | translate }}
 
-      button.btn.btn-primary.pull-right(ng-if='isAdmin()', ng-disabled='!isValid()') Crear curso
+      button.btn.btn-primary.pull-right(ng-if='isAdmin()', ng-disabled='!isValid()')
+        | {{ 'new_course' | translate }}
