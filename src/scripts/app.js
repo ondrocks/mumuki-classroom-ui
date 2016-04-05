@@ -7,5 +7,6 @@ angular.module('classroom', [
   'ngAnimate',
   'toastr',
   'angular-clipboard',
-  'ngCookies'
+  'ngCookies',
+  'pascalprecht.translate'
 ]);
