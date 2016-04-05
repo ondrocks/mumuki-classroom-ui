@@ -25,7 +25,7 @@
 }
 
 .guide-progress-blog {
-  padding: 20px;
+  padding: 15px;
   border: 1px solid #f0f0f0;
 }
 
@@ -42,6 +42,10 @@
 
 .name-location {
   overflow: hidden;
+  text-overflow: ellipsis;
+  strong, small {
+    white-space: nowrap;
+  }
 }
 
 .student-guide-details section {
