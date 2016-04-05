@@ -7,6 +7,7 @@ angular
     by_name: 'By name',
     by_progress: 'By progress',
     copied: 'Copied',
+    expectations: 'Expectations',
     filter_available_courses: 'Filter available courses',
     filter_available_guides: 'Filter available guides',
     filter_students: 'Filter students',
@@ -26,7 +27,10 @@ angular
     no_students_to_show: 'There is no students to show',
     open_in_atheneum: 'Open in Atheneum',
     show_details: 'Show details',
+    results: 'Results',
     students: 'Students',
     students_subscription_address: 'Students subscription address',
+    submitted_solutions: 'Submitted solutions',
+    tests: 'Tests',
 
   });
