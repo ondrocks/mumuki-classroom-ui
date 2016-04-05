@@ -4,8 +4,9 @@ angular
   .controller('GuidesController', function ($scope, $state, $stateParams, guides) {
 
     $scope.list = guides;
-    $scope.type = 'Guías';
     $scope.preTitle = _.capitalize($stateParams.course.toUpperCase());
+    $scope.noItemsToShow = 'no_guides_to_show';
+    $scope.inputPlaceholder = 'filter_available_guides';
 
     $scope.sortCriteria = (guide) => ['language.name', 'name'];
 
