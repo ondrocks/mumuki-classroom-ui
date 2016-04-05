@@ -41,7 +41,7 @@ angular
         const data = { exercise_id: exerciseProgress.exercise.id, submission_id: submission.id, comment: {
             content: submission.comment,
             type: submission.commentType,
-            date: Date.now(),
+            date: new Date(),
             email: Auth.profile().email
             }
         }

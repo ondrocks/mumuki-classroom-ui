@@ -32,7 +32,7 @@ angular
         this.comments.push({
           content: comment,
           type: commentType,
-          date: Date.now(),
+          date: new Date(),
           email: Auth.profile().email
         });
       }
