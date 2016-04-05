@@ -1,15 +1,11 @@
 .container
 
-  h2 Cursos Disponibles
-
-  br
-
   .input-group
     i.input-group-addon.fa.fa-search
-    input.form-control(id='filter', placeholder='Filtrar cursos disponibles', ng-model='listSearch')
+    input.form-control(id='filter', placeholder='{{ "filter_available_courses" | translate }}', ng-model='listSearch')
 
   br
 
   div.list-group
     label
-      | Tenés que iniciar sesión primero
+      | {{ 'log_in_first' | translate }}
