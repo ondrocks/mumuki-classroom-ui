@@ -40,7 +40,8 @@
           .name-location
             strong {{ progress.student.name }}
           .name-location
-            small {{ progress.student.email }}
+            small {{ progress.student.email || ('email_not_provided' | translate) }}
+
 
         span.col-sm-4
           h4.pull-right(ng-class='"guide-progress-" + progress.colorClass()')

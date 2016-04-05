@@ -11,6 +11,7 @@ angular
     comment_this_solution: 'Comentar esta solución',
     complete_form: 'Cargar datos',
     copied: 'Copiado',
+    email_not_provided: 'No hay email asociado',
     expectations: 'Expectativas',
     filter_available_courses: 'Filtrar cursos disponibles',
     filter_available_guides: 'Filtrar guías disponibles',
