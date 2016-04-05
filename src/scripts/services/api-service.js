@@ -52,4 +52,15 @@ angular
         .then((res) => _.map(res.data.students, Student.from));
     }
 
+    this.getComments = (submission_id) => {
+      return $http
+        .get(`${API}/comments/${submission_id}`, authenticated())
+        .then((res) => ({comments: res.data.comments}));
+    }
+
+    this.comment = (data) => {
+      return $http
+        .post(`${API}/comment`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
+    }
+
   });

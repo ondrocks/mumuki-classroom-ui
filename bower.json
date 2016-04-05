@@ -13,6 +13,9 @@
     "test",
     "tests"
   ],
+  "main": [
+    "src/bower_components/moment/locale/es.js"
+  ],
   "dependencies": {
     "lodash": "4.0.0",
     "devicons": "1.8.0",
@@ -20,6 +23,7 @@
     "bootstrap-sass": "3.3.6",
     "jsdiff": "2.2.1",
     "diff2html": "rtfpessoa/diff2html#6abfbdb6a82dcc29deb5eec6672857343809459e",
+    "moment": "2.11.2",
     "angular": "1.4.9",
     "angular-ui-router": "0.2.15",
     "angular-cookies": "1.4.9",

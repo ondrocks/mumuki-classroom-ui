@@ -71,7 +71,7 @@
                   strong Última solución enviada
               .row
                 span.col-sm-10
-                  a(ui-sref='classroom.guideProgress.exercise({ student: progress.student.id, exercise: progress.lastExerciseSubmitted().id })')
+                  a(ui-sref='classroom.guideProgress.exercise({ student: progress.student.social_id, exercise: progress.lastExerciseSubmitted().id })')
                     | {{ progress.lastExerciseSubmitted().getName() }}
                 span.col-sm-2.pull-right
                   status-icon(status='progress.lastSubmission().status')

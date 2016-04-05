@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $sce, exerciseProgress) {
+  .controller('ExerciseProgressController', function ($scope, $sce, exerciseProgress, Auth, Api) {
 
     const diffs = exerciseProgress.diffs;
 
@@ -14,6 +14,7 @@ angular
 
     $scope.diffs = diffs;
     $scope.progress = exerciseProgress;
+    $scope.lastSubmission = _.last(exerciseProgress.submissions);
 
     $scope.prev = () => $scope.selectDiff(diffs[prev()]);
     $scope.next = () => $scope.selectDiff(diffs[next()]);
@@ -22,5 +23,32 @@ angular
     $scope.isSelectedDiff = (diff) => _.isEqual($scope.selectedDiff, diff);
 
     $scope.selectDiff(diffs[MIN]);
+
+    $scope.comments = (submission) => submission.comments;
+    $scope.time = (comment) => moment(comment.date).fromNow();
+    const getComments = () => {
+      Api.getComments(exerciseProgress.exercise.id)
+          .then((data) => {
+            const groupedComments = _.groupBy(data.comments, 'submission_id');
+            _.each($scope.diffs, (submission, index) => {
+              submission.right.comments = groupedComments[submission.right.id];
+            });
+          });
+    };
+    getComments();
+    $scope.addComment = (submission) => {
+      if (submission.comment) {
+        const data = { exercise_id: exerciseProgress.exercise.id, submission_id: submission.id, comment: {
+            content: submission.comment,
+            type: submission.commentType,
+            date: Date.now(),
+            email: Auth.profile().email
+            }
+        }
+        Api.comment(data)
+        getComments();
+        submission.restartComment();
+      }
+    }
 
   });

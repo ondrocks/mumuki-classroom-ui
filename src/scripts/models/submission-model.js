@@ -1,13 +1,17 @@
 
 angular
   .module('classroom')
-  .factory('Submission', function () {
+  .factory('Submission', function (Auth) {
 
     class Submission {
 
       constructor(submission = {}) {
         submission.content = submission.content || '';
+        submission.comments = submission.comments || [];
+
         _.defaults(this, submission);
+
+        this.restartComment();
       }
 
       colorClass() {
@@ -17,6 +21,20 @@ angular
           case 'failed': case 'errored': return 'danger';
           default:                       return 'default';
         }
+      }
+
+      restartComment() {
+        this.comment = '';
+        this.commentType = 'success';
+      }
+
+      addComment(comment, commentType) {
+        this.comments.push({
+          content: comment,
+          type: commentType,
+          date: Date.now(),
+          email: Auth.profile().email
+        });
       }
 
       static from(submission) {

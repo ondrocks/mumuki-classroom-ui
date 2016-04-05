@@ -1,4 +1,9 @@
 
+$color-default: #777;
+$color-success: #5cb85c;
+$color-warning: #f0ad4e;
+$color-danger: #d9534f;
+
 .bs-callout {
   padding: 20px;
   margin: 20px 0;
@@ -61,10 +66,18 @@
   margin-left: 40px;
 }
 
-.d2h-info {
+.d2h-file-name {
   display: none;
 }
 
-.d2h-file-name {
-  display: none;
+.textarea-success {
+  background-color: rgba($color-success, 0.25);
+}
+
+.textarea-warning {
+  background-color: rgba($color-warning, 0.25);
+}
+
+.textarea-danger {
+  background-color: rgba($color-danger, 0.25);
 }
