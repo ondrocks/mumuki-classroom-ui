@@ -4,8 +4,8 @@ angular
   .controller('CourseController', function ($scope, $state, $stateParams, $location, $timeout, clipboard) {
 
     const tabs = {
-      Guides: 'classroom.courses.course.guides',
-      Students: 'classroom.courses.course.students'
+      guides: 'classroom.courses.course.guides',
+      students: 'classroom.courses.course.students'
     }
 
     $scope.tabs = _.keys(tabs);
