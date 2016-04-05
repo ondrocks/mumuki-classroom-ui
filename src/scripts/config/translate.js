@@ -1,12 +1,10 @@
 
 angular
   .module('classroom')
-  .config(function ($translateProvider) {
+  .config(function ($translateProvider, LANG_EN) {
 
-    $translateProvider.translations('en', {});
+    $translateProvider.translations('en', LANG_EN);
 
-    $translateProvider.translations('es', {});
-
-    $translateProvider.preferredLanguage('es');
+    $translateProvider.preferredLanguage('en');
 
   });
