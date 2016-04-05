@@ -7,7 +7,7 @@
       small &nbsp;- {{ progress.student.email }}
       small.show {{ progress.getName() }}
       small
-        span {{ progress.submissionsCount() + ' soluciones enviadas' }}
+        span {{ progress.submissionsCount() }} {{ 'submitted_solutions' | translate | lowercase }}
         span
           status-icon(status='progress.exercise.lastSubmission().status')
 
@@ -30,7 +30,7 @@
   .row
     .col-sm-6(ng-repeat='submission in [ selectedDiff.left, selectedDiff.right ]')
       .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.test_results.length')
-        h4 Pruebas
+        h4 {{ 'tests' | translate }}
         p
           .row(ng-repeat='result in submission.test_results')
             .col-sm-11
@@ -39,12 +39,12 @@
               status-icon(status='result.status')
 
       .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.result')
-        h4 Resultado
+        h4 {{ 'results' | translate }}
         p
           div(ng-bind-html='trust(submission.result)')
 
       .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.expectation_results.length')
-        h4 Expectativas
+        h4 {{ 'expectations' | translate }}
         p
           .row(ng-repeat='expectationResult in submission.expectation_results')
             .col-sm-11

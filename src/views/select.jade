@@ -2,7 +2,7 @@
 
   .input-group
     i.input-group-addon.fa.fa-search
-    input.form-control(id='filter', placeholder='Filtrar {{ type | lowercase }} disponibles', ng-model='listSearch')
+    input.form-control(id='filter', placeholder='{{ inputPlaceholder | translate }}', ng-model='listSearch')
 
   br
 
@@ -12,6 +12,7 @@
       span.divider-vertical
       span.item-name {{ item.getName() | uppercase }}
     label(ng-if='!(list | orderBy: sortCriteria() | filter:listSearch).length')
-      | No hay {{ type | lowercase }} para mostrar
+      | {{ noItemsToShow | translate }}
 
-  button.btn.btn-primary.pull-right(ng-if='isAdmin()', ui-sref='classroom.courses.new') Crear curso
+  button.btn.btn-primary.pull-right(ng-if='isAdmin()', ui-sref='classroom.courses.new')
+    | {{ 'new_course' | translate }}

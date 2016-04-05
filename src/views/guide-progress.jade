@@ -7,23 +7,25 @@
           | {{ guide.name }}
           i.devicons(class='{{ guide.iconClass() }}')
         h5
-          a(href='{{ guide.getMumukiURL() }}', target='_blank') Abrir en Atheneum
+          a(href='{{ guide.getMumukiURL() }}', target='_blank') {{ 'open_in_atheneum' | translate }}
         small.show {{ guide.chapter.name }}
 
       .col-sm-5
         .option-buttons
           .btn-group.btn-group-justified.pull-right(role='group')
             label.btn.btn-default(ng-model='showDetails', ng-click='showDetails = !showDetails')
-             div {{ (showDetails ? 'Ocultar' : 'Mostrar') }} detalles
+             div {{ (showDetails ? 'hide_details' : 'show_details') | translate }}
           .btn-group.btn-group-justified.pull-right(role='group')
-            label.btn.btn-default(ng-model='sortType', ng-click='sortType = "progress"') Por progreso
-            label.btn.btn-default(ng-model='sortType', ng-click='sortType = "name"') Por nombre
+            label.btn.btn-default(ng-model='sortType', ng-click='sortType = "progress"')
+              | {{ 'by_progress' | translate }}
+            label.btn.btn-default(ng-model='sortType', ng-click='sortType = "name"')
+              | {{ 'by_name' | translate }}
 
   br
 
   .input-group
     i.input-group-addon.fa.fa-search
-    input.form-control(id='filter', placeholder='Filtrar estudiante', ng-model='listSearch')
+    input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')
 
   br
 
@@ -49,7 +51,7 @@
         .student-guide-details(ng-show='showDetails')
           .row(ng-if='!progress.hasSubmissions()')
             .col-sm-12.detail-title
-              h4 No hay soluciones por el momento &nbsp;
+              h4 {{ 'no_students_to_show' | translate }} &nbsp;
                 i.fa.fa-frown-o
 
           div(ng-if='progress.hasSubmissions()')

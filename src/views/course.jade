@@ -2,17 +2,17 @@
 
   ul.nav.nav-tabs
     li(ng-repeat='tab in tabs', ng-class='{ active: is(tab) }', ng-click='open(tab)')
-      a(href='') {{ tab }}
+      a(href='') {{ tab | translate }}
 
   br
 
   div
-    small.text-muted Dirección de suscripción de alumnos:&nbsp;
+    small.text-muted {{ 'students_subscription_address' | translate }}:&nbsp;
     small.text-muted.text-primary {{ url() }}
     span.clipboard
       span &nbsp;
       i.fa.fa-clipboard(ng-click='copy()')
-      small.text-muted(ng-show='isCopied') &nbsp; Copied!
+      small.text-muted(ng-show='isCopied') &nbsp; {{ 'copied' | translate }}!
 
   br
 
