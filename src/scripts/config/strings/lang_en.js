@@ -11,6 +11,7 @@ angular
     comment_this_solution: 'Comment this solution',
     complete_form: 'Complete form',
     copied: 'Copied',
+    email_not_provided: 'Email not provided',
     expectations: 'Expectations',
     filter_available_courses: 'Filter available courses',
     filter_available_guides: 'Filter available guides',
