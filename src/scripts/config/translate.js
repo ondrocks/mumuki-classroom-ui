@@ -6,5 +6,6 @@ angular
     $translateProvider.translations('en', LANG_EN);
 
     $translateProvider.preferredLanguage('en');
+    $translateProvider.useSanitizeValueStrategy(null);
 
   });
