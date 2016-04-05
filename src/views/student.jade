@@ -1,6 +1,6 @@
 .container
 
-  h3 Cargá tus datos
+  h3 {{ 'complete_form' | translate }}
 
   form(ng-submit='update()')
 
@@ -8,25 +8,25 @@
       input.form-control(
           type='text',
           ng-model='student.first_name',
-          placeholder='Nombre',
+          placeholder='{{ "first_name" | translate }}',
           required,
           autofocus,
           ng-init='f1 = false'
           ng-change='f1 = true')
       div.error
         small.text-muted.text-danger(ng-show='!isTextValid(student.first_name) && f1')
-          | El nombre es obligatorio
+          | {{ 'first_name_error' | translate }}
 
     fieldset.form-group
       input.form-control(
           type='text',
           ng-model='student.last_name',
-          placeholder='Apellido',
+          placeholder='{{ "last_name" | translate }}',
           required
           ng-init='f2 = false'
           ng-change='f2 = true')
       div.error
         small.text-muted.text-danger(ng-show='!isTextValid(student.last_name) && f2')
-          | El apellido es obligatorio
+          | {{ 'last_name_error' | translate }}
 
-      button.btn.btn-primary.pull-right(ng-disabled='!isValid()') Cargar datos
+      button.btn.btn-primary.pull-right(ng-disabled='!isValid()') {{ 'submit' | translate }}
