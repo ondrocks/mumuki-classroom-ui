@@ -63,4 +63,19 @@ angular
         .post(`${API}/comment`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
     }
 
+    this.follow = (social_id, email) => {
+      return $http
+        .post(`${API}/follower`, { social_id, email }, authenticated())
+    }
+
+    this.unfollow = (social_id, email) => {
+      return $http
+        .delete(`${API}/follower/${email}/${social_id}`, authenticated())
+    }
+
+    this.getFollowers = (email) => {
+      return $http
+        .get(`${API}/followers/${email}`, authenticated())
+    }
+
   });
