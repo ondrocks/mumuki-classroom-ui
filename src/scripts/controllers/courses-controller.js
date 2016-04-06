@@ -4,7 +4,7 @@ angular
   .controller('CoursesController', function ($scope, $state, courses, Auth, Api) {
 
     $scope.list = courses;
-    $scope.preTitle = _.capitalize(Api.subdomain.replace(/[.]$/g, ''));
+    $scope.preTitle = _.capitalize(Api.subdomain);
     $scope.noItemsToShow = 'no_courses_to_show';
     $scope.inputPlaceholder = 'filter_available_courses';
 

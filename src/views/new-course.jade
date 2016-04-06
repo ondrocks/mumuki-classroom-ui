@@ -7,15 +7,27 @@
     fieldset.form-group
       input.form-control(
           type='text',
-          ng-model='course.name',
-          placeholder='{{ "new_course_name" | translate }}',
+          ng-model='course.period',
+          placeholder='{{ "new_course_period" | translate }}',
           required,
           autofocus,
           ng-init='f1 = false'
           ng-change='f1 = true')
       div.error
-        small.text-muted.text-danger(ng-show='!isValidName() && f1')
-          | {{ 'new_course_name_error' | translate }}
+        small.text-muted.text-danger(ng-show='!isValidPeriod() && f1')
+          | {{ 'new_course_period_error' | translate }}
+
+    fieldset.form-group
+      input.form-control(
+          type='text',
+          ng-model='course.code',
+          placeholder='{{ "new_course_code" | translate }}',
+          required
+          ng-init='f2 = false'
+          ng-change='f2 = true')
+      div.error
+        small.text-muted.text-danger(ng-show='!isValidCode() && f2')
+          | {{ 'new_course_code_error' | translate }}
 
     fieldset.form-group
       input.form-control(
@@ -23,11 +35,38 @@
           ng-model='course.description',
           placeholder='{{ "new_course_description" | translate }}',
           required
-          ng-init='f2 = false'
-          ng-change='f2 = true')
+          ng-init='f3 = false'
+          ng-change='f3 = true')
       div.error
-        small.text-muted.text-danger(ng-show='!isValidDescription() && f2')
+        small.text-muted.text-danger(ng-show='!isValidDescription() && f3')
           | {{ 'new_course_description_error' | translate }}
 
-      button.btn.btn-primary.pull-right(ng-if='isAdmin()', ng-disabled='!isValid()')
-        | {{ 'new_course' | translate }}
+    fieldset.form-group
+      .checkbox-inline(ng-repeat='day in days')
+        label.checkbox-inline
+          input(
+              type='checkbox',
+              ng-model='day.checked',
+              ng-change='updateArray("days")')
+          span {{ day.name | translate }}
+      div.error
+        small.text-muted.text-danger(ng-show='!isValidDays()')
+          | {{ 'new_course_days_error' | translate }}
+
+    br
+
+    fieldset.form-group
+      .checkbox-inline(ng-repeat='shift in shifts')
+        label.checkbox-inline
+          input(
+              type='checkbox',
+              ng-model='shift.checked',
+              ng-change='updateArray("shifts")')
+          span {{ 'shift' | translate }} {{ shift.name | translate }}
+      div.error
+        small.text-muted.text-danger(ng-show='!isValidShifts()')
+          | {{ 'new_course_shift_error' | translate }}
+
+    button.btn.btn-primary.pull-right(ng-if='isAdmin()', ng-disabled='!isValid()')
+      | {{ 'new_course' | translate }}
+
