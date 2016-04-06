@@ -3,6 +3,7 @@ angular
   .module('classroom')
   .constant('LANG_ES', {
 
+    all: 'Todos',
     available_courses: 'Cursos disponibles',
     by_name: 'Por nombre',
     by_progress: 'Por progreso',
@@ -25,6 +26,7 @@ angular
     filter_students: 'Filtrar alumnos',
     first_name: 'Nombre',
     first_name_error: 'El campo nombre es obligatorio',
+    follow: 'Seguir',
     guides: 'Guías',
     hide_details: 'Ocultar detalles',
     last_name: 'Apellido',
@@ -48,6 +50,7 @@ angular
     no_courses_to_show: 'No hay cursos para mostrar',
     no_guides_to_show: 'No hay guías para mostrar',
     no_students_to_show: 'No hay alumnos para mostrar',
+    only_followers: 'Seguidos',
     open_in_atheneum: 'Abrir en Atheneum',
     results: 'Resultados',
     shift: 'Turno',
@@ -60,5 +63,6 @@ angular
     submit: 'Enviar',
     submitted_solutions: 'Soluciones enviadas',
     tests: 'Pruebas',
+    unfollow: 'Dejar de Seguir'
 
   });

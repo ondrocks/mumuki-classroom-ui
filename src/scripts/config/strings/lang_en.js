@@ -3,6 +3,7 @@ angular
   .module('classroom')
   .constant('LANG_EN', {
 
+    all: 'All',
     available_courses: 'Available Courses',
     by_name: 'By name',
     by_progress: 'By progress',
@@ -25,6 +26,7 @@ angular
     filter_students: 'Filter students',
     first_name: 'First name',
     first_name_error: 'First name is mandatory',
+    follow: 'Follow',
     guides: 'Guides',
     hide_details: 'Hide details',
     last_name: 'Last name',
@@ -48,6 +50,7 @@ angular
     no_courses_to_show: 'There is no courses to show',
     no_guides_to_show: 'There is no guides to show',
     no_students_to_show: 'There is no students to show',
+    only_followers: 'Only following',
     open_in_atheneum: 'Open in Atheneum',
     results: 'Results',
     shift: 'Shift',
@@ -60,5 +63,6 @@ angular
     submit: 'Submit',
     submitted_solutions: 'Submitted solutions',
     tests: 'Tests',
+    unfollow: 'Unfollow'
 
   });
