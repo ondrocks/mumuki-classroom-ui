@@ -3,7 +3,7 @@ angular
   .module('classroom')
   .service('Auth', function ($state, $location, auth, store, jwtHelper, Domain) {
 
-    const subdomain = Domain.tenant.replace(/[.]$/, '');
+    const subdomain = Domain.tenant;
 
     const adminRegex = new RegExp(`^(\\\*|\\\*\\\/\\\*|${subdomain}\\\/\\\*)$`);
     const teacherRegex = new RegExp(`^(\\\*|${subdomain})$`);
