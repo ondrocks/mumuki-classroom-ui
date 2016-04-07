@@ -7,13 +7,15 @@ angular
     RememberSetting($scope, 'onlyFollowers');
 
     Api.getFollowers(Auth.profile().email)
-      .then((data) => Followers.setFollowers(_.map(data.data.followers, 'social_ids')[0]));
+      .then((data) => Followers.setFollowers(_.groupBy(data.data.followers, "course")));
 
     const guide = Guide.from(data.guide);
 
     const setGuideProgress = (guideProgress) => $scope.guideProgress = guideProgress;
 
     const guideProgressFetcher = $interval(() => Api.getGuideProgress($stateParams).then((data) => setGuideProgress(data.guideProgress)), 5000);
+
+    const splitSlug = (slug) => slug.split('/')[1];
 
     setGuideProgress(data.guideProgress);
 
@@ -32,12 +34,7 @@ angular
     };
 
     $scope.byFollowers = (guide_progress) => {
-      if($scope.onlyFollowers) {
-        return _.includes(Followers.followers, guide_progress.student.social_id);
-      } else {
-        return true;
-      }
-
+        return !$scope.onlyFollowers || Followers.doFollow(splitSlug(guide_progress.course.slug), guide_progress.student.social_id);
     }
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));

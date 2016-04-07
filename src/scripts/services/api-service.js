@@ -63,14 +63,14 @@ angular
         .post(`${API}/comment`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
     }
 
-    this.follow = (social_id, email) => {
+    this.follow = (social_id, email, course) => {
       return $http
-        .post(`${API}/follower`, { social_id, email }, authenticated())
+        .post(`${API}/follower`, { social_id, email, course }, authenticated())
     }
 
-    this.unfollow = (social_id, email) => {
+    this.unfollow = (social_id, email, course) => {
       return $http
-        .delete(`${API}/follower/${email}/${social_id}`, authenticated())
+        .delete(`${API}/follower/${course}/${email}/${social_id}`, authenticated())
     }
 
     this.getFollowers = (email) => {
