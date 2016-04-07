@@ -15,6 +15,8 @@
           .btn-group.btn-group-justified.pull-right(role='group')
             label.btn.btn-default(ng-model='showDetails', ng-click='showDetails = !showDetails')
              div {{ (showDetails ? 'hide_details' : 'show_details') | translate }}
+            label.btn.btn-default(ng-model='onlyFollowers', ng-click='onlyFollowers = !onlyFollowers')
+             div {{ (onlyFollowers ? 'all' : 'only_followers') | translate }}
           .btn-group.btn-group-justified.pull-right(role='group')
             label.btn.btn-default(ng-model='sortType', ng-click='sortType = "progress"')
               | {{ 'by_progress' | translate }}
@@ -31,7 +33,7 @@
 
   .row.guide-progress-main
     .col-md-4.col-sm-6(
-        ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress) | filter:listSearch')
+        ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress) | filter:listSearch | filter:byFollowers')
       .row.guide-progress-blog
         span.col-sm-8
           img.rounded-x(ng-src='{{ progress.student.image_url }}')
