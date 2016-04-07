@@ -2,7 +2,13 @@ box: node
 
 build:
   steps:
+  - script:
+      name: install bower
+      code: sudo npm install -g bower
   - npm-install
+  - script:
+      name: install bower dependencies
+      code: bower install --allow-root
   - npm-test
 
 deploy:
