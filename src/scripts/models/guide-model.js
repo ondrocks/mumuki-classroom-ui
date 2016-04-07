@@ -14,7 +14,7 @@ angular
       }
 
       getMumukiURL() {
-        return `http://${Domain.tenant()}.mumuki.io/guides/${this.slug}`;
+        return `http://${Domain.tenant}mumuki.io/guides/${this.slug}`;
       }
 
       iconClass() {
