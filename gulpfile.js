@@ -135,6 +135,7 @@ gulp.task('test', (done) => {
     configFile: `${__dirname}/karma.conf.js`,
     action: 'run',
     files: wiredep({ devDependencies: true }).js.concat([
+      'test/context.js',
       'src/scripts/**/*.js',
       'config/test.js',
       'test/**/*.test.js'
