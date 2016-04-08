@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $sce, exerciseProgress, Auth, Api) {
+  .controller('ExerciseProgressController', function ($scope, $sce, $filter, toastr, exerciseProgress, Auth, Api) {
 
     const diffs = exerciseProgress.diffs;
 
@@ -46,7 +46,8 @@ angular
             }
         }
         Api.comment(data)
-        getComments();
+          .then(() => getComments())
+          .then(() => toastr.success($filter('translate')('do_comment')))
         submission.restartComment();
       }
     }
