@@ -7,7 +7,6 @@ angular
       guides: 'classroom.courses.course.guides',
       students: 'classroom.courses.course.students'
     }
-
     $scope.tabs = _.keys(tabs);
     $scope.open = (tab) => $state.go(tabs[tab], $stateParams, { location: 'replace' });
     $scope.is = (tab) => $state.is(tabs[tab], $stateParams);
