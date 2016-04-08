@@ -13,7 +13,7 @@ angular
 
     $scope.open = (course) => {
       const slug = course.slug.split('/');
-      $state.go('classroom.courses.course.guides', { org: slug[0], course: slug[1] })
+      $state.go('classroom.courses.course.guides', { course: slug[1] })
     }
 
   });

@@ -27,7 +27,7 @@ angular
         }
       })
       .state('classroom.students', {
-        url: '/courses/:course/students',
+        url: '/students/:course',
         authenticated: false,
         views: {
           'navbar@classroom': {},
@@ -65,7 +65,7 @@ angular
         }
       })
       .state('classroom.courses.course', {
-        url: '/:org/:course',
+        url: '/:course',
         abstract: true,
         authenticated: true,
         views: {
@@ -110,7 +110,7 @@ angular
         }
       })
       .state('classroom.guideProgress', {
-        url: '/:org/:course/:repo',
+        url: '/:course/:org/:repo',
         authenticated: true,
         views: {
           'content@classroom': {

@@ -18,21 +18,21 @@ angular
         .then((res) => _.map(res.data.courses, Course.from))
     };
 
-    this.getGuides = ({ org, course }) => {
+    this.getGuides = ({ course }) => {
       return $http
-        .get(`${API}/courses/${org}/${course}`, authenticated())
+        .get(`${API}/courses/${course}`, authenticated())
         .then((res) => _.map(res.data.course_guides, Guide.from))
     };
 
     this.getGuideProgress = ({ org, course, repo }) => {
       return $http
-        .get(`${API}/guide_progress/${org}/${course}/${repo}`, authenticated())
+        .get(`${API}/guide_progress/${course}/${org}/${repo}`, authenticated())
         .then((res) => ({guide: res.data.guide, guideProgress: _.map(res.data.progress, GuideProgress.from)}))
     };
 
     this.getExerciseProgress = ({ org, course, repo, student, exercise }) => {
       return $http
-        .get(`${API}/guide_progress/${org}/${course}/${repo}/${student}/${exercise}`, authenticated())
+        .get(`${API}/guide_progress/${course}/${org}/${repo}/${student}/${exercise}`, authenticated())
         .then((res) => ExerciseProgress.from(res.data.exercise_progress))
     };
 
@@ -46,9 +46,9 @@ angular
         .post(`${API}/courses/${course}/students`, { first_name, last_name }, authenticated())
     }
 
-    this.getStudents = ({ org, course }) => {
+    this.getStudents = ({ course }) => {
       return $http
-        .get(`${API}/students/${org}/${course}`, authenticated())
+        .get(`${API}/students/${course}`, authenticated())
         .then((res) => _.map(res.data.students, Student.from));
     }
 
@@ -60,12 +60,12 @@ angular
 
     this.comment = (data, course) => {
       return $http
-        .post(`${API}/comment/${subdomain}/${course}`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
+        .post(`${API}/comment/${course}`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
     }
 
     this.follow = (social_id, email, course) => {
       return $http
-        .post(`${API}/follower/${subdomain}/${course}`, { social_id, email, course }, authenticated())
+        .post(`${API}/follower/${course}`, { social_id, email, course }, authenticated())
     }
 
     this.unfollow = (social_id, email, course) => {
