@@ -5,6 +5,7 @@ angular
 
     const diffs = exerciseProgress.diffs;
 
+    const course = exerciseProgress.course.slug.split('/')[1];
     const MIN = 0;
     const MAX = diffs.length - 1 ;
 
@@ -45,9 +46,10 @@ angular
             email: Auth.profile().email
             }
         }
-        Api.comment(data)
+        Api.comment(data, course)
           .then(() => getComments())
           .then(() => toastr.success($filter('translate')('do_comment')))
+
         submission.restartComment();
       }
     }
