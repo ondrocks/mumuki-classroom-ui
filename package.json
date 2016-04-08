@@ -35,7 +35,9 @@
     "gulp-webserver": "^0.9.1",
     "gulp-wiredep": "0.0.0",
     "run-sequence": "^1.1.5",
-    "wiredep": "^4.0.0",
+    "wiredep": "^4.0.0"
+  },
+  "devDependencies": {
     "chai": "^3.5.0",
     "karma": "^0.13.22",
     "karma-babel-preprocessor": "^6.0.1",
