@@ -58,14 +58,14 @@ angular
         .then((res) => ({comments: res.data.comments}));
     }
 
-    this.comment = (data) => {
+    this.comment = (data, course) => {
       return $http
-        .post(`${API}/comment`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
+        .post(`${API}/comment/${subdomain}/${course}`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
     }
 
     this.follow = (social_id, email, course) => {
       return $http
-        .post(`${API}/follower`, { social_id, email, course }, authenticated())
+        .post(`${API}/follower/${subdomain}/${course}`, { social_id, email, course }, authenticated())
     }
 
     this.unfollow = (social_id, email, course) => {
