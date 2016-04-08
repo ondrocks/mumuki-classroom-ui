@@ -19,6 +19,8 @@ angular
     day_thursday: 'Jueves',
     day_tuesday: 'Martes',
     day_wednesday: 'Miércoles',
+    do_follow: 'Siguiendo!',
+    do_comment: 'Has comentado correctamente',
     email_not_provided: 'No hay email asociado',
     expectations: 'Expectativas',
     filter_available_courses: 'Filtrar cursos disponibles',
@@ -63,6 +65,7 @@ angular
     submit: 'Enviar',
     submitted_solutions: 'Soluciones enviadas',
     tests: 'Pruebas',
-    unfollow: 'Dejar de Seguir'
+    unfollow: 'Dejar de Seguir',
+    unfollowing: 'Has dejado de seguir al usuario'
 
   });
