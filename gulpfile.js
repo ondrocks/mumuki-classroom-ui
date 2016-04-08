@@ -5,11 +5,8 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const del = require('del');
 const gulp = require('gulp');
-const wiredep = require('wiredep');
 const runSequence = require('run-sequence');
 const gulpLoadPlugins = require('gulp-load-plugins');
-
-const Server = require('karma').Server;
 
 const $ = gulpLoadPlugins();
 
@@ -130,6 +127,10 @@ gulp.task('prod', (done) => {
 
 gulp.task('test', (done) => {
   process.env.NODE_ENV = 'test';
+
+  const wiredep = require('wiredep');
+  const Server = require('karma').Server;
+
   new Server({
     configFile: `${__dirname}/karma.conf.js`,
     action: 'run',
