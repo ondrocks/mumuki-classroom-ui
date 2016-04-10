@@ -23,7 +23,7 @@ angular
     $scope.selectDiff = (diff) => $scope.selectedDiff = diff;
     $scope.isSelectedDiff = (diff) => _.isEqual($scope.selectedDiff, diff);
 
-    $scope.selectDiff(diffs[MIN]);
+    $scope.selectDiff(diffs[MAX]);
 
     $scope.comments = (submission) => submission.comments;
     $scope.time = (comment) => moment(comment.date).fromNow();
