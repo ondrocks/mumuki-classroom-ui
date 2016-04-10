@@ -62,7 +62,7 @@
               .row
                 .col-sm-12.detail-title
                   strong Ejercicios
-              .row(ng-repeat='exercise in progress.exercises')
+              .row(ng-repeat='exercise in progress.exercises | orderBy:"number"')
                 span.col-sm-10
                   a(ui-sref='classroom.guideProgress.exercise({ student: progress.student.social_id, exercise: exercise.id })')
                     | {{ exercise.getName() }}
