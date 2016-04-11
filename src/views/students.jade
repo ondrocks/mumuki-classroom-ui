@@ -19,4 +19,4 @@
             small {{ item.email || ('email_not_provided' | translate) }}
         .col-xs-6
           .btn.pull-right(class="btn-{{followClass(item.social_id)}}", ng-click='followAction(item.social_id)')
-            {{ followText(item.social_id) | translate }}
+            | {{ followText(item.social_id) | translate }}

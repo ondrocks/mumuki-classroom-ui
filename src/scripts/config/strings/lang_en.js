@@ -60,6 +60,7 @@ angular
     shift_morning: 'Morning',
     shift_night: 'Night',
     show_details: 'Show details',
+    solution_sent_at_format: 'MMMM DD YYYY - h:mm a',
     students: 'Students',
     students_subscription_address: 'Students subscription address',
     submit: 'Submit',

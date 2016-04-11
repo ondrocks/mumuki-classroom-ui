@@ -27,6 +27,7 @@ angular
 
     $scope.comments = (submission) => submission.comments;
     $scope.time = (comment) => moment(comment.date).fromNow();
+
     const getComments = () => {
       Api.getComments(exerciseProgress.exercise.id)
           .then((data) => {
