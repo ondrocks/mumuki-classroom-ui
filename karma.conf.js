@@ -29,6 +29,7 @@ module.exports = (config) => {
     ],
 
     preprocessors: {
+      'test/context.js ': ['babel'],
       'test/**/*.test.js ': ['babel'],
       'src/scripts/**/*.js ': ['babel']
     },
