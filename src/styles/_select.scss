@@ -5,8 +5,11 @@
   border-left: 1px solid #CCC;
 }
 
-.item-name {
+
+.list-group-item {
+  overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .clipboard {
