@@ -7,17 +7,17 @@ angular
     const course = $stateParams.course;
 
     Api.getFollowers(Auth.profile().email)
-      .then((data) => Followers.setFollowers(_.groupBy(data.data.followers, "course")));
+      .then((data) => Followers.setFollowUps(_.groupBy(data.data.followers, "course")));
 
     $scope.sortCriteria = (student) => student.fullName();
 
-    $scope.doFollow = (course, social_id) => Followers.doFollow(course, social_id);
+    $scope.isFollowing = (course, social_id) => Followers.isFollowing(course, social_id);
 
-    $scope.followClass = (social_id) => $scope.doFollow(course, social_id) ? 'danger' : 'info';
+    $scope.followClass = (social_id) => $scope.isFollowing(course, social_id) ? 'danger' : 'info';
 
-    $scope.followText = (social_id) => $scope.doFollow(course, social_id) ? 'unfollow' : 'follow';
+    $scope.followText = (social_id) => $scope.isFollowing(course, social_id) ? 'unfollow' : 'follow';
 
-    $scope.followAction = (social_id) => $scope.doFollow(course, social_id) ? $scope.unfollow(course, social_id) : $scope.follow(course, social_id)
+    $scope.followAction = (social_id) => $scope.isFollowing(course, social_id) ? $scope.unfollow(course, social_id) : $scope.follow(course, social_id)
 
     $scope.follow = (course, social_id) =>  {
     	return Api.follow(social_id, Auth.profile().email, course)

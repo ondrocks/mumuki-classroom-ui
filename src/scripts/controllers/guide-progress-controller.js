@@ -7,7 +7,7 @@ angular
     RememberSetting($scope, 'onlyFollowers');
 
     Api.getFollowers(Auth.profile().email)
-      .then((data) => Followers.setFollowers(_.groupBy(data.data.followers, "course")));
+      .then((data) => Followers.setFollowUps(_.groupBy(data.data.followers, "course")));
 
     const guide = Guide.from(data.guide);
 
@@ -34,7 +34,7 @@ angular
     };
 
     $scope.byFollowers = (guide_progress) => {
-        return !$scope.onlyFollowers || Followers.doFollow(splitSlug(guide_progress.course.slug), guide_progress.student.social_id);
+        return !$scope.onlyFollowers || Followers.isFollowing(splitSlug(guide_progress.course.slug), guide_progress.student.social_id);
     }
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
