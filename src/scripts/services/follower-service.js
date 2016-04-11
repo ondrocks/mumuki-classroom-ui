@@ -9,7 +9,7 @@ angular
       return this.followers = followers;
     }
 
-    this.doFollow = (course, social_id) => {
+    this.isFollowing = (course, social_id) => {
       this.followers[course] = this.followers[course] || [];
       return this.followers[course].length !== 0 && _.includes(this.course(course).social_ids, social_id);
     }
