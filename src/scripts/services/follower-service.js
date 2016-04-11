@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Followers', function (Api, Auth) {
+  .service('Followers', function () {
 
     this.followUps = {};
 
@@ -25,5 +25,4 @@ angular
     this.removeFollower = (course, social_id) => {
       _.pull(this.courseFollowers(course), social_id);
     };
-
-  });
+});
