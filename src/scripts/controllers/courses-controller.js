@@ -9,7 +9,7 @@ angular
     $scope.inputPlaceholder = 'filter_available_courses';
 
     $scope.isAdmin = Auth.isAdmin;
-    $scope.sortCriteria = () => ['slug'];
+    $scope.sortCriteria = () => ['getName()'];
 
     $scope.open = (course) => {
       const slug = course.slug.split('/');
