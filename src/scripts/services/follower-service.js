@@ -10,11 +10,14 @@ angular
     }
 
     this.isFollowing = (course, social_id) => {
-      this.followers[course] = this.followers[course] || {};
-      return this.courseFollowers(course).length !== 0 && _.includes(this.course(course).social_ids, social_id);
+      return this.courseFollowers(course).length !== 0 &&
+             _.includes(this.course(course).social_ids, social_id);
     }
 
-    this.courseFollowers = (course) => this.followers[course];
+    this.courseFollowers = (course) => {
+      this.followers[course] = this.followers[course] || {};
+      return this.followers[course]
+    };
 
     this.course = (course) => _.head(this.courseFollowers(course))
 
