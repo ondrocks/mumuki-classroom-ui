@@ -36,9 +36,9 @@ angular
         .then((res) => ExerciseProgress.from(res.data.exercise_progress))
     };
 
-    this.createCourse = ({ name, description }) => {
+    this.createCourse = (course) => {
       return $http
-        .post(`${API}/courses`, { name: name.toLowerCase(), description: description }, authenticated())
+        .post(`${API}/courses`, course, authenticated())
     }
 
     this.updateStudent = (course, { first_name, last_name }) => {
