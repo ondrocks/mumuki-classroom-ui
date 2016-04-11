@@ -3,28 +3,27 @@ angular
   .module('classroom')
   .service('Followers', function (Api, Auth) {
 
-    this.followers = {};
+    this.followUps = {};
 
-    this.setFollowers = (followers) => {
-      return this.followers = followers;
-    }
-
-    this.isFollowing = (course, social_id) => {
-      return this.courseFollowers(course).length !== 0 &&
-             _.includes(this.course(course).social_ids, social_id);
-    }
-
-    this.courseFollowers = (course) => {
-      this.followers[course] = this.followers[course] || {};
-      return this.followers[course]
+    this.setFollowUps = (followers) => {
+      return this.followUps = followers;
     };
 
-    this.course = (course) => _.head(this.courseFollowers(course))
+    this.isFollowing = (course, social_id) => {
+      return _.includes(this.courseFollowers(course), social_id);
+    };
+
+    this.courseFollowers = (course) => {
+      this.followUps[course] = this.followUps[course] || {social_ids: []};
+      return this.followUps[course].social_ids;
+    };
 
     this.addFollower = (course, social_id) => {
-      this.course(course).social_ids = [...this.course(course).social_ids, social_id];
-    }
+      this.courseFollowers(course).push(social_id);
+    };
 
-    this.removeFollower = (course, social_id) => this.course(course).social_ids =  _.without(this.course(course).social_ids, social_id);
+    this.removeFollower = (course, social_id) => {
+      _.pull(this.courseFollowers(course), social_id);
+    };
 
   });

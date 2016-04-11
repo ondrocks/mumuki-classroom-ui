@@ -7,7 +7,7 @@ angular
     RememberSetting($scope, 'onlyFollowers');
 
     Api.getFollowers(Auth.profile().email)
-      .then((data) => Followers.setFollowers(_.groupBy(data.data.followers, "course")));
+      .then((data) => Followers.setFollowUps(_.groupBy(data.data.followers, "course")));
 
     const guide = Guide.from(data.guide);
 
