@@ -25,7 +25,7 @@
         a(href='', aria-label='Siguiente', ng-click='next()')
           span(aria-hidden='true') &raquo;
 
-  diff-side(language='{{ progress.guide.language.name }}', left='selectedDiff.left.content', right='selectedDiff.right.content')
+  diff-side(language='{{ progress.guide.language.name }}', left='selectedDiff.left', right='selectedDiff.right')
 
   .row
     .col-sm-12(ng-repeat='submission in [ selectedDiff.right ]')

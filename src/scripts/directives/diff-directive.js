@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .directive('diffSide', function () {
+  .directive('diffSide', function ($filter) {
     return {
       restrict: 'E',
       scope: {
@@ -13,7 +13,7 @@ angular
       controller: ($scope) => {
         $scope.$watchGroup(['left', 'right'], () => {
 
-          const lines = JsDiff.diffLines($scope.left, $scope.right);
+          const lines = JsDiff.diffLines($scope.left.content, $scope.right.content);
 
           const prefix = (line, pre) => {
             let subLines = line.value.split('\n');
@@ -26,12 +26,14 @@ angular
                   (line.removed) ? prefix(line, '-') : prefix(line, '  ');
           });
 
+          const date = moment($scope.right.created_at).format($filter('translate')('solution_sent_at_format'));
+
           const diffText = [
-            'diff --git a/submission b/submission',
-            'index fc56817..e8e7e49 100644',
-            '--- a/submission',
-            '+++ b/submission',
-            '@@ -1,1 +1,1 @@',
+            `diff --git`,
+            `index fc56817..e8e7e49 100644`,
+            `--- a/${date}`,
+            `+++ b/${date}`,
+            `@@ -1,1 +1,1 @@`,
             ...diffLines
           ].join('\n');
 
