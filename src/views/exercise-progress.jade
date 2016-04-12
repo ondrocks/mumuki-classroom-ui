@@ -35,7 +35,8 @@
           textarea.form-control(
               ng-model='submission.comment',
               placeholder='{{ "comment_this_solution" | translate }}',
-              class="textarea-{{submission.commentType}}"
+              class="textarea-{{submission.commentType}}",
+              maxlength='255',
               rows='3')
 
         .col-sm-3.col-md-2
