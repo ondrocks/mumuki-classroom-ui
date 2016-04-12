@@ -35,15 +35,14 @@
     .col-md-4.col-sm-6(
         ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress) | filter:listSearch | filter:byFollowers')
       .row.guide-progress-blog
-        span.col-sm-8
+        span.col-xs-9
           img.rounded-x(ng-src='{{ progress.student.image_url }}')
           .name-location
             strong {{ progress.student.fullName() }}
           .name-location
             small {{ progress.student.email || ('email_not_provided' | translate) }}
 
-
-        span.col-sm-4
+        span.col-xs-3
           h4.pull-right(ng-class='"guide-progress-" + progress.colorClass()')
             strong {{ progress.stats().passed || 0 }}
             span &nbsp;/&nbsp;
