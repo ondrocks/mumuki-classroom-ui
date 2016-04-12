@@ -76,6 +76,10 @@ angular
     this.getFollowers = (email) => {
       return $http
         .get(`${API}/followers/${email}`, authenticated())
+        .then((data) => {
+          const groupedData = _.groupBy(data.data.followers, "course");
+          return _.forEach(groupedData, (v, k) => groupedData[k] = _.head(groupedData[k]));
+        });
     }
 
   });

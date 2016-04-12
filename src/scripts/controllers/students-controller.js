@@ -8,8 +8,7 @@ angular
 
     Api.getFollowers(Auth.profile().email)
       .then((data) => {
-        const groupedData = _.groupBy(data.data.followers, "course");
-        return Followers.setFollowUps(_.forEach(groupedData, (v, k) => groupedData[k] = _.head(groupedData[k])));
+        return Followers.setFollowUps(data);
       });
 
     $scope.sortCriteria = (student) => student.fullName();
