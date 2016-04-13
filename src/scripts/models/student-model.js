@@ -18,7 +18,7 @@ angular
       }
 
       _capitalize(name) {
-        return _(name).words().map(_.capitalize).join(' ');
+        return _(name).split(' ').map(_.capitalize).join(' ');
       }
 
     }

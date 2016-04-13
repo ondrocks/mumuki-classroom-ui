@@ -15,6 +15,10 @@ classroomTest('Student Model', () => {
     it('capitalizes the first letter of each name', () => {
       new Student({first_name: 'josé francisco', last_name: 'de san martín'}).fullName().should.eq('De San Martín, José Francisco');
     });
+
+    it("doesn't split apostrophes", () => {
+      new Student({first_name: 'Pedro', last_name: "d'Alessandro"}).fullName().should.eq("D'alessandro, Pedro");
+    });
   });
 
 });
