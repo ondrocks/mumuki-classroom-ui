@@ -10,11 +10,15 @@ angular
       }
 
       fullName() {
-        return `${this.last_name}, ${this.first_name}`
+        return `${this._capitalize(this.last_name)}, ${this._capitalize(this.first_name)}`
       }
 
       static from(student) {
         return new Student(student);
+      }
+
+      _capitalize(name) {
+        return _(name).split(' ').map(_.capitalize).join(' ');
       }
 
     }
