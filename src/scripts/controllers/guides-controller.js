@@ -2,6 +2,7 @@
 angular
   .module('classroom')
   .controller('GuidesController', function ($scope, $state, $stateParams, guides) {
+    $scope.setCount(guides.length);
 
     $scope.list = guides;
     $scope.preTitle = _.capitalize($stateParams.course.toUpperCase());

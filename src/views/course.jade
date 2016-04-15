@@ -2,7 +2,8 @@
 
   ul.nav.nav-tabs
     li(ng-repeat='tab in tabs', ng-class='{ active: is(tab) }', ng-click='open(tab)')
-      a(href='') {{ tab | translate }}
+      a(href='') {{ tab | translate }} 
+        span(ng-show="is(tab)") {{ '(' + count + ')' }}
 
   br
 
