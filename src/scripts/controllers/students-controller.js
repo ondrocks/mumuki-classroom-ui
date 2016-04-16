@@ -2,6 +2,7 @@
 angular
   .module('classroom')
   .controller('StudentsController', function ($scope, $state, $stateParams, toastr, $filter, students, Auth, Followers, Api) {
+    $scope.setCount(students.length);
 
     $scope.list = students;
     const course = $stateParams.course;

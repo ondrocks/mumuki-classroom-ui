@@ -11,6 +11,8 @@ angular
     $scope.open = (tab) => $state.go(tabs[tab], $stateParams, { location: 'replace' });
     $scope.is = (tab) => $state.is(tabs[tab], $stateParams);
 
+    $scope.setCount = (count) => $scope.count = count;
+
     const protocol = $location.protocol();
     const host = $location.host();
     const href = $state.href('classroom.students', { course: $stateParams.course })
