@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $stateParams, toastr, $filter, students, Auth, Followers, Api) {
+  .controller('StudentsController', function ($scope, $state, $stateParams, toastr, $filter, students, Auth, Followers, Api, Domain) {
     $scope.setCount(students.length);
 
     $scope.list = students;
@@ -14,7 +14,7 @@ angular
 
     $scope.sortCriteria = (student) => student.fullName();
 
-    $scope.isFollowing = (course, social_id) => Followers.isFollowing(course, social_id);
+    $scope.isFollowing = (course, social_id) => Followers.isFollowing(`${Domain.tenant()}/${course}`, social_id);
 
     $scope.followClass = (social_id) => $scope.isFollowing(course, social_id) ? 'danger' : 'info';
 
