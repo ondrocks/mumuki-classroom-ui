@@ -36,7 +36,7 @@ angular
     };
 
     $scope.byFollowers = (guide_progress) => {
-        return !$scope.onlyFollowers || Followers.isFollowing(splitSlug(guide_progress.course.slug), guide_progress.student.social_id);
+        return !$scope.onlyFollowers || Followers.isFollowing(guide_progress.course.slug, guide_progress.student.social_id);
     }
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
