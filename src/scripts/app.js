@@ -8,5 +8,7 @@ angular.module('classroom', [
   'toastr',
   'angular-clipboard',
   'ngCookies',
-  'pascalprecht.translate'
+  'pascalprecht.translate',
+  'angular-loading-bar',
+  'cfp.loadingBar'
 ]);
