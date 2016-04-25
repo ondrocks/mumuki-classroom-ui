@@ -1,7 +1,8 @@
 
 angular
   .module('classroom')
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+    cfpLoadingBarProvider.includeSpinner = false;
 
     $stateProvider
       .state('classroom', {
