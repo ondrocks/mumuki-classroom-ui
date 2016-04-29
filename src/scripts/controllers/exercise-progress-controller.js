@@ -29,7 +29,7 @@ angular
     $scope.time = (comment) => moment(comment.date).fromNow();
 
     const getComments = () => {
-      Api.getComments(exerciseProgress.exercise.id)
+      Api.getComments(exerciseProgress.exercise.id, course)
           .then((data) => {
             const groupedComments = _.groupBy(data.comments, 'submission_id');
             _.each($scope.diffs, (submission, index) => {

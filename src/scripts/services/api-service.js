@@ -52,9 +52,9 @@ angular
         .then((res) => _.map(res.data.students, Student.from));
     }
 
-    this.getComments = (submission_id) => {
+    this.getComments = (exercise_id, course) => {
       return $http
-        .get(`${API}/comments/${submission_id}`, authenticated())
+        .get(`${API}/comments/${course}/${exercise_id}`, authenticated())
         .then((res) => ({comments: res.data.comments}));
     }
 
