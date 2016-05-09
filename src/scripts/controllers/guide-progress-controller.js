@@ -32,7 +32,7 @@ angular
     $scope.sortingCriteria = () => {
       return $scope.sortType === 'name' ?
         ['student.last_name', 'student.first_name'] :
-        ['exercises.length', 'passedAverage()'];
+        ['stats.total', 'passedAverage()', 'student.last_name', 'student.first_name'];
     };
 
     $scope.byFollowers = (guide_progress) => {
