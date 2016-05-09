@@ -20,19 +20,19 @@ angular
 
     this.getGuides = ({ course }) => {
       return $http
-        .get(`${API}/courses/${course}`, authenticated())
+        .get(`${API}/courses/${course}/guides`, authenticated())
         .then((res) => _.map(res.data.course_guides, Guide.from))
     };
 
     this.getGuideProgress = ({ org, course, repo }) => {
       return $http
-        .get(`${API}/guide_progress/${course}/${org}/${repo}`, authenticated())
+        .get(`${API}/courses/${course}/guides/${org}/${repo}`, authenticated())
         .then((res) => ({guide: res.data.guide, guideProgress: _.map(res.data.progress, GuideProgress.from)}))
     };
 
     this.getExerciseProgress = ({ org, course, repo, student, exercise }) => {
       return $http
-        .get(`${API}/guide_progress/${course}/${org}/${repo}/${student}/${exercise}`, authenticated())
+        .get(`${API}/courses/${course}/guides/${org}/${repo}/${student}/${exercise}`, authenticated())
         .then((res) => ExerciseProgress.from(res.data.exercise_progress))
     };
 
@@ -48,34 +48,34 @@ angular
 
     this.getStudents = ({ course }) => {
       return $http
-        .get(`${API}/students/${course}`, authenticated())
+        .get(`${API}/courses/${course}/students`, authenticated())
         .then((res) => _.map(res.data.students, Student.from));
     }
 
     this.getComments = (exercise_id, course) => {
       return $http
-        .get(`${API}/comments/${course}/${exercise_id}`, authenticated())
+        .get(`${API}/courses/$course/comments/${exercise_id}`, authenticated())
         .then((res) => ({comments: res.data.comments}));
     }
 
     this.comment = (data, course) => {
       return $http
-        .post(`${API}/comment/${course}`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
+        .post(`${API}/courses/$course/comments`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
     }
 
     this.follow = (social_id, email, course) => {
       return $http
-        .post(`${API}/follower/${course}`, { social_id, email, course }, authenticated())
+        .post(`${API}/courses/$course/followers`, { social_id, email, course }, authenticated())
     }
 
     this.unfollow = (social_id, email, course) => {
       return $http
-        .delete(`${API}/follower/${course}/${email}/${social_id}`, authenticated())
+        .delete(`${API}/courses/$course/followers/${email}/${social_id}`, authenticated())
     }
 
     this.getFollowers = (email) => {
       return $http
-        .get(`${API}/followers/${email}`, authenticated())
+        .get(`${API}/courses/$course/followers/${email}`, authenticated())
         .then((data) => {
           const groupedData = _.groupBy(data.data.followers, "course");
           return _.forEach(groupedData, (v, k) => groupedData[k] = _.head(groupedData[k]));
