@@ -1,51 +1,51 @@
 
 angular
   .module('classroom')
-  .factory('GuideProgress', function (Guide, Course, Student, Exercise) {
+  .factory('GuideProgress', function (Guide, Course, Student, Exercise, Submission) {
 
     class GuideProgress {
 
       constructor(guideProgress = {}) {
+        if (!_.isNumber(guideProgress.last_assignment.exercise.number)) {
+          guideProgress.last_assignment.exercise.number = '0';
+        }
         _.defaults(this, guideProgress);
       }
 
-      stats() {
-        const stats = _.countBy(this.exercises, (exercise) => _.last(exercise.submissions).status);
-        stats.total = _.get(this, 'exercises.length', 0);
+      statistics() {
+        const stats = this.stats;
+        stats.total = stats.passed + stats.passed_with_warnings + stats.failed ;
         return stats;
       }
 
       colorClass() {
         const passedAverage = this.passedAverage();
-        return passedAverage <= 0.3 ? 'low' :
-               passedAverage <= 0.6 ? 'medium' : 'high';
+        return passedAverage <= 0.4 ? 'low' :
+               passedAverage <= 0.7 ? 'medium' : 'high';
       }
 
       passedAverage() {
-        const stats = this.stats();
+        const stats = this.statistics();
         return (stats.passed / stats.total) || 0;
       }
 
       hasSubmissions() {
-        return _.get(this, 'exercises.length', 0) > 0;
+        return true;
       }
 
       lastSubmission() {
-        return this.lastExerciseSubmitted().lastSubmission();
+        return this.last_assignment.submission;
       };
 
       lastExerciseSubmitted() {
-        return _(this)
-          .chain()
-          .get('exercises', [])
-          .maxBy((exercise) => _.maxBy(exercise.submissions, 'created_at').created_at)
-          .value();
+        return this.last_assignment.exercise;
       };
 
       static from(guideProgress) {
         guideProgress.course = Course.from(guideProgress.course);
         guideProgress.student = Student.from(guideProgress.student);
-        guideProgress.exercises = _.map(guideProgress.exercises, Exercise.from);
+        guideProgress.last_assignment.exercise = Exercise.from(guideProgress.last_assignment.exercise);
+        guideProgress.last_assignment.submission = Submission.from(guideProgress.last_assignment.submission);
         return new GuideProgress(guideProgress);
       }
 

@@ -44,9 +44,9 @@
 
         span.col-xs-3
           h4.pull-right(ng-class='"guide-progress-" + progress.colorClass()')
-            strong {{ progress.stats().passed || 0 }}
+            strong {{ progress.statistics().passed }}
             span &nbsp;/&nbsp;
-            span {{ progress.stats().total }}
+            span {{ progress.statistics().total }}
 
         .student-guide-details(ng-show='showDetails')
           .row(ng-if='!progress.hasSubmissions()')
