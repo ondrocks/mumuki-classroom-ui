@@ -21,7 +21,7 @@ angular
     this.getGuides = ({ course }) => {
       return $http
         .get(`${API}/courses/${course}/guides`, authenticated())
-        .then((res) => _.map(res.data.course_guides, Guide.from))
+        .then((res) => _.map(res.data.guides, Guide.from))
     };
 
     this.getGuideProgress = ({ org, course, repo }) => {
