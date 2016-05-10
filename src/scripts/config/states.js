@@ -127,7 +127,7 @@ angular
           }
         }
       })
-      .state('classroom.guideProgress.exercise', {
+      .state('classroom.guideProgress.exercises', {
         url: '/:student/:exercise',
         authenticated: true,
         views: {
@@ -135,7 +135,7 @@ angular
             templateUrl: 'views/exercise-progress.html',
             controller: 'ExerciseProgressController',
             resolve: {
-              exerciseProgress: ($state, $stateParams, Api) => {
+              exercisesProgress: ($state, $stateParams, Api) => {
                 return Api
                   .getExerciseProgress($stateParams)
                   .catch(() => $state.go('classroom.guideProgress', $stateParams, { location: 'replace' }));

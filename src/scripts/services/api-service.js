@@ -35,8 +35,8 @@ angular
 
     this.getExerciseProgress = ({ org, course, repo, student, exercise }) => {
       return $http
-        .get(`${API}/courses/${course}/guides/${org}/${repo}/${student}/${exercise}`, authenticated())
-        .then((res) => ExerciseProgress.from(res.data.exercise_progress))
+        .get(`${API}/courses/${course}/guides/${org}/${repo}/${student}`, authenticated())
+        .then((res) => _.map(res.data.exercise_student_progress, ExerciseProgress.from))
     };
 
     this.createCourse = (course) => {

@@ -1,58 +1,81 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $sce, $filter, toastr, exerciseProgress, Auth, Api) {
+  .controller('ExerciseProgressController', function ($scope, $sce, $stateParams, $filter, toastr, exercisesProgress, Auth, Api) {
 
-    const diffs = exerciseProgress.diffs;
+    $scope.exercisesProgress = exercisesProgress;
 
-    const course = exerciseProgress.course.slug.split('/')[1];
-    const MIN = 0;
-    const MAX = diffs.length - 1 ;
+    $scope.selectExercise = (exercise) => {
+      let exerciseProgress = exercise;
+      const diffs = exerciseProgress.diffs;
 
-    const index = () => _.indexOf(diffs, $scope.selectedDiff);
-    const prev = () => Math.max(index() - 1, MIN);
-    const next = () => Math.min(index() + 1, MAX);
+      const course = $stateParams.course;
+      const MIN = 0;
+      const MAX = diffs.length - 1 ;
 
-    $scope.diffs = diffs;
-    $scope.progress = exerciseProgress;
-    $scope.lastSubmission = _.last(exerciseProgress.submissions);
+      const index = () => _.indexOf(diffs, $scope.selectedDiff);
+      const prev = () => Math.max(index() - 1, MIN);
+      const next = () => Math.min(index() + 1, MAX);
 
-    $scope.prev = () => $scope.selectDiff(diffs[prev()]);
-    $scope.next = () => $scope.selectDiff(diffs[next()]);
-    $scope.trust = (html) => $sce.trustAsHtml(html);
-    $scope.selectDiff = (diff) => $scope.selectedDiff = diff;
-    $scope.isSelectedDiff = (diff) => _.isEqual($scope.selectedDiff, diff);
+      $scope.first = () => $scope.selectDiff(_.first(diffs));
+      $scope.last = () => $scope.selectDiff(_.last(diffs));
 
-    $scope.selectDiff(diffs[MAX]);
+      $scope.prev = () => $scope.selectDiff(diffs[prev()]);
+      $scope.next = () => $scope.selectDiff(diffs[next()]);
 
-    $scope.comments = (submission) => submission.comments;
-    $scope.time = (comment) => moment(comment.date).fromNow();
+      $scope.index = () => _.findIndex(diffs, $scope.isSelectedDiff);
 
-    const getComments = () => {
-      Api.getComments(exerciseProgress.exercise.id, course)
+      $scope.begin = () => {
+        return _.floor($scope.index() / $scope.limit) * $scope.limit;
+      };
+
+      $scope.indexNumber = ($index) => _.padStart($scope.begin() + $index + 1, 2, '0');
+
+      $scope.trust = (html) => $sce.trustAsHtml(html);
+      $scope.selectDiff = (diff) => $scope.selectedDiff = diff;
+      $scope.isSelectedDiff = (diff) => _.isEqual($scope.selectedDiff, diff);
+
+      $scope.limit = 5;
+      $scope.diffs = diffs;
+      $scope.progress = exerciseProgress;
+      $scope.lastSubmission = _.last(exerciseProgress.submissions);
+
+      $scope.selectDiff(diffs[MAX]);
+
+      $scope.comments = (submission) => submission.comments;
+      $scope.time = (comment) => moment(comment.date).fromNow();
+
+      const getComments = () => {
+        Api.getComments(exerciseProgress.exercise.id, course)
           .then((data) => {
             const groupedComments = _.groupBy(data.comments, 'submission_id');
             _.each($scope.diffs, (submission, index) => {
               submission.right.comments = groupedComments[submission.right.id];
             });
           });
-    };
-    getComments();
-    $scope.addComment = (submission) => {
-      if (submission.comment) {
-        const data = { exercise_id: exerciseProgress.exercise.id, submission_id: submission.id, comment: {
-            content: submission.comment,
-            type: submission.commentType,
-            date: new Date(),
-            email: Auth.profile().email
-            }
-        }
-        Api.comment(data, course)
-          .then(() => getComments())
-          .then(() => toastr.success($filter('translate')('do_comment')))
+      };
 
-        submission.restartComment();
+      $scope.addComment = (submission) => {
+        if (submission.comment) {
+          const data = { exercise_id: exerciseProgress.exercise.id, submission_id: submission.id, comment: {
+              content: submission.comment,
+              type: submission.commentType,
+              date: new Date(),
+              email: Auth.profile().email
+              }
+          }
+          Api.comment(data, course)
+            .then(() => getComments())
+            .then(() => toastr.success($filter('translate')('do_comment')))
+
+          submission.restartComment();
+        }
       }
+
+      getComments();
+
     }
+
+    $scope.selectExercise(exercisesProgress[0]);
 
   });

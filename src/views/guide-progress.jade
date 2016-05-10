@@ -34,7 +34,7 @@
   .row.guide-progress-main
     .col-md-4.col-sm-6(
         ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress) | filter:listSearch | filter:byFollowers')
-      .row.guide-progress-blog
+      .row.guide-progress-blog(ui-sref='classroom.guideProgress.exercises({ student: progress.student.social_id })')
         span.col-xs-9
           img.rounded-x(ng-src='{{ progress.student.image_url }}')
           .name-location
