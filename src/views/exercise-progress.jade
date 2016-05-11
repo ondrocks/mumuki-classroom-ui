@@ -34,7 +34,7 @@
             a(href='', aria-label='Anterior', ng-click='prev()')
               span(aria-hidden='true') &lt;
 
-          li(ng-repeat='diff in diffs | limitTo:limit:begin()[0]', ng-class='{ active: isSelectedDiff(diff) }')
+          li(ng-repeat='diff in diffs | limitTo:limit:begin()', ng-class='{ active: isSelectedDiff(diff) }')
             a(href='', ng-click='selectDiff(diff)') {{ indexNumber($index) }}
 
           li

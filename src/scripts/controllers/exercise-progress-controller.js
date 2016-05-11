@@ -26,7 +26,12 @@ angular
       $scope.index = () => _.findIndex(diffs, $scope.isSelectedDiff);
 
       $scope.begin = () => {
-        return _.floor($scope.index() / $scope.limit) * $scope.limit;
+        // This ugly logic is for fancy pagination;
+        const number = _.floor($scope.index() / $scope.limit) * $scope.limit;
+        const diffLengthBiggerThanLimit = diffs.length >= $scope.limit;
+        const numberBiggerThandiffLength = number + $scope.limit >= diffs.length;
+
+        return diffLengthBiggerThanLimit && numberBiggerThandiffLength ? (diffs.length - $scope.limit) : number;
       };
 
       $scope.indexNumber = ($index) => _.padStart($scope.begin() + $index + 1, 2, '0');
@@ -35,7 +40,7 @@ angular
       $scope.selectDiff = (diff) => $scope.selectedDiff = diff;
       $scope.isSelectedDiff = (diff) => _.isEqual($scope.selectedDiff, diff);
 
-      $scope.limit = 5;
+      $scope.limit = 4;
       $scope.diffs = diffs;
       $scope.progress = exerciseProgress;
       $scope.lastSubmission = _.last(exerciseProgress.submissions);
