@@ -111,7 +111,7 @@ angular
         }
       })
       .state('classroom.courses.course.guides.guide.students', {
-        url: '/students/:student/:eid',
+        url: '/:student/:eid',
         authenticated: true,
         views: {
           'content@classroom': {

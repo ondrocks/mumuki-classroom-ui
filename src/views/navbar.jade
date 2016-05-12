@@ -13,8 +13,21 @@ nav.navbar.navbar-default.navbar-static-top
     #navbar-main.collapse.navbar-collapse
 
       ul.nav.navbar-nav(ng-if='isLoggedIn() && isTeacher()')
-        li(ng-class='{ active: $state.is("classroom.courses") }')
-          a(href='', ui-sref='classroom.courses') {{ 'my_courses' | translate }}
+
+        li(ng-class='{ active: isCourses() }', ng-if='includesCourses()')
+          a(href='', ng-click='goToCourses()') {{ 'courses' | translate }}
+
+        li(ng-class='{ active: isGuides() }', ng-if='includesGuides()')
+          a(href='', ng-click='goToGuides()') {{ 'guides' | translate }}
+
+        li(ng-class='{ active: isStudents() }', ng-if='includesStudents()')
+          a(href='', ng-click='goToStudents()') {{ 'students' | translate }}
+
+        li(ng-class='{ active: isGuide() }', ng-if='includesGuide()')
+          a(href='', ng-click='goToGuide()') {{ guideName() }}
+
+        li(ng-class='{ active: isGuideExercises() }', ng-if='includesGuideExercises()')
+          a(href='', ng-click='goToGuideExercises()') {{ userId() }}
 
       ul.nav.navbar-nav.navbar-right
 
