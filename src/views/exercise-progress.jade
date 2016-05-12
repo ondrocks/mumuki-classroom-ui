@@ -2,28 +2,23 @@
   .row
     .col-sm-3
       .text-center
-        img.rounded-x(ng-src='{{ progress.student.image_url }}', width='75%')
+        img.rounded-x(ng-src='{{ progress.student.image_url }}', width='25%')
+        h4 {{ progress.student.fullName() }}
+        small(ng-if='progress.student.email')
+          a(href='mailto:{{ progress.student.email }}') {{ progress.student.email }}
       br
       section
-        .row
-          .col-sm-12.detail-title
-            strong Ejercicios
-        br
-        .row(ng-repeat='progress in exercisesProgress | orderBy:["number", "name"]')
-          span.col-sm-10.pull-left
+        .row(ng-repeat='progress in exercisesProgress | orderBy:["exercise.number", "exercise.name"]')
+          span.col-sm-10.pull-left.exercise-item
             a(href='', ng-click='selectExercise(progress)')
               | {{ progress.exercise.getName() }}
           span.col-sm-2.pull-right
-            status-icon(status='progress.exercise.lastSubmission().status')
+            status-icon(status='progress.lastSubmission().status')
 
     .col-sm-9
       .row
-        h1
-          div {{ progress.student.fullName() }}
-          small.show(ng-if='progress.student.email') {{ progress.student.email }}
-          small.show {{ progress.guide.getName() }}
-          small.show {{ progress.submissionsCount() }} {{ 'submitted_solutions' | translate | lowercase }}
-
+        h1.title
+          span {{ progress.guide.getName() }}
       nav
         ul.pagination
 

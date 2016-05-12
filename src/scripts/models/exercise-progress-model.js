@@ -24,6 +24,10 @@ angular
         return _.get(this, 'submissions.length', 0);
       }
 
+      lastSubmission() {
+        return _.maxBy(_.get(this, 'submissions', []), 'created_at');
+      }
+
       static from(exerciseProgress) {
         exerciseProgress.guide = Guide.from(exerciseProgress.guide);
         exerciseProgress.course = Course.from(exerciseProgress.course);

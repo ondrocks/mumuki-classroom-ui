@@ -7,7 +7,7 @@ angular
 
       constructor(exercise = {}) {
         if (!_.isNumber(exercise.number)) {
-          exercise.number = '0';
+          exercise.number = 0;
         }
         _.defaults(this, exercise);
       }
