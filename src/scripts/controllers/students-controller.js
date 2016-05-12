@@ -8,7 +8,7 @@ angular
     const course = $stateParams.course;
     const course_slug = `${Domain.tenant()}/${course}`;
 
-    Api.getFollowers(Auth.profile().email)
+    Api.getFollowers(Auth.profile().email, $stateParams.course)
       .then((data) => {
         return Followers.setFollowUps(data);
       });

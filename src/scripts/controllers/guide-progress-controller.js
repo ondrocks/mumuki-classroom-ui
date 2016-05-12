@@ -6,7 +6,7 @@ angular
     RememberSetting($scope, 'sortType');
     RememberSetting($scope, 'onlyFollowers');
 
-    Api.getFollowers(Auth.profile().email)
+    Api.getFollowers(Auth.profile().email, $stateParams.course)
       .then((data) => {
         return Followers.setFollowUps(data);
       });

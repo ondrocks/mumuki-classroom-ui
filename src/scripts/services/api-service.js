@@ -57,28 +57,28 @@ angular
 
     this.getComments = (exercise_id, course) => {
       return $http
-        .get(`${API}/courses/$course/comments/${exercise_id}`, authenticated())
+        .get(`${API}/courses/${course}/comments/${exercise_id}`, authenticated())
         .then((res) => ({comments: res.data.comments}));
     }
 
     this.comment = (data, course) => {
       return $http
-        .post(`${API}/courses/$course/comments`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
+        .post(`${API}/courses/${course}/comments`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
     }
 
     this.follow = (social_id, email, course) => {
       return $http
-        .post(`${API}/courses/$course/followers`, { social_id, email, course }, authenticated())
+        .post(`${API}/courses/${course}/followers`, { social_id, email, course }, authenticated())
     }
 
     this.unfollow = (social_id, email, course) => {
       return $http
-        .delete(`${API}/courses/$course/followers/${email}/${social_id}`, authenticated())
+        .delete(`${API}/courses/${course}/followers/${email}/${social_id}`, authenticated())
     }
 
-    this.getFollowers = (email) => {
+    this.getFollowers = (email, course) => {
       return $http
-        .get(`${API}/courses/$course/followers/${email}`, authenticated())
+        .get(`${API}/courses/${course}/followers/${email}`, authenticated())
         .then((data) => {
           const groupedData = _.groupBy(data.data.followers, "course");
           return _.forEach(groupedData, (v, k) => groupedData[k] = _.head(groupedData[k]));
