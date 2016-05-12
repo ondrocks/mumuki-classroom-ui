@@ -34,7 +34,7 @@
   .row.guide-progress-main
     .col-md-4.col-sm-6(
         ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress) | filter:listSearch | filter:byFollowers')
-      .row.guide-progress-blog(ui-sref='classroom.guideProgress.exercises({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
+      .row.guide-progress-blog(ui-sref='classroom.courses.course.guides.guide.students({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
         span.col-xs-9.pointer
           img.rounded-x(ng-src='{{ progress.student.image_url }}')
           .name-location
@@ -59,7 +59,7 @@
                   strong Última solución enviada
               .row
                 span.col-sm-10
-                  a(ui-sref='classroom.guideProgress.exercises({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
+                  a(ui-sref='classroom.courses.course.guides.guide.students({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
                     | {{ progress.lastExerciseSubmitted().getName() }}
                 span.col-sm-2.pull-right
                   status-icon(status='progress.lastSubmission().status')

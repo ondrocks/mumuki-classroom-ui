@@ -93,8 +93,8 @@ angular
           }
         }
       })
-      .state('classroom.guideProgress', {
-        url: '/:course/:org/:repo',
+      .state('classroom.courses.course.guides.guide', {
+        url: '/:org/:repo',
         authenticated: true,
         views: {
           'content@classroom': {
@@ -110,8 +110,8 @@ angular
           }
         }
       })
-      .state('classroom.guideProgress.exercises', {
-        url: '/:student/:eid',
+      .state('classroom.courses.course.guides.guide.students', {
+        url: '/students/:student/:eid',
         authenticated: true,
         views: {
           'content@classroom': {
@@ -121,7 +121,7 @@ angular
               exercisesProgress: ($state, $stateParams, Api) => {
                 return Api
                   .getExerciseProgress($stateParams)
-                  .catch(() => $state.go('classroom.guideProgress', $stateParams, { location: 'replace' }));
+                  .catch(() => $state.go('classroom.courses.course.guides.guide', $stateParams, { location: 'replace' }));
               }
             }
           }
