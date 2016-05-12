@@ -93,23 +93,6 @@ angular
           }
         }
       })
-      .state('classroom.courses.course.students', {
-        url: '/students',
-        authenticated: true,
-        views: {
-          'main@classroom.courses.course': {
-            templateUrl: 'views/students.html',
-            controller: 'StudentsController',
-            resolve: {
-              students: ($state, $stateParams, Api) => {
-                return Api
-                  .getStudents($stateParams)
-                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
-              }
-            }
-          }
-        }
-      })
       .state('classroom.guideProgress', {
         url: '/:course/:org/:repo',
         authenticated: true,
@@ -139,6 +122,23 @@ angular
                 return Api
                   .getExerciseProgress($stateParams)
                   .catch(() => $state.go('classroom.guideProgress', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
+      })
+      .state('classroom.courses.course.students', {
+        url: '/students',
+        authenticated: true,
+        views: {
+          'main@classroom.courses.course': {
+            templateUrl: 'views/students.html',
+            controller: 'StudentsController',
+            resolve: {
+              students: ($state, $stateParams, Api) => {
+                return Api
+                  .getStudents($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }
           }
