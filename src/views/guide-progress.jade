@@ -35,12 +35,14 @@
     .col-md-4.col-sm-6(
         ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress) | filter:listSearch | filter:byFollowers')
       .row.guide-progress-blog(ui-sref='classroom.guideProgress.exercises({ student: progress.student.social_id })')
-        span.col-xs-9
+        span.col-xs-9.pointer
           img.rounded-x(ng-src='{{ progress.student.image_url }}')
           .name-location
             strong {{ progress.student.fullName() }}
           .name-location
-            small {{ progress.student.email || ('email_not_provided' | translate) }}
+            small
+              div(ng-if='!progress.student.email') {{ 'email_not_provided' | translate }}
+              a(ng-if='progress.student.email', href='mailto:{{progress.student.email}}') {{progress.student.email}}
 
         span.col-xs-3
           h4.pull-right(ng-class='"guide-progress-" + progress.colorClass()')
@@ -49,22 +51,8 @@
             span {{ progress.statistics().total }}
 
         .student-guide-details(ng-show='showDetails')
-          .row(ng-if='!progress.hasSubmissions()')
-            .col-sm-12.detail-title
-              h4 {{ 'no_students_to_show' | translate }} &nbsp;
-                i.fa.fa-frown-o
 
           div(ng-if='progress.hasSubmissions()')
-            section
-              .row
-                .col-sm-12.detail-title
-                  strong Ejercicios
-              .row(ng-repeat='exercise in progress.exercises | orderBy:"number"')
-                span.col-sm-10
-                  a(ui-sref='classroom.guideProgress.exercise({ student: progress.student.social_id, exercise: exercise.id })')
-                    | {{ exercise.getName() }}
-                span.col-sm-2.pull-right
-                  status-icon(status='exercise.lastSubmission().status')
             section
               .row
                 .col-sm-12.detail-title
@@ -76,6 +64,6 @@
                 span.col-sm-2.pull-right
                   status-icon(status='progress.lastSubmission().status')
                 .col-sm-12
-                  pre
+                  pre(style='height: 125px; overflow-y: auto')
                     code
                       | {{ progress.lastSubmission().content }}
