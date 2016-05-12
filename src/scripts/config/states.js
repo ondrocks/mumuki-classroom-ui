@@ -128,7 +128,7 @@ angular
         }
       })
       .state('classroom.guideProgress.exercises', {
-        url: '/:student/:exercise',
+        url: '/:student/:eid',
         authenticated: true,
         views: {
           'content@classroom': {

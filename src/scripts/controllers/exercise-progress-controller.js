@@ -81,6 +81,7 @@ angular
 
     }
 
-    $scope.selectExercise(exercisesProgress[0]);
+    const exerciseToView = _.find(exercisesProgress, (progress) => progress.exercise.id === Number($stateParams.eid));
+    $scope.selectExercise(exerciseToView || exercisesProgress[0]);
 
   });
