@@ -22,6 +22,8 @@ angular
     day_wednesday: 'Wednesday',
     do_comment: 'Successful comment!',
     do_follow: 'Following!',
+    email: 'Email',
+    email_error: 'Email is mandatory and it must be a valid one',
     email_not_provided: 'Email not provided',
     expectations: 'Expectations',
     filter_available_courses: 'Filter available courses',
@@ -66,6 +68,6 @@ angular
     submit: 'Submit',
     tests: 'Tests',
     unfollow: 'Unfollow',
-    unfollowing: 'Unfollow!'
+    unfollowing: 'Unfollow!',
 
   });

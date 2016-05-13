@@ -22,6 +22,8 @@ angular
     day_wednesday: 'Miércoles',
     do_comment: 'Has comentado correctamente',
     do_follow: 'Siguiendo!',
+    email: 'Email',
+    email_error: 'El campo email es obligatorio, y debe ser válido',
     email_not_provided: 'No hay email asociado',
     expectations: 'Expectativas',
     filter_available_courses: 'Filtrar cursos disponibles',
@@ -66,6 +68,6 @@ angular
     submit: 'Enviar',
     tests: 'Pruebas',
     unfollow: 'Dejar de Seguir',
-    unfollowing: 'Has dejado de seguir al usuario'
+    unfollowing: 'Has dejado de seguir al usuario',
 
   });

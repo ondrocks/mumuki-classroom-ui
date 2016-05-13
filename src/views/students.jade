@@ -14,9 +14,9 @@
           .name-location
             strong {{ item.fullName() }}
           .name-location
-            strong {{ item.name }}
-          .name-location
-            small {{ item.email || ('email_not_provided' | translate) }}
+            small(ng-if='!item.email') {{ 'email_not_provided' | translate }}
+            small(ng-if='item.email')
+              a(href='mailto:{{ item.email }}') {{ item.email }}
         .col-xs-6
           .btn.pull-right(class="btn-{{followClass(item.social_id)}}", ng-click='followAction(item.social_id)')
             | {{ followText(item.social_id) | translate }}

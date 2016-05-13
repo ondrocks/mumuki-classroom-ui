@@ -32,7 +32,7 @@ angular
       auth.signin({ authParams: { scope: 'openid app_metadata' } }, (profile, token) => {
         store.set('profile', profile);
         store.set('token', token);
-        if (_.isFunction(callback)) callback();
+        if (_.isFunction(callback)) callback(profile);
       });
     };
 
