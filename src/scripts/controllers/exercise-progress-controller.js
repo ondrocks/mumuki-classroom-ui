@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, exercisesProgress, Auth, Api) {
+  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, exercisesProgress, Auth, Api, Breadcrumb) {
 
     const exerciseToView = _.find(exercisesProgress, (progress) => progress.exercise.id === Number($stateParams.eid));
 
@@ -13,6 +13,8 @@ angular
       $stateParams.eid = exerciseProgress.exercise.id;
       $state.go($state.current.name, $stateParams, { reload: true });
     }
+
+    Breadcrumb.setStudent(exerciseProgress.student);
 
     const diffs = exerciseProgress.diffs;
 

@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, data, Api, Auth, DevIcon, Guide, RememberSetting, Followers, Domain) {
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, data, Api, Auth, DevIcon, Guide, RememberSetting, Followers, Domain, Breadcrumb) {
     RememberSetting($scope, 'showDetails');
     RememberSetting($scope, 'sortType');
     RememberSetting($scope, 'onlyFollowers');
@@ -11,6 +11,8 @@ angular
       .then((data) => Followers.setFollowUps(data));
 
     const guide = Guide.from(data.guide);
+
+    Breadcrumb.setGuide(guide);
 
     const setGuideProgress = (guideProgress) => $scope.guideProgress = guideProgress;
 
