@@ -1,84 +1,98 @@
-.container
+.container-fluid
   .row
-    h1
-      img.rounded-x(ng-src='{{ progress.student.image_url }}', width='100px')
-      span {{ progress.student.fullName() }}
-      span &nbsp;- {{ progress.student.name }}
-      small &nbsp;- {{ progress.student.email }}
-      small.show {{ progress.getName() }}
-      small
-        span {{ progress.submissionsCount() }} {{ 'submitted_solutions' | translate | lowercase }}
-        span
-          status-icon(status='progress.exercise.lastSubmission().status')
+    .col-sm-3
+      .text-center
+        img.rounded-x(ng-src='{{ progress.student.image_url }}', width='25%')
+        h4 {{ progress.student.fullName() }}
+        small(ng-if='progress.student.email')
+          a(href='mailto:{{ progress.student.email }}') {{ progress.student.email }}
+      br
+      section
+        .row(ng-repeat='progress in exercisesProgress | orderBy:["exercise.number", "exercise.name"]')
+          span.col-sm-10.pull-left.exercise-item
+            a(href='', ng-click='selectExercise(progress)')
+              | {{ progress.exercise.getName() }}
+          span.col-sm-2.pull-right
+            status-icon(status='progress.lastSubmission().status')
 
-  nav
-    ul.pagination
+    .col-sm-9
+      .row
+        h1.title
+          span {{ progress.exercise.getName() }}
+      nav
+        ul.pagination
 
-      li
-        a(href='', aria-label='Anterior', ng-click='prev()')
-          span(aria-hidden='true') &laquo;
+          li
+            a(href='', aria-label='Anterior', ng-click='first()')
+              span(aria-hidden='true') &laquo;
+          li
+            a(href='', aria-label='Anterior', ng-click='prev()')
+              span(aria-hidden='true') &lt;
 
-      li(ng-repeat='diff in diffs', ng-class='{ active: isSelectedDiff(diff) }')
-        a(href='', ng-click='selectDiff(diff)') {{ $index + 1 }}
+          li(ng-repeat='diff in diffs | limitTo:limit:begin()', ng-class='{ active: isSelectedDiff(diff) }')
+            a(href='', ng-click='selectDiff(diff)') {{ indexNumber($index) }}
 
-      li
-        a(href='', aria-label='Siguiente', ng-click='next()')
-          span(aria-hidden='true') &raquo;
+          li
+            a(href='', aria-label='Siguiente', ng-click='next()')
+              span(aria-hidden='true') &gt;
+          li
+            a(href='', aria-label='Siguiente', ng-click='last()')
+              span(aria-hidden='true') &raquo;
 
-  diff-side(language='{{ progress.guide.language.name }}', left='selectedDiff.left', right='selectedDiff.right')
+      diff-side(language='{{ progress.guide.language.name }}', left='selectedDiff.left', right='selectedDiff.right')
 
-  .row
-    .col-sm-12(ng-repeat='submission in [ selectedDiff.right ]')
+      .row
+        .col-sm-12(ng-repeat='submission in [ selectedDiff.right ]')
 
-      .row(ng-if='submission.content', ng-init='submission.commentType = "success"')
-        .col-sm-9.col-md-10
-          textarea.form-control(
-              ng-model='submission.comment',
-              placeholder='{{ "comment_this_solution" | translate }}',
-              class="textarea-{{submission.commentType}}",
-              maxlength='255',
-              rows='3')
+          .row(ng-if='submission.content', ng-init='submission.commentType = "success"')
+            .col-sm-9.col-md-10
+              textarea.form-control(
+                  ng-model='submission.comment',
+                  placeholder='{{ "comment_this_solution" | translate }}',
+                  class="textarea-{{submission.commentType}}",
+                  maxlength='255',
+                  rows='3')
 
-        .col-sm-3.col-md-2
-          .btn-group.btn-group-justified
-            .btn-group
-              button.btn.btn-success(ng-click='submission.commentType = "success"')
-            .btn-group
-              button.btn.btn-warning(ng-click='submission.commentType = "warning"')
-            .btn-group
-              button.btn.btn-danger(ng-click='submission.commentType = "danger"')
-          br
-          button.btn.btn-default.btn-block(ng-click='addComment(submission)')
-            | {{ 'comment_solution' | translate  }}
+            .col-sm-3.col-md-2
+              .btn-group.btn-group-justified
+                .btn-group
+                  button.btn.btn-success(ng-click='submission.commentType = "success"')
+                .btn-group
+                  button.btn.btn-warning(ng-click='submission.commentType = "warning"')
+                .btn-group
+                  button.btn.btn-danger(ng-click='submission.commentType = "danger"')
+              br
+              button.btn.btn-default.btn-block(ng-click='addComment(submission)')
+                | {{ 'comment_solution' | translate  }}
 
-      .bs-callout(ng-repeat='data in comments(submission) | orderBy:$index:true', class='bs-callout-{{ data.comment.type }}')
-        h4 {{ 'comment' | translate  }}
-          small &nbsp;- {{ data.comment.email }} - {{ time(data.comment) }}
-        p(ng-repeat='line in data.comment.content.split("\n") track by $index')
-          | {{ line }}
+          .bs-callout(ng-repeat='data in comments(submission) | orderBy:$index:true', class='bs-callout-{{ data.comment.type }}')
+            h4 {{ 'comment' | translate  }}
+              small &nbsp;- {{ data.comment.email }} - {{ time(data.comment) }}
+            p(ng-repeat='line in data.comment.content.split("\n") track by $index')
+              | {{ line }}
 
-      .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.test_results.length')
-        h4 {{ 'tests' | translate }}
-        p
-          .row(ng-repeat='result in submission.test_results')
-            .col-sm-11
-              span {{ result.title || 'Example ' + ($index + 1) }}
-              div(ng-if="result.status != 'passed'", ng-bind-html='trust(result.result)')
-            .col-sm-1
-              status-icon(status='result.status')
+          .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.test_results.length')
+            h4 {{ 'tests' | translate }}
+            p
+              .row(ng-repeat='result in submission.test_results')
+                .col-sm-11
+                  span {{ result.title || 'Example ' + ($index + 1) }}
+                  div(ng-if="result.status != 'passed'", ng-bind-html='trust(result.result)')
+                .col-sm-1
+                  status-icon(status='result.status')
 
-      .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.result')
-        h4 {{ 'results' | translate }}
-        p
-          div(ng-bind-html='trust(submission.result)')
+          .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.result')
+            h4 {{ 'results' | translate }}
+            p
+              div(ng-bind-html='trust(submission.result)')
 
-      .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.expectation_results.length')
-        h4 {{ 'expectations' | translate }}
-        p
-          .row(ng-repeat='expectationResult in submission.expectation_results')
-            .col-sm-11
-              span {{ expectationResult.binding }}
-              i.expectation-arrow
-              span {{ expectationResult.inspection }}
-            .col-sm-1
-              status-icon(status='expectationResult.result')
+          .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.expectation_results.length')
+            h4 {{ 'expectations' | translate }}
+            p
+              .row(ng-repeat='expectationResult in submission.expectation_results')
+                .col-sm-11
+                  span {{ expectationResult.binding }}
+                  i.expectation-arrow
+                  span {{ expectationResult.inspection }}
+                .col-sm-1
+                  status-icon(status='expectationResult.result')

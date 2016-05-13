@@ -77,3 +77,14 @@ $color-danger: #d9534f;
 .textarea-danger {
   background-color: rgba($color-danger, 0.25);
 }
+
+.title {
+  margin-left: 1rem;
+}
+
+.exercise-item {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+

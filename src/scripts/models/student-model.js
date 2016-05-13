@@ -13,6 +13,10 @@ angular
         return `${this._capitalize(this.last_name)}, ${this._capitalize(this.first_name)}`
       }
 
+      getName() {
+        return this.fullName();
+      }
+
       static from(student) {
         return new Student(student);
       }

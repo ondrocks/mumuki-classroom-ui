@@ -12,6 +12,7 @@ angular
     comment_this_solution: 'Comment this solution',
     complete_form: 'Complete form',
     copied: 'Copied',
+    courses: 'Courses',
     day_friday: 'Friday',
     day_monday: 'Monday',
     day_saturday: 'Saturday',
@@ -19,8 +20,10 @@ angular
     day_thursday: 'Thursday',
     day_tuesday: 'Tuesday',
     day_wednesday: 'Wednesday',
-    do_follow: 'Following!',
     do_comment: 'Successful comment!',
+    do_follow: 'Following!',
+    email: 'Email',
+    email_error: 'Email is mandatory and it must be a valid one',
     email_not_provided: 'Email not provided',
     expectations: 'Expectations',
     filter_available_courses: 'Filter available courses',
@@ -36,7 +39,6 @@ angular
     log_in: 'Log in',
     log_in_first: 'You must login first',
     log_out: 'Log out',
-    my_courses: 'My courses',
     new_course: 'New course',
     new_course_code: 'Course code',
     new_course_code_error: 'Course code is mandatory',
@@ -64,9 +66,8 @@ angular
     students: 'Students',
     students_subscription_address: 'Students subscription address',
     submit: 'Submit',
-    submitted_solutions: 'Submitted solutions',
     tests: 'Tests',
     unfollow: 'Unfollow',
-    unfollowing: 'Unfollow!'
+    unfollowing: 'Unfollow!',
 
   });

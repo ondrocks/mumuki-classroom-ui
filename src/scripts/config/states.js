@@ -93,25 +93,8 @@ angular
           }
         }
       })
-      .state('classroom.courses.course.students', {
-        url: '/students',
-        authenticated: true,
-        views: {
-          'main@classroom.courses.course': {
-            templateUrl: 'views/students.html',
-            controller: 'StudentsController',
-            resolve: {
-              students: ($state, $stateParams, Api) => {
-                return Api
-                  .getStudents($stateParams)
-                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
-              }
-            }
-          }
-        }
-      })
-      .state('classroom.guideProgress', {
-        url: '/:course/:org/:repo',
+      .state('classroom.courses.course.guides.guide', {
+        url: '/:org/:repo',
         authenticated: true,
         views: {
           'content@classroom': {
@@ -127,18 +110,35 @@ angular
           }
         }
       })
-      .state('classroom.guideProgress.exercise', {
-        url: '/:student/:exercise',
+      .state('classroom.courses.course.guides.guide.students', {
+        url: '/:student/:eid',
         authenticated: true,
         views: {
           'content@classroom': {
             templateUrl: 'views/exercise-progress.html',
             controller: 'ExerciseProgressController',
             resolve: {
-              exerciseProgress: ($state, $stateParams, Api) => {
+              exercisesProgress: ($state, $stateParams, Api) => {
                 return Api
                   .getExerciseProgress($stateParams)
-                  .catch(() => $state.go('classroom.guideProgress', $stateParams, { location: 'replace' }));
+                  .catch(() => $state.go('classroom.courses.course.guides.guide', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
+      })
+      .state('classroom.courses.course.students', {
+        url: '/students',
+        authenticated: true,
+        views: {
+          'main@classroom.courses.course': {
+            templateUrl: 'views/students.html',
+            controller: 'StudentsController',
+            resolve: {
+              students: ($state, $stateParams, Api) => {
+                return Api
+                  .getStudents($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }
           }

@@ -9,19 +9,23 @@ angular
         _.defaults(this, exerciseProgress);
 
         this.diffs = [];
-        this.exercise.submissions = _.sortBy(this.exercise.submissions, 'created_at');
+        this.submissions = _.sortBy(this.submissions, 'created_at');
 
-        _.forEach(this.exercise.submissions, (value, i, array) => {
+        _.forEach(this.submissions, (value, i, array) => {
           this.diffs.push({ left: Submission.from(array[i - 1]), right: Submission.from(value) });
         });
       }
 
       getName() {
-        return `${this.exercise.name} -  ${this.guide.name}`;
+        return this.exercise.getName();
       }
 
       submissionsCount() {
-        return _.get(this, 'exercise.submissions.length', 0);
+        return _.get(this, 'submissions.length', 0);
+      }
+
+      lastSubmission() {
+        return _.maxBy(_.get(this, 'submissions', []), 'created_at');
       }
 
       static from(exerciseProgress) {
@@ -29,6 +33,7 @@ angular
         exerciseProgress.course = Course.from(exerciseProgress.course);
         exerciseProgress.student = Student.from(exerciseProgress.student);
         exerciseProgress.exercise = Exercise.from(exerciseProgress.exercise);
+        exerciseProgress.submissions = _.map(exerciseProgress.submissions, Submission.from);
         return new ExerciseProgress(exerciseProgress);
       }
 

@@ -14,7 +14,7 @@ angular
     $scope.open = (guide) => {
       const [ org, repo ] = guide.slug.split('/');
       const course = $stateParams.course;
-      $state.go('classroom.guideProgress', { org, repo, course });
+      $state.go('classroom.courses.course.guides.guide', { org, repo, course });
     }
 
   });
