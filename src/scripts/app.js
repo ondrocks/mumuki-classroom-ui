@@ -10,5 +10,6 @@ angular.module('classroom', [
   'ngCookies',
   'pascalprecht.translate',
   'angular-loading-bar',
-  'cfp.loadingBar'
+  'cfp.loadingBar',
+  'vesparny.fancyModal'
 ]);
