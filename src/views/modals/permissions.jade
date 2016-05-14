@@ -1,0 +1,8 @@
+.container
+  h3 {{ 'add_permissions_to_teacher' | translate }} {{course}}
+
+  input.col-xs-3.pull-left(ng-model='email', type='text', placeholder='example@mumuki.org', autofocus)
+  br
+  br
+  br
+  button.btn.btn-primary(ng-click='addPermission()') {{ 'confirm' | translate }}
