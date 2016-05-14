@@ -7,12 +7,15 @@
   br
 
   div.list-group
-    button.list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch', ng-click='open(item)')
-      i(class='{{ item.iconClass() }}')
-      span.divider-vertical
-      span.item-name {{ item.getName() | uppercase }}
+    .list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch')
+      .item.pull-left(ng-click='open(item)')
+        i(class='{{ item.iconClass() }}')
+        span.divider-vertical
+        span.item-name {{ item.getName() | uppercase }}
+      .pull-right
+        span.divider-vertical
+        i.settings-icon(ng-if='isCourse', class='{{ item.iconSetting() }}', ng-click='openPermissionsModal(item.slug)')
     label(ng-if='!(list | orderBy: sortCriteria() | filter:listSearch).length')
       | {{ noItemsToShow | translate }}
-
   button.btn.btn-primary.pull-right(ng-if='isAdmin()', ui-sref='classroom.courses.new')
     | {{ 'new_course' | translate }}

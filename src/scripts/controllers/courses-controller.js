@@ -9,6 +9,7 @@ angular
     $scope.inputPlaceholder = 'filter_available_courses';
 
     $scope.isAdmin = Auth.isAdmin;
+    $scope.isCourse = true;
     $scope.sortCriteria = () => ['getName()'];
 
     $scope.open = (course) => {
