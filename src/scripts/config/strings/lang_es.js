@@ -14,6 +14,7 @@ angular
     complete_form: 'Cargar datos',
     confirm: 'Confirmar',
     copied: 'Copiado',
+    correct_permissions: 'Permisos otorgados satisfactoriamente',
     courses: 'Cursos',
     day_friday: 'Viernes',
     day_monday: 'Lunes',

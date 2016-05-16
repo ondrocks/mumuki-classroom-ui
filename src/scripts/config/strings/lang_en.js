@@ -14,6 +14,7 @@ angular
     complete_form: 'Complete form',
     confirm: 'Confirm',
     copied: 'Copied',
+    correct_permissions: 'Permissions granted correctly',
     courses: 'Courses',
     day_friday: 'Friday',
     day_monday: 'Monday',
