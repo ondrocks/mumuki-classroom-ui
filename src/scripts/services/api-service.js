@@ -85,4 +85,9 @@ angular
         });
     }
 
+    this.addPermission = (slug, email) => {
+      return $http
+        .post(`${API}/courses/${slug}/permissions`, { email }, authenticated())
+    }
+
   });

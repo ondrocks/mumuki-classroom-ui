@@ -17,6 +17,10 @@ angular
         return 'fa fa-graduation-cap';
       }
 
+      iconSetting() {
+        return 'fa fa-cog';
+      }
+
       static from(course) {
         return new Course(course);
       }

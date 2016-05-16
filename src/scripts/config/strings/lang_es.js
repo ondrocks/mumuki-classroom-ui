@@ -3,6 +3,7 @@ angular
   .module('classroom')
   .constant('LANG_ES', {
 
+    add_permissions_to_teacher: 'Agregar permisos a',
     all: 'Todos',
     available_courses: 'Cursos disponibles',
     by_name: 'Por nombre',
@@ -11,7 +12,9 @@ angular
     comment_solution: 'Comentar',
     comment_this_solution: 'Comentar esta solución',
     complete_form: 'Cargar datos',
+    confirm: 'Confirmar',
     copied: 'Copiado',
+    correct_permissions: 'Permisos otorgados satisfactoriamente',
     courses: 'Cursos',
     day_friday: 'Viernes',
     day_monday: 'Lunes',
