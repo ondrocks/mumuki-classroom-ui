@@ -12,6 +12,10 @@ angular
       return _.get(this.profile(), 'classroom.permissions', '').split(':');
     }
 
+    this.adminPermissions = () => {
+      return  _.get(this.profile(), 'admin.permissions', '').split(':');
+    }
+
     this.profile = () => {
       return store.get('profile');
     }
@@ -21,7 +25,7 @@ angular
     }
 
     this.isAdmin = () => {
-      return _.some(this.permissions(), (p) => adminRegex.test(p));
+      return _.some(this.adminPermissions(), (p) => adminRegex.test(p));
     }
 
     this.isTeacher = () => {
