@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('StudentController', function ($scope, $state, $stateParams, toastr, Auth, Api) {
+  .controller('StudentController', function ($scope, $state, $stateParams, toastr, Auth, Api, Domain) {
 
     const EMAIL_REGEX = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
 
@@ -23,7 +23,7 @@ angular
     $scope.update = () => {
       return Api
         .updateStudent($stateParams.course, $scope.student)
-        .then(() => toastr.success('Gracias por cargar tus datos'))
+        .then(() => Domain.openAtheneum())
         .catch((res) => toastr.error(res.data.message));
     }
 
