@@ -5,7 +5,8 @@ angular
 
     const tabs = {
       guides: 'classroom.courses.course.guides',
-      students: 'classroom.courses.course.students'
+      students: 'classroom.courses.course.students',
+      exams: 'classroom.courses.course.exams'
     }
     $scope.tabs = _.keys(tabs);
     $scope.open = (tab) => $state.go(tabs[tab], $stateParams, { location: 'replace' });

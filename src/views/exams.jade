@@ -1,0 +1,18 @@
+.container
+
+  .input-group
+    i.input-group-addon.fa.fa-search
+    input.form-control(id='filter', placeholder='{{ inputPlaceholder | translate }}', ng-model='listSearch')
+
+  br
+
+  div.list-group
+    .list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch')
+      .item.pull-left(ng-click='open(item)')
+        i(class='{{ item.iconClass() }}')
+        span.divider-vertical
+        span.item-name {{ item.getName() | uppercase }}
+    label(ng-if='!(list | orderBy: sortCriteria() | filter:listSearch).length')
+      | {{ noItemsToShow | translate }}
+  button.btn.btn-primary.pull-right(ng-if='isAdmin()', ui-sref='classroom.exams.new')
+    | {{ 'new_exam' | translate }}

@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Api', function ($http, $location, Course, Guide, Student, GuideProgress, ExerciseProgress, Auth, Domain, CONFIG) {
+  .service('Api', function ($http, $location, Course, Guide, Student, GuideProgress, ExerciseProgress, Exam, Auth, Domain, CONFIG) {
 
     const subdomain = Domain.tenant();
     const API = `http://${subdomain}.${CONFIG.classroom.url}`;
@@ -37,6 +37,13 @@ angular
       return $http
         .get(`${API}/courses/${course}/guides/${org}/${repo}/${student}`, authenticated())
         .then((res) => _.map(res.data.exercise_student_progress, ExerciseProgress.from))
+    };
+
+    this.getExams = ({ course }) => {
+      return $http
+        // .get(`${API}/courses/${course}/exams`, authenticated())
+        .get(`http://private-91a3f5-mumukiclassroom.apiary-mock.com/courses/${course}/exams`, authenticated())
+        .then((res) => _.map(res.data.exams, Exam.from))
     };
 
     this.createCourse = (course) => {

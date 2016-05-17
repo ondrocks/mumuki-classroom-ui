@@ -143,6 +143,23 @@ angular
             }
           }
         }
+      })
+      .state('classroom.courses.course.exams', {
+        url: '/exams',
+        authenticated: true,
+        views: {
+          'main@classroom.courses.course': {
+            templateUrl: 'views/exams.html',
+            controller: 'ExamsController',
+            resolve: {
+              exams: ($state, $stateParams, Api) => {
+                return Api
+                  .getExams($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
       });
 
     $urlRouterProvider.otherwise(($injector) => {
