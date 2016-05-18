@@ -47,14 +47,18 @@ angular
 
     this.getExams = ({ course }) => {
       return $http
-        // .get(`${API}/courses/${course}/exams`, authenticated())
-        .get(`http://private-91a3f5-mumukiclassroom.apiary-mock.com/courses/${course}/exams`, authenticated())
+        .get(`${API}/courses/${course}/exams`, authenticated())
         .then((res) => _.map(res.data.exams, Exam.from))
     };
 
     this.createCourse = (course) => {
       return $http
         .post(`${API}/courses`, course, authenticated())
+    }
+
+    this.createExam = (course, exam) => {
+      return $http
+        .post(`${API}/courses/${course}/exams`, exam, authenticated())
     }
 
     this.updateStudent = (course, student) => {

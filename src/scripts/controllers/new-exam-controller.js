@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('NewExamController', function ($scope, $state, $filter, toastr, Auth, Api) {
+  .controller('NewExamController', function ($scope, $state, $stateParams, $filter, toastr, Auth, Api) {
 
     $scope.isAdmin = Auth.isAdmin;
     $scope.exam = {
@@ -35,6 +35,7 @@ angular
       $scope.exam.slug = $scope.asyncSelected.slug;
       $scope.exam.name = $scope.asyncSelected.name;
       $scope.exam.language = $scope.asyncSelected.language;
+      return $scope.exam;
     }
 
     $scope.fullName = (guide) => guide && `${guide.name} - ${guide.slug}`;
@@ -42,8 +43,8 @@ angular
     $scope.create = () => {
       const exam = getExam();
       return Api
-        .createExam(exam)
-        .then(() => $state.go('classroom.exams', {}, { reload: true }))
+        .createExam($stateParams.course, exam)
+        .then(() => $state.go('classroom.courses.course.exams', $stateParams, { reload: true }))
         .catch((res) => toastr.error(res.data.message));
     }
 
