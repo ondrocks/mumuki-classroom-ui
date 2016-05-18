@@ -160,6 +160,16 @@ angular
             }
           }
         }
+      })
+      .state('classroom.courses.course.exams.new', {
+        url: '/new',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/new-exam.html',
+            controller: 'NewExamController'
+          }
+        }
       });
 
     $urlRouterProvider.otherwise(($injector) => {
