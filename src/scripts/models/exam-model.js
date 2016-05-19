@@ -13,6 +13,10 @@ angular
         return this.name;
       }
 
+      fullName() {
+        return `${this.name} - ${this.slug}`;
+      }
+
       iconClass() {
         return `devicons devicons-${DevIcon.from(this.language)}`;;
       }

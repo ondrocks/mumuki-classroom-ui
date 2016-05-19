@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExamsController', function ($scope, $state, exams, Auth, Api, Modal) {
+  .controller('ExamsController', function ($scope, $state, $stateParams, exams, Auth, Api, Modal) {
     $scope.setCount(exams.length);
 
     $scope.list = exams;
@@ -11,5 +11,10 @@ angular
     $scope.isAdmin = Auth.isAdmin;
     $scope.isExam = true;
     $scope.sortCriteria = () => ['getName()'];
+
+    $scope.open = (item) => {
+      const params = { course: $stateParams.course, exam: item.id };
+      return $state.go('classroom.courses.course.exams.edit', params);
+    }
 
   });

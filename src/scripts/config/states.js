@@ -170,6 +170,28 @@ angular
             controller: 'NewExamController'
           }
         }
+      })
+      .state('classroom.courses.course.exams.edit', {
+        url: '/:exam',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/edit-exam.html',
+            controller: 'EditExamController',
+            resolve: {
+              exam: ($state, $stateParams, Api) => {
+                return Api
+                  .getExam($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
+              },
+              students: ($state, $stateParams, Api) => {
+                return Api
+                  .getStudents($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
       });
 
     $urlRouterProvider.otherwise(($injector) => {

@@ -51,6 +51,12 @@ angular
         .then((res) => _.map(res.data.exams, Exam.from))
     };
 
+    this.getExam = ({ course, exam }) => {
+      return $http
+        .get(`${API}/courses/${course}/exams/${exam}`, authenticated())
+        .then((res) => Exam.from(res.data))
+    };
+
     this.createCourse = (course) => {
       return $http
         .post(`${API}/courses`, course, authenticated())
@@ -64,6 +70,11 @@ angular
     this.updateStudent = (course, student) => {
       return $http
         .post(`${API}/courses/${course}/students`, student, authenticated())
+    }
+
+    this.updateExam = (course, exam) => {
+      return $http
+        .put(`${API}/courses/${course}/exams/${exam.id}`, exam, authenticated())
     }
 
     this.getStudents = ({ course }) => {

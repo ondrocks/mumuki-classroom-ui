@@ -1,6 +1,6 @@
 .container
 
-  h3 {{ 'new_exam' | translate }}
+  h3 {{ 'edit_exam' | translate }}
 
   form(ng-submit='create()')
 
@@ -9,16 +9,10 @@
       .col-sm-12
         label {{ 'guide' | translate }}
         .form-group
-          .input-group.date
+          .input-group
             span.input-group-addon
-              i.fa.fa-search(ng-hide='loadingGuides')
-              i.glyphicon.glyphicon-refresh(ng-show='loadingGuides')
-            input.form-control(
-                type='text',
-                ng-model='asyncSelected',
-                placeholder='{{ "filter_available_guides" | translate }}',
-                uib-typeahead='guide as fullName(guide) for guide in getGuides($viewValue)',
-                typeahead-loading='loadingGuides')
+              i(class='{{ exam.iconClass() }}')
+            input.form-control(type='text', value='{{exam.fullName()}}', disabled)
 
       .col-sm-4
         label {{ 'start_time' | translate }}
@@ -61,6 +55,40 @@
                 ng-model='exam.duration',
                 placeholder='90')
 
-    button.btn.btn-primary.pull-right(ng-if='isAdmin()', ng-disabled='!isValid()')
-      | {{ 'new_exam' | translate }}
+      .container
+        button.btn.btn-primary.pull-right(ng-disabled='!isValid()')
+          | {{ 'save' | translate }}
+
+      .col-sm-12
+
+        label {{ 'students' | translate }}
+        .input-group
+          i.input-group-addon.fa.fa-search
+          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')
+          span.input-group-addon
+            i.pointer.fa.fa-square-o(ng-if='!allSelected()', ng-click='selectAll()')
+            i.pointer.fa.fa-check-square-o(ng-if='allSelected()', ng-click='unselectAll()')
+
+        br
+
+        .row
+          .col-sm-12(ng-repeat='student in students | orderBy:sortCriteria | filter:listSearch')
+            .row.guide-progress-blog
+              .col-xs-10
+                img.rounded-x(ng-src='{{ student.image_url }}')
+                .name-location
+                  strong {{ student.fullName() }}
+                .name-location
+                  small(ng-if='!student.email') {{ 'email_not_provided' | translate }}
+                  small(ng-if='student.email')
+                    a(href='mailto:{{ student.email }}') {{ student.email }}
+              .col-xs-2
+                .checkbox.pull-right
+                  label
+                    input(type='checkbox', ng-model='student.isSelected')
+
+      br
+
+      button.btn.btn-primary.pull-right(ng-disabled='!isValid()')
+        | {{ 'save' | translate }}
 
