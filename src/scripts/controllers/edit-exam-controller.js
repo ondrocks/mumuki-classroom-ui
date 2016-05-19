@@ -1,7 +1,9 @@
 
 angular
   .module('classroom')
-  .controller('EditExamController', function ($scope, $state, $stateParams, $filter, exam, students, toastr, Api) {
+  .controller('EditExamController', function ($scope, $state, $stateParams, $filter, exam, students, toastr, Api, Breadcrumb) {
+
+    Breadcrumb.setExam(exam);
 
     const isSelected = (student, newVal) => {
       student.isSelected = newVal
