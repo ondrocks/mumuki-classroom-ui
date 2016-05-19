@@ -13,9 +13,15 @@ angular
       _.forEach($scope.students, (st) => isSelected(st, selected))
     };
 
+    const getExamInLocalTime = (localExam) => {
+      localExam.start_time = moment(localExam.start_time).toDate();
+      localExam.end_time = moment(localExam.end_time).toDate();
+      return localExam;
+    }
+
     const getExam = () => {
       $scope.exam.social_ids = _($scope.students).filter('isSelected').map('social_id').value();
-      return $scope.exam;
+      return getExamInLocalTime($scope.exam);
     }
 
     _.forEach(exam.social_ids, (social_id) => {
@@ -23,7 +29,7 @@ angular
       if (student) student.isSelected = true;
     })
 
-    $scope.exam = exam;
+    $scope.exam = getExamInLocalTime(exam);
     $scope.students = students;
 
     $scope.isValidStartTime = () => moment($scope.exam.start_time).isBefore($scope.exam.end_time);
