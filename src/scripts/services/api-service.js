@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Api', function ($http, $location, Course, Guide, Student, GuideProgress, ExerciseProgress, Auth, Domain, CONFIG) {
+  .service('Api', function ($http, $location, Course, Guide, Student, GuideProgress, ExerciseProgress, Exam, Auth, Domain, CONFIG) {
 
     const subdomain = Domain.tenant();
     const API = `http://${subdomain}.${CONFIG.classroom.url}`;
@@ -17,6 +17,12 @@ angular
         .get(`${API}/courses`, authenticated())
         .then((res) => _.map(res.data.courses, Course.from))
     };
+
+    this.getBibliothecaGuides = () => {
+      return $http
+        .get(`http://bibliotheca.mumuki.io/guides`, authenticated())
+        .then((res) => res.data.guides)
+    }
 
     this.getGuides = ({ course }) => {
       return $http
@@ -39,14 +45,36 @@ angular
         .then((res) => _.map(res.data.exercise_student_progress, ExerciseProgress.from))
     };
 
+    this.getExams = ({ course }) => {
+      return $http
+        .get(`${API}/courses/${course}/exams`, authenticated())
+        .then((res) => _.map(res.data.exams, Exam.from))
+    };
+
+    this.getExam = ({ course, exam }) => {
+      return $http
+        .get(`${API}/courses/${course}/exams/${exam}`, authenticated())
+        .then((res) => Exam.from(res.data))
+    };
+
     this.createCourse = (course) => {
       return $http
         .post(`${API}/courses`, course, authenticated())
     }
 
+    this.createExam = (course, exam) => {
+      return $http
+        .post(`${API}/courses/${course}/exams`, exam, authenticated())
+    }
+
     this.updateStudent = (course, student) => {
       return $http
         .post(`${API}/courses/${course}/students`, student, authenticated())
+    }
+
+    this.updateExam = (course, exam) => {
+      return $http
+        .put(`${API}/courses/${course}/exams/${exam.id}`, exam, authenticated())
     }
 
     this.getStudents = ({ course }) => {

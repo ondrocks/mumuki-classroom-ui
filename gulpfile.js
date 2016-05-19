@@ -129,17 +129,20 @@ gulp.task('test', (done) => {
   process.env.NODE_ENV = 'test';
 
   const wiredep = require('wiredep');
+  const bower = require('./bower.json').main;
   const Server = require('karma').Server;
 
   new Server({
     configFile: `${__dirname}/karma.conf.js`,
     action: 'run',
-    files: wiredep({ devDependencies: true }).js.concat([
-      'test/context.js',
-      'src/scripts/**/*.js',
-      'config/test.js',
-      'test/**/*.test.js'
-    ])
+    files: wiredep({ devDependencies: true }).js
+      .concat(bower.filter((dep) => /\.js$/.test(dep)))
+      .concat([
+        'test/context.js',
+        'src/scripts/**/*.js',
+        'config/test.js',
+        'test/**/*.test.js'
+      ])
   }, done).start();
 });
 

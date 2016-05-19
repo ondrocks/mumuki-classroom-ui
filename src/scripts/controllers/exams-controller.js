@@ -1,0 +1,20 @@
+
+angular
+  .module('classroom')
+  .controller('ExamsController', function ($scope, $state, $stateParams, exams, Auth, Api, Modal) {
+    $scope.setCount(exams.length);
+
+    $scope.list = exams;
+    $scope.noItemsToShow = 'no_exams_to_show';
+    $scope.inputPlaceholder = 'filter_available_exams';
+
+    $scope.isAdmin = Auth.isAdmin;
+    $scope.isExam = true;
+    $scope.sortCriteria = () => ['getName()'];
+
+    $scope.open = (item) => {
+      const params = { course: $stateParams.course, exam: item.id };
+      return $state.go('classroom.courses.course.exams.edit', params);
+    }
+
+  });

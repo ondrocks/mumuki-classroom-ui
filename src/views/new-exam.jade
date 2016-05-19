@@ -1,0 +1,66 @@
+.container
+
+  h3 {{ 'new_exam' | translate }}
+
+  form(ng-submit='create()')
+
+    .row
+
+      .col-sm-12
+        label {{ 'guide' | translate }}
+        .form-group
+          .input-group.date
+            span.input-group-addon
+              i.fa.fa-search(ng-hide='loadingGuides')
+              i.glyphicon.glyphicon-refresh(ng-show='loadingGuides')
+            input.form-control(
+                type='text',
+                ng-model='asyncSelected',
+                placeholder='{{ "filter_available_guides" | translate }}',
+                uib-typeahead='guide as fullName(guide) for guide in getGuides($viewValue)',
+                typeahead-loading='loadingGuides')
+
+      .col-sm-4
+        label {{ 'start_time' | translate }}
+        .dropdown.form-group
+          #start_time_id.dropdown-toggle.input-group.date.start_time_class(
+              role='button',
+              data-toggle='dropdown',
+              data-target='#')
+            span.input-group-addon
+              i.fa.fa-calendar
+            input.form-control(type='text', data-ng-model='exam.start_time', readonly)
+          ul.dropdown-menu(role='menu', aria-labelledby='start_time_id')
+            datetimepicker(
+                data-ng-model='exam.start_time',
+                data-datetimepicker-config='{ dropdownSelector: ".start_time_class" }')
+
+      .col-sm-4
+        label {{ 'end_time' | translate }}
+        .dropdown.form-group
+          #end_time_id.dropdown-toggle.input-group.date.end_time_class(
+              role='button',
+              data-toggle='dropdown',
+              data-target='#')
+            span.input-group-addon
+              i.fa.fa-calendar
+            input.form-control(type='text', data-ng-model='exam.end_time', readonly)
+          ul.dropdown-menu(role='menu', aria-labelledby='end_time_id')
+            datetimepicker(
+                data-ng-model='exam.end_time',
+                data-datetimepicker-config='{ dropdownSelector: ".end_time_class" }')
+
+      .col-sm-4
+        label {{ 'duration' | translate }} ({{ "duration_placeholder" | translate | lowercase }})
+        .form-group
+          .input-group
+            span.input-group-addon
+              i.fa.fa-clock-o
+            input.form-control(
+                type='text',
+                ng-model='exam.duration',
+                placeholder='90')
+
+    button.btn.btn-primary.pull-right(ng-if='isAdmin()', ng-disabled='!isValid()')
+      | {{ 'new_exam' | translate }}
+

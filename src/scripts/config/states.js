@@ -143,6 +143,55 @@ angular
             }
           }
         }
+      })
+      .state('classroom.courses.course.exams', {
+        url: '/exams',
+        authenticated: true,
+        views: {
+          'main@classroom.courses.course': {
+            templateUrl: 'views/exams.html',
+            controller: 'ExamsController',
+            resolve: {
+              exams: ($state, $stateParams, Api) => {
+                return Api
+                  .getExams($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
+      })
+      .state('classroom.courses.course.exams.new', {
+        url: '/new',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/new-exam.html',
+            controller: 'NewExamController'
+          }
+        }
+      })
+      .state('classroom.courses.course.exams.edit', {
+        url: '/:exam',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/edit-exam.html',
+            controller: 'EditExamController',
+            resolve: {
+              exam: ($state, $stateParams, Api) => {
+                return Api
+                  .getExam($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
+              },
+              students: ($state, $stateParams, Api) => {
+                return Api
+                  .getStudents($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
       });
 
     $urlRouterProvider.otherwise(($injector) => {

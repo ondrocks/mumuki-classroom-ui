@@ -1,0 +1,94 @@
+.container
+
+  h3 {{ 'edit_exam' | translate }}
+
+  form(ng-submit='create()')
+
+    .row
+
+      .col-sm-12
+        label {{ 'guide' | translate }}
+        .form-group
+          .input-group
+            span.input-group-addon
+              i(class='{{ exam.iconClass() }}')
+            input.form-control(type='text', value='{{exam.fullName()}}', disabled)
+
+      .col-sm-4
+        label {{ 'start_time' | translate }}
+        .dropdown.form-group
+          #start_time_id.dropdown-toggle.input-group.date.start_time_class(
+              role='button',
+              data-toggle='dropdown',
+              data-target='#')
+            span.input-group-addon
+              i.fa.fa-calendar
+            input.form-control(type='text', data-ng-model='exam.start_time', readonly)
+          ul.dropdown-menu(role='menu', aria-labelledby='start_time_id')
+            datetimepicker(
+                data-ng-model='exam.start_time',
+                data-datetimepicker-config='{ dropdownSelector: ".start_time_class" }')
+
+      .col-sm-4
+        label {{ 'end_time' | translate }}
+        .dropdown.form-group
+          #end_time_id.dropdown-toggle.input-group.date.end_time_class(
+              role='button',
+              data-toggle='dropdown',
+              data-target='#')
+            span.input-group-addon
+              i.fa.fa-calendar
+            input.form-control(type='text', data-ng-model='exam.end_time', readonly)
+          ul.dropdown-menu(role='menu', aria-labelledby='end_time_id')
+            datetimepicker(
+                data-ng-model='exam.end_time',
+                data-datetimepicker-config='{ dropdownSelector: ".end_time_class" }')
+
+      .col-sm-4
+        label {{ 'duration' | translate }} ({{ "duration_placeholder" | translate | lowercase }})
+        .form-group
+          .input-group
+            span.input-group-addon
+              i.fa.fa-clock-o
+            input.form-control(
+                type='text',
+                ng-model='exam.duration',
+                placeholder='90')
+
+      .container
+        button.btn.btn-primary.pull-right(ng-disabled='!isValid()')
+          | {{ 'save' | translate }}
+
+      .col-sm-12
+
+        label {{ 'students' | translate }}
+        .input-group
+          i.input-group-addon.fa.fa-search
+          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')
+          span.input-group-addon
+            i.pointer.fa.fa-square-o(ng-if='!allSelected()', ng-click='selectAll()')
+            i.pointer.fa.fa-check-square-o(ng-if='allSelected()', ng-click='unselectAll()')
+
+        br
+
+        .row
+          .col-sm-12(ng-repeat='student in students | orderBy:sortCriteria | filter:listSearch')
+            .row.guide-progress-blog
+              .col-xs-10
+                img.rounded-x(ng-src='{{ student.image_url }}')
+                .name-location
+                  strong {{ student.fullName() }}
+                .name-location
+                  small(ng-if='!student.email') {{ 'email_not_provided' | translate }}
+                  small(ng-if='student.email')
+                    a(href='mailto:{{ student.email }}') {{ student.email }}
+              .col-xs-2
+                .checkbox.pull-right
+                  label
+                    input(type='checkbox', ng-model='student.isSelected')
+
+      br
+
+      button.btn.btn-primary.pull-right(ng-disabled='!isValid()')
+        | {{ 'save' | translate }}
+
