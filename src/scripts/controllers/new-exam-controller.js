@@ -10,10 +10,14 @@ angular
     $scope.guides = guides;
     $scope.isNew = true;
 
+    const roundedMinutes = (n) => now.minutes() - (now.minutes() % 5);
+    const now = moment();
+    const date = now.seconds(0).minutes(roundedMinutes(now)).toDate()
+
     $scope.selected = {};
     $scope.exam = {
-      start_time: '',
-      end_time: '',
+      start_time: date,
+      end_time: date,
       duration: '',
       name: '',
       slug: '',
