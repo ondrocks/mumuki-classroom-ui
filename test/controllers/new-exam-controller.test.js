@@ -2,7 +2,7 @@
 classroomTest('New Exam Controller', () => {
 
   let $scope;
-  let date = moment().toDate();
+  const date = moment().toDate();
 
   beforeEach(inject((_$rootScope_, _$controller_, _$state_) => {
     $scope = _$rootScope_.$new();
