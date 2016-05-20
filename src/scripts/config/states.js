@@ -166,8 +166,15 @@ angular
         authenticated: true,
         views: {
           'content@classroom': {
-            templateUrl: 'views/new-exam.html',
-            controller: 'NewExamController'
+            templateUrl: 'views/exam.html',
+            controller: 'NewExamController',
+            resolve: {
+              guides: ($state, $stateParams, Api) => {
+                return Api
+                  .getBibliothecaGuides($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
+              }
+            }
           }
         }
       })
@@ -176,7 +183,7 @@ angular
         authenticated: true,
         views: {
           'content@classroom': {
-            templateUrl: 'views/edit-exam.html',
+            templateUrl: 'views/exam.html',
             controller: 'EditExamController',
             resolve: {
               exam: ($state, $stateParams, Api) => {

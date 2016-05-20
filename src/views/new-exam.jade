@@ -6,20 +6,6 @@
 
     .row
 
-      .col-sm-12
-        label {{ 'guide' | translate }}
-        .form-group
-          .input-group.date
-            span.input-group-addon
-              i.fa.fa-search(ng-hide='loadingGuides')
-              i.glyphicon.glyphicon-refresh(ng-show='loadingGuides')
-            input.form-control(
-                type='text',
-                ng-model='asyncSelected',
-                placeholder='{{ "filter_available_guides" | translate }}',
-                uib-typeahead='guide as fullName(guide) for guide in getGuides($viewValue)',
-                typeahead-loading='loadingGuides')
-
       .col-sm-4
         label {{ 'start_time' | translate }}
         .dropdown.form-group

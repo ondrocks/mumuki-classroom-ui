@@ -1,12 +1,24 @@
 .container
 
-  h3 {{ 'edit_exam' | translate }}
+  h3 {{ exam_type | translate }}
 
   form(ng-submit='create()')
 
     .row
 
-      .col-sm-12
+      .col-sm-12(ng-if='isNew')
+        label {{ 'guide' | translate }}
+        .form-group
+          .input-group.date
+            span.input-group-addon
+              i.fa.fa-search
+            input.form-control(
+                type='text',
+                ng-model='selected.guide',
+                placeholder='{{ "filter_available_guides" | translate }}',
+                uib-typeahead='guide as fullName(guide) for guide in guides | filter:$viewValue')
+
+      .col-sm-12(ng-if='!isNew')
         label {{ 'guide' | translate }}
         .form-group
           .input-group
@@ -59,7 +71,7 @@
         button.btn.btn-primary.pull-right(ng-disabled='!isValid()')
           | {{ 'save' | translate }}
 
-      .col-sm-12
+      .col-sm-12(ng-if='!isNew')
 
         label {{ 'students' | translate }}
         .input-group
@@ -89,6 +101,6 @@
 
       br
 
-      button.btn.btn-primary.pull-right(ng-disabled='!isValid()')
+      button.btn.btn-primary.pull-right(ng-disabled='!isValid()', ng-if='!isNew')
         | {{ 'save' | translate }}
 

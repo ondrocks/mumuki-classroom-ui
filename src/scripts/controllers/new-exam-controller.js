@@ -1,12 +1,23 @@
 
 angular
   .module('classroom')
-  .controller('NewExamController', function ($scope, $state, $stateParams, $filter, toastr, Auth, Api) {
+  .controller('NewExamController', function ($scope, $controller, guides, Auth, Api) {
 
+    angular.extend(this, $controller('ExamController', { $scope: $scope }));
+
+    $scope.exam_type = 'new_exam';
     $scope.isAdmin = Auth.isAdmin;
+    $scope.guides = guides;
+    $scope.isNew = true;
+
+    const roundedMinutes = (n) => now.minutes() - (now.minutes() % 5);
+    const now = moment();
+    const date = now.seconds(0).minutes(roundedMinutes(now)).toDate()
+
+    $scope.selected = {};
     $scope.exam = {
-      start_time: '',
-      end_time: '',
+      start_time: date,
+      end_time: date,
       duration: '',
       name: '',
       slug: '',
@@ -14,38 +25,22 @@ angular
       social_ids: []
     };
 
-    const isValidField = (field) => !_.isEmpty(($scope.asyncSelected[field] || '').trim());
+    $scope.isValid = () => $scope.isValidMandatoryFields() && $scope.isValidGuide();
+    $scope.isValidGuide = () => isValid('name') && isValid('slug') && isValid('language');
 
-    $scope.isValidStartTime = () => moment($scope.exam.start_time).isBefore($scope.exam.end_time);
-    $scope.isValidEndTime = () => moment($scope.exam.start_time).isBefore($scope.exam.end_time);
-    $scope.isValidDuration = () => $scope.exam.duration > 0;
+    const isValid = (field) => {
+      return !_.isEmpty(_.get($scope.selected.guide, field, '').trim());
+    }
 
-    $scope.isValidGuide = () => isValidField('name') && isValidField('slug') && isValidField('language');
-
-    $scope.isValid = () =>
-      $scope.isValidEndTime() &&
-      $scope.isValidDuration() &&
-      $scope.isValidStartTime() &&
-      $scope.isValidGuide();
-
-    $scope.getGuides = (input) =>
-      Api.getBibliothecaGuides().then(_.partialRight($filter('filter'), input))
-
-    const getExam = () => {
-      $scope.exam.slug = $scope.asyncSelected.slug;
-      $scope.exam.name = $scope.asyncSelected.name;
-      $scope.exam.language = $scope.asyncSelected.language;
-      return $scope.exam;
+    $scope.getExam = () => {
+      $scope.exam.slug = $scope.selected.guide.slug;
+      $scope.exam.name = $scope.selected.guide.name;
+      $scope.exam.language = $scope.selected.guide.language;
+      return $scope.getExamInLocalTime($scope.exam);
     }
 
     $scope.fullName = (guide) => guide && `${guide.name} - ${guide.slug}`;
 
-    $scope.create = () => {
-      const exam = getExam();
-      return Api
-        .createExam($stateParams.course, exam)
-        .then(() => $state.go('classroom.courses.course.exams', $stateParams, { reload: true }))
-        .catch((res) => toastr.error(res.data.message));
-    }
+    $scope.submit = (course, exam) => Api.createExam(course, exam);
 
   });
