@@ -5,10 +5,9 @@ angular
 
     angular.extend(this, $controller('ExamController', { $scope: $scope }));
 
-    _.forEach(exam.social_ids, (social_id) => {
-      const student = _.find(students, { social_id });
-      if (student) student.isSelected = true;
-    })
+    students
+      .filter((student) => _(exam.social_ids).includes(student.social_id))
+      .forEach((student) => student.isSelected = true)
 
     Breadcrumb.setExam(exam);
 
