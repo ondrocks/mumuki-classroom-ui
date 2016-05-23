@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('EditExamController', function ($scope, $controller, exam, students, Api, Breadcrumb) {
+  .controller('EditExamController', function ($scope, $state, $controller, exam, students, Api, Breadcrumb, Domain) {
 
     angular.extend(this, $controller('ExamController', { $scope: $scope }));
 
@@ -37,5 +37,7 @@ angular
     $scope.unselectAll = () => allStudents(false);
 
     $scope.allSelected = () => _.every($scope.students, 'isSelected');
+
+    $scope.openExamInAtheneum = () => Domain.openExamInAtheneum($state.params.exam);
 
   });
