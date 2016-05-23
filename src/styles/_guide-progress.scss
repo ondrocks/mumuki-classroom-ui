@@ -64,6 +64,10 @@ pre {
   margin-top: 5px;
 }
 
-input.form-control {
+input.form-control[readonly] {
   background-color: white !important;
+}
+
+input.form-control[disable="disable"] {
+  background-color: grey !important;
 }

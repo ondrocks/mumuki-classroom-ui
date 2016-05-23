@@ -11,7 +11,7 @@ angular
 
     $scope.isValidStartTime = () => isBefore();
     $scope.isValidEndTime = () => isBefore();
-    $scope.isValidDuration = () => $scope.exam.duration > 0;
+    $scope.isValidDuration = () => !$scope.hasDuration || $scope.exam.duration > 0;
 
     $scope.isValidMandatoryFields = () =>
       $scope.isValidEndTime() &&
@@ -31,8 +31,10 @@ angular
     }
 
     $scope.create = () => {
+      const exam = $scope.getExam($scope.exam);
+      if (!$scope.hasDuration) exam.duration = null;
       return $scope
-        .submit($stateParams.course, $scope.getExam($scope.exam))
+        .submit($stateParams.course, exam)
         .then(() => $state.go('classroom.courses.course.exams', $stateParams, { reload: true }))
         .then(() => toastr.success($filter('translate')('exam_updated')))
         .catch((res) => toastr.error(res.data.message));

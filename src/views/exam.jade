@@ -60,12 +60,14 @@
         label {{ 'duration' | translate }} ({{ "duration_placeholder" | translate | lowercase }})
         .form-group
           .input-group
-            span.input-group-addon
-              i.fa.fa-clock-o
+            span.input-group-addon.pointer(ng-init='hasDuration = !!exam.duration', ng-click='hasDuration = !hasDuration')
+              i.fa.fa-square-o(ng-if='!hasDuration')
+              i.fa.fa-check-square-o(ng-if='hasDuration')
             input.form-control(
                 type='text',
                 ng-model='exam.duration',
-                placeholder='90')
+                placeholder='90',
+                ng-disabled='!hasDuration')
 
       .container
         button.btn.btn-primary.pull-right(ng-disabled='!isValid()')
