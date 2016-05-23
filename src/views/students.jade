@@ -9,7 +9,7 @@
   .row
     .col-sm-12(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch')
       .row.guide-progress-blog
-        .col-xs-6
+        .col-xs-4
           img.rounded-x(ng-src='{{ item.image_url }}')
           .name-location
             strong {{ item.fullName() }}
@@ -17,6 +17,22 @@
             small(ng-if='!item.email') {{ 'email_not_provided' | translate }}
             small(ng-if='item.email')
               a(href='mailto:{{ item.email }}') {{ item.email }}
-        .col-xs-6
-          .btn.pull-right(class="btn-{{followClass(item.social_id)}}", ng-click='followAction(item.social_id)')
-            | {{ followText(item.social_id) | translate }}
+        .col-xs-7
+          .progress.flex-centered
+            .progress-bar.progress-bar-success.progress-bar-striped(style='width: {{stats(item,"passed")}}%')
+              span(ng-if='item.stats.passed') {{ item.stats.passed }}
+            .progress-bar.progress-bar-warning.progress-bar-striped(style='width: {{stats(item,"passed_with_warnings")}}%')
+              span(ng-if='item.stats.passed_with_warnings') {{ item.stats.passed_with_warnings }}
+            .progress-bar.progress-bar-danger.progress-bar-striped(style='width: {{stats(item,"failed")}}%')
+              span(ng-if='item.stats.failed') {{ item.stats.failed }}
+        .col-xs-1
+          h4(ng-class='{                                  \
+              "text-primary": followClass(item.social_id),\
+              "text-danger": !followClass(item.social_id) \
+            }')
+            i.pointer.fa.pull-right(
+                ng-click='followAction(item.social_id)',
+                ng-class='{                                   \
+                  "fa-eye": followClass(item.social_id),      \
+                  "fa-eye-slash": !followClass(item.social_id)\
+                }')

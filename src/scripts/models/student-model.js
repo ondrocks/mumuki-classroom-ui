@@ -17,6 +17,10 @@ angular
         return this.fullName();
       }
 
+      totalStats() {
+        return this.passed + this.passed_with_warnings + this.failed;
+      }
+
       static from(student) {
         return new Student(student);
       }

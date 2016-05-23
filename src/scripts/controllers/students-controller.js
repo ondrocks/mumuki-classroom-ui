@@ -15,9 +15,11 @@ angular
 
     $scope.sortCriteria = (student) => student.fullName();
 
+    $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();
+
     $scope.isFollowing = (course, social_id) => Followers.isFollowing(course_slug, social_id);
 
-    $scope.followClass = (social_id) => $scope.isFollowing(course_slug, social_id) ? 'danger' : 'info';
+    $scope.followClass = (social_id) => $scope.isFollowing(course_slug, social_id);
 
     $scope.followText = (social_id) => $scope.isFollowing(course_slug, social_id) ? 'unfollow' : 'follow';
 
