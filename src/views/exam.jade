@@ -21,10 +21,10 @@
       .col-sm-12(ng-if='!isNew')
         label {{ 'guide' | translate }}
         .form-group
-          .input-group
+          a.input-group.pointer(href='', ng-click='openExamInAtheneum()')
             span.input-group-addon
               i(class='{{ exam.iconClass() }}')
-            input.form-control(type='text', value='{{exam.fullName()}}', disabled)
+            input.form-control(type='text', value='{{exam.fullName()}}', readonly)
 
       .col-sm-4
         label {{ 'start_time' | translate }}
