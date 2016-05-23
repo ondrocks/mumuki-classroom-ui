@@ -57,25 +57,28 @@ classroomTest('Exam Controller', () => {
 
   });
 
-  describe('#duration', () => {
+  describe('#isValidDuration', () => {
 
-    describe('should returns false', () => {
-      it('when duration is missing', () => {
-        delete $scope.exam.duration;
-        $scope.isValidDuration().should.be.eql(false);
-      });
-      it('when duration is zero', () => {
+    describe('if has duration should returns false', () => {
+      it('should returns false when duration is zero', () => {
+        $scope.hasDuration = true;
         $scope.exam.duration = 0
         $scope.isValidDuration().should.be.eql(false);
       });
       it('when duration is lower than zero', () => {
+        $scope.hasDuration = true;
         $scope.exam.duration = -1;
         $scope.isValidDuration().should.be.eql(false);
       });
     });
 
-    describe('should returns false', () => {
+    describe('if has no duration should returns true', () => {
+      it('when duration is missing', () => {
+        $scope.hasDuration = false;
+        $scope.isValidDuration().should.be.eql(true);
+      });
       it('when duration is greater than zero', () => {
+        $scope.hasDuration = true;
         $scope.isValidDuration().should.be.eql(true);
       });
     });
