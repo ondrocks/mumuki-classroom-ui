@@ -30,10 +30,14 @@ angular
       $scope.sortType = 'progress';
     }
 
+    const sortingCriterias = {
+      name: ['student.last_name', 'student.first_name'],
+      progress: ['stats.total', 'passedAverage()', 'student.last_name', 'student.first_name'],
+      date: ['-lastSubmission().created_at']
+    };
+
     $scope.sortingCriteria = () => {
-      return $scope.sortType === 'name' ?
-        ['student.last_name', 'student.first_name'] :
-        ['stats.total', 'passedAverage()', 'student.last_name', 'student.first_name'];
+      return sortingCriterias[$scope.sortType];
     };
 
     $scope.byFollowers = (progress) => {
