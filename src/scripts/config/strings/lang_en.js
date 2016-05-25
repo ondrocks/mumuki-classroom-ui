@@ -6,6 +6,7 @@ angular
     add_permissions_to_teacher: 'Add permissions to',
     all: 'All',
     available_courses: 'Available Courses',
+    by_date: 'By date',
     by_name: 'By name',
     by_progress: 'By progress',
     comment: 'Comment',
