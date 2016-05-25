@@ -6,9 +6,13 @@ angular
     RememberSetting($scope, 'sortingType');
     RememberSetting($scope, 'onlyFollowers');
 
+    const splitSlug = (slug) => slug.split('/')[1];
+    const courseSlug = () => `${Domain.tenant()}/${$stateParams.course}`;
+
     Api
       .getFollowers(Auth.profile().email, $stateParams.course)
-      .then((data) => Followers.setFollowUps(data));
+      .then((data) => Followers.setFollowUps(data))
+      .then(() => $scope.followUpsCount = Followers.count(courseSlug()));
 
     const guide = Guide.from(data.guide);
 
@@ -17,9 +21,6 @@ angular
     const setGuideProgress = (guideProgress) => $scope.guideProgress = guideProgress;
 
     const guideProgressFetcher = $interval(() => Api.getGuideProgress($stateParams).then((data) => setGuideProgress(data.guideProgress)), 5000);
-
-    const splitSlug = (slug) => slug.split('/')[1];
-    const courseSlug = () => `${Domain.tenant()}/${$stateParams.course}`;
 
     setGuideProgress(data.guideProgress);
 
@@ -40,7 +41,7 @@ angular
 
     $scope.byFollowers = (progress) => {
       return !$scope.onlyFollowers || Followers.isFollowing(courseSlug(), progress.student.social_id);
-    }
+    }   
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
   });
