@@ -18,12 +18,8 @@
             label.btn.btn-default(ng-model='onlyFollowers', ng-click='onlyFollowers = !onlyFollowers')
              div {{ (onlyFollowers ? 'all' : 'only_followers') | translate }}
           .btn-group.btn-group-justified.pull-right(role='group')
-            label.btn.btn-default(ng-model='sortType', ng-click='sortType = "progress"')
-              | {{ 'by_progress' | translate }}
-            label.btn.btn-default(ng-model='sortType', ng-click='sortType = "name"')
-              | {{ 'by_name' | translate }}
-            label.btn.btn-default(ng-model='sortType', ng-click='sortType = "date"')
-              | {{ 'by_date' | translate }}              
+            select.form-control(ng-model='sortingType')
+              option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
 
   br
 
