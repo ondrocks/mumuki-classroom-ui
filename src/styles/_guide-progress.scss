@@ -16,6 +16,16 @@
 .guide-progress-medium { @include guide-progress(#333333) }
 .guide-progress-low { @include guide-progress($brand-danger) }
 
+.guide-progress-options {
+  margin-bottom: 15px;
+  padding: 0;
+
+  li {
+    display: inline;
+    margin-right: 50px;
+  }
+}
+
 .guide-progress-header {
   margin-bottom: 15px;
 }
