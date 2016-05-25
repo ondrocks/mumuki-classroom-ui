@@ -33,7 +33,7 @@ angular
     $scope.availableSortingCriterias = [
       { type: 'name', properties: ['student.last_name', 'student.first_name']},
       { type: 'progress', properties: ['stats.total', 'passedAverage()', 'student.last_name', 'student.first_name']},
-      { type: 'date', properties: ['-lastSubmission().created_at']}
+      { type: 'last_submission_date', properties: ['-lastSubmission().created_at']}
     ];
 
     $scope.sortingCriteria = () => _.find($scope.availableSortingCriterias, {type: $scope.sortingType}).properties;
