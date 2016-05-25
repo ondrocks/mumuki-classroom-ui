@@ -40,8 +40,8 @@
             i.input-group-addon.fa.fa-search
             input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')          
 
-    .panel-body
-      .row.guide-progress-main
+    .panel-body.guide-progress-main
+      .row
         .col-md-4.col-sm-6(
             ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress) | filter:listSearch | filter:byFollowers')
           .row.guide-progress-blog.pointer(ui-sref='classroom.courses.course.guides.guide.students({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
