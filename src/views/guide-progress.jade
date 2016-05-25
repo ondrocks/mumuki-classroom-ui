@@ -10,61 +10,68 @@
           a(href='{{ guide.getMumukiURL() }}', target='_blank') {{ 'open_in_atheneum' | translate }}
         small.show {{ guide.chapter.name }}
 
-      .col-sm-5
-        .option-buttons
-          .btn-group.btn-group-justified.pull-right(role='group')
-            label.btn.btn-default(ng-model='showDetails', ng-click='showDetails = !showDetails')
-             div {{ (showDetails ? 'hide_details' : 'show_details') | translate }}
-            label.btn.btn-default(ng-model='onlyFollowers', ng-click='onlyFollowers = !onlyFollowers')
-             div {{ (onlyFollowers ? 'all' : 'only_followers') | translate }}
-        
   br
 
   .row
-    .col-sm-8
-      .input-group
-        i.input-group-addon.fa.fa-search
-        input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')
-
     .col-sm-4
-      .input-group
-        i.input-group-addon.fa.fa-sort-amount-asc
-        select.form-control(ng-model='sortingType')
-          option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
+      span Ultima solución:
+      button.btn-link(ng-model='showDetails', ng-click='showDetails = !showDetails') {{ (showDetails ? 'hide' : 'show') | translate }}
+
+    .col-sm-4 
+      span Ver estudiantes:
+      button.btn-link(ng-model='onlyFollowers', ng-click='onlyFollowers = true') {{ 'only_followers' | translate }} ({{ followUpsCount }})
+      span -
+      button.btn-link(ng-model='onlyFollowers', ng-click='onlyFollowers = false') {{ 'all' | translate }} ({{ guideProgress.length }})
+
   br
 
-  .row.guide-progress-main
-    .col-md-4.col-sm-6(
-        ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress) | filter:listSearch | filter:byFollowers')
-      .row.guide-progress-blog.pointer(ui-sref='classroom.courses.course.guides.guide.students({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
-        span.col-xs-9
-          img.rounded-x(ng-src='{{ progress.student.image_url }}')
-          .name-location
-            strong {{ progress.student.fullName() }}
-          .name-location
-            i.fa.fa-clock-o 
-            small {{ progress.lastSubmission().timeFromNow() }}
+  .panel.panel-default
+    .panel-heading
+      .row
+        .col-sm-8
+          .input-group
+            i.input-group-addon.fa.fa-sort-amount-asc
+            select.form-control(ng-model='sortingType')
+              option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
 
-        span.col-xs-3
-          h4.pull-right(ng-class='"guide-progress-" + progress.colorClass()')
-            strong {{ progress.statistics().passed }}
-            span &nbsp;/&nbsp;
-            span {{ progress.statistics().total }}
+        .col-sm-4
+          .input-group
+            i.input-group-addon.fa.fa-search
+            input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')          
 
-        .student-guide-details(ng-show='showDetails')
+    .panel-body
+      .row.guide-progress-main
+        .col-md-4.col-sm-6(
+            ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress) | filter:listSearch | filter:byFollowers')
+          .row.guide-progress-blog.pointer(ui-sref='classroom.courses.course.guides.guide.students({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
+            span.col-xs-9
+              img.rounded-x(ng-src='{{ progress.student.image_url }}')
+              .name-location
+                strong {{ progress.student.fullName() }}
+              .name-location
+                i.fa.fa-clock-o 
+                small {{ progress.lastSubmission().timeFromNow() }}
 
-          div(ng-if='progress.hasSubmissions()')
-            section
-              .row
-                .col-sm-12.detail-title
-                  strong Última solución enviada
-              .row
-                span.col-sm-10
-                  a(ui-sref='classroom.courses.course.guides.guide.students({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
-                    | {{ progress.lastExerciseSubmitted().getName() }}
-                span.col-sm-2.pull-right
-                  status-icon(status='progress.lastSubmission().status')
-                .col-sm-12
-                  pre(style='height: 125px; overflow-y: auto')
-                    code
-                      | {{ progress.lastSubmission().content }}
+            span.col-xs-3
+              h4.pull-right(ng-class='"guide-progress-" + progress.colorClass()')
+                strong {{ progress.statistics().passed }}
+                span &nbsp;/&nbsp;
+                span {{ progress.statistics().total }}
+
+            .student-guide-details(ng-show='showDetails')
+
+              div(ng-if='progress.hasSubmissions()')
+                section
+                  .row
+                    .col-sm-12.detail-title
+                      strong Última solución enviada
+                  .row
+                    span.col-sm-10
+                      a(ui-sref='classroom.courses.course.guides.guide.students({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
+                        | {{ progress.lastExerciseSubmitted().getName() }}
+                    span.col-sm-2.pull-right
+                      status-icon(status='progress.lastSubmission().status')
+                    .col-sm-12
+                      pre(style='height: 125px; overflow-y: auto')
+                        code
+                          | {{ progress.lastSubmission().content }}

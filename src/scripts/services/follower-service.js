@@ -18,6 +18,8 @@ angular
       return this.followUps[course].social_ids;
     };
 
+    this.count = (course) => this.courseFollowers(course).length;
+
     this.addFollower = (course, social_id) => {
       this.courseFollowers(course).push(social_id);
     };
