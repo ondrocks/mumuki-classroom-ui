@@ -37,6 +37,10 @@ angular
         });
       }
 
+      timeFromNow() {
+        return moment(this.created_at).fromNow();
+      }
+
       static from(submission) {
         return new Submission(submission);
       }

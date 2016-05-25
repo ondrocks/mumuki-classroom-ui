@@ -4,8 +4,9 @@
       .text-center
         img.rounded-x(ng-src='{{ progress.student.image_url }}', width='25%')
         h4 {{ progress.student.fullName() }}
-        small(ng-if='progress.student.email')
-          a(href='mailto:{{ progress.student.email }}') {{ progress.student.email }}
+        h5
+          div(ng-if='!progress.student.email') {{ 'email_not_provided' | translate }}
+          a(ng-if='progress.student.email', href='mailto:{{progress.student.email}}') {{progress.student.email}}
       br
       section
         .row(ng-repeat='progress in exercisesProgress | orderBy:["exercise.number", "exercise.name"]')

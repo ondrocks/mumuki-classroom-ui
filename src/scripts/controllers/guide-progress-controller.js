@@ -3,7 +3,7 @@ angular
   .module('classroom')
   .controller('GuideProgressController', function ($scope, $stateParams, $interval, data, Api, Auth, DevIcon, Guide, RememberSetting, Followers, Domain, Breadcrumb) {
     RememberSetting($scope, 'showDetails');
-    RememberSetting($scope, 'sortType');
+    RememberSetting($scope, 'sortingType');
     RememberSetting($scope, 'onlyFollowers');
 
     Api
@@ -26,15 +26,17 @@ angular
     $scope.guide = guide;
     $scope.devicon = DevIcon.from;
 
-    if (_.isNil($scope.sortType)) {
-      $scope.sortType = 'progress';
+    if (_.isNil($scope.sortingType)) {
+      $scope.sortingType = 'progress';
     }
 
-    $scope.sortingCriteria = () => {
-      return $scope.sortType === 'name' ?
-        ['student.last_name', 'student.first_name'] :
-        ['stats.total', 'passedAverage()', 'student.last_name', 'student.first_name'];
-    };
+    $scope.availableSortingCriterias = [
+      { type: 'name', properties: ['student.last_name', 'student.first_name']},
+      { type: 'progress', properties: ['stats.total', 'passedAverage()', 'student.last_name', 'student.first_name']},
+      { type: 'last_submission_date', properties: ['-lastSubmission().created_at']}
+    ];
+
+    $scope.sortingCriteria = () => _.find($scope.availableSortingCriterias, {type: $scope.sortingType}).properties;
 
     $scope.byFollowers = (progress) => {
       return !$scope.onlyFollowers || Followers.isFollowing(courseSlug(), progress.student.social_id);
