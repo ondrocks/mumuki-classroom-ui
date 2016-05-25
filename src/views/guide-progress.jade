@@ -40,9 +40,8 @@
           .name-location
             strong {{ progress.student.fullName() }}
           .name-location
-            small
-              div(ng-if='!progress.student.email') {{ 'email_not_provided' | translate }}
-              a(ng-if='progress.student.email', href='mailto:{{progress.student.email}}') {{progress.student.email}}
+            i.fa.fa-clock-o 
+            small {{ progress.lastSubmission().timeFromNow() }}
 
         span.col-xs-3
           h4.pull-right(ng-class='"guide-progress-" + progress.colorClass()')
