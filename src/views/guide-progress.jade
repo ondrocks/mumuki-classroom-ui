@@ -17,16 +17,20 @@
              div {{ (showDetails ? 'hide_details' : 'show_details') | translate }}
             label.btn.btn-default(ng-model='onlyFollowers', ng-click='onlyFollowers = !onlyFollowers')
              div {{ (onlyFollowers ? 'all' : 'only_followers') | translate }}
-          .btn-group.btn-group-justified.pull-right(role='group')
-            select.form-control(ng-model='sortingType')
-              option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
-
+        
   br
 
-  .input-group
-    i.input-group-addon.fa.fa-search
-    input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')
+  .row
+    .col-sm-8
+      .input-group
+        i.input-group-addon.fa.fa-search
+        input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')
 
+    .col-sm-4
+      .input-group
+        i.input-group-addon.fa.fa-sort-amount-asc
+        select.form-control(ng-model='sortingType')
+          option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
   br
 
   .row.guide-progress-main
