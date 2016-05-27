@@ -93,7 +93,7 @@
               .row(ng-repeat='expectationResult in submission.expectation_results')
                 .col-sm-11
                   span {{ expectationResult.binding }}
-                  i.expectation-arrow
+                  i.fa.fa-long-arrow-right.expectation-arrow
                   span {{ expectationResult.inspection }}
                 .col-sm-1
                   status-icon(status='expectationResult.result')
