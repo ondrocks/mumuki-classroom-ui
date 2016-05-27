@@ -11,7 +11,7 @@
       .col-sm-4
         small.pull-right
           a(href='{{ guide.getMumukiURL() }}', target='_blank')
-            span Abrir en Atheneum
+            span {{ 'open_in_atheneum' | translate }}
 
   .panel.panel-default
     .panel-heading
@@ -65,7 +65,7 @@
                 section
                   .row
                     .col-sm-12.detail-title
-                      strong Última solución enviada
+                      strong {{ 'last_solution' | translate }}
                   .row
                     span.col-sm-10
                       a(ui-sref='classroom.courses.course.guides.guide.students({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
