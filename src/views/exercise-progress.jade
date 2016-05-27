@@ -78,7 +78,9 @@
               .row(ng-repeat='result in submission.test_results')
                 .col-sm-11
                   span {{ result.title || 'Example ' + ($index + 1) }}
-                  div(ng-if="result.status != 'passed'", ng-bind-html='trust(result.result)')
+                  div(ng-if="result.status != 'passed'")
+                    div(ng-if="containsHtml(result.result)", ng-bind-html='trust(result.result)')
+                    pre(ng-if="!containsHtml(result.result)") {{ result.result }}
                 .col-sm-1
                   status-icon(status='result.status')
 
