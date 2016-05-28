@@ -3,7 +3,7 @@ mixin follow
       "text-primary": followClass(item.social_id),\
       "text-danger": !followClass(item.social_id) \
     }')
-    i.pointer.fa.pull-right(
+    i.pointer.fa.pull-right.eye-margin(
         ng-click='followAction(item.social_id)',
         ng-class='{                                   \
           "fa-eye": followClass(item.social_id),      \
@@ -31,13 +31,19 @@ mixin follow
               a(href='mailto:{{ item.email }}') {{ item.email }}
         .col-xs-2.visible-xs
           +follow
-        .col-sm-7.col-xs-12.student-progress-bar
-          .progress
-            .progress-bar.progress-bar-success(style='width: {{stats(item,"passed")}}%')
-              span(ng-if='item.stats.passed') {{ item.stats.passed }}
-            .progress-bar.progress-bar-warning(style='width: {{stats(item,"passed_with_warnings")}}%')
-              span(ng-if='item.stats.passed_with_warnings') {{ item.stats.passed_with_warnings }}
-            .progress-bar.progress-bar-danger(style='width: {{stats(item,"failed")}}%')
-              span(ng-if='item.stats.failed') {{ item.stats.failed }}
+        .col-sm-7.col-xs-12.text-center
+          .row
+            .col-xs-12.margin-bottom
+                small Total:&nbsp;
+                  strong {{ item.totalStats() }}
+            .col-xs-4.text-danger
+                small Failed:&nbsp;
+                  strong {{ item.stats.failed }}
+            .col-xs-4.text-warning
+                small Warning:&nbsp;
+                  strong {{ item.stats.passed_with_warnings }}
+            .col-xs-4.text-success
+                small Passed:&nbsp;
+                  strong {{ item.stats.passed }}
         .col-sm-1.hidden-xs
           +follow
