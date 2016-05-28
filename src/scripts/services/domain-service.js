@@ -14,5 +14,6 @@ angular
 
     this.openAtheneum = () => openAth('_self');
     this.openExamInAtheneum = (exam) => openAth('_blank', `/exams/${exam}`);
+    this.examURL = (exam) => `${this.atheneumURL()}/exams/${exam}`;
 
   });

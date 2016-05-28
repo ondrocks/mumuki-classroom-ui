@@ -33,6 +33,7 @@ angular
     email_error: 'Email is mandatory and it must be a valid one',
     email_not_provided: 'Email not provided',
     end_time: 'End time',
+    exam_link: 'Exam link',
     exam_updated: 'Exam updated successfully',
     exams: 'Exams',
     expectations: 'Expectations',

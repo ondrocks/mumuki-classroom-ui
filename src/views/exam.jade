@@ -21,10 +21,16 @@
       .col-sm-12(ng-if='!isNew')
         label {{ 'guide' | translate }}
         .form-group
-          a.input-group.pointer(href='', ng-click='openExamInAtheneum()')
+          .input-group.pointer(href='', ng-click='openExamInAtheneum()')
             span.input-group-addon
               i(class='{{ exam.iconClass() }}')
             input.form-control(type='text', value='{{exam.fullName()}}', readonly)
+          small.text-muted {{ 'exam_link' | translate }}:&nbsp;
+          small.text-muted.text-primary {{ url() }}
+          span.clipboard
+            span &nbsp;
+            i.fa.fa-clipboard(ng-click='copy()')
+            small.text-muted(ng-show='isCopied') &nbsp; {{ 'copied' | translate }}!
 
       .col-sm-4
         label {{ 'start_time' | translate }}

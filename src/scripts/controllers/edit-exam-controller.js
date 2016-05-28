@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('EditExamController', function ($scope, $state, $controller, exam, students, Api, Breadcrumb, Domain) {
+  .controller('EditExamController', function ($scope, $state, $timeout, $controller, clipboard, exam, students, Api, Breadcrumb, Domain) {
 
     angular.extend(this, $controller('ExamController', { $scope: $scope }));
 
@@ -39,5 +39,13 @@ angular
     $scope.allSelected = () => _.every($scope.students, 'isSelected');
 
     $scope.openExamInAtheneum = () => Domain.openExamInAtheneum($state.params.exam);
+
+    $scope.url = () => Domain.examURL($scope.exam.id);
+
+    $scope.copy = () => {
+      clipboard.copyText($scope.url());
+      $scope.isCopied = true;
+      $timeout(() => $scope.isCopied = false, 5000);
+    };
 
   });

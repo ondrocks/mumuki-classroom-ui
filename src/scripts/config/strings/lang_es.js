@@ -33,6 +33,7 @@ angular
     email_error: 'El campo email es obligatorio, y debe ser válido',
     email_not_provided: 'No hay email asociado',
     end_time: 'Hasta',
+    exam_link: 'Link al examen',
     exam_updated: 'Examen guardado satisfactoriamente',
     exams: 'Exámenes',
     expectations: 'Expectativas',
