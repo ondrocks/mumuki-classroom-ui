@@ -144,6 +144,23 @@ angular
           }
         }
       })
+      .state('classroom.courses.course.teachers', {
+        url: '/teachers',
+        authenticated: true,
+        views: {
+          'main@classroom.courses.course': {
+            templateUrl: 'views/teachers.html',
+            controller: 'TeachersController',
+            resolve: {
+              teachers: ($state, $stateParams, Api) => {
+                return Api
+                  .getTeachers($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
+      })
       .state('classroom.courses.course.exams', {
         url: '/exams',
         authenticated: true,
