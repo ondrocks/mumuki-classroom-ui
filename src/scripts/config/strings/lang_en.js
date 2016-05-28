@@ -85,6 +85,7 @@ angular
     students: 'Students',
     students_subscription_address: 'Students subscription address',
     submit: 'Submit',
+    teachers: 'Teachers',
     tests: 'Tests',
     unfollow: 'Unfollow',
     unfollowing: 'Unfollow!',

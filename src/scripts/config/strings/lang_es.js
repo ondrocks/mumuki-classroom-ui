@@ -85,6 +85,7 @@ angular
     students: 'Estudiantes',
     students_subscription_address: 'Dirección de suscripción de estudiantes',
     submit: 'Enviar',
+    teachers: 'Docentes',
     tests: 'Pruebas',
     unfollow: 'Dejar de Seguir',
     unfollowing: 'Has dejado de seguir al usuario',
