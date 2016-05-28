@@ -1,0 +1,17 @@
+.container
+
+  .input-group
+    i.input-group-addon.fa.fa-search
+    input.form-control(id='filter', placeholder='{{ "filter_teachers" | translate }}', ng-model='listSearch')
+
+  br
+
+  .row
+    .col-sm-12(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch')
+      .row.guide-progress-blog
+        .col-xs-6
+          .name-location
+            strong {{ item.fullName() }}
+          .name-location
+            small
+              a(href='mailto:{{ item.email }}') {{ item.email }}
