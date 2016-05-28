@@ -6,6 +6,7 @@ angular
     class Student {
 
       constructor(student = {}) {
+        _.defaultsDeep(student, { stats: this.defaultStats() });
         _.defaults(this, student);
       }
 
@@ -18,7 +19,11 @@ angular
       }
 
       totalStats() {
-        return this.passed + this.passed_with_warnings + this.failed;
+        return this.stats.passed + this.stats.passed_with_warnings + this.stats.failed;
+      }
+
+      defaultStats() {
+        return { passed: 0, failed: 0, passed_with_warnings: 0 };
       }
 
       static from(student) {
