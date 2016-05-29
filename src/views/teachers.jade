@@ -10,6 +10,7 @@
     .col-sm-12(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch')
       .row.guide-progress-blog
         .col-xs-6
+          img.rounded-x(ng-src='{{ item.image_url }}')
           .name-location
             strong {{ item.fullName() }}
           .name-location
