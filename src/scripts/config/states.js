@@ -153,11 +153,22 @@ angular
             controller: 'TeachersController',
             resolve: {
               teachers: ($state, $stateParams, Api) => {
+                debugger;
                 return Api
                   .getTeachers($stateParams)
                   .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }
+          }
+        }
+      })
+      .state('classroom.courses.course.teachers.new', {
+        url: '/new',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/new-teacher.html',
+            controller: 'NewTeacherController'
           }
         }
       })

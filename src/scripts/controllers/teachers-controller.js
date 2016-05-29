@@ -10,7 +10,7 @@ angular
 
     $scope.isAdmin = () => Auth.isAdmin();
 
-    $scope.openNewTeacherModal = () => Modal.newTeacher(course_slug);
+    $scope.newTeacher = () => $state.go('classroom.courses.course.teachers.new', { course_slug });
 
     $scope.sortCriteria = (teacher) => teacher.fullName();
 

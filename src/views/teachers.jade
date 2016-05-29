@@ -16,5 +16,5 @@
           .name-location
             small
               a(href='mailto:{{ item.email }}') {{ item.email }}
-  button.btn.btn-primary.pull-right(ng-if='isAdmin()', ng-click='openNewTeacherModal()')
+  button.btn.btn-primary.pull-right(ng-if='isAdmin()', ng-click='newTeacher()')
     | {{ 'new_teacher' | translate }}
