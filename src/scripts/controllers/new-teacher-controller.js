@@ -11,7 +11,7 @@ angular
 
     $scope.addTeacher = () => {
       Api.updateTeacher($scope.course, $scope.teacher)
-        .then(() => toastr.success($filter('translate')('correct_permissions')))
+        .then(() => toastr.success($filter('translate')('added_teacher')))
         .catch((e) => toastr.error(e.data.message))
         .finally(() => $fancyModal.close())
     }

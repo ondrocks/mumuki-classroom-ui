@@ -4,6 +4,7 @@ angular
   .constant('LANG_EN', {
 
     add_permissions_to_teacher: 'Add permissions to',
+    added_teacher: 'Teacher added',
     all: 'All',
     available_courses: 'Available Courses',
     by_date: 'By last submission date',
