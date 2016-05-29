@@ -41,6 +41,7 @@ angular
     filter_available_exams: 'Filter available exams',
     filter_available_guides: 'Filter available guides',
     filter_students: 'Filter students',
+    filter_teachers: 'Filter teachers',
     first_name: 'First name',
     first_name_error: 'First name is mandatory',
     follow: 'Follow',

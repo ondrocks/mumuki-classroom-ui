@@ -41,6 +41,7 @@ angular
     filter_available_exams: 'Filtrar exámenes disponibles',
     filter_available_guides: 'Filtrar guías disponibles',
     filter_students: 'Filtrar estudiantes',
+    filter_teachers: 'Filtrar docentes',
     first_name: 'Nombre',
     first_name_error: 'El campo nombre es obligatorio',
     follow: 'Seguir',
