@@ -72,6 +72,11 @@ angular
         .post(`${API}/courses/${course}/students`, student, authenticated())
     }
 
+    this.updateTeacher = (course, teacher) => {
+      return $http
+        .post(`${API}/courses/${course}/teachers`, teacher, authenticated())
+    }
+
     this.updateExam = (course, exam) => {
       return $http
         .put(`${API}/courses/${course}/exams/${exam.id}`, exam, authenticated())
