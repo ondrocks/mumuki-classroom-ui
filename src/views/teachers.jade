@@ -15,3 +15,5 @@
           .name-location
             small
               a(href='mailto:{{ item.email }}') {{ item.email }}
+  button.btn.btn-primary.pull-right(ng-if='isAdmin()', ui-sref='classroom.courses.course.teachers.new')
+    | {{ 'new_teacher' | translate }}

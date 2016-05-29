@@ -67,6 +67,7 @@ angular
     new_course_shift: 'Shift',
     new_course_shift_error: 'Select at least one shift',
     new_exam: 'New exam',
+    new_teacher: 'New teacher',
     no_courses_to_show: 'There is no courses to show',
     no_exams_to_show: 'There is no exams to show',
     no_guides_to_show: 'There is no guides to show',

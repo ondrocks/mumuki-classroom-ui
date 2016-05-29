@@ -67,6 +67,7 @@ angular
     new_course_shift: 'Turno',
     new_course_shift_error: 'Seleccioná al menos un turno',
     new_exam: 'Nuevo examen',
+    new_teacher: 'Nuevo docente',
     no_courses_to_show: 'No hay cursos para mostrar',
     no_exams_to_show: 'No hay exámenes para mostrar',
     no_guides_to_show: 'No hay guías para mostrar',
