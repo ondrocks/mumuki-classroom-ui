@@ -1,0 +1,14 @@
+.row
+  h4.col-xs-12.modal-title {{ 'add_permissions_to_teacher' | translate }} {{course}}
+br
+br
+.row
+  input.col-xs-8.col-xs-offset-2.modal-form-input(ng-model='teacher.first_name', type='text', placeholder='First name', autofocus)
+.row
+  input.col-xs-8.col-xs-offset-2.modal-form-input(ng-model='teacher.last_name', type='text', placeholder='Last name')
+.row
+  input.col-xs-8.col-xs-offset-2.modal-form-input(ng-model='teacher.email', type='text', placeholder='example@mumuki.org')
+br
+br
+.row
+  button.btn.btn-primary.modal-form-input.pull-right(ng-click='addTeacher()') {{ 'confirm' | translate }}
