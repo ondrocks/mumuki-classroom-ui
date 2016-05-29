@@ -82,7 +82,7 @@ angular
     show_students: 'Ver estudiantes',
     solution_sent_at_format: 'DD MMMM YYYY - hh:mm',
     start_time: 'Desde',
-    students: 'Alumnos',
+    students: 'Estudiantes',
     students_subscription_address: 'Dirección de suscripción de estudiantes',
     submit: 'Enviar',
     tests: 'Pruebas',
