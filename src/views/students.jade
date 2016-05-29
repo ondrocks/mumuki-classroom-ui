@@ -34,16 +34,16 @@ mixin follow
         .col-sm-7.col-xs-12.text-center
           .row
             .col-xs-12.margin-bottom
-                small Total:&nbsp;
-                  strong {{ item.totalStats() }}
-            .col-xs-4.text-danger
-                small Failed:&nbsp;
-                  strong {{ item.stats.failed }}
-            .col-xs-4.text-warning
-                small Warning:&nbsp;
-                  strong {{ item.stats.passed_with_warnings }}
-            .col-xs-4.text-success
-                small Passed:&nbsp;
-                  strong {{ item.stats.passed }}
+                span Total:&nbsp;
+                strong {{ item.totalStats() }}
+            .col-xs-4
+                i.fa.fa-times-circle
+                span &nbsp;{{ item.stats.failed }}
+            .col-xs-4
+                i.fa.fa-exclamation-circle
+                span &nbsp;{{ item.stats.passed_with_warnings }}
+            .col-xs-4
+                i.fa.fa-check-circle
+                span &nbsp;{{ item.stats.passed }}
         .col-sm-1.hidden-xs
           +follow
