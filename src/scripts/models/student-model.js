@@ -6,6 +6,7 @@ angular
     class Student {
 
       constructor(student = {}) {
+        _.defaultsDeep(student, { stats: this.defaultStats() });
         _.defaults(this, student);
       }
 
@@ -15,6 +16,14 @@ angular
 
       getName() {
         return this.fullName();
+      }
+
+      totalStats() {
+        return this.stats.passed + this.stats.passed_with_warnings + this.stats.failed;
+      }
+
+      defaultStats() {
+        return { passed: 0, failed: 0, passed_with_warnings: 0 };
       }
 
       static from(student) {

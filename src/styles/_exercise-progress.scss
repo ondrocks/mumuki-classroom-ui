@@ -1,4 +1,5 @@
-$color-default: #777;
+$color-primary: #337ab7;
+$color-default: #777777;
 $color-success: #5cb85c;
 $color-warning: #f0ad4e;
 $color-danger: #d9534f;
@@ -89,4 +90,17 @@ $color-danger: #d9534f;
 
 .expectation-arrow {
   padding: 5px;
+}
+
+.margin-bottom {
+  margin-top: 0.2em;
+  padding-bottom: 0.5em;
+}
+
+h4.unfollow {
+  color: rgba($color-default, 0.50);
+}
+
+h4.follow {
+  color: $color-primary;
 }

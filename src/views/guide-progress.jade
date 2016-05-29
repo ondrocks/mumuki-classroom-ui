@@ -16,29 +16,28 @@
   .panel.panel-default
     .panel-heading
       .row
-        .col-sm-8
-          ul.guide-progress-options
-            li
-              span {{ 'last_solution' | translate }}:
-              button.btn-link(ng-model='showDetails', ng-click='showDetails = !showDetails') {{ (showDetails ? 'hide' : 'show') | translate }}
+        .col-md-8.col-sm-6
+          div
+            span {{ 'last_solution' | translate }}:
+            button.btn-link(ng-model='showDetails', ng-click='showDetails = !showDetails') {{ (showDetails ? 'hide' : 'show') | translate }}
 
-            li
-              span {{ 'show_students' | translate }}:
-              button.btn-link(ng-model='onlyFollowers', ng-click='onlyFollowers = true') {{ 'only_followers' | translate }} ({{ followUpsCount }})
-              span -
-              button.btn-link(ng-model='onlyFollowers', ng-click='onlyFollowers = false') {{ 'all' | translate }} ({{ guideProgress.length }})          
+          div
+            span {{ 'show_students' | translate }}:
+            button.btn-link(ng-model='onlyFollowers', ng-click='onlyFollowers = true', ng-disabled='onlyFollowers') {{ 'only_followers' | translate }} ({{ followUpsCount }})
+            span -
+            button.btn-link(ng-model='onlyFollowers', ng-click='onlyFollowers = false', ng-disabled='!onlyFollowers') {{ 'all' | translate }} ({{ guideProgress.length }})
 
-        .col-sm-4
+        .col-md-4.col-sm-6
           .input-group
             i.input-group-addon.fa.fa-sort-amount-asc
             select.form-control(ng-model='sortingType')
-              option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}              
+              option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
 
       .row
-        .col-sm-4.pull-right
+        .col-md-4.col-sm-6.pull-right
           .input-group
             i.input-group-addon.fa.fa-search
-            input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')          
+            input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')
 
     .panel-body.guide-progress-main
       .row
@@ -50,7 +49,7 @@
               .name-location
                 strong {{ progress.student.fullName() }}
               .name-location
-                i.fa.fa-clock-o 
+                i.fa.fa-clock-o
                 small {{ progress.lastSubmission().timeFromNow() }}
 
             span.col-xs-3

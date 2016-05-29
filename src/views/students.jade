@@ -1,3 +1,15 @@
+mixin follow
+  h4(ng-class='{                               \
+      "follow": followClass(item.social_id),   \
+      "unfollow": !followClass(item.social_id) \
+    }')
+    i.pointer.fa.pull-right.eye-margin(
+        ng-click='followAction(item.social_id)',
+        ng-class='{                                   \
+          "fa-eye": followClass(item.social_id),      \
+          "fa-eye-slash": !followClass(item.social_id)\
+        }')
+
 .container
 
   .input-group
@@ -9,7 +21,7 @@
   .row
     .col-sm-12(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch')
       .row.guide-progress-blog
-        .col-xs-6
+        .col-sm-4.col-xs-10
           img.rounded-x(ng-src='{{ item.image_url }}')
           .name-location
             strong {{ item.fullName() }}
@@ -17,6 +29,21 @@
             small(ng-if='!item.email') {{ 'email_not_provided' | translate }}
             small(ng-if='item.email')
               a(href='mailto:{{ item.email }}') {{ item.email }}
-        .col-xs-6
-          .btn.pull-right(class="btn-{{followClass(item.social_id)}}", ng-click='followAction(item.social_id)')
-            | {{ followText(item.social_id) | translate }}
+        .col-xs-2.visible-xs
+          +follow
+        .col-sm-7.col-xs-12.text-center
+          .row
+            .col-xs-12.margin-bottom
+                span Total:&nbsp;
+                strong {{ item.totalStats() }}
+            .col-xs-4
+                i.fa.fa-times-circle
+                span &nbsp;{{ item.stats.failed }}
+            .col-xs-4
+                i.fa.fa-exclamation-circle
+                span &nbsp;{{ item.stats.passed_with_warnings }}
+            .col-xs-4
+                i.fa.fa-check-circle
+                span &nbsp;{{ item.stats.passed }}
+        .col-sm-1.hidden-xs
+          +follow
