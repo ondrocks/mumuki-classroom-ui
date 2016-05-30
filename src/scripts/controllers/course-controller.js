@@ -6,6 +6,7 @@ angular
     const tabs = {
       guides: 'classroom.courses.course.guides',
       students: 'classroom.courses.course.students',
+      teachers: 'classroom.courses.course.teachers',
       exams: 'classroom.courses.course.exams'
     }
     $scope.tabs = _.keys(tabs);

@@ -4,6 +4,7 @@ angular
   .constant('LANG_ES', {
 
     add_permissions_to_teacher: 'Agregar permisos a',
+    added_teacher: 'Docente agregado satisfactoriamente',
     all: 'Todos',
     available_courses: 'Cursos disponibles',
     by_last_submission_date: 'Por fecha de ultima solución',
@@ -41,6 +42,7 @@ angular
     filter_available_exams: 'Filtrar exámenes disponibles',
     filter_available_guides: 'Filtrar guías disponibles',
     filter_students: 'Filtrar estudiantes',
+    filter_teachers: 'Filtrar docentes',
     first_name: 'Nombre',
     first_name_error: 'El campo nombre es obligatorio',
     follow: 'Seguir',
@@ -66,6 +68,7 @@ angular
     new_course_shift: 'Turno',
     new_course_shift_error: 'Seleccioná al menos un turno',
     new_exam: 'Nuevo examen',
+    new_teacher: 'Nuevo docente',
     no_courses_to_show: 'No hay cursos para mostrar',
     no_exams_to_show: 'No hay exámenes para mostrar',
     no_guides_to_show: 'No hay guías para mostrar',
@@ -85,6 +88,7 @@ angular
     students: 'Estudiantes',
     students_subscription_address: 'Dirección de suscripción de estudiantes',
     submit: 'Enviar',
+    teachers: 'Docentes',
     tests: 'Pruebas',
     unfollow: 'Dejar de Seguir',
     unfollowing: 'Has dejado de seguir al usuario',

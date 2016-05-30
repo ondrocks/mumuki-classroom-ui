@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('CoursesController', function ($scope, $state, courses, Auth, Api, Modal) {
+  .controller('CoursesController', function ($scope, $state, courses, Auth, Api) {
 
     $scope.list = courses;
     $scope.preTitle = _.capitalize(Api.subdomain);
@@ -11,8 +11,6 @@ angular
     $scope.isAdmin = Auth.isAdmin;
     $scope.isCourse = true;
     $scope.sortCriteria = () => ['getName()'];
-
-    $scope.openPermissionsModal = (slug) => Modal.permissionsModal(slug);
 
     $scope.open = (course) => {
       const slug = course.slug.split('/');

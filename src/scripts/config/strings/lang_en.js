@@ -4,6 +4,7 @@ angular
   .constant('LANG_EN', {
 
     add_permissions_to_teacher: 'Add permissions to',
+    added_teacher: 'Teacher added',
     all: 'All',
     available_courses: 'Available Courses',
     by_date: 'By last submission date',
@@ -41,6 +42,7 @@ angular
     filter_available_exams: 'Filter available exams',
     filter_available_guides: 'Filter available guides',
     filter_students: 'Filter students',
+    filter_teachers: 'Filter teachers',
     first_name: 'First name',
     first_name_error: 'First name is mandatory',
     follow: 'Follow',
@@ -66,6 +68,7 @@ angular
     new_course_shift: 'Shift',
     new_course_shift_error: 'Select at least one shift',
     new_exam: 'New exam',
+    new_teacher: 'New teacher',
     no_courses_to_show: 'There is no courses to show',
     no_exams_to_show: 'There is no exams to show',
     no_guides_to_show: 'There is no guides to show',
@@ -85,6 +88,7 @@ angular
     students: 'Students',
     students_subscription_address: 'Students subscription address',
     submit: 'Submit',
+    teachers: 'Teachers',
     tests: 'Tests',
     unfollow: 'Unfollow',
     unfollowing: 'Unfollow!',
