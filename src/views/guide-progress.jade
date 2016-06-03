@@ -27,14 +27,11 @@
             span -
             button.btn-link(ng-model='onlyFollowers', ng-click='onlyFollowers = false', ng-disabled='!onlyFollowers') {{ 'all' | translate }} ({{ guideProgress.length }})
 
-        .col-md-4.col-sm-6
+        .col-md-4.col-sm-6.pull-right
           .input-group
             i.input-group-addon.fa.fa-sort-amount-asc
             select.form-control(ng-model='sortingType')
               option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
-
-      .row
-        .col-md-4.col-sm-6.pull-right
           .input-group
             i.input-group-addon.fa.fa-search
             input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')

@@ -12,38 +12,53 @@ mixin follow
 
 .container
 
-  .input-group
-    i.input-group-addon.fa.fa-search
-    input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')
+  .panel.panel-default
+    .panel-heading
 
-  br
+      .row
+        .col-md-8.col-sm-6
+          div
+            span {{ 'show_students' | translate }}:
+            button.btn-link(ng-model='onlyFollowers', ng-click='onlyFollowers = true', ng-disabled='onlyFollowers') {{ 'only_followers' | translate }} ({{ followUpsCount }})
+            span -
+            button.btn-link(ng-model='onlyFollowers', ng-click='onlyFollowers = false', ng-disabled='!onlyFollowers') {{ 'all' | translate }} ({{ guideProgress.length }})
 
-  .row
-    .col-sm-12(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch')
-      .row.guide-progress-blog
-        .col-sm-4.col-xs-10
-          img.rounded-x(ng-src='{{ item.image_url }}')
-          .name-location
-            strong {{ item.fullName() }}
-          .name-location
-            small(ng-if='!item.email') {{ 'email_not_provided' | translate }}
-            small(ng-if='item.email')
-              a(href='mailto:{{ item.email }}') {{ item.email }}
-        .col-xs-2.visible-xs
-          +follow
-        .col-sm-7.col-xs-12.text-center
-          .row
-            .col-xs-12.margin-bottom
-                span Total:&nbsp;
-                strong {{ item.totalStats() }}
-            .col-xs-4
-                i.fa.fa-times-circle
-                span &nbsp;{{ item.stats.failed }}
-            .col-xs-4
-                i.fa.fa-exclamation-circle
-                span &nbsp;{{ item.stats.passed_with_warnings }}
-            .col-xs-4
-                i.fa.fa-check-circle
-                span &nbsp;{{ item.stats.passed }}
-        .col-sm-1.hidden-xs
-          +follow
+        .col-md-4.col-sm-6.pull-right
+          .input-group
+            i.input-group-addon.fa.fa-sort-amount-asc
+            select.form-control(ng-model='sortingType')
+              option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
+          .input-group
+            i.input-group-addon.fa.fa-search
+            input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')
+
+    .panel-body.guide-progress-main
+      .row
+        .col-sm-12(ng-repeat='item in list | orderBy:sortingCriteria() | filter:listSearch | filter:byFollowers')
+          .row.guide-progress-blog
+            .col-sm-4.col-xs-10
+              img.rounded-x(ng-src='{{ item.image_url }}')
+              .name-location
+                strong {{ item.fullName() }}
+              .name-location
+                small(ng-if='!item.email') {{ 'email_not_provided' | translate }}
+                small(ng-if='item.email')
+                  a(href='mailto:{{ item.email }}') {{ item.email }}
+            .col-xs-2.visible-xs
+              +follow
+            .col-sm-7.col-xs-12.text-center
+              .row
+                .col-xs-12.margin-bottom
+                    span Total:&nbsp;
+                    strong {{ item.totalStats() }}
+                .col-xs-4
+                    i.fa.fa-times-circle
+                    span &nbsp;{{ item.stats.failed }}
+                .col-xs-4
+                    i.fa.fa-exclamation-circle
+                    span &nbsp;{{ item.stats.passed_with_warnings }}
+                .col-xs-4
+                    i.fa.fa-check-circle
+                    span &nbsp;{{ item.stats.passed }}
+            .col-sm-1.hidden-xs
+              +follow

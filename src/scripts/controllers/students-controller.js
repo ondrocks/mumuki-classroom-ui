@@ -1,7 +1,23 @@
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $stateParams, toastr, $filter, students, Auth, Followers, Api, Domain) {
+  .controller('StudentsController', function ($scope, $state, $stateParams, toastr, $filter, students, Auth, Followers, Api, Domain, RememberSetting) {
+    
+    RememberSetting($scope, 'showDetails');
+    RememberSetting($scope, 'sortingType');
+    RememberSetting($scope, 'onlyFollowers');
+
+    if (_.isNil($scope.sortingType)) {
+      $scope.sortingType = 'progress';
+    }
+
+    $scope.availableSortingCriterias = [
+      { type: 'name', properties: ['last_name', 'first_name']},
+      { type: 'progress', properties: ['totalStats()', '-stats.failed', '-stats.passed_with_warnings', '-stats.passed', 'last_name', 'first_name']},
+    ];
+
+    $scope.sortingCriteria = () => _.find($scope.availableSortingCriterias, {type: $scope.sortingType}).properties;
+
     $scope.setCount(students.length);
 
     $scope.list = students;
@@ -38,5 +54,11 @@ angular
         .then(() => toastr.success($filter('translate')('unfollowing')))
         .catch((e) => toastr.error(e));
     }
+
+    $scope.byFollowers = (student) => {
+      return !$scope.onlyFollowers || $scope.isFollowing(course_slug, student.social_id);
+    }   
+
+
 
   });
