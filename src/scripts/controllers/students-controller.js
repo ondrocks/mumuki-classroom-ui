@@ -1,11 +1,11 @@
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $stateParams, toastr, $filter, students, Auth, Followers, Api, Domain, RememberSetting) {
-    
-    RememberSetting($scope, 'showDetails');
-    RememberSetting($scope, 'sortingType');
-    RememberSetting($scope, 'onlyFollowers');
+  .controller('StudentsController', function ($scope, $state, $stateParams, toastr, $filter, students, Auth, Followers, Api, Domain, Preferences) {
+
+    Preferences($scope, 'showDetails');
+    Preferences($scope, 'sortingType');
+    Preferences($scope, 'onlyFollowers');
 
     if (_.isNil($scope.sortingType)) {
       $scope.sortingType = 'progress';
@@ -57,7 +57,7 @@ angular
 
     $scope.byFollowers = (student) => {
       return !$scope.onlyFollowers || $scope.isFollowing(course_slug, student.social_id);
-    }   
+    }
 
 
 

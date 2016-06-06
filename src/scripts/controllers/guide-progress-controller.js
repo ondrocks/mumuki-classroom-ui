@@ -1,10 +1,10 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, data, Api, Auth, DevIcon, Guide, RememberSetting, Followers, Domain, Breadcrumb) {
-    RememberSetting($scope, 'showDetails');
-    RememberSetting($scope, 'sortingType');
-    RememberSetting($scope, 'onlyFollowers');
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, data, Api, Auth, DevIcon, Guide, Preferences, Followers, Domain, Breadcrumb) {
+    Preferences($scope, 'showDetails');
+    Preferences($scope, 'sortingType');
+    Preferences($scope, 'onlyFollowers');
 
     const splitSlug = (slug) => slug.split('/')[1];
     const courseSlug = () => `${Domain.tenant()}/${$stateParams.course}`;
@@ -41,7 +41,7 @@ angular
 
     $scope.byFollowers = (progress) => {
       return !$scope.onlyFollowers || Followers.isFollowing(courseSlug(), progress.student.social_id);
-    }   
+    }
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
   });

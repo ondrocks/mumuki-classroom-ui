@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('RememberSetting', function($state, $cookies) {
+  .service('Preferences', function($state, $cookies) {
 
     const preferences = {
       showDetails: false,
@@ -13,7 +13,7 @@ angular
       $cookies.putObject(field, { value: preferences[field] });
     }
 
-    const RememberSetting = (scope, key) => {
+    const Preferences = (scope, key) => {
       const cookieName = $state.current.name + "-" + key;
 
       scope[key] = _.get($cookies.getObject(cookieName), 'value');
@@ -26,12 +26,12 @@ angular
       });
     };
 
-    RememberSetting.showDetails = () => preferences.showDetails;
-    RememberSetting.onlyFollowers = () => preferences.onlyFollowers;
+    Preferences.showDetails = () => preferences.showDetails;
+    Preferences.onlyFollowers = () => preferences.onlyFollowers;
 
-    RememberSetting.toggleShowDetails = () => toggleField('showDetails');
-    RememberSetting.toggleOnlyFollowers = () => toggleField('onlyFollowers');
+    Preferences.toggleShowDetails = () => toggleField('showDetails');
+    Preferences.toggleOnlyFollowers = () => toggleField('onlyFollowers');
 
-    return RememberSetting;
+    return Preferences;
 
   });
