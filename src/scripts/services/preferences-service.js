@@ -4,13 +4,20 @@ angular
   .service('Preferences', function($state, $cookies) {
 
     const preferences = {
-      showDetails: false,
-      onlyFollowers: false,
+      showDetails: null,
+      onlyFollowers: null,
     };
 
     const toggleField = (field) => {
       preferences[field] = !preferences[field];
       $cookies.putObject(field, { value: preferences[field] });
+    }
+
+    const getField = (field) => {
+      if (_.isNull(preferences[field])) {
+        preferences[field] = _.get($cookies.getObject(field), 'value');
+      }
+      return preferences[field];
     }
 
     const Preferences = (scope, key) => {
@@ -26,8 +33,8 @@ angular
       });
     };
 
-    Preferences.showDetails = () => preferences.showDetails;
-    Preferences.onlyFollowers = () => preferences.onlyFollowers;
+    Preferences.showDetails = () => getField('showDetails');
+    Preferences.onlyFollowers = () => getField('onlyFollowers');
 
     Preferences.toggleShowDetails = () => toggleField('showDetails');
     Preferences.toggleOnlyFollowers = () => toggleField('onlyFollowers');

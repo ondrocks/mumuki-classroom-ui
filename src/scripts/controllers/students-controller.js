@@ -3,13 +3,17 @@ angular
   .module('classroom')
   .controller('StudentsController', function ($scope, $state, $stateParams, toastr, $filter, students, Auth, Followers, Api, Domain, Preferences) {
 
-    Preferences($scope, 'showDetails');
     Preferences($scope, 'sortingType');
-    Preferences($scope, 'onlyFollowers');
 
     if (_.isNil($scope.sortingType)) {
       $scope.sortingType = 'progress';
     }
+
+    $scope.showDetails = Preferences.showDetails;
+    $scope.toggleShowDetails = Preferences.toggleShowDetails;
+
+    $scope.onlyFollowers = Preferences.onlyFollowers;
+    $scope.toggleOnlyFollowers = Preferences.toggleOnlyFollowers;
 
     $scope.availableSortingCriterias = [
       { type: 'name', properties: ['last_name', 'first_name']},
@@ -56,7 +60,7 @@ angular
     }
 
     $scope.byFollowers = (student) => {
-      return !$scope.onlyFollowers || $scope.isFollowing(course_slug, student.social_id);
+      return !$scope.onlyFollowers() || $scope.isFollowing(course_slug, student.social_id);
     }
 
 

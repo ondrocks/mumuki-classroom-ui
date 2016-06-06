@@ -19,21 +19,17 @@ mixin follow
         .col-md-8.col-sm-6
           div(ng-if='withDetails')
             span {{ 'last_solution' | translate }}:
-            button.btn.btn-link(
-                ng-model='showDetails',
-                ng-click='showDetails = !showDetails') {{ (showDetails ? 'hide' : 'show') | translate }}
+            button.btn.btn-link(ng-click='toggleShowDetails()') {{ (showDetails() ? 'hide' : 'show') | translate }}
 
           div
             span {{ 'show_students' | translate }}:
             button.btn.btn-link(
-                ng-model='onlyFollowers',
-                ng-click='onlyFollowers = true',
-                ng-disabled='onlyFollowers') {{ 'only_followers' | translate }} ({{ followUpsCount }})
+                ng-click='toggleOnlyFollowers()',
+                ng-disabled='onlyFollowers()') {{ 'only_followers' | translate }} ({{ followUpsCount }})
             span -
             button.btn.btn-link(
-                ng-model='onlyFollowers',
-                ng-click='onlyFollowers = false',
-                ng-disabled='!onlyFollowers') {{ 'all' | translate }} ({{ guideProgress.length }})
+                ng-click='toggleOnlyFollowers()',
+                ng-disabled='!onlyFollowers()') {{ 'all' | translate }} ({{ guideProgress.length }})
 
         .col-md-4.col-sm-6.pull-right
           .input-group
