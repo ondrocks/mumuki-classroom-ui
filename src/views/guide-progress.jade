@@ -15,17 +15,26 @@
 
   .panel.panel-default
     .panel-heading
+
       .row
         .col-md-8.col-sm-6
           div
             span {{ 'last_solution' | translate }}:
-            button.btn-link(ng-model='showDetails', ng-click='showDetails = !showDetails') {{ (showDetails ? 'hide' : 'show') | translate }}
+            button.btn.btn-link(
+                ng-model='showDetails',
+                ng-click='showDetails = !showDetails') {{ (showDetails ? 'hide' : 'show') | translate }}
 
           div
             span {{ 'show_students' | translate }}:
-            button.btn-link(ng-model='onlyFollowers', ng-click='onlyFollowers = true', ng-disabled='onlyFollowers') {{ 'only_followers' | translate }} ({{ followUpsCount }})
+            button.btn.btn-link(
+                ng-model='onlyFollowers',
+                ng-click='onlyFollowers = true',
+                ng-disabled='onlyFollowers') {{ 'only_followers' | translate }} ({{ followUpsCount }})
             span -
-            button.btn-link(ng-model='onlyFollowers', ng-click='onlyFollowers = false', ng-disabled='!onlyFollowers') {{ 'all' | translate }} ({{ guideProgress.length }})
+            button.btn.btn-link(
+                ng-model='onlyFollowers',
+                ng-click='onlyFollowers = false',
+                ng-disabled='!onlyFollowers') {{ 'all' | translate }} ({{ guideProgress.length }})
 
         .col-md-4.col-sm-6.pull-right
           .input-group
@@ -38,9 +47,12 @@
 
     .panel-body.guide-progress-main
       .row
-        .col-md-4.col-sm-6(
-            ng-repeat='progress in guideProgress | orderBy:sortingCriteria(progress) | filter:listSearch | filter:byFollowers')
-          .row.guide-progress-blog.pointer(ui-sref='classroom.courses.course.guides.guide.students({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
+        .col-md-4.col-sm-6(ng-repeat='progress in guideProgress | orderBy:sortingCriteria() | filter:listSearch | filter:byFollowers')
+          .row.guide-progress-blog.pointer(
+              ui-sref='classroom.courses.course.guides.guide.students({ \
+                student: progress.student.social_id,                    \
+                eid: progress.lastExerciseSubmitted().id                \
+              })')
             span.col-xs-9
               img.rounded-x(ng-src='{{ progress.student.image_url }}')
               .name-location
