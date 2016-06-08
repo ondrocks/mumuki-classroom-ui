@@ -30,7 +30,7 @@ angular
         } else {
           $cookies.putObject(cookieName, {value: newValue})
         }
-      });
+      }, true);
     };
 
     Preferences.showDetails = () => getField('showDetails');

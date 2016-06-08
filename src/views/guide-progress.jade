@@ -30,7 +30,7 @@
             span -
             button.btn.btn-link(
                 ng-click='toggleOnlyFollowers()',
-                ng-disabled='!onlyFollowers()') {{ 'all' | translate }} ({{ guideProgress.length }})
+                ng-disabled='!onlyFollowers()') {{ 'all' | translate }} ({{ list.length }})
 
         .col-md-4.col-sm-6.pull-right
           .input-group
@@ -43,40 +43,40 @@
 
     .panel-body.guide-progress-main
       .row
-        .col-md-4.col-sm-6(ng-repeat='progress in guideProgress | orderBy:sortingCriteria() | filter:listSearch | filter:byFollowers')
+        .col-md-4.col-sm-6(ng-repeat='item in list | orderBy:sortingCriteria() | filter:listSearch | filter:byFollowers')
           .row.guide-progress-blog.pointer(
               ui-sref='classroom.courses.course.guides.guide.students({ \
-                student: progress.student.social_id,                    \
-                eid: progress.lastExerciseSubmitted().id                \
+                student: item.student.social_id,                    \
+                eid: item.lastExerciseSubmitted().id                \
               })')
             span.col-xs-9
-              img.rounded-x(ng-src='{{ progress.student.image_url }}')
+              img.rounded-x(ng-src='{{ item.student.image_url }}')
               .name-location
-                strong {{ progress.student.fullName() }}
+                strong {{ item.student.fullName() }}
               .name-location
                 i.fa.fa-clock-o
-                small {{ progress.lastSubmission().timeFromNow() }}
+                small {{ item.lastSubmission().timeFromNow() }}
 
             span.col-xs-3
-              h4.pull-right(ng-class='"guide-progress-" + progress.colorClass()')
-                strong {{ progress.statistics().passed }}
+              h4.pull-right(ng-class='"guide-progress-" + item.colorClass()')
+                strong {{ item.statistics().passed }}
                 span &nbsp;/&nbsp;
-                span {{ progress.statistics().total }}
+                span {{ item.statistics().total }}
 
             .student-guide-details(ng-show='showDetails()')
 
-              div(ng-if='progress.hasSubmissions()')
+              div(ng-if='item.hasSubmissions()')
                 section
                   .row
                     .col-sm-12.detail-title
                       strong {{ 'last_solution' | translate }}
                   .row
                     span.col-sm-10
-                      a(ui-sref='classroom.courses.course.guides.guide.students({ student: progress.student.social_id, eid: progress.lastExerciseSubmitted().id })')
-                        | {{ progress.lastExerciseSubmitted().getName() }}
+                      a(ui-sref='classroom.courses.course.guides.guide.students({ student: item.student.social_id, eid: item.lastExerciseSubmitted().id })')
+                        | {{ item.lastExerciseSubmitted().getName() }}
                     span.col-sm-2.pull-right
-                      status-icon(status='progress.lastSubmission().status')
+                      status-icon(status='item.lastSubmission().status')
                     .col-sm-12
                       pre(style='height: 125px; overflow-y: auto')
                         code
-                          | {{ progress.lastSubmission().content }}
+                          | {{ item.lastSubmission().content }}
