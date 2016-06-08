@@ -5,7 +5,8 @@ angular
 
     $controller('ListHeaderController', {
       $scope: $scope,
-      list: students,
+      list: data.guideProgress,
+      itemTemplate: 'views/templates/item-guide-progress.html',
       socialIdField: 'student.social_id'
     });
 
@@ -17,15 +18,16 @@ angular
     const setGuideProgress = (guideProgress) => $scope.list = guideProgress;
 
     $scope.availableSortingCriterias = [
-      { type: 'name', properties: ['student.fullName()']},
-      { type: 'progress', properties: ['stats.total', 'passedAverage()', 'student.fullName()']},
-      { type: 'last_submission_date', properties: ['-lastSubmission().created_at', 'student.fullName()']}
+      { type: 'name', properties: ['student.last_name', 'student.first_name']},
+      { type: 'progress', properties: ['stats.total', 'passedAverage()', 'student.last_name', 'student.first_name']},
+      { type: 'last_submission_date', properties: ['-lastSubmission().created_at', 'student.last_name', 'student.first_name']}
     ];
 
     setGuideProgress(data.guideProgress);
 
     $scope.guide = guide;
     $scope.devicon = DevIcon.from;
+    $scope.listBodyClass = 'col-md-4 col-sm-6';
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
   });

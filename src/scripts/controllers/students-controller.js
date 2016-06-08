@@ -6,14 +6,17 @@ angular
     $controller('ListHeaderController', {
       $scope: $scope,
       list: students,
-      socialIdField: 'social_id'
+      itemTemplate: 'views/templates/item-student.html',
+      socialIdField: 'social_id',
     });
 
     $scope.availableSortingCriterias = [
-      { type: 'name', properties: ['fullName()']},
-      { type: 'progress', properties: ['totalStats()', '-stats.failed', '-stats.passed_with_warnings', '-stats.passed', 'fullName()']},
+      { type: 'name', properties: ['last_name', 'first_name']},
+      { type: 'progress', properties: ['totalStats()', '-stats.failed', '-stats.passed_with_warnings', '-stats.passed', 'last_name', 'first_name']},
     ];
 
+    $scope.withDetails = false;
+    $scope.listBodyClass = 'col-sm-12';
     $scope.setCount(students.length);
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();
 
