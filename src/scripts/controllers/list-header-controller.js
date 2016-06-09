@@ -7,14 +7,9 @@ angular
       search: ''
     };
 
-    $scope.options = {
-      sortingType: null,
-      isAscending: true
-    };
-
     Preferences($scope, 'options');
 
-    if (_.isNil($scope.options.sortingType)) $scope.options.sortingType = 'progress';
+    _.defaultsDeep($scope, { options: { sortingType: 'progress', isAscending: true }});
 
     $scope.withSortBy = true;
     $scope.withFilter = true;
