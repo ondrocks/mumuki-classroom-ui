@@ -1,0 +1,39 @@
+.panel.panel-default
+  .panel-heading
+
+    .row
+      .col-md-8.col-sm-6
+        div(ng-if='withDetails')
+          span {{ 'last_solution' | translate }}:
+          button.btn.btn-link(ng-click='toggleShowDetails()') {{ (showDetails() ? 'hide' : 'show') | translate }}
+
+        div(ng-if='withFollowers')
+          span {{ 'show_students' | translate }}:
+          button.btn.btn-link(
+              ng-click='toggleOnlyFollowers()',
+              ng-disabled='onlyFollowers()') {{ 'only_followers' | translate }} ({{ followUpsCount }})
+          span -
+          button.btn.btn-link(
+              ng-click='toggleOnlyFollowers()',
+              ng-disabled='!onlyFollowers()') {{ 'all' | translate }} ({{ guideProgress.length }})
+
+      .col-md-4.col-sm-6.pull-right
+        .input-group(ng-if='withSortBy')
+          i.input-group-addon.fa.pointer(
+            ng-click='toggleIsAscending()',
+            ng-class='{                                   \
+              "fa-sort-amount-asc": options.isAscending,  \
+              "fa-sort-amount-desc": !options.isAscending \
+            }')
+          select.form-control(ng-model='options.sortingType')
+            option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
+        .input-group(ng-if='withFilter')
+          i.input-group-addon.fa.fa-search
+          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listOptions.search')
+
+  .panel-body.guide-progress-main
+    .row
+      div(
+          class='{{listBodyClass}}',
+          ng-repeat='item in list | orderBy:sortingCriteria():!options.isAscending | filter:listOptions.search | filter:byFollowers')
+        div(ng-include='itemTemplate')

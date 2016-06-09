@@ -1,5 +1,5 @@
 
-classroomTest('Remember Settings Service', () => {
+classroomTest('Preferences Service', () => {
 
   let $scope;
 
@@ -9,26 +9,26 @@ classroomTest('Remember Settings Service', () => {
     _$cookies_.remove('test-foo');
   }));
 
-  it('should inject cookie value saved at key to scope', inject((_$cookies_, RememberSetting) => {
+  it('should inject cookie value saved at key to scope', inject((_$cookies_, Preferences) => {
     _$cookies_.putObject('test-foo', { value: 'bar' });
-    RememberSetting($scope, 'foo');
+    Preferences($scope, 'foo');
     $scope.foo.should.be.eql('bar');
   }));
 
-  it('should not inject cookie value to scope if cookie is empty', inject((_$cookies_, RememberSetting) => {
-    RememberSetting($scope, 'foo');
+  it('should not inject cookie value to scope if cookie is empty', inject((_$cookies_, Preferences) => {
+    Preferences($scope, 'foo');
     expect(_$cookies_.getObject('test-foo')).be.undefined;
   }));
 
-  it('should save value in cookie if scope has the key', inject((_$cookies_, RememberSetting) => {
-    RememberSetting($scope, 'foo');
+  it('should save value in cookie if scope has the key', inject((_$cookies_, Preferences) => {
+    Preferences($scope, 'foo');
     $scope.foo = 'bar';
     $scope.$digest();
     _$cookies_.getObject('test-foo').should.be.eql({ value: 'bar' });
   }));
 
-  it('should save remove the cookie if key change to nullable value', inject((_$cookies_, RememberSetting) => {
-    RememberSetting($scope, 'foo');
+  it('should save remove the cookie if key change to nullable value', inject((_$cookies_, Preferences) => {
+    Preferences($scope, 'foo');
     $scope.foo = 'bar';
     $scope.$digest();
     $scope.foo = null;
