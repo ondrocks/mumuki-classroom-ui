@@ -36,4 +36,9 @@ angular
         .catch((e) => toastr.error(e));
     }
 
+    $scope.edit = (social_id) => {
+      const course = $scope.course();
+      $state.go('classroom.students.edit', { social_id, course })
+    }
+
   });
