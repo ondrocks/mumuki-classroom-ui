@@ -20,9 +20,9 @@ angular
       $scope.isTextValid($scope.student.last_name) &&
       $scope.isEmailValid($scope.student.email);
 
-    $scope.update = () => {
+    $scope.create = () => {
       return Api
-        .updateStudent($stateParams.course, $scope.student)
+        .createStudent($stateParams.course, $scope.student)
         .then(() => Domain.openAtheneum())
         .catch((res) => toastr.error(res.data.message));
     }

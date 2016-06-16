@@ -34,8 +34,9 @@
           type='text',
           ng-model='student.email',
           placeholder='{{ "email" | translate }}',
-          required
-          ng-init='f3 = false'
+          required,
+          ng-init='f3 = false',
+          ng-disabled='isEdit',
           ng-change='f3 = true')
       div.error
         small.text-muted.text-danger(ng-show='!isEmailValid(student.email) && f3')

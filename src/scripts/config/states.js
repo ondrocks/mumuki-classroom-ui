@@ -38,6 +38,23 @@ angular
           }
         }
       })
+      .state('classroom.students.edit', {
+        url: '/students/edit/:course/:social_id',
+        authenticated: true,
+        views: {
+          'navbar@classroom': {},
+          'content@classroom': {
+            templateUrl: 'views/student.html',
+            controller: 'StudentEditController',
+            resolve: {
+              student: ($stateParams, Api) => {
+                return Api
+                  .getStudent($stateParams.course, $stateParams.social_id);
+              }
+            }
+          }
+        }
+      })
       .state('classroom.courses', {
         url: '/courses',
         authenticated: true,
