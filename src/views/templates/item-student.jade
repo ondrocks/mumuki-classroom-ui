@@ -9,6 +9,7 @@ mixin follow
           "fa-eye": isFollowing(item.social_id),      \
           "fa-eye-slash": !isFollowing(item.social_id)\
         }')
+    i.pointer.fa.fa-pencil.pull-right.eye-margin.edit-icon(ng-click='edit(item.social_id)')
 
 .row.guide-progress-blog
   .col-sm-4.col-xs-10
