@@ -21,6 +21,7 @@
     "src/bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js"
   ],
   "dependencies": {
+    "jquery": "2.2.4",
     "lodash": "4.0.0",
     "devicons": "1.8.0",
     "font-awesome": "4.5.0",
