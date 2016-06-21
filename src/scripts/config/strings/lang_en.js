@@ -19,6 +19,7 @@ angular
     copied: 'Copied',
     correct_permissions: 'Permissions granted correctly',
     courses: 'Courses',
+    date_format: 'MM/dd/yyyy',
     day_friday: 'Friday',
     day_monday: 'Monday',
     day_saturday: 'Saturday',
