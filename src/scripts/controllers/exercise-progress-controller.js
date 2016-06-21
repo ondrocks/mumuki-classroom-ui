@@ -34,8 +34,6 @@ angular
 
     $scope.lastDiff = () => _.last(diffs);
 
-    $scope.isLastSolutionActivated = () => $scope.viewMode === LAST_SOLUTION;
-
     $scope.first = () => $scope.selectDiff(_.first(diffs));
     $scope.last = () => $scope.selectDiff($scope.lastDiff());
 
@@ -53,6 +51,8 @@ angular
       return diffLengthBiggerThanLimit && numberBiggerThandiffLength ? (diffs.length - $scope.limit) : number;
     };
 
+    if (_.isNull($scope.viewMode)) $scope.viewMode = UNIFIED;
+
     $scope.indexNumber = ($index) => _.padStart($scope.begin() + $index + 1, 2, '0');
 
     $scope.trust = (html) => $sce.trustAsHtml(html);
@@ -62,7 +62,6 @@ angular
 
     $scope.limit = 4;
     $scope.diffs = diffs;
-    $scope.viewMode = $scope.viewMode || UNIFIED;
     $scope.progress = exerciseProgress;
     $scope.lastSubmission = _.last(exerciseProgress.submissions);
 
@@ -70,6 +69,9 @@ angular
 
     $scope.comments = (submission) => submission.comments;
     $scope.time = (comment) => moment(comment.date).fromNow();
+
+    $scope.isLastSolutionActivated = () => _.isEqual($scope.viewMode, LAST_SOLUTION);
+    $scope.getViewMode = () => $scope.viewMode;
 
     $scope.split = () => $scope.viewMode = SPLIT;
     $scope.unified = () => $scope.viewMode = UNIFIED;

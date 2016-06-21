@@ -45,7 +45,7 @@
         .nav.navbar-nav.navbar-right.pagination
           .dropdown
             button.btn.btn-default.dropdown-toggle(id='viewModeId', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-              span {{ viewMode.name | translate }}
+              span {{ getViewMode().name | translate }}
               span.caret
             ul.dropdown-menu(aria-labelledby='viewModeId')
               li
@@ -60,7 +60,7 @@
         language='{{ progress.guide.language.name }}',
         left='selectedDiff.left',
         right='selectedDiff.right',
-        view-mode='viewMode.type')
+        view-mode='getViewMode().type')
 
       pre(ng-if='isLastSolutionActivated()')
         code {{ lastDiff().right.content }}
