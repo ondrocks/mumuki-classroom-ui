@@ -20,6 +20,8 @@ mixin follow
       small(ng-if='!item.email') {{ 'email_not_provided' | translate }}
       small(ng-if='item.email')
         a(href='mailto:{{ item.email }}') {{ item.email }}
+    .name-location
+      small {{ 'singup_date' | translate }}: {{ item.created_at | date:'dd/MM/yyyy' }}
   .col-xs-2.visible-xs
     +follow
   .col-sm-7.col-xs-12.text-center

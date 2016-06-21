@@ -83,6 +83,7 @@ angular
     shift_night: 'Noche',
     show: 'Mostrar',
     show_students: 'Ver estudiantes',
+    singup_date: 'Registración',
     solution_sent_at_format: 'DD MMMM YYYY - hh:mm',
     split: 'Separado',
     start_time: 'Desde',
