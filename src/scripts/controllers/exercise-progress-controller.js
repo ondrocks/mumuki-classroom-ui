@@ -16,6 +16,7 @@ angular
       $state.go($state.current.name, $stateParams, { reload: true });
     }
 
+    Breadcrumb.setGuide(exerciseProgress.guide);
     Breadcrumb.setStudent(exerciseProgress.student);
 
     const diffs = exerciseProgress.diffs;
