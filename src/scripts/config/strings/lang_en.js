@@ -84,6 +84,7 @@ angular
     show: 'Show',
     show_students: 'Show students',
     solution_sent_at_format: 'MMMM DD YYYY - h:mm a',
+    split: 'Split',
     start_time: 'Start time',
     students: 'Students',
     students_subscription_address: 'Students subscription address',
@@ -92,5 +93,6 @@ angular
     tests: 'Tests',
     unfollow: 'Unfollow',
     unfollowing: 'Unfollow!',
+    unified: 'Unified',
 
   });

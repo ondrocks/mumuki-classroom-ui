@@ -7,11 +7,12 @@ angular
       scope: {
         language: '@',
         left: '=',
-        right: '='
+        right: '=',
+        viewMode: '='
       },
       templateUrl: 'views/diff.html',
       controller: ($scope) => {
-        $scope.$watchGroup(['left', 'right'], () => {
+        $scope.$watchGroup(['left', 'right', 'viewMode'], () => {
 
           const lines = JsDiff.diffLines($scope.left.content, $scope.right.content);
 
@@ -41,6 +42,7 @@ angular
 
           angular.element('#diff').html(Diff2Html.getPrettyHtml(diffJson, {
             inputFormat: 'json',
+            outputFormat: $scope.viewMode,
             showFiles: false,
             matching: 'lines'
           }));
