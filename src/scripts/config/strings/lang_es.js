@@ -10,6 +10,7 @@ angular
     by_last_submission_date: 'Por fecha de ultima solución',
     by_name: 'Por nombre',
     by_progress: 'Por progreso',
+    by_signup_date: 'Por fecha de registración',
     comment: 'Comentario',
     comment_solution: 'Comentar',
     comment_this_solution: 'Comentar esta solución',

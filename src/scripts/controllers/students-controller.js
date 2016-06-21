@@ -13,6 +13,7 @@ angular
     $scope.availableSortingCriterias = [
       { type: 'name', properties: ['last_name', 'first_name']},
       { type: 'progress', properties: ['totalStats()', '-stats.failed', '-stats.passed_with_warnings', '-stats.passed', 'last_name', 'first_name']},
+      { type: 'signup_date', properties: ['created_at', 'last_name', 'first_name']},
     ];
 
     $scope.withDetails = false;
