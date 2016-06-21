@@ -20,7 +20,7 @@ angular
       $scope.isTextValid($scope.student.last_name) &&
       $scope.isEmailValid($scope.student.email);
 
-    $scope.create = () => {
+    $scope.submit = () => {
       return Api
         .createStudent($stateParams.course, $scope.student)
         .then(() => Domain.openAtheneum())

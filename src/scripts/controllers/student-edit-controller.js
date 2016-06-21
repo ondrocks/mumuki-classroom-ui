@@ -14,7 +14,7 @@ angular
       $scope.isTextValid($scope.student.first_name) &&
       $scope.isTextValid($scope.student.last_name);
 
-    $scope.update = () => {
+    $scope.submit = () => {
       return Api
         .updateStudent($stateParams.course, $scope.student)
         .then(() => $state.go('classroom.courses.course.students', { course: $stateParams.course }, { reload: true }))
