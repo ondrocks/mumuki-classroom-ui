@@ -1,7 +1,9 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, exercisesProgress, containsHtml, Auth, Api, Breadcrumb) {
+  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, exercisesProgress, containsHtml, Auth, Api, Breadcrumb, Preferences) {
+
+    Preferences($scope, 'viewMode');
 
     const exerciseToView = _.find(exercisesProgress, (progress) => progress.exercise.id === Number($stateParams.eid));
 
@@ -18,16 +20,24 @@ angular
 
     const diffs = exerciseProgress.diffs;
 
-    const course = $stateParams.course;
+    const SPLIT = { type: 'side-by-side', name: 'split' };
+    const UNIFIED = { type: 'line-by-line', name: 'unified' };
+    const LAST_SOLUTION = { type: 'only-last', name: 'last_solution' };
+
     const MIN = 0;
     const MAX = diffs.length - 1 ;
+    const course = $stateParams.course;
 
     const index = () => _.indexOf(diffs, $scope.selectedDiff);
     const prev = () => Math.max(index() - 1, MIN);
     const next = () => Math.min(index() + 1, MAX);
 
+    $scope.lastDiff = () => _.last(diffs);
+
+    $scope.isLastSolutionActivated = () => $scope.viewMode === LAST_SOLUTION;
+
     $scope.first = () => $scope.selectDiff(_.first(diffs));
-    $scope.last = () => $scope.selectDiff(_.last(diffs));
+    $scope.last = () => $scope.selectDiff($scope.lastDiff());
 
     $scope.prev = () => $scope.selectDiff(diffs[prev()]);
     $scope.next = () => $scope.selectDiff(diffs[next()]);
@@ -52,6 +62,7 @@ angular
 
     $scope.limit = 4;
     $scope.diffs = diffs;
+    $scope.viewMode = $scope.viewMode || UNIFIED;
     $scope.progress = exerciseProgress;
     $scope.lastSubmission = _.last(exerciseProgress.submissions);
 
@@ -59,6 +70,10 @@ angular
 
     $scope.comments = (submission) => submission.comments;
     $scope.time = (comment) => moment(comment.date).fromNow();
+
+    $scope.split = () => $scope.viewMode = SPLIT;
+    $scope.unified = () => $scope.viewMode = UNIFIED;
+    $scope.lastSolution = () => $scope.viewMode = LAST_SOLUTION;
 
     const getComments = () => {
       Api.getComments(exerciseProgress.exercise.id, course)

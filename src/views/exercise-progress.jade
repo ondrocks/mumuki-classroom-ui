@@ -20,8 +20,10 @@
       .row
         h1.title
           span {{ progress.exercise.getName() }}
-      nav
-        ul.pagination
+
+      nav.nav
+
+        ul.pagination(ng-if='!isLastSolutionActivated()')
 
           li
             a(href='', aria-label='Anterior', ng-click='first()')
@@ -40,7 +42,28 @@
             a(href='', aria-label='Siguiente', ng-click='last()')
               span(aria-hidden='true') &raquo;
 
-      diff-side(language='{{ progress.guide.language.name }}', left='selectedDiff.left', right='selectedDiff.right')
+        .nav.navbar-nav.navbar-right.pagination
+          .dropdown
+            button.btn.btn-default.dropdown-toggle(id='viewModeId', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+              span {{ viewMode.name | translate }}
+              span.caret
+            ul.dropdown-menu(aria-labelledby='viewModeId')
+              li
+                a(href='', ng-click='unified()') {{ 'unified' | translate }}
+              li
+                a(href='', ng-click='split()') {{ 'split' | translate }}
+              li
+                a(href='', ng-click='lastSolution()') {{ 'last_solution' | translate }}
+
+      diff-side(
+        ng-if='!isLastSolutionActivated()',
+        language='{{ progress.guide.language.name }}',
+        left='selectedDiff.left',
+        right='selectedDiff.right',
+        view-mode='viewMode.type')
+
+      pre(ng-if='isLastSolutionActivated()')
+        code {{ lastDiff().right.content }}
 
       .row
         .col-sm-12(ng-repeat='submission in [ selectedDiff.right ]')
@@ -51,7 +74,6 @@
                   ng-model='submission.comment',
                   placeholder='{{ "comment_this_solution" | translate }}',
                   class="textarea-{{submission.commentType}}",
-                  maxlength='255',
                   rows='3')
 
             .col-sm-3.col-md-2

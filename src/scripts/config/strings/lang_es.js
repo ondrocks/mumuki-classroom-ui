@@ -84,6 +84,7 @@ angular
     show: 'Mostrar',
     show_students: 'Ver estudiantes',
     solution_sent_at_format: 'DD MMMM YYYY - hh:mm',
+    split: 'Separado',
     start_time: 'Desde',
     students: 'Estudiantes',
     students_subscription_address: 'Dirección de suscripción de estudiantes',
@@ -92,5 +93,6 @@ angular
     tests: 'Pruebas',
     unfollow: 'Dejar de Seguir',
     unfollowing: 'Has dejado de seguir al usuario',
+    unified: 'Unificado',
 
   });
