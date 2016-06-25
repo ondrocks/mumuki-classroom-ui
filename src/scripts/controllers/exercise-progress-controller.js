@@ -76,7 +76,10 @@ angular
 
     $scope.split = () => $scope.viewMode = SPLIT;
     $scope.unified = () => $scope.viewMode = UNIFIED;
-    $scope.lastSolution = () => $scope.viewMode = LAST_SOLUTION;
+    $scope.lastSolution = () => {
+      $scope.selectDiff($scope.lastDiff());
+      $scope.viewMode = LAST_SOLUTION;
+    };
 
     const getComments = () => {
       Api.getComments(exerciseProgress.exercise.id, course)
