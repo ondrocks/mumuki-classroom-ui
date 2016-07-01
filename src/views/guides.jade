@@ -7,8 +7,8 @@
   br
 
   div.list-group
-    .list-group(ng-repeat='(chapter, guides) in chaptersAndLessons')
-      #accordion.panel-group(role='tablist', aria-multiselectable='true')
+    .list-group.no-margin-bottom(ng-repeat='(chapter, guides) in chaptersAndLessons')
+      #accordion.panel-group.no-margin-bottom(role='tablist', aria-multiselectable='true')
         guide-list(name='{{chapter}}', list='guides', index='$index')
     guide-list(name='others', list='others')
   button.btn.btn-primary.pull-right(ng-if='isAdmin()', ui-sref='classroom.courses.new')
