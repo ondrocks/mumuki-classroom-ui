@@ -24,8 +24,8 @@ classroomTest('New Course Controller', () => {
 
     it('should generate correctly slug', () => shouldBe('slug', 'pdep-utn/2016-k3000'));
     it('should generate correctly code', () => shouldBe('code', 'k3000'));
-    it('should generate correctly days', () => shouldBe('days', ['Lunes', 'Viernes']));
-    it('should generate correctly shifts', () => shouldBe('shifts', ['Mañana', 'Noche']));
+    it('should generate correctly days', () => shouldBe('days', ['Monday', 'Friday']));
+    it('should generate correctly shifts', () => shouldBe('shifts', ['Morning', 'Night']));
     it('should generate correctly period', () => shouldBe('period', '2016'));
 
   });
