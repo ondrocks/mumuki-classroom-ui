@@ -1,0 +1,13 @@
+.panel.panel-default
+  .panel-heading(id='heading{{index}}', role='tab')
+    h4.panel-title
+      a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapse{{index}}', aria-controls='collapse{{index}}')
+        |  {{ name | translate | uppercase }}
+  .panel-collapse.collapse(id='collapse{{index}}', role='tabpanel', aria-labelledby='heading{{index}}', ng-class="index === 0 ? 'in' : ''")
+    .panel-body.nopadding
+      button.list-group-item.noborder-radius(ng-repeat='guide in list | orderBy: sortCriteria() | filter:listSearch', ng-click='open(guide)')
+        i(class='{{ guide.iconClass() }}')
+        span.divider-vertical
+        span.item-name {{ guide.getName() | uppercase }}
+        label(ng-if='!(list | orderBy: sortCriteria() | filter:listSearch).length')
+          | {{ noItemsToShow | translate }}
