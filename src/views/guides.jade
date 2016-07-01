@@ -9,8 +9,32 @@
   div.list-group
     .list-group.no-margin-bottom(ng-repeat='(chapter, guides) in chaptersAndLessons')
       #accordion.panel-group.no-margin-bottom(role='tablist', aria-multiselectable='true')
-        guide-list(name='{{chapter}}', list='guides', index='$index')
-    guide-list(name='others', list='others')
+        .panel.panel-default
+          .panel-heading(id='heading{{$index}}', role='tab')
+            h4.panel-title
+              a(ng-click='setLastChapterOpened(chapter)', role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapse{{$index}}', aria-controls='collapse{{$index}}')
+                |  {{ chapter | translate | uppercase }}
+          .panel-collapse.collapse(id='collapse{{$index}}', role='tabpanel', aria-labelledby='heading{{$index}}', ng-class="{ in: actualChapter(chapter) }")
+            .panel-body.nopadding
+              button.list-group-item.noborder-radius(ng-repeat='guide in guides | orderBy: sortCriteria() | filter:listSearch', ng-click='open(guide)')
+                i(class='{{ guide.iconClass() }}')
+                span.divider-vertical
+                span.item-name {{ guide.getName() | uppercase }}
+                label(ng-if='!(guides | orderBy: sortCriteria() | filter:listSearch).length')
+                  | {{ noItemsToShow | translate }}
+    .panel.panel-default
+      .panel-heading(id='heading{{$index}}', role='tab')
+        h4.panel-title
+          a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapse{{$index}}', aria-controls='collapse{{$index}}')
+            |  {{ 'others' | translate | uppercase }}
+      .panel-collapse.collapse(id='collapse{{$index}}', role='tabpanel', aria-labelledby='heading{{$index}}')
+        .panel-body.nopadding
+          button.list-group-item.noborder-radius(ng-repeat='guide in others | orderBy: sortCriteria() | filter:listSearch', ng-click='open(guide)')
+            i(class='{{ guide.iconClass() }}')
+            span.divider-vertical
+            span.item-name {{ guide.getName() | uppercase }}
+            label(ng-if='!(others | orderBy: sortCriteria() | filter:listSearch).length')
+              | {{ noItemsToShow | translate }}
   button.btn.btn-primary.pull-right(ng-if='isAdmin()', ui-sref='classroom.courses.new')
     | {{ 'new_course' | translate }}
 
