@@ -19,6 +19,7 @@ angular
     $scope.inputPlaceholder = 'filter_available_guides';
 
     $scope.sortCriteria = (guide) => ['parent.position', 'language.name', 'name'];
+    $scope.present = (items) => !!items;
 
     $scope.open = (guide) => {
       const [ org, repo ] = guide.slug.split('/');
