@@ -12,6 +12,7 @@ angular
 
     $scope.dict = _.groupBy(guides, 'parent.type');
     $scope.chaptersAndLessons = _.groupBy($scope.dict.Lesson, (lesson) => mapChapter(lesson.parent.chapter.name));
+    $scope.exams = $scope.dict.Exam;
     $scope.others = $scope.dict.undefined;
     $scope.preTitle = _.capitalize($stateParams.course.toUpperCase());
     $scope.noItemsToShow = 'no_guides_to_show';

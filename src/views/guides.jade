@@ -26,6 +26,19 @@
       .panel-heading(id='heading{{$index}}', role='tab')
         h4.panel-title
           a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapse{{$index}}', aria-controls='collapse{{$index}}')
+            |  {{ 'exams' | translate | uppercase }}
+      .panel-collapse.collapse(id='collapse{{$index}}', role='tabpanel', aria-labelledby='heading{{$index}}')
+        .panel-body.nopadding
+          button.list-group-item.noborder-radius(ng-repeat='exam in exams | orderBy: sortCriteria() | filter:listSearch', ng-click='open(exam)')
+            i(class='{{ exam.iconClass() }}')
+            span.divider-vertical
+            span.item-name {{ exam.getName() | uppercase }}
+            label(ng-if='!(exams | orderBy: sortCriteria() | filter:listSearch).length')
+              | {{ noItemsToShow | translate }}
+    .panel.panel-default
+      .panel-heading(id='heading{{$index}}', role='tab')
+        h4.panel-title
+          a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapse{{$index}}', aria-controls='collapse{{$index}}')
             |  {{ 'others' | translate | uppercase }}
       .panel-collapse.collapse(id='collapse{{$index}}', role='tabpanel', aria-labelledby='heading{{$index}}')
         .panel-body.nopadding
