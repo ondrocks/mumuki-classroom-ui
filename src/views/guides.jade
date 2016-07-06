@@ -23,11 +23,11 @@
                 label(ng-if='!(guides | orderBy: sortCriteria() | filter:listSearch).length')
                   | {{ noItemsToShow | translate }}
     .panel.panel-default
-      .panel-heading(id='heading{{$index}}', role='tab')
+      .panel-heading(id='headingExams', role='tab')
         h4.panel-title
-          a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapse{{$index}}', aria-controls='collapse{{$index}}')
+          a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapseExams', aria-controls='collapseExams')
             |  {{ 'exams' | translate | uppercase }}
-      .panel-collapse.collapse(id='collapse{{$index}}', role='tabpanel', aria-labelledby='heading{{$index}}')
+      .panel-collapse.collapse(id='collapseExams', role='tabpanel', aria-labelledby='headingExams')
         .panel-body.nopadding
           button.list-group-item.noborder-radius(ng-repeat='exam in exams | orderBy: sortCriteria() | filter:listSearch', ng-click='open(exam)')
             i(class='{{ exam.iconClass() }}')
@@ -36,11 +36,11 @@
             label(ng-if='!(exams | orderBy: sortCriteria() | filter:listSearch).length')
               | {{ noItemsToShow | translate }}
     .panel.panel-default
-      .panel-heading(id='heading{{$index}}', role='tab')
+      .panel-heading(id='headingOthers', role='tab')
         h4.panel-title
-          a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapse{{$index}}', aria-controls='collapse{{$index}}')
+          a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapseOthers', aria-controls='collapseOthers')
             |  {{ 'others' | translate | uppercase }}
-      .panel-collapse.collapse(id='collapse{{$index}}', role='tabpanel', aria-labelledby='heading{{$index}}')
+      .panel-collapse.collapse(id='collapseOthers', role='tabpanel', aria-labelledby='headingOthers')
         .panel-body.nopadding
           button.list-group-item.noborder-radius(ng-repeat='guide in others | orderBy: sortCriteria() | filter:listSearch', ng-click='open(guide)')
             i(class='{{ guide.iconClass() }}')
