@@ -98,7 +98,7 @@ angular
         authenticated: true,
         views: {
           'main@classroom.courses.course': {
-            templateUrl: 'views/select.html',
+            templateUrl: 'views/guides.html',
             controller: 'GuidesController',
             resolve: {
               guides: ($state, $stateParams, Api) => {
