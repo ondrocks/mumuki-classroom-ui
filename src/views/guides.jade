@@ -22,6 +22,19 @@
                 span.item-name {{ guide.getName() | uppercase }}
                 label(ng-if='!(guides | orderBy: sortCriteria() | filter:listSearch).length')
                   | {{ noItemsToShow | translate }}
+    .panel.panel-default(ng-if='present(complements)')
+      .panel-heading(id='headingExams', role='tab')
+        h4.panel-title
+          a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapseComplemets', aria-controls='collapseComplemets')
+            |  {{ 'complements' | translate | uppercase }}
+      .panel-collapse.collapse(id='collapseComplemets', role='tabpanel', aria-labelledby='headingComplemets')
+        .panel-body.nopadding
+          button.list-group-item.noborder-radius(ng-repeat='complement in complements | orderBy: sortCriteria() | filter:listSearch', ng-click='open(complement)')
+            i(class='{{ complement.iconClass() }}')
+            span.divider-vertical
+            span.item-name {{ complement.getName() | uppercase }}
+            label(ng-if='!(complements | orderBy: sortCriteria() | filter:listSearch).length')
+              | {{ noItemsToShow | translate }}
     .panel.panel-default(ng-if='present(exams)')
       .panel-heading(id='headingExams', role='tab')
         h4.panel-title

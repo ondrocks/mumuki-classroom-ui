@@ -15,6 +15,7 @@ angular
     comment_solution: 'Comentar',
     comment_this_solution: 'Comentar esta solución',
     complement: 'Complemento',
+    complements: 'Complementos',
     complete_form: 'Cargar datos',
     confirm: 'Confirmar',
     copied: 'Copiado',
