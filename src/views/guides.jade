@@ -19,7 +19,7 @@
               button.list-group-item.noborder-radius(ng-repeat='guide in guides | orderBy: sortCriteria() | filter:listSearch', ng-click='open(guide)')
                 i(class='{{ guide.iconClass() }}')
                 span.divider-vertical
-                span.item-name {{guide.parent.position}}. {{ guide.getName() | uppercase }}
+                span.item-name {{ guide.getName() | uppercase }}
                 label(ng-if='!(guides | orderBy: sortCriteria() | filter:listSearch).length')
                   | {{ noItemsToShow | translate }}
     .panel.panel-default(ng-if='present(complements)')
