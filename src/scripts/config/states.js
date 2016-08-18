@@ -9,7 +9,10 @@ angular
         abstract: true,
         views: {
           '@': {
-            templateUrl: 'views/layout.html'
+            templateUrl: 'views/layout.html',
+            resolve: {
+              organization: (Organization) => Organization.getLockJson()
+            }
           },
           'navbar@classroom': {
             templateUrl: 'views/navbar.html',

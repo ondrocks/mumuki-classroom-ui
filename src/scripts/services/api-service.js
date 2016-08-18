@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Api', function ($http, $location, Course, Guide, Student, Teacher, GuideProgress, ExerciseProgress, Exam, Auth, Domain, CONFIG) {
+  .service('Api', function ($http, $location, Course, Guide, Student, Teacher, GuideProgress, ExerciseProgress, Exam, Auth, Domain, Organization, CONFIG) {
 
     const subdomain = Domain.tenant();
     const API = `http://${subdomain}.${CONFIG.classroom.url}`;
@@ -137,6 +137,11 @@ angular
     this.addPermission = (slug, email) => {
       return $http
         .post(`${API}/courses/${slug}/permissions`, { email }, authenticated())
+    }
+
+    this.getOrganization = () => {
+      return $http
+        .get(`${API}/organization`)
     }
 
   });

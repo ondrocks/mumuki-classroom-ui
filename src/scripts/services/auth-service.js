@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Auth', function ($state, $location, auth, store, jwtHelper, Domain) {
+  .service('Auth', function ($state, $location, auth, store, jwtHelper, Domain, Organization) {
 
     const subdomain = Domain.tenant();
 
@@ -33,11 +33,15 @@ angular
     }
 
     this.signin = (callback) => {
-      auth.signin({ authParams: { scope: 'openid app_metadata' } }, (profile, token) => {
-        store.set('profile', profile);
-        store.set('token', token);
-        if (_.isFunction(callback)) callback(profile);
-      });
+      Organization
+        .getLockJson()
+        .then((modalJson) => {
+          auth.signin(_.merge(modalJson, { icon: '/images/icon.png', authParams: { scope: 'openid app_metadata' } }), (profile, token) => {
+            store.set('profile', profile);
+            store.set('token', token);
+            if (_.isFunction(callback)) callback(profile);
+          });
+        });
     };
 
     this.signout = () => {
