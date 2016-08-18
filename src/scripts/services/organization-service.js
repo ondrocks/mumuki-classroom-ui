@@ -1,10 +1,11 @@
 
 angular
   .module('classroom')
-  .service('Organization', function ($injector) {
+  .service('Organization', function ($injector, $translate) {
 
     this.set = (org) => {
       this.organization = org;
+      $translate.use(org.locale);
     }
 
     this.getLockJson = () => {
