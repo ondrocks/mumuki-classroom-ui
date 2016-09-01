@@ -110,6 +110,11 @@ angular
         .then((res) => ({comments: res.data.comments}));
     }
 
+    this.removeStudent = (social_id, course) => {
+      return $http
+        .delete(`${API}/courses/${course}/students/${social_id}`, authenticated())
+    }
+
     this.comment = (data, course) => {
       return $http
         .post(`${API}/courses/${course}/comments`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
