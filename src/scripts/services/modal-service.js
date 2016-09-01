@@ -1,13 +1,13 @@
-
 angular
   .module('classroom')
   .service('Modal', function ($fancyModal) {
 
-    this.newTeacher = (slug) => $fancyModal.open({
-      templateUrl: 'views/modals/new_teacher.html',
-      controller: 'NewTeacherController',
+    this.confirmDialog = (text, onYes) => $fancyModal.open({
+      templateUrl: 'views/modals/confirm-dialog.html',
+      controller: 'ConfirmDialogController',
       resolve: {
-        slug: _.constant(slug)
+        text: () => text,
+        onYes: () => onYes
       }
     });
 
