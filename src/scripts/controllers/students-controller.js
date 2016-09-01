@@ -17,6 +17,7 @@ angular
     ];
 
     $scope.withDetails = false;
+    $scope.isAdmin = Auth.isAdmin();
     $scope.listBodyClass = 'col-sm-12';
     $scope.setCount(students.length);
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();
@@ -40,6 +41,13 @@ angular
     $scope.edit = (social_id) => {
       const course = $scope.course();
       $state.go('classroom.students.edit', { social_id, course })
+    }
+
+    $scope.remove = (social_id) => {
+      return Api
+        .removeStudent(social_id, $scope.course())
+        .then(() => $state.reload())
+        .catch((e) => toastr.error(e));
     }
 
   });
