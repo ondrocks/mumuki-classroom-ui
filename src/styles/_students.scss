@@ -1,11 +1,28 @@
-.fa.fa-check-circle {
-  color: #5cb85c;
+.fa {
+  &.fa-check-circle {
+    color: #5cb85c;
+  }
+  &.fa-times-circle {
+    color: #d9534f;
+  }
+  &.fa-exclamation-circle {
+    color: #F39C12;
+  }
+  &.fa-envelope-o {
+    color: #000000;
+  }
+  &.fa-facebook-square {
+    color: #3b5998;
+  }
+  &.fa-github {
+    color: #333;
+  }
+  &.fa-google {
+    color: #ea4335;
+  }
+  &.fa-twitter {
+    color: #55acee;
+  }
 }
 
-.fa.fa-times-circle {
-  color: #d9534f;
-}
 
-.fa.fa-exclamation-circle {
-  color: #F39C12;
-}

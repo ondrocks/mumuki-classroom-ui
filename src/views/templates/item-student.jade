@@ -16,7 +16,9 @@ mixin follow
   .col-sm-4.col-xs-10
     img.rounded-x(ng-src='{{ item.image_url }}')
     .name-location
-      strong {{ item.fullName() }}
+      strong
+        span.fa(class='fa-{{ item.providerIcon() }}')
+        |{{ item.fullName() }}
     .name-location
       small(ng-if='!item.email') {{ 'email_not_provided' | translate }}
       small(ng-if='item.email')

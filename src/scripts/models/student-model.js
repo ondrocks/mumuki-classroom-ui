@@ -3,6 +3,14 @@ angular
   .module('classroom')
   .factory('Student', function () {
 
+    var icons = {
+      'auth0': 'envelope-o',
+      'github': 'github',
+      'twitter': 'twitter',
+      'facebook': 'facebook-square',
+      'google-oauth2': 'google',
+    }
+
     class Student {
 
       constructor(student = {}) {
@@ -24,6 +32,14 @@ angular
 
       defaultStats() {
         return { passed: 0, failed: 0, passed_with_warnings: 0 };
+      }
+
+      provider() {
+        return this.social_id.split('|')[0];
+      }
+
+      providerIcon() {
+        return icons[this.provider()];
       }
 
       static from(student) {
