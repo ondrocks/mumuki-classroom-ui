@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $controller, toastr, $filter, students, Auth, Followers, Api) {
+  .controller('StudentsController', function ($scope, $state, $controller, toastr, $filter, students, Auth, Followers, Api, Modal) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -44,10 +44,12 @@ angular
     }
 
     $scope.remove = (social_id) => {
-      return Api
-        .removeStudent(social_id, $scope.course())
-        .then(() => $state.reload())
-        .catch((e) => toastr.error(e));
+      Modal.confirmDialog('you want to remove student from course?', () => {
+        return Api
+          .removeStudent(social_id, $scope.course())
+          .then(() => $state.reload())
+          .catch((e) => toastr.error(e));
+      });
     }
 
   });
