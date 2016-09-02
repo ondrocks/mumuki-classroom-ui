@@ -43,10 +43,10 @@ angular
       $state.go('classroom.students.edit', { social_id, course })
     }
 
-    $scope.remove = (social_id) => {
-      Modal.confirmDialog('you want to remove student from course?', () => {
+    $scope.remove = (student) => {
+      Modal.confirmDialog(student, () => {
         return Api
-          .removeStudent(social_id, $scope.course())
+          .removeStudent(student.social_id, $scope.course())
           .then(() => $state.reload())
           .catch((e) => toastr.error(e));
       });

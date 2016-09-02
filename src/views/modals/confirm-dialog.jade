@@ -1,9 +1,9 @@
 .container-fluid
   .row
     .col-sm-12
-      h4.modal-title Are you sure...
+      h4.modal-title {{ student.fullName() }}
     .col-sm-12
-      p {{ text }}
+      p {{ 'are_you_sure_delete_student_from_course' | translate }}
     .col-sm-12
-      button.btn.btn-default(type='button', ng-click='no()', data-dismiss='modal') No
-      button.btn.btn-primary(type='button', ng-click='yes()') Yes
+      button.btn.btn-default(type='button', ng-click='no()', data-dismiss='modal') {{ 'no' | translate }}
+      button.btn.btn-primary(type='button', ng-click='yes()') {{ 'yes' | translate }}

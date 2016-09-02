@@ -6,6 +6,7 @@ angular
     add_permissions_to_teacher: 'Add permissions to',
     added_teacher: 'Teacher added',
     all: 'All',
+    are_you_sure_delete_student_from_course: 'Are you sure you want to remove student from course?',
     available_courses: 'Available Courses',
     by_last_submission_date: 'By last submission date',
     by_name: 'By name',
@@ -38,9 +39,9 @@ angular
     email_error: 'Email is mandatory and it must be a valid one',
     email_not_provided: 'Email not provided',
     end_time: 'End time',
+    exam: 'Exam',
     exam_link: 'Exam link',
     exam_updated: 'Exam updated successfully',
-    exam: 'Exam',
     exams: 'Exams',
     expectations: 'Expectations',
     filter_available_courses: 'Filter available courses',
@@ -74,6 +75,7 @@ angular
     new_course_shift_error: 'Select at least one shift',
     new_exam: 'New exam',
     new_teacher: 'New teacher',
+    no: 'No',
     no_courses_to_show: 'There is no courses to show',
     no_exams_to_show: 'There is no exams to show',
     no_guides_to_show: 'There is no guides to show',
@@ -101,5 +103,6 @@ angular
     unfollow: 'Unfollow',
     unfollowing: 'Unfollow!',
     unified: 'Unified',
+    yes: 'Yes'
 
   });
