@@ -10,7 +10,7 @@ mixin follow
           "fa-eye": isFollowing(item.social_id),      \
           "fa-eye-slash": !isFollowing(item.social_id)\
         }')
-    i.pointer.fa.fa-trash.pull-right.eye-margin.edit-icon(ng-click='remove(item.social_id)', ng-if='isAdmin')
+    i.pointer.fa.fa-trash.pull-right.eye-margin.edit-icon(ng-click='remove(item)', ng-if='isAdmin')
 
 .row.guide-progress-blog
   .col-sm-4.col-xs-10

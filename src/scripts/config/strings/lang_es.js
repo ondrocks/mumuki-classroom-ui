@@ -6,6 +6,7 @@ angular
     add_permissions_to_teacher: 'Agregar permisos a',
     added_teacher: 'Docente agregado satisfactoriamente',
     all: 'Todos',
+    are_you_sure_delete_student_from_course: '¿Estás seguro que querés borrar al estudiante del curso?',
     available_courses: 'Cursos disponibles',
     by_last_submission_date: 'Por fecha de ultima solución',
     by_name: 'Por nombre',
@@ -38,9 +39,9 @@ angular
     email_error: 'El campo email es obligatorio, y debe ser válido',
     email_not_provided: 'No hay email asociado',
     end_time: 'Hasta',
+    exam: 'Examen',
     exam_link: 'Link al examen',
     exam_updated: 'Examen guardado satisfactoriamente',
-    exam: 'Examen',
     exams: 'Exámenes',
     expectations: 'Expectativas',
     filter_available_courses: 'Filtrar cursos disponibles',
@@ -75,6 +76,7 @@ angular
     new_course_shift_error: 'Seleccioná al menos un turno',
     new_exam: 'Nuevo examen',
     new_teacher: 'Nuevo docente',
+    no: 'No',
     no_courses_to_show: 'No hay cursos para mostrar',
     no_exams_to_show: 'No hay exámenes para mostrar',
     no_guides_to_show: 'No hay guías para mostrar',
@@ -102,5 +104,6 @@ angular
     unfollow: 'Dejar de Seguir',
     unfollowing: 'Has dejado de seguir al usuario',
     unified: 'Unificado',
+    yes: 'Si'
 
   });
