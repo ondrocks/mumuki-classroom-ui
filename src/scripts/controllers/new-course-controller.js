@@ -12,7 +12,7 @@ angular
       description: ''
     };
 
-    $scope.isValidCode = () => !_.isEmpty(($scope.course.code || '').trim());
+    $scope.isValidCode = () => /^([0-9a-zA-Z\-])+$/i.test(($scope.course.code || ''));
     $scope.isValidDays = () => !_.isEmpty($scope.course.days);
     $scope.isValidShifts = () => !_.isEmpty($scope.course.shifts);
     $scope.isValidPeriod = () => /^([0-9]{4})(-(1|2|4|6)[A-Z])?$/i.test(($scope.course.period || ''));

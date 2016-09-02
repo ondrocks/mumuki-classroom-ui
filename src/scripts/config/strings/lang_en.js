@@ -61,7 +61,7 @@ angular
     log_in_first: 'You must login first',
     log_out: 'Log out',
     new_course: 'New course',
-    new_course_code: 'Course code',
+    new_course_code: 'Course code - i.e. K2000 or ABC-123',
     new_course_code_error: 'Course code is mandatory',
     new_course_days_error: 'Select at least one day',
     new_course_description: 'Course description',
