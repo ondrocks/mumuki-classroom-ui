@@ -3,7 +3,7 @@ angular
   .module('classroom')
   .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, exercisesProgress, containsHtml, Auth, Api, Breadcrumb, Preferences, Humanizer) {
 
-    Preferences($scope, 'viewMode');
+    Preferences($scope, 'options');
 
     const exerciseToView = _.find(exercisesProgress, (progress) => progress.exercise.id === Number($stateParams.eid));
 
@@ -24,6 +24,7 @@ angular
     const SPLIT = { type: 'side-by-side', name: 'split' };
     const UNIFIED = { type: 'line-by-line', name: 'unified' };
     const LAST_SOLUTION = { type: 'only-last', name: 'last_solution' };
+    if (_.isEmpty($scope.options)) $scope.options = { viewMode: UNIFIED };
 
     const MIN = 0;
     const MAX = diffs.length - 1 ;
@@ -52,7 +53,6 @@ angular
       return diffLengthBiggerThanLimit && numberBiggerThandiffLength ? (diffs.length - $scope.limit) : number;
     };
 
-    if (_.isNull($scope.viewMode)) $scope.viewMode = UNIFIED;
 
     $scope.indexNumber = ($index) => _.padStart($scope.begin() + $index + 1, 2, '0');
 
@@ -73,14 +73,14 @@ angular
     $scope.comments = (submission) => submission.comments;
     $scope.time = (comment) => moment(comment.date).fromNow();
 
-    $scope.isLastSolutionActivated = () => _.isEqual($scope.viewMode, LAST_SOLUTION);
-    $scope.getViewMode = () => $scope.viewMode;
+    $scope.isLastSolutionActivated = () => _.isEqual($scope.options.viewMode, LAST_SOLUTION);
+    $scope.getViewMode = () => $scope.options.viewMode;
 
-    $scope.split = () => $scope.viewMode = SPLIT;
-    $scope.unified = () => $scope.viewMode = UNIFIED;
+    $scope.split = () => $scope.options.viewMode = SPLIT;
+    $scope.unified = () => $scope.options.viewMode = UNIFIED;
     $scope.lastSolution = () => {
       $scope.selectDiff($scope.lastDiff());
-      $scope.viewMode = LAST_SOLUTION;
+      $scope.options.viewMode = LAST_SOLUTION;
     };
 
     const getComments = () => {
