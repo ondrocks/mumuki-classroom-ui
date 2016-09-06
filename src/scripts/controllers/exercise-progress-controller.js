@@ -88,6 +88,19 @@ angular
       $scope.options.viewMode = LAST_SOLUTION;
     };
 
+    $scope.submissionHasComments = (submission) => {
+      return !_.isEmpty(submission.comments);
+    }
+    $scope.hasComments = (progress) => {
+      return _.some(progress.submissions, (submission) => $scope.submissionHasComments(submission));
+    }
+    $scope.showCommentsIcon = (progress) => {
+      return $scope.submissionHasComments(progress.lastSubmission());
+    };
+    $scope.showNewCommentsIcon = (progress) => {
+      return !$scope.showCommentsIcon(progress) && $scope.hasComments(progress);
+    };
+
     const getCommentToPost = (submission) => {
       return {
         social_id: $stateParams.student,

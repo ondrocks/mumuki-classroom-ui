@@ -1,6 +1,6 @@
 .container
   .row
-    .col-sm-2(style='margin-top: 20px')
+    .col-sm-3(style='margin-top: 20px')
       .text-center
         img.rounded-x(ng-src='{{ progress.student.image_url }}', width='40%')
         h4 {{ progress.student.fullName() }}
@@ -10,13 +10,18 @@
       br
       section
         .row(ng-repeat='progress in exercisesProgress | orderBy:["exercise.number", "exercise.name"]')
-          span.col-sm-10.exercise-item(ng-class="{'active-exercise': progressSelected(progress)}")
+          span.col-sm-8.exercise-item(ng-class="{'active-exercise': progressSelected(progress)}")
             a(href='', ng-click='selectExercise(progress)')
               | {{ progress.exercise.getName() }}
-          span.col-sm-2
+          span.col-sm-2.pull-right
             status-icon(status='progress.lastSubmission().status')
+          span.col-sm-2.pull-right(ng-if='hasComments(progress)')
+            i.fa(ng-class='{                                          \
+                  "fa-comments-o": showCommentsIcon(progress),        \
+                  "fa-pencil-square-o": showNewCommentsIcon(progress) \
+                }') &nbsp;
 
-    .col-sm-10
+    .col-sm-9
       .row
         h1.title
           span {{ progress.exercise.getName() }}
