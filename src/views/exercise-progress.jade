@@ -20,6 +20,9 @@
       .row
         h1.title
           span {{ progress.exercise.getName() }}
+      .row
+        h5.title
+          span {{ 'submissions_count' | translate:{submissionsCount: submissionsCount, lastSubmissionDate: lastSubmissionDate} }}
 
       nav.nav
 
