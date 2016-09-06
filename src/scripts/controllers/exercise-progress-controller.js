@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, exercisesProgress, containsHtml, Auth, Api, Breadcrumb, Preferences) {
+  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, exercisesProgress, containsHtml, Auth, Api, Breadcrumb, Preferences, Humanizer) {
 
     Preferences($scope, 'viewMode');
 
@@ -65,6 +65,8 @@ angular
     $scope.diffs = diffs;
     $scope.progress = exerciseProgress;
     $scope.lastSubmission = _.last(exerciseProgress.submissions);
+    $scope.lastSubmissionDate = Humanizer.date($scope.lastSubmission.created_at);
+    $scope.submissionsCount = exerciseProgress.submissions.length;
 
     $scope.selectDiff(diffs[MAX]);
 

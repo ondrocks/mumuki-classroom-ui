@@ -94,6 +94,7 @@ angular
     singup_date: 'Signup date',
     solution_sent_at_format: 'MMMM DD YYYY - h:mm a',
     split: 'Split',
+    submissions_count: '{{submissionsCount}} solutions sent. Last solution: {{lastSubmissionDate}}',
     start_time: 'Start time',
     students: 'Students',
     students_subscription_address: 'Students subscription address',
