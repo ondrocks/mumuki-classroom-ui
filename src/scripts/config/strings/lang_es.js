@@ -105,6 +105,7 @@ angular
     unfollow: 'Dejar de Seguir',
     unfollowing: 'Has dejado de seguir al usuario',
     unified: 'Unificado',
+    view_mode: 'Visualización: ',
     yes: 'Si'
 
   });

@@ -104,6 +104,7 @@ angular
     unfollow: 'Unfollow',
     unfollowing: 'Unfollow!',
     unified: 'Unified',
+    view_mode: 'View Mode: ',
     yes: 'Yes'
 
   });

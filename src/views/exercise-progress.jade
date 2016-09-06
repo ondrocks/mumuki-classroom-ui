@@ -47,6 +47,7 @@
 
         .nav.navbar-nav.navbar-right.pagination
           .dropdown
+            span.view-mode {{ 'view_mode' | translate }}
             button.btn.btn-default.dropdown-toggle(id='viewModeId', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
               span {{ getViewMode().name | translate }}
               span.caret
