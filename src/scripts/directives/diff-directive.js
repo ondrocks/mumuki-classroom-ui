@@ -11,7 +11,7 @@ angular
         viewMode: '='
       },
       templateUrl: 'views/diff.html',
-      controller: ($scope) => {
+      controller: ($scope, Humanizer) => {
         $scope.$watchGroup(['left', 'right', 'viewMode'], () => {
 
           const lines = JsDiff.diffLines($scope.left.content, $scope.right.content);
@@ -27,7 +27,7 @@ angular
                   (line.removed) ? prefix(line, '-') : prefix(line, '  ');
           });
 
-          const date = moment($scope.right.created_at).format($filter('translate')('solution_sent_at_format'));
+          const date = Humanizer.date($scope.right.created_at);
 
           const diffText = [
             `diff --git`,

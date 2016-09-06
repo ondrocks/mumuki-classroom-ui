@@ -95,6 +95,7 @@ angular
     singup_date: 'Registración',
     solution_sent_at_format: 'DD MMMM YYYY - hh:mm',
     split: 'Separado',
+    submissions_count: '{{submissionsCount}} soluciones enviadas. Última solución: {{lastSubmissionDate}}',
     start_time: 'Desde',
     students: 'Estudiantes',
     students_subscription_address: 'Dirección de suscripción de estudiantes',
