@@ -104,12 +104,6 @@ angular
         .then((res) => _.map(res.data.teachers, Teacher.from));
     }
 
-    this.getComments = (exercise_id, course) => {
-      return $http
-        .get(`${API}/courses/${course}/comments/${exercise_id}`, authenticated())
-        .then((res) => ({comments: res.data.comments}));
-    }
-
     this.removeStudent = (social_id, course) => {
       return $http
         .delete(`${API}/courses/${course}/students/${social_id}`, authenticated())
@@ -117,7 +111,7 @@ angular
 
     this.comment = (data, course) => {
       return $http
-        .post(`${API}/courses/${course}/comments`, { exercise_id: data.exercise_id, submission_id: data.submission_id, comment: data.comment }, authenticated())
+        .post(`${API}/courses/${course}/comments`, data, authenticated())
     }
 
     this.follow = (social_id, email, course) => {
