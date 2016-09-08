@@ -67,6 +67,7 @@ angular
     $scope.lastSubmission = _.last(exerciseProgress.submissions);
     $scope.lastSubmissionDate = Humanizer.date($scope.lastSubmission.created_at);
     $scope.submissionsCount = exerciseProgress.submissions.length;
+    $scope.progressSelected = (progress) => progress.exercise.id === $scope.progress.exercise.id
 
     $scope.selectDiff(diffs[MAX]);
 

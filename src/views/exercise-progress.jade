@@ -10,7 +10,7 @@
       br
       section
         .row(ng-repeat='progress in exercisesProgress | orderBy:["exercise.number", "exercise.name"]')
-          span.col-sm-10.pull-left.exercise-item
+          span.col-sm-10.pull-left.exercise-item(ng-class="{'active-exercise': progressSelected(progress)}")
             a(href='', ng-click='selectExercise(progress)')
               | {{ progress.exercise.getName() }}
           span.col-sm-2.pull-right
