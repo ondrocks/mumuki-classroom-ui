@@ -9,6 +9,8 @@ angular
     }
 
     this.atheneumURL = () => `${$location.protocol()}://${this.tenant()}.mumuki.io`;
+    this.exerciseURL = (exerciseId) => `${this.atheneumURL()}/exercises/${exerciseId}`;
+    this.exerciseURLByBibliotheca = (guideSlug, exerciseId) => `${this.atheneumURL()}/exercises/${guideSlug}/${exerciseId}`;
 
     this.tenant = () => $location.host().split('classroom')[0].replace(/[.]$/g, '');
 

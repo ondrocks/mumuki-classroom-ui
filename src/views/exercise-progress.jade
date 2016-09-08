@@ -20,6 +20,8 @@
       .row
         h1.title
           span {{ progress.exercise.getName() }}
+        h5.title
+          a(href="{{atheneumLink()}}") {{ 'see_atheneum' | translate }}
       .row
         h5.title
           span {{ 'submissions_count' | translate:{submissionsCount: submissionsCount, lastSubmissionDate: lastSubmissionDate} }}
