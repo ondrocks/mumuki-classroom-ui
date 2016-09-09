@@ -1,13 +1,17 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, exercisesProgress, containsHtml, Auth, Api, Breadcrumb, Preferences, Humanizer) {
+  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, exercisesProgress, containsHtml, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain) {
 
     Preferences($scope, 'options');
 
     const exerciseToView = _.find(exercisesProgress, (progress) => progress.exercise.id === Number($stateParams.eid));
 
     $scope.exercisesProgress = exercisesProgress;
+
+    $scope.atheneumLink = () => _.isEmpty(exerciseProgress.exercise.bilbiotheca_id)
+                                  ? Domain.exerciseURL(exerciseProgress.exercise.id)
+                                  : Domain.exerciseURLByBibliotheca(exerciseProgress.guide.slug, exerciseProgress.exercise.bibliotheca_id)
 
     let exerciseProgress = exerciseToView || exercisesProgress[0];
 

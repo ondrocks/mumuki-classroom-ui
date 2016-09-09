@@ -86,6 +86,7 @@ angular
     others: 'Otros',
     results: 'Resultados',
     save: 'Guardar',
+    see_atheneum: 'Ver en atheneum',
     shift: 'Turno',
     shift_afternoon: 'Tarde',
     shift_morning: 'Mañana',
