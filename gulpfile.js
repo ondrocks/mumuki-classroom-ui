@@ -61,7 +61,7 @@ gulp.task('jade:index', () => {
 });
 
 gulp.task('scss', () => {
-  return gulp.src([`${srcFolder}/styles/**/*.scss`])
+  return gulp.src([`${srcFolder}/styles/main.scss`])
     .pipe($.sass.sync())
     .pipe(gulp.dest(`${outFolder}/styles`))
     .pipe($.livereload());
