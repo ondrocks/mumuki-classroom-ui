@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $controller, toastr, $filter, students, Auth, Followers, Api, Modal) {
+  .controller('StudentsController', function ($scope, $state, $controller, toastr, $filter, students, Auth, Followers, Api, Modal, Domain) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -17,7 +17,7 @@ angular
     ];
 
     $scope.withDetails = false;
-    $scope.isAdmin = Auth.isAdmin();
+    $scope.isAdmin = (Auth.isAdmin() && Domain.tenant() !== 'digitalhouse') || Auth.isSuperUser(); // FIXME: private clients
     $scope.listBodyClass = 'col-sm-12';
     $scope.setCount(students.length);
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();

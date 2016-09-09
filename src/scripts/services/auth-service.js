@@ -28,6 +28,10 @@ angular
       return _.some(this.adminPermissions(), (p) => adminRegex.test(p));
     }
 
+    this.isSuperUser = () => {
+      return _.some(this.adminPermissions(), (p) => p === '*');
+    }
+
     this.isTeacher = () => {
       return _.some(this.permissions(), (p) => teacherRegex.test(p.split('/')[0]));
     }
