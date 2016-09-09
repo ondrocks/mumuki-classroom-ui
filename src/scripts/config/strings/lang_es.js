@@ -94,6 +94,7 @@ angular
     show_students: 'Ver estudiantes',
     singup_date: 'Registración',
     solution_sent_at_format: 'DD MMMM YYYY - hh:mm',
+    solved_at: 'Resuelto el {{date}}',
     split: 'Separado',
     submissions_count: '{{submissionsCount}} soluciones enviadas. Última solución: {{lastSubmissionDate}}',
     start_time: 'Desde',

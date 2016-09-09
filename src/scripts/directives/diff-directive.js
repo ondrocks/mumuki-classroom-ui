@@ -28,12 +28,13 @@ angular
           });
 
           const date = Humanizer.date($scope.right.created_at);
+          const dateText = $filter('translate')('solved_at', { date })
 
           const diffText = [
             `diff --git`,
             `index fc56817..e8e7e49 100644`,
-            `--- a/${date}`,
-            `+++ b/${date}`,
+            `--- a/${dateText}`,
+            `+++ b/${dateText}`,
             `@@ -1,1 +1,1 @@`,
             ...diffLines
           ].join('\n');
