@@ -50,7 +50,7 @@
         .nav.navbar-nav.navbar-right.pagination
           .dropdown
             span.view-mode {{ 'view_mode' | translate }}
-            button.btn.btn-default.dropdown-toggle(id='viewModeId', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+            button.btn.btn-primary.dropdown-toggle(id='viewModeId', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
               span {{ getViewMode().name | translate }}
               span.caret
             ul.dropdown-menu(aria-labelledby='viewModeId')
@@ -91,7 +91,7 @@
                 .btn-group
                   button.btn.btn-danger(ng-click='submission.commentType = "danger"')
               br
-              button.btn.btn-default.btn-block(ng-click='addComment(submission)')
+              button.btn.btn-success.btn-block(ng-click='addComment(submission)')
                 | {{ 'comment_solution' | translate  }}
 
           .bs-callout(ng-repeat='data in comments(submission) | orderBy:$index:true', class='bs-callout-{{ data.comment.type }}')
