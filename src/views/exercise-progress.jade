@@ -1,22 +1,22 @@
-.container-fluid
+.container
   .row
-    .col-sm-3
+    .col-sm-2(style='margin-top: 20px')
       .text-center
-        img.rounded-x(ng-src='{{ progress.student.image_url }}', width='25%')
+        img.rounded-x(ng-src='{{ progress.student.image_url }}', width='40%')
         h4 {{ progress.student.fullName() }}
-        h5
+        h5.exercise-item
           div(ng-if='!progress.student.email') {{ 'email_not_provided' | translate }}
           a(ng-if='progress.student.email', href='mailto:{{progress.student.email}}') {{progress.student.email}}
       br
       section
         .row(ng-repeat='progress in exercisesProgress | orderBy:["exercise.number", "exercise.name"]')
-          span.col-sm-10.pull-left.exercise-item(ng-class="{'active-exercise': progressSelected(progress)}")
+          span.col-sm-10.exercise-item(ng-class="{'active-exercise': progressSelected(progress)}")
             a(href='', ng-click='selectExercise(progress)')
               | {{ progress.exercise.getName() }}
-          span.col-sm-2.pull-right
+          span.col-sm-2
             status-icon(status='progress.lastSubmission().status')
 
-    .col-sm-9
+    .col-sm-10
       .row
         h1.title
           span {{ progress.exercise.getName() }}
@@ -52,7 +52,7 @@
             span.view-mode {{ 'view_mode' | translate }}
             button.btn.btn-primary.dropdown-toggle(id='viewModeId', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
               span {{ getViewMode().name | translate }}
-              span.caret
+              span.caret(style="margin-left: .5em")
             ul.dropdown-menu(aria-labelledby='viewModeId')
               li
                 a(href='', ng-click='unified()') {{ 'unified' | translate }}
