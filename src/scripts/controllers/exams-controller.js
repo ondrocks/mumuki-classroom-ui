@@ -4,6 +4,7 @@ angular
   .controller('ExamsController', function ($scope, $state, $stateParams, exams, Auth, Api, Modal) {
     $scope.setCount(exams.length);
 
+    Breadcrumb.setCourse($stateParams.course);
     $scope.list = exams;
     $scope.noItemsToShow = 'no_exams_to_show';
     $scope.inputPlaceholder = 'filter_available_exams';

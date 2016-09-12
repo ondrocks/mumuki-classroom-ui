@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $controller, toastr, $filter, students, Auth, Followers, Api, Modal, Domain) {
+  .controller('StudentsController', function ($scope, $state, $controller, $stateParams, toastr, $filter, students, Auth, Followers, Api, Modal, Domain) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -16,6 +16,7 @@ angular
       { type: 'signup_date', properties: ['created_at', 'last_name', 'first_name']},
     ];
 
+    Breadcrumb.setCourse($stateParams.course);
     $scope.withDetails = false;
     $scope.isAdmin = (Auth.isAdmin() && Domain.tenant() !== 'digitalhouse') || Auth.isSuperUser(); // FIXME: private clients
     $scope.listBodyClass = 'col-sm-12';

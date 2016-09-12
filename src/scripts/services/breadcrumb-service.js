@@ -44,8 +44,9 @@ angular
     this._student = null;
     this._list = [
       { name: () => this._course, state: 'classroom.courses.course.guides' },
-      { name: () => 'students', state: 'classroom.courses.course.students' },
-      { name: () => 'exams', state: 'classroom.courses.course.exams' },
+      { name: () => this._course, state: 'classroom.courses.course.exams' },
+      { name: () => this._course, state: 'classroom.courses.course.students' },
+      { name: () => this._course, state: 'classroom.courses.course.teachers' },
       { name: () => 'new_exam', state: 'classroom.courses.course.exams.new' },
       { name: () => this.getExamName(), state: 'classroom.courses.course.exams.edit' },
       { name: () => this.getGuideName(), state: 'classroom.courses.course.guides.guide' },
