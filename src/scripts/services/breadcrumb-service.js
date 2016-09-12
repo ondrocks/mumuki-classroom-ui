@@ -23,6 +23,10 @@ angular
       return this._exam && this._exam.getName();
     }
 
+    this.setCourse = (course) => {
+      this._course = course;
+    }
+
     this.setGuide = (guide) => {
       this._guide = guide;
     }
@@ -35,11 +39,11 @@ angular
       this._exam = exam;
     }
 
+    this._course = null;
     this._guide = null;
     this._student = null;
     this._list = [
-      { name: () => 'courses', state: 'classroom.courses' },
-      { name: () => 'guides', state: 'classroom.courses.course.guides' },
+      { name: () => this._course, state: 'classroom.courses.course.guides' },
       { name: () => 'students', state: 'classroom.courses.course.students' },
       { name: () => 'exams', state: 'classroom.courses.course.exams' },
       { name: () => 'new_exam', state: 'classroom.courses.course.exams.new' },

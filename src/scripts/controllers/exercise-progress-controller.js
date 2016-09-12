@@ -20,6 +20,8 @@ angular
       $state.go($state.current.name, $stateParams, { reload: true });
     }
 
+    const course = $stateParams.course;
+    Breadcrumb.setCourse(course);
     Breadcrumb.setGuide(exerciseProgress.guide);
     Breadcrumb.setStudent(exerciseProgress.student);
 
@@ -32,7 +34,6 @@ angular
 
     const MIN = 0;
     const MAX = diffs.length - 1 ;
-    const course = $stateParams.course;
 
     const index = () => _.indexOf(diffs, $scope.selectedDiff);
     const prev = () => Math.max(index() - 1, MIN);

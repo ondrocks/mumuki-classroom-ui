@@ -14,5 +14,5 @@
     label(ng-if='!(list | orderBy: sortCriteria() | filter:listSearch).length')
       | {{ noItemsToShow | translate }}
 
-  button.btn.btn-primary.pull-right(ng-if='isAdmin()', ui-sref='classroom.courses.new')
+  button.btn.btn-success.pull-right(ng-if='isAdmin()', ui-sref='classroom.courses.new')
     | {{ 'new_course' | translate }}

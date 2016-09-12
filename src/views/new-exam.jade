@@ -47,6 +47,6 @@
                 ng-model='exam.duration',
                 placeholder='90')
 
-    button.btn.btn-primary.pull-right(ng-if='isAdmin()', ng-disabled='!isValid()')
+    button.btn.btn-success.pull-right(ng-if='isAdmin()', ng-disabled='!isValid()')
       | {{ 'new_exam' | translate }}
 

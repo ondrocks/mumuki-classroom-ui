@@ -1,11 +1,12 @@
 
 angular
   .module('classroom')
-  .controller('GuidesController', function ($scope, $state, $stateParams, guides, Preferences) {
+  .controller('GuidesController', function ($scope, $state, $stateParams, guides, Preferences, Breadcrumb) {
     Preferences($scope, 'lastChapter');
     if (_.isNil($scope.lastChapter)) $scope.lastChapter = { name: ''};
     $scope.setLastChapterOpened = (chapter) => { $scope.lastChapter = { name: chapter }};
 
+    Breadcrumb.setCourse($stateParams.course);
     const mapChapter = _.flow(_.lowerCase, _.deburr);
     $scope.setCount(guides.length);
     $scope.actualChapter = (name) => name === $scope.lastChapter.name;
