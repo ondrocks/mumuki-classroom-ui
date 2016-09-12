@@ -5,6 +5,8 @@
         li
           span.ahahamojimoji
             a(ui-sref='classroom.home') ム
+        li
+          a(ui-sref='classroom.home') {{ 'courses' | translate}}
         li(ng-repeat='item in Breadcrumb.list()')
           a(href='', ng-click='Breadcrumb.goTo(item)') {{ item.name() | translate }}
     .col-md-2
