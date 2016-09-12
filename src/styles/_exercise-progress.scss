@@ -98,11 +98,11 @@ $color-danger: #d9534f;
 }
 
 h4.unfollow {
-  color: rgba($color-default, 0.50);
+  color: rgba($color-danger, 0.50);
 }
 
 h4.follow {
-  color: $color-primary;
+  color: $brand-info;
 }
 
 span.view-mode {
@@ -112,4 +112,9 @@ span.view-mode {
 span.active-exercise {
   font-weight: bold;
   text-decoration: underline;
+}
+
+.comment-success {
+  background-color: $color-success;
+  border-color: $color-success;
 }

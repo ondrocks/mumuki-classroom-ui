@@ -1,34 +1,21 @@
-nav.navbar.navbar-default.navbar-static-top
-  .container
-
-    .navbar-header
-      button(class='navbar-toggle collapsed', data-toggle='collapse', data-target='#navbar-main')
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.navbar-brand(ui-sref='classroom.home')
-        span.ahahamojimoji ム
-        span Classroom
-
-    #navbar-main.collapse.navbar-collapse
-
-      ul.nav.navbar-nav(ng-if='isLoggedIn() && isTeacher()')
-
-        li(ng-repeat='item in Breadcrumb.list()', ng-class='{ active: $last }')
+.container
+  .row
+    .col-md-10
+      ol.breadcrumb(ng-if='isLoggedIn() && isTeacher()')
+        li
+          span.ahahamojimoji
+            a(ui-sref='classroom.home') ム
+        li(ng-repeat='item in Breadcrumb.list()')
           a(href='', ng-click='Breadcrumb.goTo(item)') {{ item.name() | translate }}
-
-      ul.nav.navbar-nav.navbar-right
-
-        li.dropdown(ng-if='isLoggedIn()')
+    .col-md-2
+      .user-menu
+        dropdown(ng-if='isLoggedIn()')
           a.dropdown-toggle(href='', data-toggle='dropdown', role='button')
             img.rounded-x.profile(ng-src='{{ profile().picture }}', width='40px')
-            span.caret
           ul.dropdown-menu()
             li
               a {{ profile().name }}
             li.divider(role='separator')
             li
               a(href='', ng-click='signout()') {{ 'log_out' | translate }}
-
-        li(ng-if='!isLoggedIn()')
-          a(href='', ng-click='signin()') {{ 'log_in' | translate }}
+          a(ng-if='!isLoggedIn()' href='', ng-click='signin()') {{ 'log_in' | translate }}

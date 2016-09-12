@@ -1,11 +1,11 @@
 
 // Bower
+@import '../bower_components/mumuki-styles/dist/stylesheets/mumuki';
 @import '../bower_components/font-awesome/scss/font-awesome';
 @import '../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
 
 // Font
 @import 'home';
-@import 'fonts';
 @import 'select';
 @import 'students';
 @import 'new-course';
@@ -13,3 +13,4 @@
 @import 'exercise-progress';
 @import 'loading-bar';
 @import 'modals';
+@import 'navbar';

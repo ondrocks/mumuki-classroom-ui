@@ -76,7 +76,7 @@
                 ng-disabled='!hasDuration')
 
       .container
-        button.btn.btn-primary.pull-right(ng-disabled='!isValid()')
+        button.btn.btn-success.pull-right(ng-disabled='!isValid()')
           | {{ 'save' | translate }}
 
       .col-sm-12(ng-if='!isNew')
@@ -109,6 +109,6 @@
 
       br
 
-      button.btn.btn-primary.pull-right(ng-disabled='!isValid()', ng-if='!isNew')
+      button.btn.btn-success.pull-right(ng-disabled='!isValid()', ng-if='!isNew')
         | {{ 'save' | translate }}
 
