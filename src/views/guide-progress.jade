@@ -6,7 +6,7 @@
         span {{ guide.name }}
 
         small
-          a(target='_blank' href="{{guide.getMumukiURL()}}")
+          a.view-in-atheneum(target='_blank' href="{{guide.getMumukiURL()}}")
             i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}")
 
         small.show {{ guide.lesson.name }}

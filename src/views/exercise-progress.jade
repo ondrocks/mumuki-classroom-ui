@@ -26,7 +26,7 @@
         h1.title
           span {{ progress.exercise.getName() }}
           small
-            a(target='_blank' href="{{atheneumLink()}}")
+            a.view-in-atheneum(target='_blank' href="{{atheneumLink()}}")
               i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}")
       .row
         h5.title
