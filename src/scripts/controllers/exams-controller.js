@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExamsController', function ($scope, $state, $stateParams, exams, Auth, Api, Modal) {
+  .controller('ExamsController', function ($scope, $state, $stateParams, exams, Auth, Api, Modal, Breadcrumb) {
     $scope.setCount(exams.length);
 
     Breadcrumb.setCourse($stateParams.course);
