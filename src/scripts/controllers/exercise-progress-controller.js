@@ -76,7 +76,6 @@ angular
 
     $scope.selectDiff(diffs[MAX]);
 
-    $scope.comments = (submission) => submission.comments;
     $scope.time = (comment) => moment(comment.date).fromNow();
 
     $scope.isLastSolutionActivated = () => _.isEqual($scope.options.viewMode, LAST_SOLUTION);
@@ -89,33 +88,42 @@ angular
       $scope.options.viewMode = LAST_SOLUTION;
     };
 
-    const getComments = () => {
-      Api.getComments(exerciseProgress.exercise.id, course)
-        .then((data) => {
-          const groupedComments = _.groupBy(data.comments, 'submission_id');
-          _.each($scope.diffs, (submission, index) => {
-            submission.right.comments = groupedComments[submission.right.id];
-          });
-        });
+    $scope.submissionHasComments = (submission) => {
+      return !_.isEmpty(submission.comments);
+    }
+    $scope.hasComments = (progress) => {
+      return _.some(progress.submissions, (submission) => $scope.submissionHasComments(submission));
+    }
+    $scope.showCommentsIcon = (progress) => {
+      return $scope.submissionHasComments(progress.lastSubmission());
+    };
+    $scope.showNewCommentsIcon = (progress) => {
+      return !$scope.showCommentsIcon(progress) && $scope.hasComments(progress);
     };
 
-    $scope.addComment = (submission) => {
-      if (submission.comment) {
-        const data = { exercise_id: exerciseProgress.exercise.id, submission_id: submission.id, comment: {
-            content: submission.comment,
-            type: submission.commentType,
-            date: new Date(),
-            email: Auth.profile().email
-            }
+    const getCommentToPost = (submission) => {
+      return {
+        social_id: $stateParams.student,
+        exercise_id: exerciseProgress.exercise.id,
+        submission_id: submission.id,
+        comment: {
+          content: submission.comment,
+          type: submission.commentType,
+          date: new Date(),
+          email: Auth.profile().email
         }
-        Api.comment(data, course)
-          .then(() => getComments())
-          .then(() => toastr.success($filter('translate')('do_comment')))
-
-        submission.restartComment();
       }
     }
 
-    getComments();
+    $scope.addComment = (submission) => {
+      if (submission.comment) {
+        const data = getCommentToPost(submission);
+        submission.comments.push(data.comment);
+        Api
+          .comment(data, course)
+          .then(() => submission.restartComment())
+          .then(() => toastr.success($filter('translate')('do_comment')))
+      }
+    }
 
   });

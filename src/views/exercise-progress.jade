@@ -1,6 +1,6 @@
 .container
   .row
-    .col-sm-2(style='margin-top: 20px')
+    .col-sm-3(style='margin-top: 20px')
       .text-center
         img.rounded-x(ng-src='{{ progress.student.image_url }}', width='40%')
         h4 {{ progress.student.fullName() }}
@@ -10,13 +10,18 @@
       br
       section
         .row(ng-repeat='progress in exercisesProgress | orderBy:["exercise.number", "exercise.name"]')
-          span.col-sm-10.exercise-item(ng-class="{'active-exercise': progressSelected(progress)}")
+          span.col-sm-8.exercise-item(ng-class="{'active-exercise': progressSelected(progress)}")
             a(href='', ng-click='selectExercise(progress)')
               | {{ progress.exercise.getName() }}
-          span.col-sm-2
+          span.col-sm-2.pull-right
             status-icon(status='progress.lastSubmission().status')
+          span.col-sm-2.pull-right(ng-if='hasComments(progress)')
+            i.fa(ng-class='{                                          \
+                  "fa-comments-o": showCommentsIcon(progress),        \
+                  "fa-pencil-square-o": showNewCommentsIcon(progress) \
+                }') &nbsp;
 
-    .col-sm-10
+    .col-sm-9
       .row
         h1.title
           span {{ progress.exercise.getName() }}
@@ -74,7 +79,7 @@
       .row
         .col-sm-12(ng-repeat='submission in [ selectedDiff.right ]')
 
-          .row(ng-if='submission.content', ng-init='submission.commentType = "success"')
+          .row(ng-init='submission.commentType = "success"')
             .col-sm-9.col-md-10
               textarea.form-control(
                   ng-model='submission.comment',
@@ -94,10 +99,10 @@
               button.btn.btn-success.btn-block(ng-click='addComment(submission)')
                 | {{ 'comment_solution' | translate  }}
 
-          .bs-callout(ng-repeat='data in comments(submission) | orderBy:$index:true', class='bs-callout-{{ data.comment.type }}')
+          .bs-callout(ng-repeat='comment in submission.comments | orderBy:$index:true', class='bs-callout-{{ comment.type }}')
             h4 {{ 'comment' | translate  }}
-              small &nbsp;- {{ data.comment.email }} - {{ time(data.comment) }}
-            p(ng-repeat='line in data.comment.content.split("\n") track by $index')
+              small &nbsp;- {{ comment.email }} - {{ time(comment) }}
+            p(ng-repeat='line in comment.content.split("\n") track by $index')
               | {{ line }}
 
           .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.test_results.length')
