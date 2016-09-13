@@ -25,8 +25,9 @@
       .row
         h1.title
           span {{ progress.exercise.getName() }}
-        h5.title
-          a(target='_blank' href="{{atheneumLink()}}") {{ 'see_atheneum' | translate }}
+          small
+            a(target='_blank' href="{{atheneumLink()}}")
+              i.fa.fa-external-link(title="{{ 'see_atheneum' | translate }}")
       .row
         h5.title
           span {{ 'submissions_count' | translate:{submissionsCount: submissionsCount, lastSubmissionDate: lastSubmissionDate} }}
