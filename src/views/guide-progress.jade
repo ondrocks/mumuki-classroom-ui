@@ -4,13 +4,14 @@
     h2
       .col-sm-8
         span {{ guide.name }}
-        i.devicons(class='{{ guide.iconClass() }}')
+
+        small
+          a(target='_blank' href="{{guide.getMumukiURL()}}")
+            i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}")
 
         small.show {{ guide.lesson.name }}
 
       .col-sm-4
-        small.pull-right
-          a(href='{{ guide.getMumukiURL() }}', target='_blank')
-            span {{ 'open_in_atheneum' | translate }}
+        i.pull-right.devicons(class='{{ guide.iconClass() }}')
 
   div(ng-include='"views/templates/list-header.html"')
