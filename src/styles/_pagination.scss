@@ -1,0 +1,22 @@
+.pagination > li {
+  a {
+    background-color: $brand-info;
+    &:hover {
+      background-color: darken($brand-info, 15%);
+    }
+    &:focus {
+      background-color: darken($brand-info, 15%);
+    }
+  }
+}
+.pagination > .active {
+  a {
+    background-color: darken($brand-info, 15%);
+    &:hover {
+      background-color: darken($brand-info, 15%);
+    }
+    &:focus {
+      background-color: darken($brand-info, 15%);
+    }
+  }
+}

@@ -2,7 +2,10 @@
 // Bower
 @import '../bower_components/mumuki-styles/dist/stylesheets/mumuki';
 @import '../bower_components/font-awesome/scss/font-awesome';
-@import '../bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
+@import "../bower_components/bootswatch-scss/flatly/variables";
+@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "../bower_components/bootswatch-scss/flatly/bootswatch";
 
 // Font
 @import 'home';
@@ -15,3 +18,4 @@
 @import 'modals';
 @import 'navbar';
 @import 'diff';
+@import 'pagination';
