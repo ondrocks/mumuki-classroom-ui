@@ -12,6 +12,7 @@ angular
     by_name: 'By name',
     by_progress: 'By progress',
     by_signup_date: 'By signup date',
+    cancel: 'Cancel',
     comment: 'Comment',
     comment_solution: 'Comment',
     comment_this_solution: 'Comment this solution',

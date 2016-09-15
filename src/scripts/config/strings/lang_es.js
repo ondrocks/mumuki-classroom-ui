@@ -12,6 +12,7 @@ angular
     by_name: 'Por nombre',
     by_progress: 'Por progreso',
     by_signup_date: 'Por fecha de registración',
+    cancel: 'Cancelar',
     comment: 'Comentario',
     comment_solution: 'Comentar',
     comment_this_solution: 'Comentar esta solución',
