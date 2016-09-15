@@ -1,17 +1,30 @@
 mixin follow
-  h4(ng-class='{                               \
-      "follow": isFollowing(item.social_id),   \
-      "unfollow": !isFollowing(item.social_id) \
-    }')
-    i.pointer.fa.fa-pencil.pull-right.eye-margin.edit-icon(ng-click='edit(item.social_id)')
-    i.pointer.fa.pull-right.eye-margin(
-        ng-click='followAction(item.social_id)',
-        ng-class='{                                   \
-          "fa-eye": isFollowing(item.social_id),      \
-          "fa-eye-slash": !isFollowing(item.social_id)\
-        }')
-    i.pointer.fa.fa-trash.pull-right.eye-margin.edit-icon(ng-click='remove(item)', ng-if='isAdmin')
-    i.pointer.fa.fa-exchange.pull-right.eye-margin.edit-icon(ng-click='transfer(item)', ng-if='canTransfer')
+  div.pull-right
+    span.pointer
+      i.fa(
+          style='margin-right: 8px'
+          ng-click='followAction(item.social_id)',
+          ng-class='{                                   \
+            "follow": isFollowing(item.social_id),      \
+            "unfollow": !isFollowing(item.social_id),   \
+            "fa-eye": isFollowing(item.social_id),      \
+            "fa-eye-slash": !isFollowing(item.social_id)\
+          }')
+    span.dropdown
+      i.pointer.fa.fa-ellipsis-v.dropdown-toggle(data-toggle='dropdown')
+      ul.dropdown-menu.dropdown-menu-right
+        li.pointer
+          a
+            i.fa.fa-pencil(ng-click='edit(item.social_id)') &nbsp;
+            span Edit
+        li.pointer
+          a
+            i.fa.fa-trash(ng-click='remove(item)', ng-if='isAdmin') &nbsp;
+            span Remove
+        li.pointer
+          a
+            i.fa.fa-exchange(ng-click='transfer(item)', ng-if='canTransfer') &nbsp;
+            span Transfer
 
 .row.guide-progress-blog
   .col-sm-4.col-xs-10

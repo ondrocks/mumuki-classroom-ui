@@ -97,11 +97,11 @@ $color-danger: #d9534f;
   padding-bottom: 0.5em;
 }
 
-h4.unfollow {
+.unfollow {
   color: rgba($color-danger, 0.50);
 }
 
-h4.follow {
+.follow {
   color: $brand-info;
 }
 
