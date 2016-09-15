@@ -16,15 +16,15 @@ mixin follow
         li.pointer
           a
             i.fa.fa-pencil(ng-click='edit(item.social_id)') &nbsp;
-            span Edit
+            span {{ 'edit' | translate }}
         li.pointer
           a
             i.fa.fa-trash(ng-click='remove(item)', ng-if='isAdmin') &nbsp;
-            span Remove
+            span {{ 'remove' | translate }}
         li.pointer
           a
             i.fa.fa-exchange(ng-click='transfer(item)', ng-if='canTransfer') &nbsp;
-            span Transfer
+            span {{ 'transfer' | translate }}
 
 .row.guide-progress-blog
   .col-sm-4.col-xs-10
