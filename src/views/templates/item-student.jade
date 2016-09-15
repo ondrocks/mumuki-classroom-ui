@@ -11,6 +11,7 @@ mixin follow
           "fa-eye-slash": !isFollowing(item.social_id)\
         }')
     i.pointer.fa.fa-trash.pull-right.eye-margin.edit-icon(ng-click='remove(item)', ng-if='isAdmin')
+    i.pointer.fa.fa-exchange.pull-right.eye-margin.edit-icon(ng-click='transfer(item)', ng-if='canTransfer')
 
 .row.guide-progress-blog
   .col-sm-4.col-xs-10
