@@ -13,18 +13,18 @@ mixin follow
     span.dropdown
       i.pointer.fa.fa-ellipsis-v.dropdown-toggle(data-toggle='dropdown')
       ul.dropdown-menu.dropdown-menu-right
-        li.pointer
+        li.pointer(ng-click='edit(item.social_id)')
           a
-            i.fa.fa-pencil(ng-click='edit(item.social_id)') &nbsp;
-            span {{ 'edit' | translate }}
-        li.pointer
+            i.fa.fa-pencil.margin
+            span.item-name {{ 'edit' | translate }}
+        li.pointer(ng-click='remove(item)', ng-if='isAdmin')
           a
-            i.fa.fa-trash(ng-click='remove(item)', ng-if='isAdmin') &nbsp;
-            span {{ 'remove' | translate }}
-        li.pointer
+            i.fa.fa-trash.margin
+            span.item-name {{ 'remove' | translate }}
+        li.pointer(ng-click='transfer(item)', ng-if='canTransfer')
           a
-            i.fa.fa-exchange(ng-click='transfer(item)', ng-if='canTransfer') &nbsp;
-            span {{ 'transfer' | translate }}
+            i.fa.fa-exchange.margin
+            span.item-name {{ 'transfer' | translate }}
 
 .row.guide-progress-blog
   .col-sm-4.col-xs-10
