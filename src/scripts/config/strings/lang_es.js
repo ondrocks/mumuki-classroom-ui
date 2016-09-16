@@ -46,6 +46,7 @@ angular
     exam_updated: 'Examen guardado satisfactoriamente',
     exams: 'Exámenes',
     expectations: 'Expectativas',
+    export_solutions: 'Exportar soluciones',
     filter_available_courses: 'Filtrar cursos disponibles',
     filter_available_exams: 'Filtrar exámenes disponibles',
     filter_available_guides: 'Filtrar guías disponibles',

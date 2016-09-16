@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('CourseController', function ($scope, $state, $stateParams, $location, $timeout, clipboard) {
+  .controller('CourseController', function ($scope, $state, $stateParams, $location, $timeout, clipboard, Api, Download) {
 
     const tabs = {
       guides: 'classroom.courses.course.guides',
@@ -26,5 +26,11 @@ angular
       $scope.isCopied = true;
       $timeout(() => $scope.isCopied = false, 5000);
     };
+
+    $scope.export = () => {
+      Api
+        .getCourseProgress($stateParams.course)
+        .then((data) => Download.json($stateParams.course, data.exercise_student_progress))
+    }
 
   });
