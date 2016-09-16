@@ -2,18 +2,24 @@
 
   ul.nav.nav-tabs
     li(ng-repeat='tab in tabs', ng-class='{ active: is(tab) }', ng-click='open(tab)')
-      a(href='') {{ tab | translate }} 
+      a(href='') {{ tab | translate }}
         span(ng-show="is(tab)") {{ '(' + count + ')' }}
 
   br
 
   div
-    small.text-muted {{ 'students_subscription_address' | translate }}:&nbsp;
-    small.text-muted.text-primary {{ url() }}
-    span.clipboard
-      span &nbsp;
-      i.fa.fa-clipboard(ng-click='copy()')
-      small.text-muted(ng-show='isCopied') &nbsp; {{ 'copied' | translate }}!
+    div.mu-inline-block-right
+      a(href='', ng-click='export()')
+        span.view-mode {{ 'export_solutions' | translate }}
+        i.fa.fa-download
+      a#downloadAnchor(style='display:none')
+    div.mu-inline-block-left
+      small.text-muted {{ 'students_subscription_address' | translate }}:&nbsp;
+      small.text-muted.text-primary
+        span.view-mode {{ url() }}
+      span.clipboard
+        i.fa.fa-clipboard(ng-click='copy()')
+        small.text-muted(ng-show='isCopied') &nbsp; {{ 'copied' | translate }}!
 
   br
 

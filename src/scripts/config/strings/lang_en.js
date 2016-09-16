@@ -46,6 +46,7 @@ angular
     exam_updated: 'Exam updated successfully',
     exams: 'Exams',
     expectations: 'Expectations',
+    export_solutions: 'Export solutions',
     filter_available_courses: 'Filter available courses',
     filter_available_exams: 'Filter available exams',
     filter_available_guides: 'Filter available guides',

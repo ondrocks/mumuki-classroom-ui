@@ -18,6 +18,12 @@ angular
         .then((res) => _.map(res.data.courses, Course.from))
     };
 
+    this.getCourseProgress = (course) => {
+      return $http
+        .get(`${API}/courses/${course}/progress`, authenticated())
+        .then((res) => res.data)
+    };
+
     this.getBibliothecaGuides = () => {
       return $http
         .get(`http://bibliotheca.mumuki.io/guides`, authenticated())
