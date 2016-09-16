@@ -109,6 +109,11 @@ angular
         .delete(`${API}/courses/${course}/students/${social_id}`, authenticated())
     }
 
+    this.transfer = (social_id, course, destination) => {
+      return $http
+        .post(`${API}/courses/${course}/students/${social_id}/transfer`, { destination }, authenticated())
+    }
+
     this.comment = (data, course) => {
       return $http
         .post(`${API}/courses/${course}/comments`, data, authenticated())
