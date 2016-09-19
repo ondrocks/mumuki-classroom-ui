@@ -96,7 +96,7 @@ angular
     show_students: 'Show students',
     singup_date: 'Signup date',
     solution_sent_at_format: 'MMMM DD YYYY - h:mm a',
-    solved_at: 'Solved at {{date}}',
+    solved_at: 'Solved {{date}}',
     split: 'Split',
     start_time: 'Start time',
     students: 'Students',

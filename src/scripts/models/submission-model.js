@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .factory('Submission', function (Auth) {
+  .factory('Submission', function (Auth, Humanizer) {
 
     class Submission {
 
@@ -38,7 +38,11 @@ angular
       }
 
       timeFromNow() {
-        return moment(this.created_at).fromNow();
+        return Humanizer.date(this.created_at);
+      }
+
+      date() {
+        return this.created_at;
       }
 
       static from(submission) {

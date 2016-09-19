@@ -1,15 +1,16 @@
-.row.guide-progress-blog.pointer(
-    ui-sref='classroom.courses.course.guides.guide.students({ \
-      student: item.student.social_id,                    \
-      eid: item.lastExerciseSubmitted().id                \
-    })')
+.row.guide-progress-blog
   span.col-xs-9
-    img.rounded-x(ng-src='{{ item.student.image_url }}')
+    img.rounded-x.pointer(
+      ng-src='{{ item.student.image_url }}'
+      ui-sref='classroom.courses.course.guides.guide.students({ \
+        student: item.student.social_id,                    \
+        eid: item.lastExerciseSubmitted().id                \
+    })')
     .name-location
       strong {{ item.student.fullName() }}
     .name-location
-      i.fa.fa-clock-o
-      small {{ item.lastSubmission().timeFromNow() }}
+      span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" title="{{item.lastSubmission().date()}}")
+      small {{ item.lastSubmission().timeFromNow()}}
 
   span.col-xs-3
     h4.pull-right(ng-class='"guide-progress-" + item.colorClass()')

@@ -1,9 +1,9 @@
 
 angular
   .module('classroom')
-  .service('Humanizer', function ($filter) {
+  .service('Humanizer', function () {
 
     this.date = (date) => {
-      return moment(date).format($filter('translate')('solution_sent_at_format'));
+      return moment(date).fromNow();
     }
   });
