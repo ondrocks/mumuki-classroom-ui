@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('CourseController', function ($scope, $state, $stateParams, $location, $timeout, clipboard, Api, Download) {
+  .controller('CourseController', function ($scope, $state, $stateParams, $location, $timeout, clipboard, Api, Download, Modal) {
 
     const tabs = {
       guides: 'classroom.courses.course.guides',
@@ -28,9 +28,12 @@ angular
     };
 
     $scope.export = () => {
-      Api
-        .getCourseProgress($stateParams.course)
-        .then((data) => Download.json($stateParams.course, data.exercise_student_progress))
+      Modal.exportCourseDataToJson($stateParams.course, () => {
+        return Api
+          .getCourseProgress($stateParams.course)
+          .then((data) => Download.json($stateParams.course, data.exercise_student_progress))
+          .catch((e) => toastr.error(e));
+      });
     }
 
   });

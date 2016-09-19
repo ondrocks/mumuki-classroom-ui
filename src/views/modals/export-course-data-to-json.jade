@@ -1,0 +1,9 @@
+.container-fluid
+  .row
+    .col-sm-12
+      h4.modal-title {{ course }}
+    .col-sm-12
+      p {{ 'export_disclaimer' | translate }}
+    .col-sm-12
+      button.btn.btn-default(type='button', ng-click='no()', data-dismiss='modal') {{ 'no' | translate }}
+      button.btn.btn-success(type='button', ng-click='yes()') {{ 'yes' | translate }}

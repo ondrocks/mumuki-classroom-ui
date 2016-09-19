@@ -2,6 +2,15 @@ angular
   .module('classroom')
   .service('Modal', function ($fancyModal, Api) {
 
+    this.exportCourseDataToJson = (model, onYes) => $fancyModal.open({
+      templateUrl: 'views/modals/export-course-data-to-json.html',
+      controller: 'ExportCourseDataToJsonDialogController',
+      resolve: {
+        course: () => model,
+        onYes: () => onYes
+      }
+    });
+
     this.confirmDialog = (student, onYes) => $fancyModal.open({
       templateUrl: 'views/modals/confirm-dialog.html',
       controller: 'ConfirmDialogController',
