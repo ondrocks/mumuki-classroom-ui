@@ -1,13 +1,22 @@
 angular
   .module('classroom')
-  .service('Modal', function ($fancyModal, Api) {
+  .service('Modal', function ($fancyModal, $translate, Api) {
 
-    this.confirmDialog = (student, onYes) => $fancyModal.open({
+    this.exportCourseDataToJson = (course, onYesPromise) => {
+      return this.confirmDialog(course, $translate('export_disclaimer'), onYesPromise);
+    };
+
+    this.removeStudent = (student, onYesPromise) => {
+      return this.confirmDialog(student.fullName(), $translate('are_you_sure_delete_student_from_course'), onYesPromise);
+    };
+
+    this.confirmDialog = (title, text, onYesPromise) => $fancyModal.open({
       templateUrl: 'views/modals/confirm-dialog.html',
       controller: 'ConfirmDialogController',
       resolve: {
-        student: () => student,
-        onYes: () => onYes
+        title: () => title,
+        text: () => text,
+        onYesPromise: () => onYesPromise
       }
     });
 

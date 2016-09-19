@@ -1,12 +1,12 @@
 angular
   .module('classroom')
-  .controller('ConfirmDialogController', function ($scope, $fancyModal, student, onYes) {
+  .controller('ConfirmDialogController', function ($scope, $fancyModal, title, text, onYesPromise) {
 
-    $scope.student = student;
+    $scope.title = title;
+    $scope.text = text;
 
     $scope.yes = () => {
-      onYes();
-      $fancyModal.close();
+      onYesPromise().then(() => $fancyModal.close());
     }
 
     $scope.no = () => {
