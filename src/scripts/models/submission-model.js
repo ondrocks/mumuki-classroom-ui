@@ -41,6 +41,10 @@ angular
         return Humanizer.date(this.created_at);
       }
 
+      date() {
+        return this.created_at;
+      }
+
       static from(submission) {
         return new Submission(submission);
       }
