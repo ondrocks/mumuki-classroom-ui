@@ -47,7 +47,7 @@ angular
     }
 
     $scope.remove = (student) => {
-      Modal.confirmDialog(student, () => {
+      Modal.removeStudent(student, () => {
         return Api
           .removeStudent(student.social_id, $scope.course())
           .then(() => $state.reload())
