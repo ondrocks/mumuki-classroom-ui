@@ -129,8 +129,6 @@
             p
               .row(ng-repeat='expectationResult in submission.expectation_results')
                 .col-sm-11
-                  span {{ expectationResult.binding }}
-                  i.fa.fa-long-arrow-right.expectation-arrow
-                  span {{ expectationResult.inspection }}
+                  div(ng-bind-html="trust(expectationResult.html)")
                 .col-sm-1
                   status-icon(status='expectationResult.result')
