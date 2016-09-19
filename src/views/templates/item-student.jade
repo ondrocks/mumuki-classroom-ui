@@ -38,7 +38,7 @@ mixin follow
       small(ng-if='item.email')
         a(href='mailto:{{ item.email }}') {{ item.email }}
     .name-location
-      small {{ 'singup_date' | translate }}: {{ item.created_at | date:('date_format'|translate) }}
+      small {{ 'singup_date' | translate }} {{ Humanizer.date(item.created_at)}}
   .col-xs-2.visible-xs
     +follow
   .col-sm-7.col-xs-12.text-center
