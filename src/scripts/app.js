@@ -11,7 +11,7 @@ angular.module('classroom', [
   'pascalprecht.translate',
   'angular-loading-bar',
   'cfp.loadingBar',
-  'vesparny.fancyModal',
   'ui.bootstrap',
+  'ui.bootstrap.modal',
   'ui.bootstrap.datetimepicker'
 ]);
