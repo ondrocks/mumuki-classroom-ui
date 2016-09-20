@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('CourseController', function ($scope, $state, $stateParams, $location, $timeout, clipboard, Api, Download, Modal) {
+  .controller('CourseController', function ($scope, $state, $stateParams, $location, $timeout, toastr, clipboard, Api, Download, Modal) {
 
     const tabs = {
       guides: 'classroom.courses.course.guides',
