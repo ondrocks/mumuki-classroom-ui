@@ -14,9 +14,9 @@
 
   span.col-xs-3
     h4.pull-right(ng-class='"guide-progress-" + item.colorClass()')
-      strong {{ item.statistics().passed }}
+      strong(data-toggle="tooltip" title="{{ 'passed' | translate }}") {{ item.statistics().passed }}
       span &nbsp;/&nbsp;
-      span {{ item.statistics().total }}
+      span(data-toggle="tooltip" title="{{ 'total' | translate }}") {{ item.statistics().total }}
 
   .student-guide-details(ng-show='showDetails()')
 
