@@ -9,18 +9,18 @@
     .name-location
       strong {{ item.student.fullName() }}
     .name-location
-      span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" title="{{item.lastSubmission().date()}}")
+      span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" tooltip title="{{item.lastSubmission().date()}}")
       small {{ item.lastSubmission().timeFromNow()}}
 
   span.col-xs-3
     .pull-right
-      .row.guide-progress-high(data-toggle="tooltip" title="{{ 'passed' | translate }}")
+      .row.guide-progress-high(data-toggle="tooltip" tooltip title="{{ 'passed' | translate }}")
         strong {{ item.statistics().passed }}
         i.fa.fa-check-circle
-      .row.guide-progress-medium(data-toggle="tooltip" title="{{ 'with_warnings' | translate }}")
+      .row.guide-progress-medium(data-toggle="tooltip" tooltip title="{{ 'with_warnings' | translate }}")
         strong {{ item.statistics().passed_with_warnings }}
         i.fa.fa-exclamation-circle
-      .row.guide-progress-low(data-toggle="tooltip" title="{{ 'failed' | translate }}")
+      .row.guide-progress-low(data-toggle="tooltip" tooltip title="{{ 'failed' | translate }}")
         strong {{ item.statistics().failed }}
         i.fa.fa-times-circle
 
