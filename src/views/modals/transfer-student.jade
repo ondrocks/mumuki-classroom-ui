@@ -1,14 +1,16 @@
-.container-fluid
-  .row
-    .col-sm-12
-      h4.modal-title {{ student.fullName() }}
-    .col-sm-12
-      div.list-group
-        button.list-group-item(ng-repeat='course in courses | orderBy: ["getName()"]', ng-click='transfer(course)')
-          i(class='fa fa-graduation-cap')
-          span.divider-vertical
-          span.item-name {{ course.getName() | uppercase }}
-
-      button.btn.btn-success.pull-right(ng-click='cancel()')
-        | {{ 'cancel' | translate }}
-
+.modal-content
+  .modal-header
+    p.modal-title.text-center.title-font {{ student.fullName() }}
+  .modal-body
+    .container-fluid
+      .row
+        .col-md-12
+          .list-group
+            button.list-group-item(ng-repeat='course in courses | orderBy: ["getName()"]', ng-click='transfer(course)')
+              i(class='fa fa-graduation-cap')
+              span.divider-vertical
+              span.item-name {{ course.getName() | uppercase }}
+  .modal-footer
+    .row
+      .col-md-12.pull-right
+        button.btn.btn-success.pull-right(ng-click='cancel()') {{ 'cancel' | translate }}

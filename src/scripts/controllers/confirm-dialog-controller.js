@@ -1,6 +1,6 @@
 angular
   .module('classroom')
-  .controller('ConfirmDialogController', function ($scope, $fancyModal, title, text, onYesPromise) {
+  .controller('ConfirmDialogController', function ($scope, $uibModalInstance, title, text, onYesPromise) {
 
     $scope.title = title;
     $scope.text = text;
@@ -12,11 +12,11 @@ angular
       spinnerOn();
       onYesPromise()
         .then(() => spinnerOff())
-        .then(() => $fancyModal.close());
+        .then(() => $uibModalInstance.close());
     }
 
     $scope.no = () => {
-      $fancyModal.close();
+      $uibModalInstance.close();
     }
 
   });

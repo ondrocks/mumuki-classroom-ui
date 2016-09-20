@@ -1,6 +1,6 @@
 angular
   .module('classroom')
-  .service('Modal', function ($fancyModal, $translate, Api) {
+  .service('Modal', function ($uibModal, $translate, Api) {
 
     this.exportCourseDataToJson = (course, onYesPromise) => {
       return this.confirmDialog(course, $translate('export_disclaimer'), onYesPromise);
@@ -10,7 +10,7 @@ angular
       return this.confirmDialog(student.fullName(), $translate('are_you_sure_delete_student_from_course'), onYesPromise);
     };
 
-    this.confirmDialog = (title, text, onYesPromise) => $fancyModal.open({
+    this.confirmDialog = (title, text, onYesPromise) => $uibModal.open({
       templateUrl: 'views/modals/confirm-dialog.html',
       controller: 'ConfirmDialogController',
       resolve: {
@@ -20,7 +20,7 @@ angular
       }
     });
 
-    this.transfer = (student, callback) => $fancyModal.open({
+    this.transfer = (student, callback) => $uibModal.open({
       templateUrl: 'views/modals/transfer-student.html',
       controller: 'TransferStudentController',
       resolve: {
