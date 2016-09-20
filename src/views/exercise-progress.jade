@@ -30,7 +30,7 @@
               i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}")
       .row
         h5.title
-          span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" title="{{item.created_at}}")
+          span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" tooltip title="{{lastSubmission.created_at | date:'medium'}}")
           span {{ 'submissions_count' | translate:{submissionsCount: submissionsCount, lastSubmissionDate: lastSubmissionDate} }}
 
       nav.nav
