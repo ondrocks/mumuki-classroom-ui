@@ -48,6 +48,7 @@ angular
     expectations: 'Expectativas',
     export_disclaimer: '¡Cuidado! Estos datos son sensibles. No los utilices ni distribuyas sin el consentimiento de los usuarios',
     export_solutions: 'Exportar soluciones',
+    failed: "Con errores",
     filter_available_courses: 'Filtrar cursos disponibles',
     filter_available_exams: 'Filtrar exámenes disponibles',
     filter_available_guides: 'Filtrar guías disponibles',
@@ -115,6 +116,7 @@ angular
     unified: 'Unificado',
     view_in_atheneum: 'Ver en Atheneum',
     view_mode: 'Visualización: ',
+    with_warnings: 'Con advertencias',
     yes: 'Si'
 
   });

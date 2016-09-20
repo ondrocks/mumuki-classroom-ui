@@ -9,14 +9,20 @@
     .name-location
       strong {{ item.student.fullName() }}
     .name-location
-      span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" title="{{item.lastSubmission().date()}}")
+      span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" tooltip title="{{item.lastSubmission().date()}}")
       small {{ item.lastSubmission().timeFromNow()}}
 
   span.col-xs-3
-    h4.pull-right(ng-class='"guide-progress-" + item.colorClass()')
-      strong(data-toggle="tooltip" title="{{ 'passed' | translate }}") {{ item.statistics().passed }}
-      span &nbsp;/&nbsp;
-      span(data-toggle="tooltip" title="{{ 'total' | translate }}") {{ item.statistics().total }}
+    .pull-right
+      .row.guide-progress-high(data-toggle="tooltip" tooltip title="{{ 'passed' | translate }}")
+        strong {{ item.statistics().passed }}
+        i.fa.fa-check-circle
+      .row.guide-progress-medium(data-toggle="tooltip" tooltip title="{{ 'with_warnings' | translate }}")
+        strong {{ item.statistics().passed_with_warnings }}
+        i.fa.fa-exclamation-circle
+      .row.guide-progress-low(data-toggle="tooltip" tooltip title="{{ 'failed' | translate }}")
+        strong {{ item.statistics().failed }}
+        i.fa.fa-times-circle
 
   .student-guide-details(ng-show='showDetails()')
 
