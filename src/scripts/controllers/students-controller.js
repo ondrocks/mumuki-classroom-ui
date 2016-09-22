@@ -55,6 +55,15 @@ angular
       });
     }
 
+    $scope.disable = (student) => {
+      Modal.disableStudent(student, () => {
+        return Api
+          .disableStudent(student.social_id, $scope.course())
+          .then(() => $state.reload())
+          .catch((e) => toastr.error(e));
+      });
+    };
+
     $scope.transfer = (student) => {
       Modal.transfer(student, () => $state.reload());
     }

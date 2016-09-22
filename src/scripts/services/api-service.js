@@ -115,6 +115,11 @@ angular
         .delete(`${API}/courses/${course}/students/${social_id}`, authenticated())
     }
 
+    this.disableStudent = (social_id, course) => {
+      return $http
+        .post(`${API}/courses/${course}/students/${social_id}/disable`, {}, authenticated())
+    }
+
     this.transfer = (social_id, course, destination) => {
       return $http
         .post(`${API}/courses/${course}/students/${social_id}/transfer`, { destination }, authenticated())

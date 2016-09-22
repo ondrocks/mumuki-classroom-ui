@@ -21,6 +21,10 @@ mixin follow
           a
             i.fa.fa-trash.margin
             span.item-name {{ 'remove' | translate }}
+        li.pointer(ng-click='disable(item)', ng-if='isAdmin')
+          a
+            i.fa.fa-ban.margin
+            span.item-name {{ 'disable' | translate }}
         li.pointer(ng-click='transfer(item)', ng-if='canTransfer')
           a
             i.fa.fa-exchange.margin

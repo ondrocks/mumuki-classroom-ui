@@ -3,11 +3,27 @@ angular
   .service('Modal', function ($uibModal, $translate, Api) {
 
     this.exportCourseDataToJson = (course, onYesPromise) => {
-      return this.confirmDialog($translate('export_solutions_title', {courseName: course}), $translate('export_solutions_disclaimer'), onYesPromise);
+      return this.confirmDialog(
+        $translate('export_solutions_title', {courseName: course}),
+        $translate('export_solutions_disclaimer'),
+        onYesPromise
+      );
     };
 
     this.removeStudent = (student, onYesPromise) => {
-      return this.confirmDialog(student.fullName(), $translate('are_you_sure_delete_student_from_course'), onYesPromise);
+      return this.confirmDialog(
+        student.fullName(),
+        $translate('are_you_sure_delete_student_from_course'),
+        onYesPromise
+      );
+    };
+
+    this.disableStudent = (student, onYesPromise) => {
+      return this.confirmDialog(
+        student.fullName(),
+        $translate('are_you_sure_disable_student_from_course'),
+        onYesPromise
+      );
     };
 
     this.confirmDialog = (title, text, onYesPromise) => $uibModal.open({
