@@ -7,7 +7,7 @@
 
         small
           a.view-in-atheneum(target='_blank' href="{{guide.getMumukiURL()}}")
-            i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}")
+            i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}" data-placement="top" tooltip data-toggle="tooltip")
 
         small.show {{ guide.lesson.name }}
 

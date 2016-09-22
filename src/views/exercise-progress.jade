@@ -27,7 +27,7 @@
           span {{ progress.exercise.getName() }}
           small
             a.view-in-atheneum(target='_blank' href="{{atheneumLink()}}")
-              i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}")
+              i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}" data-placement="top" tooltip data-toggle="tooltip")
       .row
         h5.title
           span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" tooltip title="{{lastSubmission.created_at | date:'medium'}}")
