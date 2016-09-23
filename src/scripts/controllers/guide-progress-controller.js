@@ -13,6 +13,7 @@ angular
     const guide = Guide.from(data.guide);
     const guideProgressFetcher = $interval(() => Api.getGuideProgress($stateParams).then((data) => setGuideProgress(data.guideProgress)), 5000);
 
+    Breadcrumb.setCourse($stateParams.course);
     Breadcrumb.setGuide(guide);
 
     const setGuideProgress = (guideProgress) => $scope.list = guideProgress;
