@@ -6,6 +6,8 @@ angular
     add_permissions_to_teacher: 'Agregar permisos a',
     added_teacher: 'Docente agregado satisfactoriamente',
     all: 'Todos',
+    attach: 'Vincular',
+    are_you_sure_attach_student_from_course: '¿Estás seguro que querés vincular al estudiante al curso?',
     are_you_sure_delete_student_from_course: '¿Estás seguro que querés borrar al estudiante del curso?',
     are_you_sure_disable_student_from_course: '¿Estás seguro que querés deshabilitar al estudiante del curso?',
     available_courses: 'Cursos disponibles',

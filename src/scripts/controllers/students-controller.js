@@ -56,6 +56,15 @@ angular
       });
     }
 
+    $scope.attach = (student) => {
+      Modal.attachStudent(student, () => {
+        return Api
+          .attachStudent(student.social_id, $scope.course())
+          .then(() => $state.reload())
+          .catch((e) => toastr.error(e));
+      });
+    };
+
     $scope.disable = (student) => {
       Modal.disableStudent(student, () => {
         return Api

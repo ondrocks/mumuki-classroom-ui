@@ -1,6 +1,6 @@
 mixin follow
   div.pull-right
-    span.pointer
+    span.pointer(ng-class='{ "disabled-student": item.disabled }')
       i.fa(
           style='margin-right: 8px'
           ng-click='followAction(item.social_id)',
@@ -21,17 +21,21 @@ mixin follow
           a
             i.fa.fa-trash.margin
             span.item-name {{ 'remove' | translate }}
-        li.pointer(ng-click='disable(item)', ng-if='isAdmin')
+        li.pointer(ng-click='attach(item)', ng-if='isAdmin && item.disabled')
           a
-            i.fa.fa-ban.margin
+            i.fa.fa-user-plus.margin
+            span.item-name {{ 'attach' | translate }}
+        li.pointer(ng-click='disable(item)', ng-if='isAdmin && !item.disabled')
+          a
+            i.fa.fa-user-times.margin
             span.item-name {{ 'disable' | translate }}
         li.pointer(ng-click='transfer(item)', ng-if='canTransfer')
           a
             i.fa.fa-exchange.margin
             span.item-name {{ 'transfer' | translate }}
 
-.row.guide-progress-blog(ng-class='{ "disabled-student": item.disabled }')
-  .col-sm-4.col-xs-10
+.row.guide-progress-blog
+  .col-sm-4.col-xs-10(ng-class='{ "disabled-student": item.disabled }')
     img.rounded-x(ng-src='{{ item.image_url }}')
     .name-location
       strong
@@ -46,7 +50,7 @@ mixin follow
       small {{ 'singup_date' | translate }} {{ Humanizer.date(item.created_at)}}
   .col-xs-2.visible-xs
     +follow
-  .col-sm-7.col-xs-12.text-center
+  .col-sm-7.col-xs-12.text-center(ng-class='{ "disabled-student": item.disabled }')
     .row
       .col-xs-12.margin-bottom
           span Total:&nbsp;

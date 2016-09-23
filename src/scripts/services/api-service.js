@@ -117,7 +117,12 @@ angular
 
     this.disableStudent = (social_id, course) => {
       return $http
-        .post(`${API}/courses/${course}/students/${social_id}/disable`, {}, authenticated())
+        .post(`${API}/courses/${course}/students/${social_id}/detach`, {}, authenticated())
+    }
+
+    this.attachStudent = (social_id, course) => {
+      return $http
+        .post(`${API}/courses/${course}/students/${social_id}/attach`, {}, authenticated())
     }
 
     this.transfer = (social_id, course, destination) => {

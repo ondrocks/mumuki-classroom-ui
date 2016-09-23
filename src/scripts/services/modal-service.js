@@ -26,6 +26,14 @@ angular
       );
     };
 
+    this.attachStudent = (student, onYesPromise) => {
+      return this.confirmDialog(
+        student.fullName(),
+        $translate('are_you_sure_attach_student_from_course'),
+        onYesPromise
+      );
+    };
+
     this.confirmDialog = (title, text, onYesPromise) => $uibModal.open({
       templateUrl: 'views/modals/confirm-dialog.html',
       controller: 'ConfirmDialogController',

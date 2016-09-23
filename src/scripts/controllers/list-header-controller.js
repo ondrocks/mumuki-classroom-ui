@@ -15,7 +15,7 @@ angular
     $scope.withFilter = true;
     $scope.withDetails = true;
     $scope.withFollowers = true;
-    $scope.withDisabledStudents = Auth.isSuperUser();
+    $scope.withDisabledStudents = Auth.isAdmin();
 
     $scope.list = list;
     $scope.itemTemplate = itemTemplate;
