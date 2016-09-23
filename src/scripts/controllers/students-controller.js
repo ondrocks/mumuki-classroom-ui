@@ -65,10 +65,10 @@ angular
       });
     };
 
-    $scope.disable = (student) => {
-      Modal.disableStudent(student, () => {
+    $scope.detach = (student) => {
+      Modal.detachStudent(student, () => {
         return Api
-          .disableStudent(student.social_id, $scope.course())
+          .detachStudent(student.social_id, $scope.course())
           .then(() => $state.reload())
           .catch((e) => toastr.error(e));
       });

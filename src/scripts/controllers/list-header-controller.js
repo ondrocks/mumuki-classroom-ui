@@ -15,7 +15,7 @@ angular
     $scope.withFilter = true;
     $scope.withDetails = true;
     $scope.withFollowers = true;
-    $scope.withDisabledStudents = Auth.isAdmin();
+    $scope.withDetachedStudents = Auth.isAdmin();
 
     $scope.list = list;
     $scope.itemTemplate = itemTemplate;
@@ -23,8 +23,8 @@ angular
     $scope.showDetails = Preferences.showDetails;
     $scope.toggleShowDetails = Preferences.toggleShowDetails;
 
-    $scope.showDisabledStudents = Preferences.showDisabledStudents;
-    $scope.toggleShowDisabledStudents = Preferences.toggleShowDisabledStudents;
+    $scope.showDetachedStudents = Preferences.showDetachedStudents;
+    $scope.toggleShowDetachedStudents = Preferences.toggleShowDetachedStudents;
 
     $scope.onlyFollowers = Preferences.onlyFollowers;
     $scope.toggleOnlyFollowers = Preferences.toggleOnlyFollowers;
@@ -43,6 +43,6 @@ angular
 
     $scope.isFollowing = (social_id) => Followers.isFollowing($scope.courseSlug(), social_id);
     $scope.byFollowers = (item) => !$scope.onlyFollowers() || Followers.isFollowing($scope.courseSlug(), _.get(item, socialIdField));
-    $scope.byDisabledStudents = (item) => !item.disabled || ($scope.withDisabledStudents && $scope.showDisabledStudents());
+    $scope.byDetachedStudents = (item) => !item.detached || ($scope.withDetachedStudents && $scope.showDetachedStudents());
 
   });

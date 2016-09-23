@@ -18,10 +18,10 @@ angular
       );
     };
 
-    this.disableStudent = (student, onYesPromise) => {
+    this.detachStudent = (student, onYesPromise) => {
       return this.confirmDialog(
         student.fullName(),
-        $translate('are_you_sure_disable_student_from_course'),
+        $translate('are_you_sure_detach_student_from_course'),
         onYesPromise
       );
     };

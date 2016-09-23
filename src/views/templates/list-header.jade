@@ -3,9 +3,9 @@
 
     .row
       .col-md-8.col-sm-6
-        div(ng-if='withDisabledStudents')
-          span {{ 'disabled_students' | translate }}:
-          button.btn.btn-link(ng-click='toggleShowDisabledStudents()') {{ (showDisabledStudents() ? 'hide' : 'show') | translate }}
+        div(ng-if='withDetachedStudents')
+          span {{ 'detach_students' | translate }}:
+          button.btn.btn-link(ng-click='toggleShowDetachedStudents()') {{ (showDetachedStudents() ? 'hide' : 'show') | translate }}
 
         div(ng-if='withDetails')
           span {{ 'last_solution' | translate }}:
@@ -40,5 +40,5 @@
     .row
       div(
           class='{{listBodyClass}}',
-          ng-repeat='item in list | filter:byDisabledStudents | orderBy:sortingCriteria():!options.isAscending | filter:listOptions.search | filter:byFollowers')
+          ng-repeat='item in list | filter:byDetachedStudents | orderBy:sortingCriteria():!options.isAscending | filter:listOptions.search | filter:byFollowers')
         div(ng-include='itemTemplate')

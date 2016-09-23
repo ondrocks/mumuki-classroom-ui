@@ -115,7 +115,7 @@ angular
         .delete(`${API}/courses/${course}/students/${social_id}`, authenticated())
     }
 
-    this.disableStudent = (social_id, course) => {
+    this.detachStudent = (social_id, course) => {
       return $http
         .post(`${API}/courses/${course}/students/${social_id}/detach`, {}, authenticated())
     }
