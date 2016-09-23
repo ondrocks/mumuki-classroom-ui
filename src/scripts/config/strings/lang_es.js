@@ -48,6 +48,7 @@ angular
     expectations: 'Expectativas',
     export_disclaimer: '¡Cuidado! Estos datos son sensibles. No los utilices ni distribuyas sin el consentimiento de los usuarios',
     export_solutions: 'Exportar soluciones',
+    export_title: 'Exportar soluciones de {{courseName}}',
     failed: "Con errores",
     filter_available_courses: 'Filtrar cursos disponibles',
     filter_available_exams: 'Filtrar exámenes disponibles',
