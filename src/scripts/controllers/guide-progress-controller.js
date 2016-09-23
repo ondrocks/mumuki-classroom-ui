@@ -29,7 +29,7 @@ angular
     $scope.guide = guide;
     $scope.devicon = DevIcon.from;
     $scope.listBodyClass = 'col-md-4 col-sm-6';
-    $scope.withDisabledStudents = false;
+    $scope.withDetachedStudents = false;
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
   });
