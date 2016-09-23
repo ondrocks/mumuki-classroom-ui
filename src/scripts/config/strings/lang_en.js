@@ -46,7 +46,7 @@ angular
     exam_updated: 'Exam updated successfully',
     exams: 'Exams',
     expectations: 'Expectations',
-    export_solutions_disclaimer: 'Warning! This data is sensitive. Do not use or distribute it without explicit users consent.\nDo you want to continue anyway?',
+    export_solutions_disclaimer: 'Warning! This data is sensitive. Do not use or distribute it without explicit users consent.<br><br>Do you want to continue anyway?',
     export_solutions_button: 'Export solutions',
     export_solutions_title: 'Export solutions of {{courseName}}',
     failed: "Failed",
