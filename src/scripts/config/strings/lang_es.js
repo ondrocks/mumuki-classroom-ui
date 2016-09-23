@@ -46,7 +46,7 @@ angular
     exam_updated: 'Examen guardado satisfactoriamente',
     exams: 'Exámenes',
     expectations: 'Expectativas',
-    export_disclaimer: '¡Cuidado! Estos datos son sensibles. No los utilices ni distribuyas sin el consentimiento de los usuarios',
+    export_disclaimer: '¡Cuidado! Estos datos son sensibles. No los utilices ni distribuyas sin el consentimiento de los usuarios.\n¿Deseas continuar de todos modos?',
     export_solutions: 'Exportar soluciones',
     export_title: 'Exportar soluciones de {{courseName}}',
     failed: "Con errores",
