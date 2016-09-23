@@ -32,4 +32,7 @@ i.margin {
 .disabled-student {
   opacity: 0.5;
   pointer-events: none;
+  *[tooltip] {
+    pointer-events: all;
+  }
 }

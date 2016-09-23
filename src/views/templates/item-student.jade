@@ -42,7 +42,7 @@ mixin follow
       small(ng-if='item.email')
         a(href='mailto:{{ item.email }}') {{ item.email }}
     .name-location
-      span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" title="{{item.created_at | date:'medium'}}" tooltip)
+      span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" title="{{(item.created_at | date:'medium') + (item.disabled ? ' => ' + (item.disabled_at | date:'medium') : '')}}" tooltip)
       small {{ 'singup_date' | translate }} {{ Humanizer.date(item.created_at)}}
   .col-xs-2.visible-xs
     +follow
