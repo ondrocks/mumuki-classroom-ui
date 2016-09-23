@@ -1,6 +1,6 @@
 mixin follow
   div.pull-right
-    span.pointer
+    span.pointer(ng-class='{ "detached-student": item.detached }')
       i.fa(
           style='margin-right: 8px'
           ng-click='followAction(item.social_id)',
@@ -21,13 +21,21 @@ mixin follow
           a
             i.fa.fa-trash.margin
             span.item-name {{ 'remove' | translate }}
+        li.pointer(ng-click='attach(item)', ng-if='isAdmin && item.detached')
+          a
+            i.fa.fa-user-plus.margin
+            span.item-name {{ 'attach' | translate }}
+        li.pointer(ng-click='detach(item)', ng-if='isAdmin && !item.detached')
+          a
+            i.fa.fa-user-times.margin
+            span.item-name {{ 'detach' | translate }}
         li.pointer(ng-click='transfer(item)', ng-if='canTransfer')
           a
             i.fa.fa-exchange.margin
             span.item-name {{ 'transfer' | translate }}
 
 .row.guide-progress-blog
-  .col-sm-4.col-xs-10
+  .col-sm-4.col-xs-10(ng-class='{ "detached-student": item.detached }')
     img.rounded-x(ng-src='{{ item.image_url }}')
     .name-location
       strong
@@ -38,11 +46,11 @@ mixin follow
       small(ng-if='item.email')
         a(href='mailto:{{ item.email }}') {{ item.email }}
     .name-location
-      span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" title="{{item.created_at | date:'medium'}}" tooltip)
+      span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" title="{{(item.created_at | date:'medium') + (item.detached ? ' => ' + (item.detached_at | date:'medium') : '')}}" tooltip)
       small {{ 'singup_date' | translate }} {{ Humanizer.date(item.created_at)}}
   .col-xs-2.visible-xs
     +follow
-  .col-sm-7.col-xs-12.text-center
+  .col-sm-7.col-xs-12.text-center(ng-class='{ "detached-student": item.detached }')
     .row
       .col-xs-12.margin-bottom
           span Total:&nbsp;

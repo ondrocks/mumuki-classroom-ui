@@ -19,6 +19,7 @@ angular
     Breadcrumb.setCourse($stateParams.course);
     $scope.Humanizer = Humanizer;
     $scope.withDetails = false;
+
     $scope.isAdmin = (Auth.isAdmin() && Domain.tenant() !== 'digitalhouse') || Auth.isSuperUser(); // FIXME: private clients
     $scope.canTransfer = Auth.isAdmin();
     $scope.listBodyClass = 'col-sm-12';
@@ -54,6 +55,24 @@ angular
           .catch((e) => toastr.error(e));
       });
     }
+
+    $scope.attach = (student) => {
+      Modal.attachStudent(student, () => {
+        return Api
+          .attachStudent(student.social_id, $scope.course())
+          .then(() => $state.reload())
+          .catch((e) => toastr.error(e));
+      });
+    };
+
+    $scope.detach = (student) => {
+      Modal.detachStudent(student, () => {
+        return Api
+          .detachStudent(student.social_id, $scope.course())
+          .then(() => $state.reload())
+          .catch((e) => toastr.error(e));
+      });
+    };
 
     $scope.transfer = (student) => {
       Modal.transfer(student, () => $state.reload());

@@ -15,11 +15,16 @@ angular
     $scope.withFilter = true;
     $scope.withDetails = true;
     $scope.withFollowers = true;
+    $scope.withDetachedStudents = Auth.isAdmin();
 
     $scope.list = list;
-    $scope.showDetails = Preferences.showDetails;
     $scope.itemTemplate = itemTemplate;
+
+    $scope.showDetails = Preferences.showDetails;
     $scope.toggleShowDetails = Preferences.toggleShowDetails;
+
+    $scope.showDetachedStudents = Preferences.showDetachedStudents;
+    $scope.toggleShowDetachedStudents = Preferences.toggleShowDetachedStudents;
 
     $scope.onlyFollowers = Preferences.onlyFollowers;
     $scope.toggleOnlyFollowers = Preferences.toggleOnlyFollowers;
@@ -38,5 +43,6 @@ angular
 
     $scope.isFollowing = (social_id) => Followers.isFollowing($scope.courseSlug(), social_id);
     $scope.byFollowers = (item) => !$scope.onlyFollowers() || Followers.isFollowing($scope.courseSlug(), _.get(item, socialIdField));
+    $scope.byDetachedStudents = (item) => !item.detached || ($scope.withDetachedStudents && $scope.showDetachedStudents());
 
   });

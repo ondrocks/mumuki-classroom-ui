@@ -6,6 +6,7 @@ angular
     const preferences = {
       showDetails: null,
       onlyFollowers: null,
+      showDetachedStudents: null
     };
 
     const toggleField = (field) => {
@@ -35,9 +36,11 @@ angular
 
     Preferences.showDetails = () => getField('showDetails');
     Preferences.onlyFollowers = () => getField('onlyFollowers');
+    Preferences.showDetachedStudents = () => getField('showDetachedStudents');
 
     Preferences.toggleShowDetails = () => toggleField('showDetails');
     Preferences.toggleOnlyFollowers = () => toggleField('onlyFollowers');
+    Preferences.toggleShowDetachedStudents = () => toggleField('showDetachedStudents');
 
     return Preferences;
 

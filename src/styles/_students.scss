@@ -29,3 +29,10 @@ i.margin {
   width: 30px;
 }
 
+.detached-student {
+  opacity: 0.5;
+  pointer-events: none;
+  *[tooltip] {
+    pointer-events: all;
+  }
+}
