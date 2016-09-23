@@ -29,3 +29,7 @@ i.margin {
   width: 30px;
 }
 
+.disabled-student {
+  opacity: 0.5;
+  pointer-events: none;
+}

@@ -30,7 +30,7 @@ mixin follow
             i.fa.fa-exchange.margin
             span.item-name {{ 'transfer' | translate }}
 
-.row.guide-progress-blog
+.row.guide-progress-blog(ng-class='{ "disabled-student": item.disabled }')
   .col-sm-4.col-xs-10
     img.rounded-x(ng-src='{{ item.image_url }}')
     .name-location

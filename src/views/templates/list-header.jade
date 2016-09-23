@@ -3,6 +3,10 @@
 
     .row
       .col-md-8.col-sm-6
+        div(ng-if='withDisabledStudents')
+          span {{ 'disabled_students' | translate }}:
+          button.btn.btn-link(ng-click='toggleShowDisabledStudents()') {{ (showDisabledStudents() ? 'hide' : 'show') | translate }}
+
         div(ng-if='withDetails')
           span {{ 'last_solution' | translate }}:
           button.btn.btn-link(ng-click='toggleShowDetails()') {{ (showDetails() ? 'hide' : 'show') | translate }}
@@ -16,6 +20,7 @@
           button.btn.btn-link(
               ng-click='toggleOnlyFollowers()',
               ng-disabled='!onlyFollowers()') {{ 'all' | translate }} ({{ list.length }})
+
 
       .col-md-4.col-sm-6.pull-right
         .input-group(ng-if='withSortBy')
@@ -35,5 +40,5 @@
     .row
       div(
           class='{{listBodyClass}}',
-          ng-repeat='item in list | orderBy:sortingCriteria():!options.isAscending | filter:listOptions.search | filter:byFollowers')
+          ng-repeat='item in list | filter:byDisabledStudents | orderBy:sortingCriteria():!options.isAscending | filter:listOptions.search | filter:byFollowers')
         div(ng-include='itemTemplate')

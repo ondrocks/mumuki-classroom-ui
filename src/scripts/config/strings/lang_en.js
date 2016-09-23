@@ -33,6 +33,7 @@ angular
     day_tuesday: 'Tuesday',
     day_wednesday: 'Wednesday',
     disable: 'Disable',
+    disabled_students: 'Disabled students',
     do_comment: 'Successful comment!',
     do_follow: 'Following!',
     duration: 'Duration',
