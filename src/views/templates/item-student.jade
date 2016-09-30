@@ -35,34 +35,25 @@ mixin follow
             span.item-name {{ 'transfer' | translate }}
 
 .row.guide-progress-blog
-  .col-sm-4.col-xs-10(ng-class='{ "detached-student": item.detached }')
+  .col-xs-10(ng-class='{ "detached-student": item.detached }')
     img.rounded-x(ng-src='{{ item.image_url }}')
     .name-location
       strong
         span.fa(class='fa-{{ item.providerIcon() }}')
         |{{ item.fullName() }}
     .name-location
-      small(ng-if='!item.email') {{ 'email_not_provided' | translate }}
-      small(ng-if='item.email')
-        a(href='mailto:{{ item.email }}') {{ item.email }}
+      span.fa(class='fa-book')
+      span.guide-progress-high(ng-class='{"guide-progress-empty": item.stats.passed === 0}' data-toggle="tooltip" tooltip title="{{ 'passed' | translate }}")
+          strong {{ item.stats.passed }}
+          i.fa.fa-check-circle
+      span.guide-progress-medium(ng-class='{"guide-progress-empty": item.stats.passed_with_warnings === 0}' data-toggle="tooltip" tooltip title="{{ 'with_warnings' | translate }}")
+          strong {{ item.stats.passed_with_warnings }}
+          i.fa.fa-exclamation-circle
+      span.guide-progress-low(ng-class='{"guide-progress-empty": item.stats.failed === 0}' data-toggle="tooltip" tooltip title="{{ 'failed' | translate }}")
+          strong {{ item.stats.failed }}
+          i.fa.fa-times-circle
     .name-location
       span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" title="{{(item.created_at | date:'medium') + (item.detached ? ' => ' + (item.detached_at | date:'medium') : '')}}" tooltip)
       small {{ 'singup_date' | translate }} {{ Humanizer.date(item.created_at)}}
-  .col-xs-2.visible-xs
-    +follow
-  .col-sm-7.col-xs-12.text-center(ng-class='{ "detached-student": item.detached }')
-    .row
-      .col-xs-12.margin-bottom
-          span Total:&nbsp;
-          strong {{ item.totalStats() }}
-      .col-xs-4
-          i.fa.fa-times-circle
-          span &nbsp;{{ item.stats.failed }}
-      .col-xs-4
-          i.fa.fa-exclamation-circle
-          span &nbsp;{{ item.stats.passed_with_warnings }}
-      .col-xs-4
-          i.fa.fa-check-circle
-          span &nbsp;{{ item.stats.passed }}
-  .col-sm-1.hidden-xs
+  .col-xs-2
     +follow
