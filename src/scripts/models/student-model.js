@@ -42,6 +42,14 @@ angular
         return icons[this.provider()];
       }
 
+      lastSubmissionTime() {
+        return this.last_assignment.submission.created_at;
+      }
+
+      lastGuide() {
+       return _.startCase(this.last_assignment.guide.slug.match(/mumuki-guia-([\w]+)-(.+)/)[2]);
+      }
+
       static from(student) {
         return new Student(student);
       }
