@@ -14,6 +14,10 @@
 .guide-progress-high { @include guide-progress($brand-success) }
 .guide-progress-medium { @include guide-progress($brand-warning) }
 .guide-progress-low { @include guide-progress($brand-danger) }
+.guide-progress-empty { @include guide-progress(lightgrey) }
+.guide-progress-empty .fa {
+  color: lightgrey;
+}
 
 .guide-progress-options {
   margin-bottom: 15px;

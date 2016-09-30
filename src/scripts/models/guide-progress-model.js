@@ -24,6 +24,18 @@ angular
                passedAverage <= 0.7 ? 'medium' : 'high';
       }
 
+      noPassed() {
+        return this.stats.passed === 0;
+      }
+
+      noWarnings() {
+        return this.stats.passed_with_warnings === 0;
+      }
+
+      noFailed() {
+        return this.stats.failed === 0;
+      }
+
       passedAverage() {
         const stats = this.statistics();
         return (stats.passed / stats.total) || 0;
