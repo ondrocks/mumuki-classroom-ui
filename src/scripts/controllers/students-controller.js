@@ -23,7 +23,6 @@ angular
     $scope.isAdmin = (Auth.isAdmin() && Domain.tenant() !== 'digitalhouse') || Auth.isSuperUser(); // FIXME: private clients
     $scope.canTransfer = Auth.isAdmin();
     $scope.canDetach = Auth.isAdmin();
-    $scope.listBodyClass = 'col-sm-4';
 
     $scope.setCount(students.length);
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();
