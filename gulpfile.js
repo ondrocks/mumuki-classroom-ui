@@ -28,6 +28,8 @@ gulp.task('dev:js', ['config'], () => {
     .pipe($.sourcemaps.init())
       .pipe($.babel({ presets: ['es2015'] }))
       .pipe($.concat('main.js'))
+      .pipe($.ngAnnotate())
+      .pipe($.uglify())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(`${outFolder}/scripts`))
     .pipe($.livereload());
@@ -37,6 +39,8 @@ gulp.task('prod:js', ['config'], () => {
   return gulp.src([`${srcFolder}/scripts/**/*.js`])
     .pipe($.babel({ presets: ['es2015'] }))
     .pipe($.concat('main.js'))
+    .pipe($.ngAnnotate())
+    .pipe($.uglify())
     .pipe(gulp.dest(`${outFolder}/scripts`))
     .pipe($.livereload());
 });
