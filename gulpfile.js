@@ -3,6 +3,7 @@ process.env.PORT = process.env.PORT || 8080;
 process.env.TENANT = process.env.TENANT || 'central';
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+const fs = require('fs');
 const del = require('del');
 const gulp = require('gulp');
 const runSequence = require('run-sequence');
@@ -16,6 +17,11 @@ const outFolder = 'build';
 const configFile = () => `config/${process.env.NODE_ENV}.js`;
 
 gulp.task('clean', () => del(`${outFolder}`, { force: true }));
+gulp.task('release', (done) => {
+  del('release', { force: true })
+    .then(() => fs.renameSync(`${outFolder}`, 'release'))
+    .then(done, done)
+});
 
 gulp.task('config', () => {
   return gulp.src(`${configFile()}`)
@@ -88,7 +94,7 @@ gulp.task('jade', ['jade:index', 'jade:views']);
 gulp.task('dev:build',  ['dev:js',  'jade', 'scss', 'fonts', 'images']);
 
 gulp.task('prod:build', (done) => {
-  runSequence('clean', ['prod:js', 'jade', 'scss', 'fonts', 'images'], done);
+  runSequence('clean', ['prod:js', 'jade', 'scss', 'fonts', 'images'], 'release', done);
 });
 
 gulp.task('dev:serve', ['dev:build'], () => {
