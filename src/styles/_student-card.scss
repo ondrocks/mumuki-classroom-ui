@@ -17,7 +17,14 @@ $color-default: #ecf0f1;
 
   border: solid 1px $color-default;
   margin: 0 -15px;
-  padding: 15px;
+  padding: 15px 22px;
+
+  .student-card-menu {
+    align-self: flex-end;
+    margin-right: -15px;
+    margin-bottom: -7px;
+    margin-top: -15px;
+  }
 
   .student-card-profile {
     @include display-flex;
