@@ -35,7 +35,7 @@ mixin menu
         .student-card-profile-data-item-text
           strong
             span.fa(class='fa-{{ item.providerIcon() }}')
-            | {{ item.fullName() }}
+            span {{ item.fullName() }}
         .student-card-profile-data-item-text
           span.fa.fa-code
           small {{ item.last_assignment ? item.lastGuide() : 'No assignments' }}

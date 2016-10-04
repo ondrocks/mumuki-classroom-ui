@@ -1,7 +1,6 @@
-@mixin text-ellipsis {
+@mixin overflow {
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 @mixin display-flex($flow: row, $position-x: space-between, $position-y: center) {
@@ -15,16 +14,19 @@ $color-default: #ecf0f1;
 
 .student-card {
   @include display-flex(column);
+
   border: solid 1px $color-default;
   margin: 0 -15px;
   padding: 15px;
 
   .student-card-profile {
     @include display-flex;
+
     width: 100%;
 
     .student-card-profile-image {
-      @include display-flex(center, center);
+      @include display-flex(row, center, center);
+
       img {
         height: 7.5rem;
         width: 7.5rem;
@@ -34,38 +36,38 @@ $color-default: #ecf0f1;
 
     .student-card-profile-data {
       @include display-flex(column, center, flex-start);
-      @include text-ellipsis;
+      @include overflow;
+
       width: 100%;
-      padding-left: 15px;
+      margin: 0 15px;
+
       .student-card-profile-data-item {
-        display: inline-flex;
-        flex-direction: column;
+        @include display-flex(column, center, flex-start);
+        @include overflow;
+
+        flex: 1;
+        min-width: 0;
+
         .fa {
-          margin-right: 5px;
           width: 20px;
         }
         .student-card-profile-data-item-text {
-          @include text-ellipsis;
-        }
-      }
-      .student-card-profile-data-menu {
-        @include display-flex;
-        width: 100%;
-        margin-top: 10px;
-        .fa {
-          margin-right: 5px;
-          width: auto;
+          strong > span,
+          small,
+          span {
+            text-overflow: ellipsis;
+          }
         }
       }
     }
 
-  }
-  .student-card-profile-status {
-    @include display-flex(column, center, flex-end);
-    width: auto;
-    .student-card-profile-status-row {
-      span {
-        margin-left: 5px;
+    .student-card-profile-status {
+      @include display-flex(column, center, flex-end);
+      width: auto;
+      .student-card-profile-status-row {
+        .fa {
+          margin-left: 5px;
+        }
       }
     }
   }
