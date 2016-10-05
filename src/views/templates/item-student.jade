@@ -5,6 +5,16 @@ div
       span.dropdown
         i.pointer.fa.fa-angle-down.dropdown-toggle(data-toggle='dropdown')
         ul.dropdown-menu.dropdown-menu-right
+          li.pointer(ng-click='followAction(item.social_id)')
+            a
+              i.fa.margin(
+                ng-class='{                                   \
+                  "follow": isFollowing(item.social_id),      \
+                  "unfollow": !isFollowing(item.social_id),   \
+                  "fa-eye": isFollowing(item.social_id),      \
+                  "fa-eye-slash": !isFollowing(item.social_id)\
+                }')
+              span.item-name {{ isFollowing(item.social_id) ? 'unfollow' : 'follow' | translate }}
           li.pointer(ng-click='edit(item.social_id)')
             a
               i.fa.fa-pencil.margin
