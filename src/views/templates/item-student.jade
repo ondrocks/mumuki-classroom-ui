@@ -28,9 +28,7 @@
   .student-card-profile(ng-class='{ "detached-student": item.detached }')
 
     .student-card-profile-image
-      img.img-circle(
-          ng-src='{{ item.image_url }}',
-          onerror='this.src = "images/avatar.svg"')
+      img.img-circle(with-default='{{ item.image_url }}')
 
     .student-card-profile-data
       .student-card-profile-data-item
