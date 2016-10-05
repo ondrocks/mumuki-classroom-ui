@@ -1,32 +1,29 @@
-mixin menu
-  span.dropdown
-    i.pointer.fa.fa-angle-down.dropdown-toggle(data-toggle='dropdown')
-    ul.dropdown-menu.dropdown-menu-right
-      li.pointer(ng-click='edit(item.social_id)')
-        a
-          i.fa.fa-pencil.margin
-          span.item-name {{ 'edit' | translate }}
-      li.pointer(ng-click='remove(item)', ng-if='isAdmin')
-        a
-          i.fa.fa-trash.margin
-          span.item-name {{ 'remove' | translate }}
-      li.pointer(ng-click='attach(item)', ng-if='canDetach && item.detached')
-        a
-          i.fa.fa-user-plus.margin
-          span.item-name {{ 'attach' | translate }}
-      li.pointer(ng-click='detach(item)', ng-if='canDetach && !item.detached')
-        a
-          i.fa.fa-user-times.margin
-          span.item-name {{ 'detach' | translate }}
-      li.pointer(ng-click='transfer(item)', ng-if='canTransfer')
-        a
-          i.fa.fa-exchange.margin
-          span.item-name {{ 'transfer' | translate }}
-
 .student-card
 
   .student-card-menu
-    +menu
+    span.dropdown
+      i.pointer.fa.fa-angle-down.dropdown-toggle(data-toggle='dropdown')
+      ul.dropdown-menu.dropdown-menu-right
+        li.pointer(ng-click='edit(item.social_id)')
+          a
+            i.fa.fa-pencil.margin
+            span.item-name {{ 'edit' | translate }}
+        li.pointer(ng-click='remove(item)', ng-if='isAdmin')
+          a
+            i.fa.fa-trash.margin
+            span.item-name {{ 'remove' | translate }}
+        li.pointer(ng-click='attach(item)', ng-if='canDetach && item.detached')
+          a
+            i.fa.fa-user-plus.margin
+            span.item-name {{ 'attach' | translate }}
+        li.pointer(ng-click='detach(item)', ng-if='canDetach && !item.detached')
+          a
+            i.fa.fa-user-times.margin
+            span.item-name {{ 'detach' | translate }}
+        li.pointer(ng-click='transfer(item)', ng-if='canTransfer')
+          a
+            i.fa.fa-exchange.margin
+            span.item-name {{ 'transfer' | translate }}
 
   .student-card-profile(ng-class='{ "detached-student": item.detached }')
 
@@ -38,8 +35,8 @@ mixin menu
     .student-card-profile-data
       .student-card-profile-data-item
         .student-card-profile-data-item-text
+          span.fa(class='fa-{{ item.providerIcon() }}')
           strong
-            span.fa(class='fa-{{ item.providerIcon() }}')
             span {{ item.fullName() }}
         .student-card-profile-data-item-text
           span.fa.fa-at
@@ -47,19 +44,31 @@ mixin menu
             a(href='mailto:{{item.email}}', ng-if='item.email') {{ item.email }}
             span(ng-if='!item.email') {{ 'email_not_provided' | translate }}
         .student-card-profile-data-item-text
-          span.fa.fa-clock-o(data-placement="top" data-toggle="tooltip" title="{{(item.created_at | date:'medium') + (item.detached ? ' => ' + (item.detached_at | date:'medium') : '')}}" tooltip)
-          small {{ Humanizer.date(item.created_at) }}
+          span.fa.fa-clock-o(
+              data-placement='top',
+              data-toggle='tooltip', tooltip,
+              title='{{                                                                                           \
+                (item.created_at|date:"medium") + (item.detached? " => " + (item.detached_at|date:"medium") : "") \
+              }}')
+          small
+            span {{ Humanizer.date(item.created_at) }}
 
     .student-card-profile-status
-      .student-card-profile-status-row
+      .student-card-profile-status-row.failed(
+          ng-class='{ "empty": item.stats.failed === 0 }'
+          data-toggle="tooltip" tooltip title="{{ 'failed' | translate }}")
         span {{ item.stats.failed }}
-        span.fa.fa-times-circle(data-placement="top" data-toggle="tooltip" title="{{(item.created_at | date:'medium') + (item.detached ? ' => ' + (item.detached_at | date:'medium') : '')}}" tooltip)
-      .student-card-profile-status-row
+        span.fa.fa-times-circle
+      .student-card-profile-status-row.passed_with_warnings(
+          ng-class='{ "empty": item.stats.passed_with_warnings === 0 }'
+          data-toggle="tooltip" tooltip title="{{ 'with_warnings' | translate }}")
         span {{ item.stats.passed_with_warnings }}
-        span.fa.fa-exclamation-circle(data-placement="top" data-toggle="tooltip" title="{{(item.created_at | date:'medium') + (item.detached ? ' => ' + (item.detached_at | date:'medium') : '')}}" tooltip)
-      .student-card-profile-status-row
+        span.fa.fa-exclamation-circle
+      .student-card-profile-status-row.passed(
+          ng-class='{ "empty": item.stats.passed === 0 }'
+          data-toggle="tooltip" tooltip title="{{ 'passed' | translate }}")
         span {{ item.stats.passed }}
-        span.fa.fa-check-circle(data-placement="top" data-toggle="tooltip" title="{{(item.created_at | date:'medium') + (item.detached ? ' => ' + (item.detached_at | date:'medium') : '')}}" tooltip)
+        span.fa.fa-check-circle
 
   //-.student-card-menu
     span.fa.fa-line-chart(data-placement="top" data-toggle="tooltip" title="{{ 'guides' | translate }}" tooltip)
