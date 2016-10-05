@@ -51,7 +51,6 @@ $color-default: #ecf0f1;
 
         .fa {
           width: 20px;
-          margin-left: 2px;
         }
         .student-card-profile-data-item-text {
         }
@@ -74,21 +73,25 @@ $color-default: #ecf0f1;
     }
   }
 
-  .student-card-recent {
-    @include display-flex
-    width: 100%;
-    margin-top: 15px;
+}
+
+.student-card-recent {
+  @include display-flex
+  width: auto;
+  margin: 0 -15px;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: lighten($color-default, 4%);
+  border: solid 1px $color-default;
+  .student-card-recent-column {
+    @include display-flex(column, center, center)
+    width: 50%;
+    padding: 5px 0;
     overflow: hidden;
-    white-space: nowrap;
-    border-top: solid 1px $color-default;
-    .student-card-recent-column {
-      @include display-flex(column, center, center)
-      width: 50%;
-      padding: 10px 0;
-      overflow: hidden;
-      &.right-separator {
-        border-right: solid 1px $color-default;
-      }
+    .fa { margin-right: 5px }
+    h4 { margin: 0 }
+    &.right-separator {
+      border-right: solid 1px $color-default;
     }
   }
 }
