@@ -73,4 +73,22 @@ $color-default: #ecf0f1;
       }
     }
   }
+
+  .student-card-recent {
+    @include display-flex
+    width: 100%;
+    margin-top: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: solid 1px $color-default;
+    .student-card-recent-column {
+      @include display-flex(column, center, center)
+      width: 50%;
+      padding: 10px 0;
+      overflow: hidden;
+      &.right-separator {
+        border-right: solid 1px $color-default;
+      }
+    }
+  }
 }

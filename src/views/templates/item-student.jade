@@ -70,47 +70,10 @@
         span {{ item.stats.passed }}
         span.fa.fa-check-circle
 
-  //-.student-card-menu
-    span.fa.fa-line-chart(data-placement="top" data-toggle="tooltip" title="{{ 'guides' | translate }}" tooltip)
-    span.fa.fa-at(data-placement="top" data-toggle="tooltip" title="{{ 'guides' | translate }}" tooltip)
-    span.fa.fa-eye(
-        ng-click='followAction(item.social_id)',
-        data-placement='top',
-        data-toggle='tooltip', tooltip
-        title='{{ isFollowing(item.social_id) ? "unfollow" : "follow" | translate }}'
-        ng-class='{                                   \
-          "follow": isFollowing(item.social_id),      \
-          "unfollow": !isFollowing(item.social_id),   \
-          "fa-eye": isFollowing(item.social_id),      \
-          "fa-eye-slash": !isFollowing(item.social_id)\
-        }')
-    +menu
-
-
-//-.row.guide-progress-blog
-  .row
-    .col-xs-2
-      img.img-circle(ng-src='{{ item.image_url }}')
-    .col-xs-8(ng-class='{ "detached-student": item.detached }')
-      .name-location
-        strong
-          span.fa(class='fa-{{ item.providerIcon() }}')
-          |{{ item.fullName() }}
-      .name-location
-        span.guide-progress-high(ng-class='{"guide-progress-empty": item.stats.passed === 0}' data-toggle="tooltip" tooltip title="{{ 'passed' | translate }}")
-            strong {{ item.stats.passed }}
-            i.fa.fa-check-circle
-        span.guide-progress-medium(ng-class='{"guide-progress-empty": item.stats.passed_with_warnings === 0}' data-toggle="tooltip" tooltip title="{{ 'with_warnings' | translate }}")
-            strong {{ item.stats.passed_with_warnings }}
-            i.fa.fa-exclamation-circle
-        span.guide-progress-low(ng-class='{"guide-progress-empty": item.stats.failed === 0}' data-toggle="tooltip" tooltip title="{{ 'failed' | translate }}")
-            strong {{ item.stats.failed }}
-            i.fa.fa-times-circle
-      .name-location(style='margin-top: 8px')
-        span.fa(class='fa-book')
-        small {{ item.last_assignment ? item.lastGuide() : '-' }}
-      .name-location
-        span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" title="{{(item.created_at | date:'medium') + (item.detached ? ' => ' + (item.detached_at | date:'medium') : '')}}" tooltip)
-        small {{ item.last_assignment ? Humanizer.date(item.lastSubmissionTime()) : '-' }}
-    .col-xs-2
-      +follow
+  .student-card-recent(ng-class='{ "detached-student": item.detached }')
+    .student-card-recent-column.right-separator
+      a(href='') {{ item.lastAssignment() || 'Sin soluciones' }}
+      small Ultima lección
+    .student-card-recent-column
+      span {{ Humanizer.date(1475638351492) }}
+      small Ultima solución
