@@ -15,7 +15,7 @@ angular
           .get('Api')
           .getOrganization()
           .then((res) => {
-            this.set(res.data.organization);
+            this.set(res.data);
           })
       return promise.then(() => this.organization.lock_json);
     }
