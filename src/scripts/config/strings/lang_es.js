@@ -66,6 +66,7 @@ angular
     guide: 'Guía',
     guides: 'Guías',
     hide: 'Ocultar',
+    last_lesson: 'Ultima lección',
     last_name: 'Apellido',
     last_name_error: 'El campo apellido es obligatorio',
     last_solution: 'Ultima solución',

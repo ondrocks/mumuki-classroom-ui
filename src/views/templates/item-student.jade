@@ -81,11 +81,13 @@ div
 
   .student-card-recent(ng-class='{ "detached-student": item.detached }', ng-show='showDetails()')
     .student-card-recent-column.right-separator
-      h4
-        span.fa.fa-book
       a(href='', ng-if='item.lastAssignment()') {{ item.lastAssignment() }}
-      span(ng-if='!item.lastAssignment()') Sin soluciones
+      span(ng-if='!item.lastAssignment()') sin soluciones
+      small
+        span.fa.fa-book
+        span {{ 'last_lesson' | translate }}
     .student-card-recent-column
-      h4
-        span.fa.fa-clock-o
       span {{ Humanizer.date(1475638351492) }}
+      small
+        span.fa.fa-clock-o
+        span {{ 'last_solution' | translate }}
