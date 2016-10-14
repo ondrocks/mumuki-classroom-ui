@@ -60,7 +60,7 @@ div
                   (item.created_at|date:"medium") + (item.detached? " => " + (item.detached_at|date:"medium") : "") \
                 }}')
             small
-              span {{ Humanizer.date(item.created_at) }}
+              span {{ 'registered' | translate }} {{ Humanizer.date(item.created_at) }}
 
       .student-card-profile-status
         .student-card-profile-status-row.failed(
@@ -81,13 +81,13 @@ div
 
   .student-card-recent(ng-class='{ "detached-student": item.detached }', ng-show='showDetails()')
     .student-card-recent-column.right-separator
-      a(href='', ng-if='item.lastAssignment()') {{ item.lastAssignment() }}
-      span(ng-if='!item.lastAssignment()') sin soluciones
+      a(href='', ng-if='item.lastGuideName()') {{ item.lastGuideName() }}
+      span(ng-if='!item.lastGuideName()') -
       small
         span.fa.fa-book
         span {{ 'last_lesson' | translate }}
     .student-card-recent-column
-      span {{ Humanizer.date(1475638351492) }}
+      span {{ item.lastSubmissionTime() ? Humanizer.date(item.lastSubmissionTime()) : '-' }}
       small
         span.fa.fa-clock-o
         span {{ 'last_solution' | translate }}

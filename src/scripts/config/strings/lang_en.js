@@ -95,6 +95,7 @@ angular
     only_followers: 'Only following',
     others: 'Others',
     passed: 'Passed',
+    registered: 'Registered',
     remove: 'Remove',
     results: 'Results',
     save: 'Save',

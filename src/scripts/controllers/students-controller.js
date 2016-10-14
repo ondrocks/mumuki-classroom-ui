@@ -19,6 +19,8 @@ angular
     Breadcrumb.setCourse($stateParams.course);
     $scope.Humanizer = Humanizer;
 
+    $scope.withDetails = false;
+
     $scope.isAdmin = (Auth.isAdmin() && Domain.tenant() !== 'digitalhouse') || Auth.isSuperUser(); // FIXME: private clients
     $scope.canTransfer = Auth.isAdmin();
     $scope.canDetach = Auth.isAdmin();

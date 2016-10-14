@@ -43,11 +43,11 @@ angular
       }
 
       lastSubmissionTime() {
-        return this.last_assignment.submission.created_at;
+        return _.get(this, 'last_assignment.submission.created_at');
       }
 
-      lastGuide() {
-       return _.startCase(this.last_assignment.guide.slug.match(/mumuki-guia-([\w]+)-(.+)/)[2]);
+      lastGuideName() {
+        return _.get(this, 'last_assignment.guide.name');
       }
 
       static from(student) {

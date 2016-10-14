@@ -25,7 +25,6 @@ $color-default: #ecf0f1;
   @include display-flex(column);
 
   border: solid 1px $color-default;
-  border-bottom: none;
   margin: 0 -15px;
   padding: 15px 22px;
 
@@ -98,6 +97,7 @@ $color-default: #ecf0f1;
   white-space: nowrap;
   background-color: lighten($color-default, 4%);
   border: solid 1px $color-default;
+  border-top: none;
   .student-card-recent-column {
     @include display-flex(column, center, center)
     width: 50%;
