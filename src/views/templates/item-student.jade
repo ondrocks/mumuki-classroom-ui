@@ -81,13 +81,17 @@ div
 
   .student-card-recent(ng-class='{ "detached-student": item.detached }')
     .student-card-recent-column.right-separator
-      a(href='', ng-if='item.lastGuideName()') {{ item.lastGuideName() }}
-      span(ng-if='!item.lastGuideName()') -
-      small
-        span.fa.fa-book
-        span {{ 'last_lesson' | translate }}
+      .student-card-recent-column-text
+        a(href='', ng-if='item.lastGuideName()') {{ item.lastGuideName() }}
+        span(ng-if='!item.lastGuideName()') -
+      .student-card-recent-column-text
+        small
+            span.fa.fa-book
+            span {{ 'last_lesson' | translate }}
     .student-card-recent-column
-      span {{ item.lastSubmissionTime() ? Humanizer.date(item.lastSubmissionTime()) : '-' }}
-      small
-        span.fa.fa-clock-o
-        span {{ 'last_solution' | translate }}
+      .student-card-recent-column-text
+        span {{ item.lastSubmissionTime() ? Humanizer.date(item.lastSubmissionTime()) : '-' }}
+      .student-card-recent-column-text
+        small
+          span.fa.fa-clock-o
+          span {{ 'last_solution' | translate }}
