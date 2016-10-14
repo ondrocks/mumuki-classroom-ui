@@ -43,14 +43,16 @@ div
     .student-guide-details(ng-show='showDetails()')
 
       .student-guide-details-title(ng-if='item.hasSubmissions()')
-        strong {{ 'last_solution' | translate }}
+        .student-guide-details-title-text
+          strong {{ 'last_solution' | translate }}
 
       .student-guide-details-exercise
-        a(ui-sref='classroom.courses.course.guides.guide.students({ student: item.student.social_id, eid: item.lastExerciseSubmitted().id })')
-          | {{ item.lastExerciseSubmitted().getName() }}
+        .student-guide-details-exercise-text
+          a(ui-sref='classroom.courses.course.guides.guide.students({ student: item.student.social_id, eid: item.lastExerciseSubmitted().id })')
+            | {{ item.lastExerciseSubmitted().getName() }}
         status-icon(status='item.lastSubmission().status')
 
-      .student-guide-details-exercise-code
-        pre(style='height: 125px; overflow-y: auto')
+      .student-guide-details-code
+        pre
           code
             | {{ item.lastSubmission().content }}
