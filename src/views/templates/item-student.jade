@@ -79,7 +79,7 @@ div
           span {{ item.stats.passed }}
           span.fa.fa-check-circle
 
-  .student-card-recent(ng-class='{ "detached-student": item.detached }', ng-show='showDetails()')
+  .student-card-recent(ng-class='{ "detached-student": item.detached }')
     .student-card-recent-column.right-separator
       a(href='', ng-if='item.lastGuideName()') {{ item.lastGuideName() }}
       span(ng-if='!item.lastGuideName()') -

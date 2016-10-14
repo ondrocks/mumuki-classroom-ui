@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, data, Api, DevIcon, Guide, Breadcrumb) {
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, data, Api, DevIcon, Guide, Breadcrumb, Humanizer) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -17,6 +17,8 @@ angular
     Breadcrumb.setGuide(guide);
 
     const setGuideProgress = (guideProgress) => $scope.list = guideProgress;
+
+    $scope.Humanizer = Humanizer;
 
     $scope.availableSortingCriterias = [
       { type: 'name', properties: ['student.last_name', 'student.first_name']},

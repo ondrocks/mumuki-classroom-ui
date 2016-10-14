@@ -109,3 +109,27 @@ $color-default: #ecf0f1;
     }
   }
 }
+
+.student-guide-details {
+  @include display-flex(column, flex-start, flex-start)
+  width: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 15px 0 7px;
+
+  .student-guide-details-exercise {
+    width: 100%;
+    @include display-flex(row, space-between, center);
+  }
+
+  .student-guide-details-exercise-code {
+    width: 100%;
+    height: 130px;
+  }
+
+}
+
+.border-bottom-none {
+  border-bottom: none;
+}
+

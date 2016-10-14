@@ -1,43 +1,56 @@
-.row.guide-progress-blog
-  span.col-xs-9
-    img.rounded-x.pointer(
-      ng-src='{{ item.student.image_url }}'
-      ui-sref='classroom.courses.course.guides.guide.students({ \
-        student: item.student.social_id,                    \
-        eid: item.lastExerciseSubmitted().id                \
-    })')
-    .name-location
-      strong {{ item.student.fullName() }}
-    .name-location
-      span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" tooltip title="{{item.lastSubmission().date()}}")
-      small {{ item.lastSubmission().timeFromNow()}}
+div
+  .student-card
 
-  span.col-xs-3
-    .pull-right
-      .row.guide-progress-high(ng-class='{"guide-progress-empty": item.noPassed()}' data-toggle="tooltip" tooltip title="{{ 'passed' | translate }}")
-        strong {{ item.statistics().passed }}
-        i.fa.fa-check-circle
-      .row.guide-progress-medium(ng-class='{"guide-progress-empty": item.noWarnings()}' data-toggle="tooltip" tooltip title="{{ 'with_warnings' | translate }}")
-        strong {{ item.statistics().passed_with_warnings }}
-        i.fa.fa-exclamation-circle
-      .row.guide-progress-low(ng-class='{"guide-progress-empty": item.noFailed()}' data-toggle="tooltip" tooltip title="{{ 'failed' | translate }}")
-        strong {{ item.statistics().failed }}
-        i.fa.fa-times-circle
+    .student-card-profile(ng-class='{ "detached-student": item.student.detached }')
 
-  .student-guide-details(ng-show='showDetails()')
+      .student-card-profile-image
+        img.img-circle.pointer(
+          with-default='{{ item.student.image_url }}',
+          ui-sref='classroom.courses.course.guides.guide.students({ \
+              student: item.student.social_id,                      \
+              eid: item.lastExerciseSubmitted().id                  \
+            })')
+      .student-card-profile-data
+        .student-card-profile-data-item
+          .student-card-profile-data-item-text
+            strong
+              span {{ item.student.fullName() }}
+          .student-card-profile-data-item-text
+            span.fa.fa-clock-o(
+                data-placement='top',
+                data-toggle='tooltip', tooltip,
+                title='{{ item.created_at|date:"medium" }}')
+            small
+              span {{ Humanizer.date(item.last_assignment.submission.created_at) }}
 
-    div(ng-if='item.hasSubmissions()')
-      section
-        .row
-          .col-sm-12.detail-title
-            strong {{ 'last_solution' | translate }}
-        .row
-          span.col-sm-10
-            a(ui-sref='classroom.courses.course.guides.guide.students({ student: item.student.social_id, eid: item.lastExerciseSubmitted().id })')
-              | {{ item.lastExerciseSubmitted().getName() }}
-          span.col-sm-2.pull-right
-            status-icon(status='item.lastSubmission().status')
-          .col-sm-12
-            pre(style='height: 125px; overflow-y: auto')
-              code
-                | {{ item.lastSubmission().content }}
+      .student-card-profile-status
+        .student-card-profile-status-row.failed(
+            ng-class='{ "empty": item.stats.failed === 0 }'
+            data-toggle="tooltip" tooltip title="{{ 'failed' | translate }}")
+          span {{ item.stats.failed }}
+          span.fa.fa-times-circle
+        .student-card-profile-status-row.passed_with_warnings(
+            ng-class='{ "empty": item.stats.passed_with_warnings === 0 }'
+            data-toggle="tooltip" tooltip title="{{ 'with_warnings' | translate }}")
+          span {{ item.stats.passed_with_warnings }}
+          span.fa.fa-exclamation-circle
+        .student-card-profile-status-row.passed(
+            ng-class='{ "empty": item.stats.passed === 0 }'
+            data-toggle="tooltip" tooltip title="{{ 'passed' | translate }}")
+          span {{ item.stats.passed }}
+          span.fa.fa-check-circle
+
+    .student-guide-details(ng-show='showDetails()')
+
+      .student-guide-details-title(ng-if='item.hasSubmissions()')
+        strong {{ 'last_solution' | translate }}
+
+      .student-guide-details-exercise
+        a(ui-sref='classroom.courses.course.guides.guide.students({ student: item.student.social_id, eid: item.lastExerciseSubmitted().id })')
+          | {{ item.lastExerciseSubmitted().getName() }}
+        status-icon(status='item.lastSubmission().status')
+
+      .student-guide-details-exercise-code
+        pre(style='height: 125px; overflow-y: auto')
+          code
+            | {{ item.lastSubmission().content }}
