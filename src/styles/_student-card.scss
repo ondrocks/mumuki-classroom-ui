@@ -56,6 +56,7 @@ $color-default: #ecf0f1;
       width: 100%;
       margin: 0 22px;
       overflow: hidden;
+      padding: 0 1px;
 
       .student-card-profile-data-item {
         @include display-flex(column, center, flex-start);
@@ -112,10 +113,10 @@ $color-default: #ecf0f1;
 
 .student-guide-details {
   @include display-flex(column, flex-start, flex-start)
-  width: auto;
+  width: 100%;
   overflow: hidden;
   white-space: nowrap;
-  padding: 15px 0 7px;
+  padding: 15px 1px 7px;
 
   .student-guide-details-exercise {
     width: 100%;
@@ -129,7 +130,6 @@ $color-default: #ecf0f1;
 
 }
 
-.border-bottom-none {
-  border-bottom: none;
+.divider-vertical {
+  border-left-color: $color-default;
 }
-
