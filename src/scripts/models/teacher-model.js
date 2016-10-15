@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .factory('Teacher', function () {
+  .factory('Teacher', function (ICONS) {
 
     class Teacher {
 
@@ -17,12 +17,20 @@ angular
         return this.fullName();
       }
 
-      static from(teacher) {
-        return new Teacher(teacher);
+      provider() {
+        return this.social_id.split('|')[0];
+      }
+
+      providerIcon() {
+        return ICONS[this.provider()];
       }
 
       _capitalize(name) {
         return _(name).split(' ').map(_.capitalize).join(' ');
+      }
+
+      static from(teacher) {
+        return new Teacher(teacher);
       }
 
     }

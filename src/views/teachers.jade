@@ -7,14 +7,23 @@
   br
 
   .row
-    .col-sm-12(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch')
-      .row.guide-progress-blog
-        .col-xs-6
-          img.rounded-x(ng-src='{{ item.image_url }}')
-          .name-location
-            strong {{ item.fullName() }}
-          .name-location
-            small
-              a(href='mailto:{{ item.email }}') {{ item.email }}
+    .col-sm-4(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch').floating-card
+      .student-card
+        .student-card-profile
+
+          .student-card-profile-image
+            img.img-circle(with-default='{{ item.image_url }}')
+
+          .student-card-profile-data
+            .student-card-profile-data-item
+              .student-card-profile-data-item-text
+                span.fa(class='fa-{{ item.providerIcon() }}')
+                strong
+                  span {{ item.fullName() }}
+              .student-card-profile-data-item-text
+                span.fa.fa-at
+                small
+                  a(href='mailto:{{item.email}}', ng-if='item.email') {{ item.email }}
+
   button.btn.btn-success.pull-right(ng-if='isAdmin()', ng-click='newTeacher()')
     | {{ 'new_teacher' | translate }}

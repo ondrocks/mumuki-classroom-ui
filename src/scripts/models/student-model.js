@@ -1,15 +1,9 @@
 
 angular
   .module('classroom')
-  .factory('Student', function () {
+  .factory('Student', function (ICONS) {
 
-    var icons = {
-      'auth0': 'envelope-o',
-      'github': 'github',
-      'twitter': 'twitter',
-      'facebook': 'facebook-square',
-      'google-oauth2': 'google',
-    }
+    var icons = ICONS;
 
     class Student {
 
