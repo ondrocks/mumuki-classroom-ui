@@ -7,12 +7,6 @@ cache:
   directories:
     - node_modules
     - src/bower_components
-after_success:
-- wget https://raw.githubusercontent.com/mumuki/mumuki-escualo-deploy/master/travis_deploy
-  && chmod u+x travis_deploy && ./travis_deploy classroom classroom.mumuki.io
-before_install:
-- openssl aes-256-cbc -K $encrypted_cde8fe39d66d_key -iv $encrypted_cde8fe39d66d_iv
-  -in escualo_rsa.enc -out escualo_rsa -d
 env:
   - CXX=g++-4.8
 addons:
