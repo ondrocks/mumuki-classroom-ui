@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .factory('Student', function (ICONS) {
+  .factory('Student', function (ICONS, Guide, Exercise, Submission) {
 
     var icons = ICONS;
 
@@ -45,6 +45,8 @@ angular
       }
 
       static from(student) {
+        student.last_assignment = student.last_assignment || {};
+        student.last_assignment.guide = Guide.from(student.last_assignment.guide);
         return new Student(student);
       }
 

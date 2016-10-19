@@ -18,7 +18,7 @@ angular
       }
 
       iconClass() {
-        return `devicons devicons-${DevIcon.from(this.language.name)}`;;
+        return `devicons devicons-${DevIcon.from(_.get(this, 'language.name'))}`;;
       }
 
       static from(guide) {
