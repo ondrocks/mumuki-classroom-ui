@@ -21,11 +21,11 @@ mixin follow
           a
             i.fa.fa-trash.margin
             span.item-name {{ 'remove' | translate }}
-        li.pointer(ng-click='attach(item)', ng-if='isAdmin && item.detached')
+        li.pointer(ng-click='attach(item)', ng-if='canDetach && item.detached')
           a
             i.fa.fa-user-plus.margin
             span.item-name {{ 'attach' | translate }}
-        li.pointer(ng-click='detach(item)', ng-if='isAdmin && !item.detached')
+        li.pointer(ng-click='detach(item)', ng-if='canDetach && !item.detached')
           a
             i.fa.fa-user-times.margin
             span.item-name {{ 'detach' | translate }}
