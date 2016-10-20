@@ -1,0 +1,163 @@
+@mixin display-flex($flow: row, $position-x: space-between, $position-y: center) {
+  display: flex;
+  flex-flow: $flow nowrap;
+  justify-content: $position-x;
+  align-items: $position-y;
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+$color-default: #ecf0f1;
+
+.panel-default {
+  border: none;
+  box-shadow: none;
+}
+
+.panel-body {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.floating-card {
+  padding: 5px 20px;
+}
+
+.student-card {
+  @include display-flex(column);
+
+  border: solid 1px $color-default;
+  margin: 0 -15px;
+  padding: 15px 22px;
+
+  .student-card-menu {
+    align-self: flex-end;
+    margin-right: -15px;
+    margin-bottom: -7px;
+    margin-top: -15px;
+  }
+
+  .student-card-profile {
+    @include display-flex;
+
+    width: 100%;
+
+    .student-card-profile-image {
+      @include display-flex(row, center, center);
+
+      img {
+        height: 7.5rem;
+        width: 7.5rem;
+        object-fit: cover;
+      }
+    }
+
+    .student-card-profile-data {
+      @include display-flex(column, center, flex-start);
+
+      width: 100%;
+      margin: 0 22px;
+      overflow: hidden;
+      padding: 0 1px;
+
+      .student-card-profile-data-item {
+
+        width: 100%;
+        white-space: nowrap;
+
+        .fa {
+          width: 20px;
+        }
+        .student-card-profile-data-item-text {
+          @include text-ellipsis;
+        }
+      }
+    }
+
+    .student-card-profile-status {
+      @include display-flex(column, center, flex-end);
+      width: auto;
+      .student-card-profile-status-row {
+        @include text-ellipsis;
+        font-weight: bold;
+        .fa { margin-left: 5px }
+        &.failed { color: $brand-danger }
+        &.passed { color: $brand-success }
+        &.passed_with_warnings { color: $brand-warning }
+        &.empty {
+          span { color: #d1d1d1 }
+        }
+      }
+    }
+  }
+
+}
+
+.student-card-recent {
+  @include display-flex
+  margin: 0 -15px;
+  width: calc(100% + 30px);
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: lighten($color-default, 4%);
+  border: solid 1px $color-default;
+  border-top: none;
+  .student-card-recent-column {
+    @include display-flex(column, center, center)
+    width: 50%;
+    padding: 5px 0;
+    overflow: hidden;
+    .fa { margin-right: 5px }
+    .student-card-recent-column-text {
+      @include text-ellipsis;
+      padding: 0 15px;
+    }
+    &.right-separator {
+      border-right: solid 1px $color-default;
+    }
+  }
+}
+
+.student-guide-details {
+  @include display-flex(column, flex-start, flex-start)
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 15px 1px 7px;
+
+  .student-guide-details-title {
+    width: 100%;
+
+    .student-guide-details-title-text {
+      @include text-ellipsis;
+    }
+  }
+
+  .student-guide-details-exercise {
+    width: 100%;
+    @include display-flex(row, space-between, center);
+
+    .student-guide-details-exercise-text {
+      @include text-ellipsis;
+    }
+  }
+
+  .student-guide-details-code {
+    width: 100%;
+    height: 130px;
+    pre {
+      height: 125px;
+      overflow-y: auto;
+    }
+  }
+
+}
+
+.divider-vertical {
+  border-left-color: $color-default;
+}

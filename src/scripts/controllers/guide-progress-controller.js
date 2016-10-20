@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, data, Api, DevIcon, Guide, Breadcrumb) {
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, data, Api, DevIcon, Guide, Breadcrumb, Humanizer) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -18,6 +18,8 @@ angular
 
     const setGuideProgress = (guideProgress) => $scope.list = guideProgress;
 
+    $scope.Humanizer = Humanizer;
+
     $scope.availableSortingCriterias = [
       { type: 'name', properties: ['student.last_name', 'student.first_name']},
       { type: 'progress', properties: ['stats.total', 'passedAverage()', 'student.last_name', 'student.first_name']},
@@ -28,7 +30,6 @@ angular
 
     $scope.guide = guide;
     $scope.devicon = DevIcon.from;
-    $scope.listBodyClass = 'col-md-4 col-sm-6';
     $scope.withDetachedStudents = false;
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));

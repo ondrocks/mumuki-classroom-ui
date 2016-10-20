@@ -1,15 +1,9 @@
 
 angular
   .module('classroom')
-  .factory('Student', function () {
+  .factory('Student', function (ICONS, Guide, Exercise, Submission) {
 
-    var icons = {
-      'auth0': 'envelope-o',
-      'github': 'github',
-      'twitter': 'twitter',
-      'facebook': 'facebook-square',
-      'google-oauth2': 'google',
-    }
+    var icons = ICONS;
 
     class Student {
 
@@ -42,7 +36,17 @@ angular
         return icons[this.provider()];
       }
 
+      lastSubmissionTime() {
+        return _.get(this, 'last_assignment.submission.created_at');
+      }
+
+      lastGuideName() {
+        return _.get(this, 'last_assignment.guide.name');
+      }
+
       static from(student) {
+        student.last_assignment = student.last_assignment || {};
+        student.last_assignment.guide = Guide.from(student.last_assignment.guide);
         return new Student(student);
       }
 

@@ -18,12 +18,13 @@ angular
 
     Breadcrumb.setCourse($stateParams.course);
     $scope.Humanizer = Humanizer;
+
     $scope.withDetails = false;
 
     $scope.isAdmin = (Auth.isAdmin() && Domain.tenant() !== 'digitalhouse') || Auth.isSuperUser(); // FIXME: private clients
     $scope.canTransfer = Auth.isAdmin();
-    $scope.listBodyClass = 'col-sm-12';
     $scope.canDetach = Auth.isAdmin();
+
     $scope.setCount(students.length);
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();
 

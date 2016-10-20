@@ -11,13 +11,13 @@ angular
           switch ($scope.status) {
             case 'failed':
             case 'errored':
-              return 'fa-times';
+              return 'fa-times-circle';
 
             case 'passed':
-              return 'fa-check';
+              return 'fa-check-circle';
 
             case 'passed_with_warnings':
-              return 'fa-exclamation';
+              return 'fa-exclamation-circle';
 
             default:
               return 'fa-circle';
