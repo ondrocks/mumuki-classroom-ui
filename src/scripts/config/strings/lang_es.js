@@ -117,7 +117,7 @@ angular
     submissions_count: '{{submissionsCount}} soluciones enviadas. Última solución: {{lastSubmissionDate}}',
     submit: 'Enviar',
     teachers: 'Docentes',
-    term_and_conditions: 'Al registrarte estas aceptando las <a target="_blank" href=""> condiciones de uso.</a>',
+    term_and_conditions: 'Al registrarte estas aceptando las <a target="_blank" href="{{url}}"> condiciones de uso.</a>',
     tests: 'Pruebas',
     total: 'Total intentados',
     transfer: 'Transferir',

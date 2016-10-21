@@ -116,7 +116,7 @@ angular
     submissions_count: '{{submissionsCount}} solutions sent. Last solution: {{lastSubmissionDate}}',
     submit: 'Submit',
     teachers: 'Teachers',
-    term_and_conditions: 'Agree with mumuki <a target="_blank" href=""> terms and conditions.</a>',
+    term_and_conditions: 'Agree with mumuki <a target="_blank" href="{{url}}"> terms and conditions.</a>',
     tests: 'Tests',
     total: 'Total',
     transfer: 'Transfer',

@@ -8,6 +8,10 @@ angular
       $translate.use(org.locale);
     }
 
+    this.currentLocale = () => $translate.use();
+
+    this.tosUrl = () => `http://mumuki.io/static/tos/tos-${this.currentLocale()}.txt`;
+
     this.getLockJson = () => {
       const promise = this.organization ?
         Promise.resolve() :
