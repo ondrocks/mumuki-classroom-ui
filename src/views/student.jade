@@ -42,6 +42,7 @@
         div.error
           small.text-muted.text-danger(ng-show='!isEmailValid(student.email) && f3')
             | {{ 'email_error' | translate }}
+      h6(ng-bind-html='termAndConditions')
 
       fieldset.form-group
         button.btn.btn-success.btn-block(ng-disabled='!isValid()') {{ 'sign_up' | translate }}
