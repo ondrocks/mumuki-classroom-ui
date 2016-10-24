@@ -1,0 +1,29 @@
+.new-student {
+  background-image: url('../images/sign_up.jpg');
+  background-size: cover;
+  position: fixed;
+  @include display-flex(column, center, center);
+  height: 100%;
+  width: 100%;
+  .student-form {
+    @include display-flex(column, center, center);
+    img {
+      width: 100px;
+    }
+    h3 {
+      color: white;
+    }
+    padding: 2rem 10rem 1rem;
+    form {
+      width: 300px;
+    }
+    small {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    h6 {
+      color: white;
+    }
+  }
+}
+

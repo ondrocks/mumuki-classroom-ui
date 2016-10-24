@@ -1,45 +1,48 @@
-.container
+.new-student
+  .student-form
+    img.text-center(src='images/logo.png')
+    h3 {{ 'complete_form' | translate }}
 
-  h3 {{ 'complete_form' | translate }}
+    form(ng-submit='submit()')
 
-  form(ng-submit='submit()')
+      fieldset.form-group
+        input.form-control(
+            type='text',
+            ng-model='student.first_name',
+            placeholder='{{ "first_name" | translate }}',
+            required,
+            autofocus,
+            ng-init='f1 = false'
+            ng-change='f1 = true')
+        div.error
+          small.text-muted.text-danger(ng-show='!isTextValid(student.first_name) && f1')
+            | {{ 'first_name_error' | translate }}
 
-    fieldset.form-group
-      input.form-control(
-          type='text',
-          ng-model='student.first_name',
-          placeholder='{{ "first_name" | translate }}',
-          required,
-          autofocus,
-          ng-init='f1 = false'
-          ng-change='f1 = true')
-      div.error
-        small.text-muted.text-danger(ng-show='!isTextValid(student.first_name) && f1')
-          | {{ 'first_name_error' | translate }}
+      fieldset.form-group
+        input.form-control(
+            type='text',
+            ng-model='student.last_name',
+            placeholder='{{ "last_name" | translate }}',
+            required
+            ng-init='f2 = false'
+            ng-change='f2 = true')
+        div.error
+          small.text-muted.text-danger(ng-show='!isTextValid(student.last_name) && f2')
+            | {{ 'last_name_error' | translate }}
 
-    fieldset.form-group
-      input.form-control(
-          type='text',
-          ng-model='student.last_name',
-          placeholder='{{ "last_name" | translate }}',
-          required
-          ng-init='f2 = false'
-          ng-change='f2 = true')
-      div.error
-        small.text-muted.text-danger(ng-show='!isTextValid(student.last_name) && f2')
-          | {{ 'last_name_error' | translate }}
+      fieldset.form-group
+        input.form-control(
+            type='text',
+            ng-model='student.email',
+            placeholder='{{ "email" | translate }}',
+            required,
+            ng-init='f3 = false',
+            ng-disabled='isEdit',
+            ng-change='f3 = true')
+        div.error
+          small.text-muted.text-danger(ng-show='!isEmailValid(student.email) && f3')
+            | {{ 'email_error' | translate }}
+      h6(ng-bind-html='termAndConditions')
 
-    fieldset.form-group
-      input.form-control(
-          type='text',
-          ng-model='student.email',
-          placeholder='{{ "email" | translate }}',
-          required,
-          ng-init='f3 = false',
-          ng-disabled='isEdit',
-          ng-change='f3 = true')
-      div.error
-        small.text-muted.text-danger(ng-show='!isEmailValid(student.email) && f3')
-          | {{ 'email_error' | translate }}
-
-      button.btn.btn-success.pull-right(ng-disabled='!isValid()') {{ 'submit' | translate }}
+      fieldset.form-group
+        button.btn.btn-success.btn-block(ng-disabled='!isValid()') {{ 'sign_up' | translate }}
