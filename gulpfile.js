@@ -63,8 +63,10 @@ gulp.task('jade:index', () => {
     .pipe($.wiredep({ includeSelf: true }))
     .pipe($.jade({ pretty: true }))
     .pipe($.usemin({
-      css: [$.minifyCss],
-      js: [$.uglify]
+      scss: [$.rev],
+      es6: [$.rev],
+      css: [$.minifyCss, $.rev],
+      js: [$.uglify, $.rev]
     }))
     .pipe(gulp.dest(`${outFolder}`))
     .pipe($.livereload());
@@ -91,10 +93,12 @@ gulp.task('images', () => {
 
 gulp.task('jade', ['jade:index', 'jade:views']);
 
-gulp.task('dev:build',  ['dev:js',  'jade', 'scss', 'fonts', 'images']);
+gulp.task('dev:build', (done) => {
+  runSequence('clean', 'dev:js', 'scss', 'jade', 'fonts', 'images', done);
+});
 
 gulp.task('prod:build', (done) => {
-  runSequence('clean', ['prod:js', 'jade', 'scss', 'fonts', 'images'], 'release', done);
+  runSequence('clean', 'prod:js', 'scss', 'jade', 'fonts', 'images', 'release', done);
 });
 
 gulp.task('dev:serve', ['dev:build'], () => {
@@ -127,7 +131,7 @@ gulp.task('prod:serve', () => {
 
 gulp.task('dev', (done) => {
   process.env.NODE_ENV = 'development';
-  runSequence('clean', 'dev:serve', 'dev:watch', done);
+  runSequence('dev:serve', 'dev:watch', done);
 });
 
 gulp.task('prod', (done) => {
