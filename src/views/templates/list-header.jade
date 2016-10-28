@@ -24,16 +24,18 @@
 
       .col-md-4.col-sm-6.pull-right
         .input-group(ng-if='withSortBy')
-          i.input-group-addon.fa.pointer(
-            ng-click='toggleIsAscending()',
-            ng-class='{                                   \
-              "fa-sort-amount-asc": options.isAscending,  \
-              "fa-sort-amount-desc": !options.isAscending \
-            }')
+          span.input-group-addon
+            i.fa.fa-fw.pointer(
+              ng-click='toggleIsAscending()',
+              ng-class='{                                   \
+                "fa-sort-amount-asc": options.isAscending,  \
+                "fa-sort-amount-desc": !options.isAscending \
+              }')
           select.form-control(ng-model='options.sortingType')
             option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
         .input-group(ng-if='withFilter')
-          i.input-group-addon.fa.fa-search
+          span.input-group-addon
+            i.fa.fa-search.fa-fw
           input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listOptions.search')
 
   .panel-body.guide-progress-main
