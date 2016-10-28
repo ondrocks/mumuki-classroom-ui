@@ -13,6 +13,7 @@
 }
 
 $color-default: #ecf0f1;
+$avatar-size: 5.75rem;
 
 .panel-default {
   border: none;
@@ -25,7 +26,7 @@ $color-default: #ecf0f1;
 }
 
 .floating-card {
-  padding: 5px 20px;
+  padding: 10px 25px;
 }
 
 .student-card {
@@ -51,8 +52,8 @@ $color-default: #ecf0f1;
       @include display-flex(row, center, center);
 
       img {
-        height: 7.5rem;
-        width: 7.5rem;
+        height: $avatar-size;
+        width: $avatar-size;
         object-fit: cover;
       }
     }
