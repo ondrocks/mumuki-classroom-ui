@@ -38,8 +38,7 @@
             i.fa.fa-search.fa-fw
           input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listOptions.search')
 
-  div
-    .row
-      div.col-md-4.col-sm-6.floating-card(
-          ng-repeat='item in list | filter:byDetachedStudents | orderBy:sortingCriteria():!options.isAscending | filter:listOptions.search | filter:byFollowers')
-        div(ng-include='itemTemplate')
+  .panel-content
+    div.col-md-4.col-sm-6.floating-card(
+        ng-repeat='item in list | filter:byDetachedStudents | orderBy:sortingCriteria():!options.isAscending | filter:listOptions.search | filter:byFollowers')
+      div(ng-include='itemTemplate')

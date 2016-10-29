@@ -12,6 +12,7 @@
   max-width: 100%;
 }
 
+$floating-card-padding: 5px;
 $color-default: #ecf0f1;
 $avatar-size: 5.75rem;
 
@@ -20,22 +21,19 @@ $avatar-size: 5.75rem;
   box-shadow: none;
 }
 
-.floating-card {
-  padding: 10px 25px;
-}
+.floating-card { padding: $floating-card-padding; }
+.panel-content { padding-top: $floating-card-padding; }
 
 .student-card {
   @include display-flex(column);
 
   border: solid 1px $color-default;
-  margin: 0 -15px;
-  padding: 15px 22px;
+  padding: 15px;
 
   .student-card-menu {
+    position: absolute;
     align-self: flex-end;
-    margin-right: -15px;
-    margin-bottom: -7px;
-    margin-top: -15px;
+    margin: -19px 11px;
   }
 
   .student-card-profile {
@@ -57,18 +55,15 @@ $avatar-size: 5.75rem;
       @include display-flex(column, center, flex-start);
 
       width: 100%;
-      margin: 0 22px;
+      margin: 0 15px;
       overflow: hidden;
-      padding: 0 1px;
 
       .student-card-profile-data-item {
 
         width: 100%;
         white-space: nowrap;
 
-        .fa {
-          width: 20px;
-        }
+        .fa { margin-right: 3px }
         .student-card-profile-data-item-text {
           @include text-ellipsis;
         }
@@ -77,16 +72,15 @@ $avatar-size: 5.75rem;
 
     .student-card-profile-status {
       @include display-flex(column, center, flex-end);
-      width: auto;
       .student-card-profile-status-row {
         @include text-ellipsis;
         font-weight: bold;
-        .fa { margin-left: 5px }
+        .fa { margin-left: 3px }
         &.failed { color: $brand-danger }
         &.passed { color: $brand-success }
         &.passed_with_warnings { color: $brand-warning }
         &.empty {
-          span { color: #d1d1d1 }
+          span, i { color: #d1d1d1 }
         }
       }
     }
@@ -96,10 +90,7 @@ $avatar-size: 5.75rem;
 
 .student-card-recent {
   @include display-flex
-  margin: 0 -15px;
-  width: calc(100% + 30px);
-  overflow: hidden;
-  white-space: nowrap;
+  width: 100%;
   background-color: lighten($color-default, 4%);
   border: solid 1px $color-default;
   border-top: none;
@@ -108,7 +99,7 @@ $avatar-size: 5.75rem;
     width: 50%;
     padding: 5px 0;
     overflow: hidden;
-    .fa { margin-right: 5px }
+    .fa, .devicons { margin-right: 3px }
     .student-card-recent-column-text {
       @include text-ellipsis;
       padding: 0 15px;
@@ -124,7 +115,6 @@ $avatar-size: 5.75rem;
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
-  padding: 15px 1px 7px;
 
   .student-guide-details-title {
     width: 100%;
