@@ -14,9 +14,11 @@ div
         .student-card-profile-data-item
           .student-card-profile-data-item-text
             strong
+              span
+                i.fa.fa-fw(class='fa-{{ item.student.providerIcon() }}')
               span {{ item.student.fullName() }}
           .student-card-profile-data-item-text
-            span.fa.fa-clock-o(
+            span.fa.fa-fw.fa-clock-o(
                 data-placement='top',
                 data-toggle='tooltip', tooltip,
                 title='{{ item.created_at|date:"medium" }}')
@@ -28,17 +30,17 @@ div
             ng-class='{ "empty": item.stats.failed === 0 }'
             data-toggle="tooltip" tooltip title="{{ 'failed' | translate }}")
           span {{ item.stats.failed }}
-          span.fa.fa-times-circle
+          span.fa.fa-fw.fa-times-circle
         .student-card-profile-status-row.passed_with_warnings(
             ng-class='{ "empty": item.stats.passed_with_warnings === 0 }'
             data-toggle="tooltip" tooltip title="{{ 'with_warnings' | translate }}")
           span {{ item.stats.passed_with_warnings }}
-          span.fa.fa-exclamation-circle
+          span.fa.fa-fw.fa-exclamation-circle
         .student-card-profile-status-row.passed(
             ng-class='{ "empty": item.stats.passed === 0 }'
             data-toggle="tooltip" tooltip title="{{ 'passed' | translate }}")
           span {{ item.stats.passed }}
-          span.fa.fa-check-circle
+          span.fa.fa-fw.fa-check-circle
 
     .student-guide-details(ng-show='showDetails()')
 
