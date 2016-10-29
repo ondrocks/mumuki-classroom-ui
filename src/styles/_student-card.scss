@@ -151,3 +151,19 @@ $avatar-size: 5.75rem;
 .teacher-card.row {
   margin: 0
 }
+
+.list-header-options {
+
+  @include display-flex(column, space-around, flex-start);
+
+  height: 88px;
+
+  .list-header-option {
+    @include display-flex(row, flex-start, center);
+    button {
+      padding: 7.5px;
+      border: none;
+    }
+  }
+
+}
