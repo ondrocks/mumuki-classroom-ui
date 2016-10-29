@@ -23,6 +23,10 @@ $avatar-size: 5.75rem;
 
 .floating-card { padding: $floating-card-padding; }
 .panel-content { padding-top: $floating-card-padding; }
+.panel-heading {
+  padding: 15px;
+  border: none;
+}
 
 .student-card {
   @include display-flex(column);
@@ -161,7 +165,7 @@ $avatar-size: 5.75rem;
   .list-header-option {
     @include display-flex(row, flex-start, center);
     button {
-      padding: 7.5px;
+      padding: 10px;
       border: none;
     }
   }
