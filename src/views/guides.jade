@@ -1,4 +1,4 @@
-.container
+div
 
   .input-group
     i.input-group-addon.fa.fa-search
@@ -15,7 +15,7 @@
               a(ng-click='setLastChapterOpened(chapter)', role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapse{{$index}}', aria-controls='collapse{{$index}}')
                 |  {{ chapter | translate | uppercase }}
           .panel-collapse.collapse(id='collapse{{$index}}', role='tabpanel', aria-labelledby='heading{{$index}}', ng-class="{ in: actualChapter(chapter) }")
-            .panel-body.nopadding
+            .guide-chapter-list
               button.list-group-item.noborder-radius(ng-repeat='guide in guides | orderBy: sortCriteria() | filter:listSearch', ng-click='open(guide)')
                 i(class='{{ guide.iconClass() }}')
                 span.divider-vertical
@@ -28,7 +28,7 @@
           a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapseComplemets', aria-controls='collapseComplemets')
             |  {{ 'complements' | translate | uppercase }}
       .panel-collapse.collapse(id='collapseComplemets', role='tabpanel', aria-labelledby='headingComplemets')
-        .panel-body.nopadding
+        .guide-chapter-list
           button.list-group-item.noborder-radius(ng-repeat='complement in complements | orderBy: sortCriteria() | filter:listSearch', ng-click='open(complement)')
             i(class='{{ complement.iconClass() }}')
             span.divider-vertical
@@ -41,7 +41,7 @@
           a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapseExams', aria-controls='collapseExams')
             |  {{ 'exams' | translate | uppercase }}
       .panel-collapse.collapse(id='collapseExams', role='tabpanel', aria-labelledby='headingExams')
-        .panel-body.nopadding
+        .guide-chapter-list
           button.list-group-item.noborder-radius(ng-repeat='exam in exams | orderBy: sortCriteria() | filter:listSearch', ng-click='open(exam)')
             i(class='{{ exam.iconClass() }}')
             span.divider-vertical
@@ -54,7 +54,7 @@
           a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapseOthers', aria-controls='collapseOthers')
             |  {{ 'others' | translate | uppercase }}
       .panel-collapse.collapse(id='collapseOthers', role='tabpanel', aria-labelledby='headingOthers')
-        .panel-body.nopadding
+        .guide-chapter-list
           button.list-group-item.noborder-radius(ng-repeat='guide in others | orderBy: sortCriteria() | filter:listSearch', ng-click='open(guide)')
             i(class='{{ guide.iconClass() }}')
             span.divider-vertical

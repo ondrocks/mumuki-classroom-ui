@@ -1,4 +1,4 @@
-.container
+div
 
   .input-group
     i.input-group-addon.fa.fa-search
@@ -6,8 +6,8 @@
 
   br
 
-  .row
-    .col-sm-4(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch').floating-card
+  .teacher-card.row
+    .col-md-4.col-sm-6.floating-card(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch')
       .student-card
         .student-card-profile
 
@@ -17,11 +17,13 @@
           .student-card-profile-data
             .student-card-profile-data-item
               .student-card-profile-data-item-text
-                span.fa(class='fa-{{ item.providerIcon() }}')
+                span
+                  i.fa.fa-fw(class='fa-{{ item.providerIcon() }}')
                 strong
                   span {{ item.fullName() }}
               .student-card-profile-data-item-text
-                span.fa.fa-at
+                span
+                  i.fa.fa-fw.fa-at
                 small
                   a(href='mailto:{{item.email}}', ng-if='item.email') {{ item.email }}
 

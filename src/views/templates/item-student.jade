@@ -1,4 +1,4 @@
-div
+.student-floating-card
   .student-card
 
     .student-card-menu
@@ -44,16 +44,16 @@ div
       .student-card-profile-data
         .student-card-profile-data-item
           .student-card-profile-data-item-text
-            span.fa(class='fa-{{ item.providerIcon() }}')
+            span.fa.fa-fw(class='fa-{{ item.providerIcon() }}')
             strong
               span {{ item.fullName() }}
           .student-card-profile-data-item-text
-            span.fa.fa-at
+            span.fa.fa-fw.fa-at
             small
               a(href='mailto:{{item.email}}', ng-if='item.email') {{ item.email }}
               span(ng-if='!item.email') {{ 'email_not_provided' | translate }}
           .student-card-profile-data-item-text
-            span.fa.fa-calendar(
+            span.fa.fa-fw.fa-calendar(
                 data-placement='top',
                 data-toggle='tooltip', tooltip,
                 title='{{                                                                                           \
@@ -67,17 +67,20 @@ div
             ng-class='{ "empty": item.stats.failed === 0 }'
             data-toggle="tooltip" tooltip title="{{ 'failed' | translate }}")
           span {{ item.stats.failed }}
-          span.fa.fa-times-circle
+          span
+            i.fa.fa-fw.fa-times-circle
         .student-card-profile-status-row.passed_with_warnings(
             ng-class='{ "empty": item.stats.passed_with_warnings === 0 }'
             data-toggle="tooltip" tooltip title="{{ 'with_warnings' | translate }}")
           span {{ item.stats.passed_with_warnings }}
-          span.fa.fa-exclamation-circle
+          span
+            i.fa.fa-fw.fa-exclamation-circle
         .student-card-profile-status-row.passed(
             ng-class='{ "empty": item.stats.passed === 0 }'
             data-toggle="tooltip" tooltip title="{{ 'passed' | translate }}")
           span {{ item.stats.passed }}
-          span.fa.fa-check-circle
+          span
+            i.fa.fa-fw.fa-check-circle
 
   .student-card-recent(ng-class='{ "detached-student": item.detached }')
     .student-card-recent-column.right-separator
@@ -85,13 +88,15 @@ div
         small {{ item.lastGuideName() || '-' }}
       .student-card-recent-column-text
         small
-          span(class='{{ item.last_assignment.guide.iconClass() }}')
-          span.fa.fa-book(ng-if='!item.last_assignment.guide.language')
+          span
+            i(class='{{ item.last_assignment.guide.iconClass() }}')
+          span(ng-if='!item.last_assignment.guide.language')
+            i.fa.fa-book
           span {{ 'last_lesson' | translate }}
     .student-card-recent-column
       .student-card-recent-column-text
         small {{ item.lastSubmissionTime() ? Humanizer.date(item.lastSubmissionTime()) : '-' }}
       .student-card-recent-column-text
         small
-          span.fa.fa-clock-o
+          span.fa.fa-fw.fa-clock-o
           span {{ 'last_solution' | translate }}

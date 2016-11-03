@@ -13,6 +13,22 @@ const $ = gulpLoadPlugins();
 
 const srcFolder = 'src';
 const outFolder = 'build';
+const useminOptions = () => {
+  return {
+    development: {
+      scss: [],
+      es6: [],
+      css: [$.minifyCss, $.rev],
+      js: [$.uglify, $.rev]
+    },
+    production: {
+      scss: [$.rev],
+      es6: [$.rev],
+      css: [$.minifyCss, $.rev],
+      js: [$.uglify, $.rev]
+    }
+  }[process.env.NODE_ENV];
+}
 
 const configFile = () => `config/${process.env.NODE_ENV}.js`;
 
@@ -62,12 +78,7 @@ gulp.task('jade:index', () => {
   return gulp.src([`${srcFolder}/index.jade`])
     .pipe($.wiredep({ includeSelf: true }))
     .pipe($.jade({ pretty: true }))
-    .pipe($.usemin({
-      scss: [$.rev],
-      es6: [$.rev],
-      css: [$.minifyCss, $.rev],
-      js: [$.uglify, $.rev]
-    }))
+    .pipe($.usemin(useminOptions()))
     .pipe(gulp.dest(`${outFolder}`))
     .pipe($.livereload());
 });
