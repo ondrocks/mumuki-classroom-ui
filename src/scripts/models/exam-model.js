@@ -18,7 +18,7 @@ angular
       }
 
       iconClass() {
-        return `devicons devicons-${DevIcon.from(this.language)}`;;
+        return `da da-${DevIcon.from(this.language)}`;;
       }
 
       static from(exam) {
