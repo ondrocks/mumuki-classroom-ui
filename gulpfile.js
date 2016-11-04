@@ -90,8 +90,15 @@ gulp.task('scss', () => {
     .pipe($.livereload());
 });
 
+const bower = `${srcFolder}/bower_components`;
+const fontPaths = [
+  `${bower}/font-awesome/fonts/**/*`,
+  `${bower}/dev-awesome/dist/fonts/**/*`,
+  `${bower}/bootstrap-sass/assets/fonts/**/*`
+];
+
 gulp.task('fonts', () => {
-  return gulp.src([`${srcFolder}/fonts/**/*`])
+  return gulp.src(fontPaths)
     .pipe(gulp.dest(`${outFolder}/fonts`))
     .pipe($.livereload());
 });
@@ -125,7 +132,7 @@ gulp.task('dev:serve', ['dev:build'], () => {
 gulp.task('dev:watch', () => {
   gulp.watch(`${configFile()}`, ['dev:js']);
   gulp.watch(`${srcFolder}/index.jade`, ['jade:index']);
-  gulp.watch(`${srcFolder}/fonts/**/*`, ['fonts']);
+  gulp.watch(`${fontPaths}`, ['fonts']);
   gulp.watch(`${srcFolder}/images/**/*`, ['images']);
   gulp.watch(`${srcFolder}/scripts/**/*.js`, ['dev:js']);
   gulp.watch(`${srcFolder}/styles/**/*.scss`, ['scss']);
