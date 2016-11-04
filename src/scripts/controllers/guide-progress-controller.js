@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, data, Api, DevIcon, Guide, Breadcrumb, Humanizer) {
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, data, Api, Guide, Breadcrumb, Humanizer) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -29,7 +29,6 @@ angular
     setGuideProgress(data.guideProgress);
 
     $scope.guide = guide;
-    $scope.devicon = DevIcon.from;
     $scope.withDetachedStudents = false;
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));

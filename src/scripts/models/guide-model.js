@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .factory('Guide', function (DevIcon, Domain) {
+  .factory('Guide', function (Domain) {
 
     class Guide {
 
@@ -18,7 +18,7 @@ angular
       }
 
       iconClass() {
-        return `da da-${DevIcon.from(_.get(this, 'language.name'))}`;;
+        return `da da-${_.get(this, 'language.name')}`;;
       }
 
       static from(guide) {

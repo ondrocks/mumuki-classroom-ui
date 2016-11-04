@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .factory('Exam', function (DevIcon) {
+  .factory('Exam', function () {
 
     class Exam {
 
@@ -18,7 +18,7 @@ angular
       }
 
       iconClass() {
-        return `da da-${DevIcon.from(this.language)}`;;
+        return `da da-${this.language}`;;
       }
 
       static from(exam) {
