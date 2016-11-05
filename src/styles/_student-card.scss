@@ -103,7 +103,7 @@ $avatar-size: 5.75rem;
     width: 50%;
     padding: 5px 0;
     overflow: hidden;
-    .fa, .devicons { margin-right: 3px }
+    .fa, .da { margin-right: 3px }
     .student-card-recent-column-text {
       @include text-ellipsis;
       padding: 0 15px;

@@ -3,8 +3,9 @@
     .col-md-10
       ol.breadcrumb(ng-if='isLoggedIn() && isTeacher()')
         li
-          span.ahahamojimoji
-            a(ui-sref='classroom.home') ム
+          span.brand
+            a(ui-sref='classroom.home')
+              i.da.da-mumuki
         li
           a(ui-sref='classroom.home') {{ 'courses' | translate}}
         li(ng-repeat='item in Breadcrumb.list()')
