@@ -44,6 +44,10 @@ angular
         return _.get(this, 'last_assignment.guide.name');
       }
 
+      lastGuide() {
+        return _.get(this, 'last_assignment.guide');
+      }
+
       static from(student) {
         student.last_assignment = student.last_assignment || {};
         student.last_assignment.guide = Guide.from(student.last_assignment.guide);
