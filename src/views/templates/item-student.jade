@@ -85,7 +85,7 @@
   .student-card-recent(ng-class='{ "detached-student": item.detached }')
     .student-card-recent-column.right-separator
       .student-card-recent-column-text
-        a.small-font(href='' ng-click='openGuide(item.lastGuide())') {{ item.lastGuideName() || '-' }}
+        a.small-font(href='' ui-sref='classroom.courses.course.guides.guide.students({ student: item.social_id, eid: item.lastExerciseSubmitted().id })') {{ item.lastGuideName() || '-' }}
       .student-card-recent-column-text
         small
           span

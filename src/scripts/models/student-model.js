@@ -48,6 +48,10 @@ angular
         return _.get(this, 'last_assignment.guide');
       }
 
+      lastExerciseSubmitted() {
+        return _.get(this, 'last_assignment.exercise');
+      }
+
       static from(student) {
         student.last_assignment = student.last_assignment || {};
         student.last_assignment.guide = Guide.from(student.last_assignment.guide);
