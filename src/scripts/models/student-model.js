@@ -45,6 +45,18 @@ angular
       }
 
       lastGuide() {
+        return _.get(this, 'last_assignment.guide.slug');
+      }
+
+      lastGuideRepo() {
+        return this.lastGuide().split('/')[1];
+      }
+
+      lastGuideOrg() {
+        return this.lastGuide().split('/')[0];
+      }
+
+      lastGuide() {
         return _.get(this, 'last_assignment.guide');
       }
 
