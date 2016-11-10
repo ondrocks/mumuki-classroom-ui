@@ -45,14 +45,14 @@ angular
       }
 
       lastGuideSlug() {
-        return this.lastGuide().slug;
+        return _.get(this, 'last_assignment.guide.slug');
       }
 
       lastGuideRepo() {
         return this.lastGuideSlug().split('/')[1];
       }
 
-      lastGuideRepo() {
+      lastGuideOrg() {
         return this.lastGuideSlug().split('/')[0];
       }
 
