@@ -10,6 +10,4 @@
     .row
       .col-md-12.pull-right
         button.btn.btn-default(type='button', ng-click='no()', data-dismiss='modal') {{ 'no' | translate }}
-        button.btn.btn-success(type='button', ng-click='yes()')
-          span(ng-if='!spin') {{ 'yes' | translate }}
-          i.fa(ng-class='{"fa-spin": spin, "fa-spinner": spin}', ng-if='spin')
+        button.btn.btn-success(type='button', spin-on-click='yes()') {{ 'yes' | translate }}
