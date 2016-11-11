@@ -1,24 +1,25 @@
-.container
-  .row
-    .col-md-10
-      ol.breadcrumb(ng-if='isLoggedIn() && isTeacher()')
-        li
-          span.brand
-            a(ui-sref='classroom.home')
-              i.da.da-mumuki
-        li
-          a(ui-sref='classroom.home') {{ 'courses' | translate}}
-        li(ng-repeat='item in Breadcrumb.list()')
-          a(href='', ng-click='Breadcrumb.goTo(item)') {{ item.name() | translate }}
-    .col-md-2
-      .user-menu
-        dropdown(ng-if='isLoggedIn()')
-          a.dropdown-toggle(href='', data-toggle='dropdown', role='button')
-            img.rounded-x.profile(ng-src='{{ profile().picture }}', width='40px')
-          ul.dropdown-menu()
-            li
-              a {{ profile().name }}
-            li.divider(role='separator')
-            li
-              a(href='', ng-click='signout()') {{ 'log_out' | translate }}
-          a(ng-if='!isLoggedIn()' href='', ng-click='signin()') {{ 'log_in' | translate }}
+.navbar
+  .container
+    .row
+      .col-md-10
+        ol.breadcrumb(ng-if='isLoggedIn() && isTeacher()')
+          li
+            span.brand
+              a(ui-sref='classroom.home')
+                i.da.da-mumuki
+          li
+            a(ui-sref='classroom.home') {{ 'courses' | translate}}
+          li(ng-repeat='item in Breadcrumb.list()')
+            a(href='', ng-click='Breadcrumb.goTo(item)') {{ item.name() | translate }}
+      .col-md-2
+        .user-menu
+          dropdown(ng-if='isLoggedIn()')
+            a.dropdown-toggle(href='', data-toggle='dropdown', role='button')
+              img.rounded-x.profile(ng-src='{{ profile().picture }}', width='40px')
+            ul.dropdown-menu()
+              li
+                a {{ profile().name }}
+              li.divider(role='separator')
+              li
+                a(href='', ng-click='signout()') {{ 'log_out' | translate }}
+            a(ng-if='!isLoggedIn()' href='', ng-click='signin()') {{ 'log_in' | translate }}

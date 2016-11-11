@@ -3,7 +3,7 @@
     img.text-center(src='images/logo.png')
     h3 {{ 'complete_form' | translate }}
 
-    form(ng-submit='submit()')
+    form
 
       fieldset.form-group
         input.form-control(
@@ -45,4 +45,4 @@
       h6(ng-bind-html='termAndConditions')
 
       fieldset.form-group
-        button.btn.btn-success.btn-block(ng-disabled='!isValid()') {{ 'sign_up' | translate }}
+        button.btn.btn-success.btn-block(spin-on-click='submit()', ng-disabled='!isValid()') {{ 'sign_up' | translate }}
