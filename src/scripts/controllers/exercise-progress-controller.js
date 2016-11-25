@@ -96,9 +96,9 @@ angular
         // This ugly logic is for fancy pagination;
         const number = _.floor($scope.index() / $scope.limit) * $scope.limit;
         const diffLengthBiggerThanLimit = diffs.length >= $scope.limit;
-        const numberBiggerThandiffLength = number + $scope.limit >= diffs.length;
+        const numberBiggerThanDiffLength = number + $scope.limit >= diffs.length;
 
-        return diffLengthBiggerThanLimit && numberBiggerThandiffLength ? (diffs.length - $scope.limit) : number;
+        return diffLengthBiggerThanLimit && numberBiggerThanDiffLength ? (diffs.length - $scope.limit) : number;
       };
 
       $scope.indexNumber = ($index) => _.padStart($scope.begin() + $index + 1, 2, '0');
