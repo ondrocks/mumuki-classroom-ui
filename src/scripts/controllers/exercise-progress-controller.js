@@ -1,13 +1,17 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, exercisesProgress, containsHtml, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain) {
+  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, hotkeys, exercisesProgress, containsHtml, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain) {
 
     Preferences($scope, 'options');
 
+    const SPLIT = { type: 'side-by-side', name: 'split' };
+    const UNIFIED = { type: 'line-by-line', name: 'unified' };
+    const LAST_SOLUTION = { type: 'only-last', name: 'last_solution' };
+
     const exerciseToView = _.find(exercisesProgress, (progress) => progress.exercise.id === Number($stateParams.eid));
 
-    $scope.exercisesProgress = exercisesProgress;
+    $scope.exercisesProgress = $filter('orderBy')(exercisesProgress, ['exercise.number', 'exercise.name']);
 
     $scope.atheneumLink = () => _.isEmpty(exerciseProgress.exercise.bilbiotheca_id)
                                   ? Domain.exerciseURL(exerciseProgress.exercise.id)
@@ -20,12 +24,55 @@ angular
     Breadcrumb.setGuide(exerciseProgress.guide);
     Breadcrumb.setStudent(exerciseProgress.student);
 
+    hotkeys
+      .bindTo($scope)
+      .add({
+        combo: ['ctrl+up', 'ctrl+left', 'command+up', 'command+left', 'k'],
+        description: $filter('translate')('next_exercise_description'),
+        callback: () => $scope.selectExercise($scope.prevExercise()),
+      })
+      .add({
+        combo: ['ctrl+down', 'ctrl+right', 'command+down', 'command+right', 'j'],
+        description: $filter('translate')('prev_exercise_description'),
+        callback: () => $scope.selectExercise($scope.nextExercise()),
+      })
+      .add({
+        combo: ['left'],
+        description: $filter('translate')('next_solution_description'),
+        callback: () => {
+          if (!_.isEqual($scope.options.viewMode, LAST_SOLUTION)) {
+            $scope.prev();
+          }
+        }
+      })
+      .add({
+        combo: ['right'],
+        description: $filter('translate')('prev_solution_description'),
+        callback: () => {
+          if (!_.isEqual($scope.options.viewMode, LAST_SOLUTION)) {
+            $scope.next();
+          }
+        },
+      });
+
+    const currentExerciseProgressIndex = () => {
+      return _.findIndex($scope.exercisesProgress, (p) => p.exercise.id === Number($stateParams.eid));
+    }
+
+    $scope.nextExercise = () => {
+      const exercisesProgressIndex = currentExerciseProgressIndex();
+      return $scope.exercisesProgress[Math.min(exercisesProgressIndex + 1, exercisesProgress.length - 1)];
+    }
+
+    $scope.prevExercise = () => {
+      const exercisesProgressIndex = currentExerciseProgressIndex();
+      return $scope.exercisesProgress[Math.max(exercisesProgressIndex - 1, 0)]
+    }
+
     $scope.selectExercise = (exerciseProgress) => {
+      $stateParams.eid = exerciseProgress.exercise.id;
       const diffs = exerciseProgress.diffs;
 
-      const SPLIT = { type: 'side-by-side', name: 'split' };
-      const UNIFIED = { type: 'line-by-line', name: 'unified' };
-      const LAST_SOLUTION = { type: 'only-last', name: 'last_solution' };
       if (_.isEmpty($scope.options)) $scope.options = { viewMode: UNIFIED };
 
       const MIN = 0;

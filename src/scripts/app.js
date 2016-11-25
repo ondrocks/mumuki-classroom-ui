@@ -13,5 +13,6 @@ angular.module('classroom', [
   'cfp.loadingBar',
   'ui.bootstrap',
   'ui.bootstrap.modal',
-  'ui.bootstrap.datetimepicker'
+  'ui.bootstrap.datetimepicker',
+  'cfp.hotkeys',
 ]);

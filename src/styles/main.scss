@@ -22,3 +22,20 @@
 @import 'pagination';
 @import 'student-card';
 @import 'new-student';
+
+.cfp-hotkeys-close {
+  display: none;
+}
+
+.cfp-hotkeys {
+  .cfp-hotkeys-title {
+    display: none;
+  }
+  table {
+    tbody {
+      tr:first-child {
+        display: none;
+      }
+    }
+  }
+}
