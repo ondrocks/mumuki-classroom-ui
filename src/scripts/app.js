@@ -15,4 +15,5 @@ angular.module('classroom', [
   'ui.bootstrap.modal',
   'ui.bootstrap.datetimepicker',
   'cfp.hotkeys',
+  'markdown',
 ]);
