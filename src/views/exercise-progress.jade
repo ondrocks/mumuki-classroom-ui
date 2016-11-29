@@ -104,8 +104,7 @@
           .bs-callout(ng-repeat='comment in submission.comments | orderBy:$index:true', class='bs-callout-{{ comment.type }}')
             h4 {{ 'comment' | translate  }}
               small &nbsp;- {{ comment.email }} - {{ time(comment) }}
-            p(ng-repeat='line in comment.content.split("\n") track by $index')
-              | {{ line }}
+            div(ng-bind-html='trust((comment.content | markdown))')
 
           .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.test_results.length')
             h4 {{ 'tests' | translate }}
