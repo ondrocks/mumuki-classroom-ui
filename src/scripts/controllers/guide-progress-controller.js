@@ -7,7 +7,7 @@ angular
       $scope: $scope,
       list: data.guideProgress,
       itemTemplate: 'views/templates/item-guide-progress.html',
-      socialIdField: 'student.social_id'
+      uidField: 'student.uid'
     });
 
     const guide = Guide.from(data.guide);

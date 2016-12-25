@@ -42,7 +42,7 @@ angular
         }
       })
       .state('classroom.students.edit', {
-        url: '/students/edit/:course/:social_id',
+        url: '/students/edit/:course/:uid',
         authenticated: true,
         views: {
           'navbar@classroom': {},
@@ -52,7 +52,7 @@ angular
             resolve: {
               student: ($stateParams, Api) => {
                 return Api
-                  .getStudent($stateParams.course, $stateParams.social_id);
+                  .getStudent($stateParams.course, $stateParams.uid);
               }
             }
           }

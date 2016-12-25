@@ -8,7 +8,7 @@ classroomTest('Edit Exam Controller', () => {
 
   beforeEach(inject((_$rootScope_, _$controller_) => {
     $scope = _$rootScope_.$new();
-    students = [{ social_id: 0 }, { social_id: 1 }, { social_id: 2 }];
+    students = [{ uid: 0 }, { uid: 1 }, { uid: 2 }];
     const exam = {
       id: '0123456789abcdef',
       start_time: date,
@@ -17,7 +17,7 @@ classroomTest('Edit Exam Controller', () => {
       slug: 'mumuki/mumuki-guia-funcional',
       name: 'mumuki guia funcional',
       language: 'haskell',
-      social_ids: [1]
+      uids: [1]
     };
     _$controller_('EditExamController', { $scope, students, exam });
   }));
@@ -34,32 +34,32 @@ classroomTest('Edit Exam Controller', () => {
     it('should has correct end_time', () => e.end_time.should.be.eql(date));
     it('should has correct language', () => e.language.should.be.eql('haskell'));
     it('should has correct start_time', () => e.start_time.should.be.eql(date));
-    it('should has correct social_ids', () => e.social_ids.should.be.eql([1]));
+    it('should has correct uids', () => e.uids.should.be.eql([1]));
   });
 
   describe('#toggle', () => {
-    it('when toggle new one should add a social_id', () => {
+    it('when toggle new one should add a uid', () => {
       $scope.toggle(students[0]);
-      $scope.getExam().social_ids.should.be.eql([0, 1]);
+      $scope.getExam().uids.should.be.eql([0, 1]);
     });
-    it('when toggle new one and old one should add a social_id', () => {
+    it('when toggle new one and old one should add a uid', () => {
       $scope.toggle(students[1]);
       $scope.toggle(students[2]);
-      $scope.getExam().social_ids.should.be.eql([2]);
+      $scope.getExam().uids.should.be.eql([2]);
     });
   });
 
   describe('#unselectAll', () => {
-    it('should remove all social_ids', () => {
+    it('should remove all uids', () => {
       $scope.unselectAll();
-      $scope.getExam().social_ids.should.be.eql([]);
+      $scope.getExam().uids.should.be.eql([]);
     });
   });
 
   describe('#selectAll', () => {
-    it('should add all social_ids', () => {
+    it('should add all uids', () => {
       $scope.selectAll();
-      $scope.getExam().social_ids.should.be.eql([0, 1, 2]);
+      $scope.getExam().uids.should.be.eql([0, 1, 2]);
     });
   });
 

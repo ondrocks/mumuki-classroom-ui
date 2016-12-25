@@ -5,17 +5,17 @@
       span.dropdown
         i.pointer.fa.fa-angle-down.dropdown-toggle(data-toggle='dropdown')
         ul.dropdown-menu.dropdown-menu-right
-          li.pointer(ng-click='followAction(item.social_id)')
+          li.pointer(ng-click='followAction(item.uid)')
             a
               i.fa.margin(
                 ng-class='{                                   \
-                  "follow": isFollowing(item.social_id),      \
-                  "unfollow": !isFollowing(item.social_id),   \
-                  "fa-eye": isFollowing(item.social_id),      \
-                  "fa-eye-slash": !isFollowing(item.social_id)\
+                  "follow": isFollowing(item.uid),      \
+                  "unfollow": !isFollowing(item.uid),   \
+                  "fa-eye": isFollowing(item.uid),      \
+                  "fa-eye-slash": !isFollowing(item.uid)\
                 }')
-              span.item-name {{ isFollowing(item.social_id) ? 'unfollow' : 'follow' | translate }}
-          li.pointer(ng-click='edit(item.social_id)')
+              span.item-name {{ isFollowing(item.uid) ? 'unfollow' : 'follow' | translate }}
+          li.pointer(ng-click='edit(item.uid)')
             a
               i.fa.fa-pencil.margin
               span.item-name {{ 'edit' | translate }}
@@ -85,7 +85,7 @@
   .student-card-recent(ng-class='{ "detached-student": item.detached }')
     .student-card-recent-column.right-separator
       .student-card-recent-column-text
-        a.small-font(href='' ui-sref='classroom.courses.course.guides.guide.students({org: item.lastGuideOrg(), repo: item.lastGuideRepo(), student: item.social_id, eid: item.lastExerciseSubmitted().id })') {{ item.lastGuideName() || '-' }}
+        a.small-font(href='' ui-sref='classroom.courses.course.guides.guide.students({org: item.lastGuideOrg(), repo: item.lastGuideRepo(), student: item.uid, eid: item.lastExerciseSubmitted().id })') {{ item.lastGuideName() || '-' }}
       .student-card-recent-column-text
         small
           span

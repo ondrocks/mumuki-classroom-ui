@@ -35,7 +35,7 @@ angular
         name: profile.nickname,
         email: profile.email,
         image_url: profile.picture,
-        social_id: profile.user_id
+        uid: profile.user_id
       }
     });
 

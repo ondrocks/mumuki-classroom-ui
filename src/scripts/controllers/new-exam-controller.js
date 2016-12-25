@@ -22,7 +22,7 @@ angular
       name: '',
       slug: '',
       language: '',
-      social_ids: []
+      uids: []
     };
 
     $scope.isValid = () => $scope.isValidMandatoryFields() && $scope.isValidGuide();

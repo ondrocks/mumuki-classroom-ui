@@ -7,7 +7,7 @@ div
         img.img-circle.pointer(
           with-default='{{ item.student.image_url }}',
           ui-sref='classroom.courses.course.guides.guide.students({ \
-              student: item.student.social_id,                      \
+              student: item.student.uid,                      \
               eid: item.lastExerciseSubmitted().id                  \
             })')
       .student-card-profile-data
@@ -50,7 +50,7 @@ div
 
       .student-guide-details-exercise
         .student-guide-details-exercise-text
-          a(ui-sref='classroom.courses.course.guides.guide.students({ student: item.student.social_id, eid: item.lastExerciseSubmitted().id })')
+          a(ui-sref='classroom.courses.course.guides.guide.students({ student: item.student.uid, eid: item.lastExerciseSubmitted().id })')
             | {{ item.lastExerciseSubmitted().getName() }}
         status-icon(status='item.lastSubmission().status')
 

@@ -145,7 +145,7 @@ angular
 
       const getCommentToPost = (submission) => {
         return {
-          social_id: $stateParams.student,
+          uid: $stateParams.student,
           exercise_id: exerciseProgress.exercise.id,
           submission_id: submission.id,
           comment: {
