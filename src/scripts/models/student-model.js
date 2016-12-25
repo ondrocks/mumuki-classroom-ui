@@ -29,11 +29,11 @@ angular
       }
 
       provider() {
-        return this.social_id.split('|')[0];
+        return _.get(this, 'social_id', '').split('|')[0];
       }
 
       providerIcon() {
-        return icons[this.provider()];
+        return icons.get(this.provider());
       }
 
       lastSubmissionTime() {
@@ -45,7 +45,7 @@ angular
       }
 
       lastGuideSlug() {
-        return _.get(this, 'last_assignment.guide.slug');
+        return _.get(this, 'last_assignment.guide.slug', '');
       }
 
       lastGuideRepo() {
