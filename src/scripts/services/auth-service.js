@@ -40,7 +40,7 @@ angular
       Organization
         .getLockJson()
         .then((modalJson) => {
-          auth.signin(_.merge(modalJson, { icon: '/images/icon.png', authParams: { scope: 'openid app_metadata' } }), (profile, token) => {
+          auth.signin(_.merge(modalJson, { icon: '/images/icon.png', authParams: { scope: 'openid email' } }), (profile, token) => {
             store.set('profile', profile);
             store.set('token', token);
             if (_.isFunction(callback)) callback(profile);
