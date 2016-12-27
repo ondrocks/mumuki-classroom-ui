@@ -14,5 +14,5 @@ div
         span.item-name {{ item.getName() | uppercase }}
     label(ng-if='!(list | orderBy: sortCriteria() | filter:listSearch).length')
       | {{ noItemsToShow | translate }}
-  button.btn.btn-success.pull-right(ng-if='isAdmin()', ui-sref='classroom.courses.course.exams.new')
+  button.btn.btn-success.pull-right(ng-if='isTeacher()', ui-sref='classroom.courses.course.exams.new')
     | {{ 'new_exam' | translate }}

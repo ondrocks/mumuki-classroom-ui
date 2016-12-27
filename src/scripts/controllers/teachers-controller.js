@@ -9,7 +9,7 @@ angular
     const course = $stateParams.course;
     const course_slug = `${Domain.tenant()}/${course}`;
 
-    $scope.isAdmin = () => Auth.isAdmin();
+    $scope.isHeadmaster = () => Auth.isHeadmaster();
 
     $scope.newTeacher = () => $state.go('classroom.courses.course.teachers.new', { course_slug });
 

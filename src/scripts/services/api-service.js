@@ -164,4 +164,9 @@ angular
         .get(`${API}/organization`)
     }
 
+    this.getPermissions = () => {
+      return $http
+        .get(`${API}/permissions`, authenticated())
+    }
+
   });

@@ -9,7 +9,7 @@ angular
     $scope.noItemsToShow = 'no_exams_to_show';
     $scope.inputPlaceholder = 'filter_available_exams';
 
-    $scope.isAdmin = Auth.isAdmin;
+    $scope.isTeacher = Auth.isTeacher;
     $scope.isExam = true;
     $scope.sortCriteria = () => ['getName()'];
 

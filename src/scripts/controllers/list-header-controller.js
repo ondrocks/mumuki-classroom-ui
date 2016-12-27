@@ -15,7 +15,7 @@ angular
     $scope.withFilter = true;
     $scope.withDetails = true;
     $scope.withFollowers = true;
-    $scope.withDetachedStudents = Auth.isAdmin();
+    $scope.withDetachedStudents = Auth.isTeacher();
 
     $scope.list = list;
     $scope.itemTemplate = itemTemplate;

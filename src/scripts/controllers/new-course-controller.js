@@ -3,7 +3,7 @@ angular
   .module('classroom')
   .controller('NewCourseController', function ($scope, $state, $filter, toastr, Auth, Api) {
 
-    $scope.isAdmin = Auth.isAdmin;
+    $scope.isJanitor = Auth.isJanitor;
     $scope.course = {
       days: [],
       code: '',

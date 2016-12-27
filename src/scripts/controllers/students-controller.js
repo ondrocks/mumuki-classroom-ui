@@ -22,9 +22,9 @@ angular
 
     $scope.withDetails = false;
 
-    $scope.isAdmin = (Auth.isAdmin() && Domain.tenant() !== 'digitalhouse') || Auth.isSuperUser(); // FIXME: private clients
-    $scope.canTransfer = Auth.isAdmin();
-    $scope.canDetach = Auth.isAdmin();
+    $scope.isOwner = Auth.isOwner();
+    $scope.canTransfer = Auth.isJanitor();
+    $scope.canDetach = Auth.isJanitor();
 
     $scope.setCount(students.length);
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();

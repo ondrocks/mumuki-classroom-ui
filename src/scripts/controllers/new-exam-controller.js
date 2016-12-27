@@ -6,13 +6,13 @@ angular
     angular.extend(this, $controller('ExamController', { $scope: $scope }));
 
     $scope.exam_type = 'new_exam';
-    $scope.isAdmin = Auth.isAdmin;
+    $scope.isTeacher = Auth.isTeacher;
     $scope.guides = guides;
     $scope.isNew = true;
 
     const roundedMinutes = (n) => now.minutes() - (now.minutes() % 5);
     const now = moment();
-    const date = now.seconds(0).minutes(roundedMinutes(now)).toDate()
+    const date = now.seconds(0).minutes(roundedMinutes(now)).toDate();
 
     $scope.selected = {};
     $scope.exam = {

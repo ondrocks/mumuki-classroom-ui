@@ -8,7 +8,7 @@ angular
     $scope.noItemsToShow = 'no_courses_to_show';
     $scope.inputPlaceholder = 'filter_available_courses';
 
-    $scope.isAdmin = Auth.isAdmin;
+    $scope.isJanitor = Auth.isJanitor;
     $scope.isCourse = true;
     $scope.sortCriteria = () => ['getName()'];
 
