@@ -1,48 +1,10 @@
-.new-student
-  .student-form
-    img.text-center(src='images/logo.png')
-    h3 {{ 'complete_form' | translate }}
-
-    form
-
-      fieldset.form-group
-        input.form-control(
-            type='text',
-            ng-model='student.first_name',
-            placeholder='{{ "first_name" | translate }}',
-            required,
-            autofocus,
-            ng-init='f1 = false'
-            ng-change='f1 = true')
-        div.error
-          small.text-muted.text-danger(ng-show='!isTextValid(student.first_name) && f1')
-            | {{ 'first_name_error' | translate }}
-
-      fieldset.form-group
-        input.form-control(
-            type='text',
-            ng-model='student.last_name',
-            placeholder='{{ "last_name" | translate }}',
-            required
-            ng-init='f2 = false'
-            ng-change='f2 = true')
-        div.error
-          small.text-muted.text-danger(ng-show='!isTextValid(student.last_name) && f2')
-            | {{ 'last_name_error' | translate }}
-
-      fieldset.form-group
-        input.form-control(
-            type='text',
-            ng-model='student.email',
-            placeholder='{{ "email" | translate }}',
-            required,
-            ng-init='f3 = false',
-            ng-disabled='isEdit',
-            ng-change='f3 = true')
-        div.error
-          small.text-muted.text-danger(ng-show='!isEmailValid(student.email) && f3')
-            | {{ 'email_error' | translate }}
-      h6(ng-bind-html='termAndConditions')
-
-      fieldset.form-group
-        button.btn.btn-success.btn-block(spin-on-click='submit()', ng-disabled='!isValid()') {{ 'sign_up' | translate }}
+.container
+  h3 {{ 'new_student' | translate }}
+  fieldset.form-group
+    input.form-control(ng-model='student.first_name', type='text', placeholder='Nombre', autofocus)
+  fieldset.form-group
+    input.form-control(ng-model='student.last_name', type='text', placeholder='Apellido')
+  fieldset.form-group
+    input.form-control(ng-model='student.email', type='text', placeholder='example@mumuki.org')
+  .row
+    button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudent()') {{ 'confirm' | translate }}

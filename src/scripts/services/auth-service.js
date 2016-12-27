@@ -32,7 +32,6 @@ angular
     };
 
     this.isJanitor = () => {
-      console.log(_.some(this.janitorPermissions(), (p) => regex.test(p)) || this.isOwner());
       return _.some(this.janitorPermissions(), (p) => regex.test(p)) || this.isOwner();
     };
 

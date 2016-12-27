@@ -30,11 +30,21 @@ angular
           }
         }
       })
+      // .state('classroom.students', {
+      //   url: '/students/:course',
+      //   authenticated: false,
+      //   views: {
+      //     'navbar@classroom': {},
+      //     'content@classroom': {
+      //       templateUrl: 'views/student.html',
+      //       controller: 'StudentController'
+      //     }
+      //   }
+      // })
       .state('classroom.students', {
         url: '/students/:course',
-        authenticated: false,
+        authenticated: true,
         views: {
-          'navbar@classroom': {},
           'content@classroom': {
             templateUrl: 'views/student.html',
             controller: 'StudentController'

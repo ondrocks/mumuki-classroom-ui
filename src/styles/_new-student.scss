@@ -1,6 +1,4 @@
 .new-student {
-  background-image: url('../images/sign_up.jpg');
-  background-size: cover;
   position: fixed;
   @include display-flex(column, center, center);
   height: 100%;

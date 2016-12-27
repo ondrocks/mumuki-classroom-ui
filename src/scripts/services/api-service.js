@@ -169,4 +169,9 @@ angular
         .get(`${API}/permissions`, authenticated())
     }
 
+    this.addStudent = (course, student) => {
+      return $http
+        .post(`${API}/courses/${course}/students`, student, authenticated())
+    }
+
   });

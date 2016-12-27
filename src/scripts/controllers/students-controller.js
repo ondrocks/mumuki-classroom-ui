@@ -14,7 +14,7 @@ angular
       { type: 'name', properties: ['last_name', 'first_name']},
       { type: 'progress', properties: ['totalStats()', '-stats.failed', '-stats.passed_with_warnings', '-stats.passed', 'last_name', 'first_name']},
       { type: 'signup_date', properties: ['created_at', 'last_name', 'first_name']},
-      { type: 'last_submission_date', properties: ['lastSubmissionTime()', 'last_name', 'first_name']},
+      { type: 'last_submission_date', properties: ['lastSubmissionTime()', 'last_name', 'first_name']}
     ];
 
     Breadcrumb.setCourse($stateParams.course);
@@ -25,6 +25,7 @@ angular
     $scope.isOwner = Auth.isOwner();
     $scope.canTransfer = Auth.isJanitor();
     $scope.canDetach = Auth.isJanitor();
+    $scope.canAddStudent = Auth.isJanitor();
 
     $scope.setCount(students.length);
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();
