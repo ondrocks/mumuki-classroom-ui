@@ -9,22 +9,22 @@ angular
       return this.followUps = followers;
     };
 
-    this.isFollowing = (course, social_id) => {
-      return _.includes(this.courseFollowers(course), social_id);
+    this.isFollowing = (course, uid) => {
+      return _.includes(this.courseFollowers(course), uid);
     };
 
     this.courseFollowers = (course) => {
-      this.followUps[course] = this.followUps[course] || {social_ids: []};
-      return this.followUps[course].social_ids;
+      this.followUps[course] = this.followUps[course] || {uids: []};
+      return this.followUps[course].uids;
     };
 
     this.count = (course) => this.courseFollowers(course).length;
 
-    this.addFollower = (course, social_id) => {
-      this.courseFollowers(course).push(social_id);
+    this.addFollower = (course, uid) => {
+      this.courseFollowers(course).push(uid);
     };
 
-    this.removeFollower = (course, social_id) => {
-      _.pull(this.courseFollowers(course), social_id);
+    this.removeFollower = (course, uid) => {
+      _.pull(this.courseFollowers(course), uid);
     };
 });

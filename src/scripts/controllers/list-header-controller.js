@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ListHeaderController', function ($scope, $stateParams, list, socialIdField, itemTemplate, Api, Auth, Preferences, Followers, Domain) {
+  .controller('ListHeaderController', function ($scope, $stateParams, list, uidField, itemTemplate, Api, Auth, Preferences, Followers, Domain) {
 
     $scope.listOptions = {
       search: ''
@@ -15,7 +15,7 @@ angular
     $scope.withFilter = true;
     $scope.withDetails = true;
     $scope.withFollowers = true;
-    $scope.withDetachedStudents = Auth.isAdmin();
+    $scope.withDetachedStudents = Auth.isTeacher();
 
     $scope.list = list;
     $scope.itemTemplate = itemTemplate;
@@ -41,8 +41,8 @@ angular
 
     $scope.sortingCriteria = () => _.find($scope.availableSortingCriterias, {type: $scope.options.sortingType}).properties;
 
-    $scope.isFollowing = (social_id) => Followers.isFollowing($scope.courseSlug(), social_id);
-    $scope.byFollowers = (item) => !$scope.onlyFollowers() || Followers.isFollowing($scope.courseSlug(), _.get(item, socialIdField));
+    $scope.isFollowing = (uid) => Followers.isFollowing($scope.courseSlug(), uid);
+    $scope.byFollowers = (item) => !$scope.onlyFollowers() || Followers.isFollowing($scope.courseSlug(), _.get(item, uidField));
     $scope.byDetachedStudents = (item) => !item.detached || ($scope.withDetachedStudents && $scope.showDetachedStudents());
 
   });

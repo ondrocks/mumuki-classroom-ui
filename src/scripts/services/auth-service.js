@@ -1,48 +1,68 @@
 
 angular
   .module('classroom')
-  .service('Auth', function ($state, $location, auth, store, jwtHelper, Domain, Organization) {
+  .service('Auth', function ($injector, $state, $location, auth, store, jwtHelper, Domain, Organization) {
 
     const subdomain = Domain.tenant();
 
-    const adminRegex = new RegExp(`^(\\\*|\\\*\\\/\\\*|${subdomain}\\\/\\\*)$`);
-    const teacherRegex = new RegExp(`^(\\\*|${subdomain})$`);
+    const regex = new RegExp(`^(\\\*|\\\*\\\/\\\*|${subdomain}\\\/\\\*)$`);
 
-    this.permissions = () => {
-      return _.get(this.profile(), 'classroom.permissions', '').split(':');
-    }
+    this.permissions = (role) => {
+      return _.get(store.get('permissions'), role, '').split(':');
+    };
 
-    this.adminPermissions = () => {
-      return  _.get(this.profile(), 'admin.permissions', '').split(':');
-    }
+    this.ownerPermissions = () => {
+      return  this.permissions('owner');
+    };
+
+    this.teacherPermissions = () => {
+      return  this.permissions('teacher');
+    };
+
+    this.headmasterPermissions = () => {
+      return  this.permissions('headmaster');
+    };
+
+    this.janitorPermissions = () => {
+      return  this.permissions('janitor');
+    };
+
+    this.isOwner = () => {
+      return _.some(this.ownerPermissions(), (p) => regex.test(p));
+    };
+
+    this.isJanitor = () => {
+      return _.some(this.janitorPermissions(), (p) => regex.test(p)) || this.isOwner();
+    };
+
+    this.isHeadmaster = () => {
+      return _.some(this.headmasterPermissions(), (p) => regex.test(p)) || this.isJanitor();
+    };
+
+    this.isTeacher = () => {
+      return _.some(this.teacherPermissions(), (p) => regex.test(p.split('/')[0])) || this.isHeadmaster();
+    };
 
     this.profile = () => {
       return store.get('profile');
-    }
+    };
 
     this.token = () => {
       return store.get('token');
-    }
+    };
 
-    this.isAdmin = () => {
-      return _.some(this.adminPermissions(), (p) => adminRegex.test(p));
-    }
-
-    this.isSuperUser = () => {
-      return _.some(this.adminPermissions(), (p) => p === '*');
-    }
-
-    this.isTeacher = () => {
-      return _.some(this.permissions(), (p) => teacherRegex.test(p.split('/')[0]));
-    }
 
     this.signin = (callback) => {
       Organization
         .getLockJson()
         .then((modalJson) => {
-          auth.signin(_.merge(modalJson, { icon: '/images/icon.png', authParams: { scope: 'openid app_metadata' } }), (profile, token) => {
+          auth.signin(_.merge(modalJson, { icon: '/images/icon.png', authParams: { scope: 'openid email' } }), (profile, token) => {
             store.set('profile', profile);
             store.set('token', token);
+            $injector
+              .get('Api')
+              .getPermissions()
+              .then((res) => store.set('permissions', res.data.permissions));
             if (_.isFunction(callback)) callback(profile);
           });
         });

@@ -18,11 +18,11 @@ angular
       }
 
       provider() {
-        return this.social_id.split('|')[0];
+        return _.get(this, 'social_id', '').split('|')[0];
       }
 
       providerIcon() {
-        return ICONS[this.provider()];
+        return ICONS.get(this.provider());
       }
 
       _capitalize(name) {

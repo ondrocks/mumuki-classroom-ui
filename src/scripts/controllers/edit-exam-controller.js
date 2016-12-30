@@ -6,7 +6,7 @@ angular
     angular.extend(this, $controller('ExamController', { $scope: $scope }));
 
     students
-      .filter((student) => _(exam.social_ids).includes(student.social_id))
+      .filter((student) => _(exam.uids).includes(student.uid))
       .forEach((student) => student.isSelected = true)
 
     Breadcrumb.setExam(exam);
@@ -20,7 +20,7 @@ angular
     };
 
     $scope.getExam = () => {
-      $scope.exam.social_ids = _($scope.students).filter('isSelected').map('social_id').value();
+      $scope.exam.uids = _($scope.students).filter('isSelected').map('uid').value();
       return $scope.getExamInLocalTime($scope.exam);
     }
 

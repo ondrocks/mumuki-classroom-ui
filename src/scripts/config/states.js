@@ -30,11 +30,21 @@ angular
           }
         }
       })
+      // .state('classroom.students', {
+      //   url: '/students/:course',
+      //   authenticated: false,
+      //   views: {
+      //     'navbar@classroom': {},
+      //     'content@classroom': {
+      //       templateUrl: 'views/student.html',
+      //       controller: 'StudentController'
+      //     }
+      //   }
+      // })
       .state('classroom.students', {
         url: '/students/:course',
-        authenticated: false,
+        authenticated: true,
         views: {
-          'navbar@classroom': {},
           'content@classroom': {
             templateUrl: 'views/student.html',
             controller: 'StudentController'
@@ -42,7 +52,7 @@ angular
         }
       })
       .state('classroom.students.edit', {
-        url: '/students/edit/:course/:social_id',
+        url: '/students/edit/:course/:uid',
         authenticated: true,
         views: {
           'navbar@classroom': {},
@@ -52,7 +62,7 @@ angular
             resolve: {
               student: ($stateParams, Api) => {
                 return Api
-                  .getStudent($stateParams.course, $stateParams.social_id);
+                  .getStudent($stateParams.course, $stateParams.uid);
               }
             }
           }

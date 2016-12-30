@@ -87,6 +87,7 @@ angular
     new_course_shift: 'Turno',
     new_course_shift_error: 'Seleccioná al menos un turno',
     new_exam: 'Nuevo examen',
+    new_student: 'Nuevo estudiante',
     new_teacher: 'Nuevo docente',
     next_exercise_description: 'Ir al ejercicio siguiente',
     next_solution_description: 'Ir a la solución siguiente',

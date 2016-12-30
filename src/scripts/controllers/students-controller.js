@@ -7,14 +7,14 @@ angular
       $scope: $scope,
       list: students,
       itemTemplate: 'views/templates/item-student.html',
-      socialIdField: 'social_id',
+      uidField: 'uid',
     });
 
     $scope.availableSortingCriterias = [
       { type: 'name', properties: ['last_name', 'first_name']},
       { type: 'progress', properties: ['totalStats()', '-stats.failed', '-stats.passed_with_warnings', '-stats.passed', 'last_name', 'first_name']},
       { type: 'signup_date', properties: ['created_at', 'last_name', 'first_name']},
-      { type: 'last_submission_date', properties: ['lastSubmissionTime()', 'last_name', 'first_name']},
+      { type: 'last_submission_date', properties: ['lastSubmissionTime()', 'last_name', 'first_name']}
     ];
 
     Breadcrumb.setCourse($stateParams.course);
@@ -22,38 +22,39 @@ angular
 
     $scope.withDetails = false;
 
-    $scope.isAdmin = (Auth.isAdmin() && Domain.tenant() !== 'digitalhouse') || Auth.isSuperUser(); // FIXME: private clients
-    $scope.canTransfer = Auth.isAdmin();
-    $scope.canDetach = Auth.isAdmin();
+    $scope.isOwner = Auth.isOwner();
+    $scope.canTransfer = Auth.isJanitor();
+    $scope.canDetach = Auth.isJanitor();
+    $scope.canAddStudent = Auth.isJanitor();
 
     $scope.setCount(students.length);
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();
 
-    $scope.followAction = (social_id) => $scope.isFollowing(social_id) ? $scope.unfollow(social_id) : $scope.follow(social_id);
+    $scope.followAction = (uid) => $scope.isFollowing(uid) ? $scope.unfollow(uid) : $scope.follow(uid);
 
-    $scope.follow = (social_id) =>  {
-    	return Api.follow(social_id, Auth.profile().email, $scope.course())
-    		.then(() => Followers.addFollower($scope.courseSlug(), social_id))
+    $scope.follow = (uid) =>  {
+      return Api.follow(uid, Auth.profile().email, $scope.course())
+        .then(() => Followers.addFollower($scope.courseSlug(), uid))
         .then(() => toastr.success($filter('translate')('do_follow')))
         .catch((e) => toastr.error(e));
     }
 
-    $scope.unfollow = (social_id) =>  {
-      return Api.unfollow(social_id, Auth.profile().email, $scope.course())
-        .then(() => Followers.removeFollower($scope.courseSlug(), social_id))
+    $scope.unfollow = (uid) =>  {
+      return Api.unfollow(uid, Auth.profile().email, $scope.course())
+        .then(() => Followers.removeFollower($scope.courseSlug(), uid))
         .then(() => toastr.success($filter('translate')('unfollowing')))
         .catch((e) => toastr.error(e));
     }
 
-    $scope.edit = (social_id) => {
+    $scope.edit = (uid) => {
       const course = $scope.course();
-      $state.go('classroom.students.edit', { social_id, course })
+      $state.go('classroom.students.edit', { uid, course })
     }
 
     $scope.remove = (student) => {
       Modal.removeStudent(student, () => {
         return Api
-          .removeStudent(student.social_id, $scope.course())
+          .removeStudent(student.uid, $scope.course())
           .then(() => $state.reload())
           .catch((e) => toastr.error(e));
       });
@@ -62,7 +63,7 @@ angular
     $scope.attach = (student) => {
       Modal.attachStudent(student, () => {
         return Api
-          .attachStudent(student.social_id, $scope.course())
+          .attachStudent(student.uid, $scope.course())
           .then(() => $state.reload())
           .catch((e) => toastr.error(e));
       });
@@ -71,7 +72,7 @@ angular
     $scope.detach = (student) => {
       Modal.detachStudent(student, () => {
         return Api
-          .detachStudent(student.social_id, $scope.course())
+          .detachStudent(student.uid, $scope.course())
           .then(() => $state.reload())
           .catch((e) => toastr.error(e));
       });

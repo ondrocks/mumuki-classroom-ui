@@ -7,4 +7,7 @@ angular
     'twitter': 'twitter',
     'facebook': 'facebook-square',
     'google-oauth2': 'google',
+    'get': function (provider) {
+      return this[provider] || this.auth0;
+    },
   });

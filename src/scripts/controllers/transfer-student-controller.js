@@ -8,7 +8,7 @@ angular
     $scope.transfer = (course) => {
       const destination = course.slug.split('/')[1]
       Api
-        .transfer(student.social_id, $stateParams.course, destination)
+        .transfer(student.uid, $stateParams.course, destination)
         .then(() => $uibModalInstance.close())
         .then(() => callback());
     }

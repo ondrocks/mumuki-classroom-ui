@@ -83,9 +83,9 @@ angular
         .put(`${API}/courses/${course}/student`, student, authenticated())
     }
 
-    this.getStudent = (course, social_id) => {
+    this.getStudent = (course, uid) => {
       return $http
-        .get(`${API}/courses/${course}/student/${social_id}`, authenticated())
+        .get(`${API}/courses/${course}/student/${uid}`, authenticated())
       }
 
     this.updateTeacher = (course, teacher) => {
@@ -110,24 +110,24 @@ angular
         .then((res) => _.map(res.data.teachers, Teacher.from));
     }
 
-    this.removeStudent = (social_id, course) => {
+    this.removeStudent = (uid, course) => {
       return $http
-        .delete(`${API}/courses/${course}/students/${social_id}`, authenticated())
+        .delete(`${API}/courses/${course}/students/${uid}`, authenticated())
     }
 
-    this.detachStudent = (social_id, course) => {
+    this.detachStudent = (uid, course) => {
       return $http
-        .post(`${API}/courses/${course}/students/${social_id}/detach`, {}, authenticated())
+        .post(`${API}/courses/${course}/students/${uid}/detach`, {}, authenticated())
     }
 
-    this.attachStudent = (social_id, course) => {
+    this.attachStudent = (uid, course) => {
       return $http
-        .post(`${API}/courses/${course}/students/${social_id}/attach`, {}, authenticated())
+        .post(`${API}/courses/${course}/students/${uid}/attach`, {}, authenticated())
     }
 
-    this.transfer = (social_id, course, destination) => {
+    this.transfer = (uid, course, destination) => {
       return $http
-        .post(`${API}/courses/${course}/students/${social_id}/transfer`, { destination }, authenticated())
+        .post(`${API}/courses/${course}/students/${uid}/transfer`, { destination }, authenticated())
     }
 
     this.comment = (data, course) => {
@@ -135,14 +135,14 @@ angular
         .post(`${API}/courses/${course}/comments`, data, authenticated())
     }
 
-    this.follow = (social_id, email, course) => {
+    this.follow = (uid, email, course) => {
       return $http
-        .post(`${API}/courses/${course}/followers`, { social_id, email, course }, authenticated())
+        .post(`${API}/courses/${course}/followers`, { uid, email, course }, authenticated())
     }
 
-    this.unfollow = (social_id, email, course) => {
+    this.unfollow = (uid, email, course) => {
       return $http
-        .delete(`${API}/courses/${course}/followers/${email}/${social_id}`, authenticated())
+        .delete(`${API}/courses/${course}/followers/${email}/${uid}`, authenticated())
     }
 
     this.getFollowers = (email, course) => {
@@ -162,6 +162,16 @@ angular
     this.getOrganization = () => {
       return $http
         .get(`${API}/organization`)
+    }
+
+    this.getPermissions = () => {
+      return $http
+        .get(`${API}/permissions`, authenticated())
+    }
+
+    this.addStudent = (course, student) => {
+      return $http
+        .post(`${API}/courses/${course}/students`, student, authenticated())
     }
 
   });

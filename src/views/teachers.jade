@@ -27,5 +27,5 @@ div
                 small
                   a(href='mailto:{{item.email}}', ng-if='item.email') {{ item.email }}
 
-  button.btn.btn-success.pull-right(ng-if='isAdmin()', ng-click='newTeacher()')
+  button.btn.btn-success.pull-right(ng-if='isHeadmaster()', ng-click='newTeacher()')
     | {{ 'new_teacher' | translate }}

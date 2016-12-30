@@ -16,9 +16,9 @@ classroomTest('Followers Service', () => {
 
     context('when there are followUps', () => {
       beforeEach(() => { $Followers.setFollowUps({
-        k2001: { social_ids: [] },
-        k2002: { social_ids: ['fb100'] },
-        k2003: { social_ids: ['fb200', 'fb201'] }
+        k2001: { uids: [] },
+        k2002: { uids: ['fb100'] },
+        k2003: { uids: ['fb200', 'fb201'] }
       })});
 
       it('should not follow unknown courses', () => {
@@ -46,9 +46,9 @@ classroomTest('Followers Service', () => {
 
   describe('addFollower', () => {
     before(() => { $Followers.setFollowUps({
-      k2001: { social_ids: [] },
-      k2002: { social_ids: ['fb100'] },
-      k2003: { social_ids: ['fb200', 'fb201'] }
+      k2001: { uids: [] },
+      k2002: { uids: ['fb100'] },
+      k2003: { uids: ['fb200', 'fb201'] }
     })});
 
     it('should be following after adding a new course', () => {
@@ -69,8 +69,8 @@ classroomTest('Followers Service', () => {
 
   describe('removeFollower', () => {
     before(() => { $Followers.setFollowUps({
-      k2001: { social_ids: [] },
-      k2003: { social_ids: ['fb100'] }
+      k2001: { uids: [] },
+      k2003: { uids: ['fb100'] }
     })});
 
     it('should not be following after remove from existing course', () => {
