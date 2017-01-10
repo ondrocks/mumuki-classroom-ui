@@ -26,7 +26,7 @@ angular
 
     this.getBibliothecaGuides = () => {
       return $http
-        .get(`http://bibliotheca.mumuki.io/guides`, authenticated())
+        .get(`http://bibliotheca-api.mumuki.io/guides`, authenticated())
         .then((res) => res.data.guides)
     }
 
