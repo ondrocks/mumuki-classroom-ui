@@ -5,6 +5,6 @@
   fieldset.form-group
     input.form-control(ng-model='student.last_name', type='text', placeholder='Apellido')
   fieldset.form-group
-    input.form-control(ng-model='student.email', type='text', placeholder='example@mumuki.org')
+    input.form-control.lower(ng-model='student.email', type='text', placeholder='example@mumuki.org')
   .row
     button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudent()') {{ 'confirm' | translate }}
