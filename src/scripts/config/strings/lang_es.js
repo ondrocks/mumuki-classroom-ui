@@ -3,6 +3,7 @@ angular
   .module('classroom')
   .constant('LANG_ES', {
 
+    add_multiple: 'Alta masiva',
     add_permissions_to_teacher: 'Agregar permisos a',
     added_teacher: 'Docente agregado satisfactoriamente',
     all: 'Todos',
@@ -11,6 +12,7 @@ angular
     are_you_sure_delete_student_from_course: '¿Estás seguro que querés borrar al estudiante del curso?',
     are_you_sure_detach_student_from_course: '¿Estás seguro que querés desvincular al estudiante del curso?',
     available_courses: 'Cursos disponibles',
+    bulk: 'Masivo',
     by_last_submission_date: 'Por fecha de ultima solución',
     by_name: 'Por nombre',
     by_progress: 'Por progreso',
@@ -109,6 +111,7 @@ angular
     shift_afternoon: 'Tarde',
     shift_morning: 'Mañana',
     shift_night: 'Noche',
+    single: 'Simple',
     show: 'Mostrar',
     show_students: 'Ver estudiantes',
     singup_date: 'Registrado',
@@ -129,6 +132,8 @@ angular
     unfollow: 'Dejar de Seguir',
     unfollowing: 'Has dejado de seguir al usuario',
     unified: 'Unificado',
+    upload_file: 'Subir archivo',
+    uploading_file: 'Subiendo archivo',
     view_in_atheneum: 'Ver en Atheneum',
     view_mode: 'Visualización: ',
     with_warnings: 'Con advertencias',
