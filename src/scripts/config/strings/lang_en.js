@@ -3,6 +3,7 @@ angular
   .module('classroom')
   .constant('LANG_EN', {
 
+    add_multiple_students: 'Add multiple students',
     add_permissions_to_teacher: 'Add permissions to',
     added_teacher: 'Teacher added',
     all: 'All',
@@ -11,6 +12,7 @@ angular
     are_you_sure_detach_student_from_course: 'Are you sure you want to detach student from course?',
     attach: 'Attach',
     available_courses: 'Available Courses',
+    bulk: 'Bulk',
     by_last_submission_date: 'By last submission date',
     by_name: 'By name',
     by_progress: 'By progress',
@@ -110,6 +112,7 @@ angular
     shift_night: 'Night',
     show: 'Show',
     show_students: 'Show students',
+    single: 'Single',
     singup_date: 'Signup date',
     sign_up: 'Sign up',
     solution_sent_at_format: 'MMMM DD YYYY - h:mm a',
@@ -128,6 +131,8 @@ angular
     unfollow: 'Unfollow',
     unfollowing: 'Unfollow!',
     unified: 'Unified',
+    upload_file: 'Upload file',
+    uploading_file: 'Uploading file',
     view_in_atheneum: 'View in Atheneum',
     view_mode: 'View Mode: ',
     with_warnings: 'With warnings',

@@ -47,6 +47,7 @@ angular
       { name: () => this._course, state: 'classroom.courses.course.exams' },
       { name: () => this._course, state: 'classroom.courses.course.students' },
       { name: () => this._course, state: 'classroom.courses.course.teachers' },
+      { name: () => this._course, state: 'classroom.students' },
       { name: () => 'new_exam', state: 'classroom.courses.course.exams.new' },
       { name: () => this.getExamName(), state: 'classroom.courses.course.exams.edit' },
       { name: () => this.getGuideName(), state: 'classroom.courses.course.guides.guide' },

@@ -16,4 +16,6 @@ angular.module('classroom', [
   'ui.bootstrap.datetimepicker',
   'cfp.hotkeys',
   'markdown',
+  'ngCsvImport',
+  'frapontillo.bootstrap-switch'
 ]);
