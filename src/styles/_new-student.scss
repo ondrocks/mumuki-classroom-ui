@@ -27,3 +27,12 @@
 .lower {
   text-transform: lowercase;
 }
+
+.bootstrap-switch-wrapper {
+  position: absolute;
+  right: 150px;
+  top: 120px;
+}
+.bootstrap-switch-primary {
+  background: $btn-primary-bg !important;
+}
