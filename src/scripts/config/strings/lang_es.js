@@ -3,7 +3,7 @@ angular
   .module('classroom')
   .constant('LANG_ES', {
 
-    add_multiple: 'Alta masiva',
+    add_multiple_students: 'Alta masiva de estudiantes',
     add_permissions_to_teacher: 'Agregar permisos a',
     added_teacher: 'Docente agregado satisfactoriamente',
     all: 'Todos',
