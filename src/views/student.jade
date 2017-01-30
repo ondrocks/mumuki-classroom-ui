@@ -13,8 +13,6 @@
   .multiple-student(ng-if='isMultiple')
     h3 {{ 'add_multiple_students' | translate }}
     ng-csv-import.import(content='csv.content', callback='applyCsv', header='csv.header', header-visible='csv.headerVisible', separator='csv.separator', result='csv.result', upload-button-label='csv.uploadButtonLabel')
-      i.fa.fa-upload
-      span {{ 'upload_file' | translate }}
     table.table(ng-if='csv.result')
       tr
         th {{ 'email' | translate }}
