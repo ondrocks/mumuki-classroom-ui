@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('NewExamController', function ($scope, $controller, guides, Auth, Api) {
+  .controller('NewExamController', function ($scope, $controller, guides, Auth, Api, Permissions) {
 
     angular.extend(this, $controller('ExamController', { $scope: $scope }));
 
