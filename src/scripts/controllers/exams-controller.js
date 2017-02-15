@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExamsController', function ($scope, $state, $stateParams, exams, Auth, Api, Modal, Breadcrumb) {
+  .controller('ExamsController', function ($scope, $state, $stateParams, exams, Auth, Api, Modal, Breadcrumb, Permissions) {
     $scope.setCount(exams.length);
 
     Breadcrumb.setCourse($stateParams.course);
@@ -9,7 +9,7 @@ angular
     $scope.noItemsToShow = 'no_exams_to_show';
     $scope.inputPlaceholder = 'filter_available_exams';
 
-    $scope.isTeacher = Auth.isTeacher;
+    $scope.isTeacher = Permissions.isTeacher;
     $scope.isExam = true;
     $scope.sortCriteria = () => ['getName()'];
 

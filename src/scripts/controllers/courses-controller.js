@@ -1,14 +1,14 @@
 
 angular
   .module('classroom')
-  .controller('CoursesController', function ($scope, $state, courses, Auth, Api) {
+  .controller('CoursesController', function ($scope, $state, courses, Api, Permissions) {
 
     $scope.list = courses;
     $scope.preTitle = _.capitalize(Api.subdomain);
     $scope.noItemsToShow = 'no_courses_to_show';
     $scope.inputPlaceholder = 'filter_available_courses';
 
-    $scope.isJanitor = Auth.isJanitor;
+    $scope.isJanitor = Permissions.isJanitor;
     $scope.isCourse = true;
     $scope.sortCriteria = () => ['getName()'];
 

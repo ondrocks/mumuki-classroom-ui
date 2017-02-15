@@ -1,9 +1,9 @@
 
 angular
   .module('classroom')
-  .controller('NewCourseController', function ($scope, $state, $filter, toastr, Auth, Api) {
+  .controller('NewCourseController', function ($scope, $state, $filter, toastr, Auth, Api, Permissions) {
 
-    $scope.isJanitor = Auth.isJanitor;
+    $scope.isJanitor = Permissions.isJanitor;
     $scope.course = {
       days: [],
       code: '',

@@ -6,7 +6,7 @@ angular
     angular.extend(this, $controller('ExamController', { $scope: $scope }));
 
     $scope.exam_type = 'new_exam';
-    $scope.isTeacher = Auth.isTeacher;
+    $scope.isTeacher = Permissions.isTeacher;
     $scope.guides = guides;
     $scope.isNew = true;
 
