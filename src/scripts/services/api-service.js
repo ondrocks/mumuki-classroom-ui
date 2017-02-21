@@ -8,37 +8,37 @@ angular
 
     const authenticated = (requestOptions = {}) => _.defaultsDeep(requestOptions, {
       headers: { Authorization: `Bearer ${Auth.token()}` }
-    })
+    });
 
     this.subdomain = subdomain;
 
     this.getCourses = () => {
       return $http
-        .get(`${API}/courses`, authenticated())
+        .get(`${API}/courses`)
         .then((res) => _.map(res.data.courses, Course.from))
     };
 
     this.getCourseProgress = (course) => {
       return $http
-        .get(`${API}/courses/${course}/progress`, authenticated())
+        .get(`${API}/courses/${course}/progress`)
         .then((res) => res.data)
     };
 
     this.getBibliothecaGuides = () => {
       return $http
-        .get(`http://bibliotheca-api.mumuki.io/guides`, authenticated())
+        .get(`http://bibliotheca-api.mumuki.io/guides`)
         .then((res) => res.data.guides)
     }
 
     this.getGuides = ({ course }) => {
       return $http
-        .get(`${API}/courses/${course}/guides`, authenticated())
+        .get(`${API}/courses/${course}/guides`)
         .then((res) => _.map(res.data.guides, Guide.from))
     };
 
     this.getGuideProgress = ({ org, course, repo }) => {
       return $http
-        .get(`${API}/courses/${course}/guides/${org}/${repo}`, authenticated())
+        .get(`${API}/courses/${course}/guides/${org}/${repo}`)
         .then((res) => ({
           guide: Guide.from(res.data.guide_students_progress[0].guide),
           guideProgress: _.map(res.data.guide_students_progress, GuideProgress.from)
@@ -47,107 +47,107 @@ angular
 
     this.getExerciseProgress = ({ org, course, repo, student, exercise }) => {
       return $http
-        .get(`${API}/courses/${course}/guides/${org}/${repo}/${student}`, authenticated())
+        .get(`${API}/courses/${course}/guides/${org}/${repo}/${student}`)
         .then((res) => _.map(res.data.exercise_student_progress, ExerciseProgress.from))
     };
 
     this.getExams = ({ course }) => {
       return $http
-        .get(`${API}/courses/${course}/exams`, authenticated())
+        .get(`${API}/courses/${course}/exams`)
         .then((res) => _.map(res.data.exams, Exam.from))
     };
 
     this.getExam = ({ course, exam }) => {
       return $http
-        .get(`${API}/courses/${course}/exams/${exam}`, authenticated())
+        .get(`${API}/courses/${course}/exams/${exam}`)
         .then((res) => Exam.from(res.data))
     };
 
     this.createCourse = (course) => {
       return $http
-        .post(`${API}/courses`, course, authenticated())
+        .post(`${API}/courses`, course)
     }
 
     this.createExam = (course, exam) => {
       return $http
-        .post(`${API}/courses/${course}/exams`, exam, authenticated())
+        .post(`${API}/courses/${course}/exams`, exam)
     }
 
     this.createStudent = (course, student) => {
       return $http
-        .post(`${API}/courses/${course}/students`, student, authenticated())
+        .post(`${API}/courses/${course}/students`, student)
     }
 
     this.updateStudent = (course, student) => {
       return $http
-        .put(`${API}/courses/${course}/student`, student, authenticated())
+        .put(`${API}/courses/${course}/student`, student)
     }
 
     this.getStudent = (course, uid) => {
       return $http
-        .get(`${API}/courses/${course}/student/${uid}`, authenticated())
+        .get(`${API}/courses/${course}/student/${uid}`)
       }
 
     this.updateTeacher = (course, teacher) => {
       return $http
-        .post(`${API}/courses/${course}/teachers`, teacher, authenticated())
+        .post(`${API}/courses/${course}/teachers`, teacher)
     }
 
     this.updateExam = (course, exam) => {
       return $http
-        .put(`${API}/courses/${course}/exams/${exam.id}`, exam, authenticated())
+        .put(`${API}/courses/${course}/exams/${exam.id}`, exam)
     }
 
     this.getStudents = ({ course }) => {
       return $http
-        .get(`${API}/courses/${course}/students`, authenticated())
+        .get(`${API}/courses/${course}/students`)
         .then((res) => _.map(res.data.students, Student.from));
     }
 
     this.getTeachers = ({ course }) => {
       return $http
-        .get(`${API}/courses/${course}/teachers`, authenticated())
+        .get(`${API}/courses/${course}/teachers`)
         .then((res) => _.map(res.data.teachers, Teacher.from));
     }
 
     this.removeStudent = (uid, course) => {
       return $http
-        .delete(`${API}/courses/${course}/students/${uid}`, authenticated())
+        .delete(`${API}/courses/${course}/students/${uid}`)
     }
 
     this.detachStudent = (uid, course) => {
       return $http
-        .post(`${API}/courses/${course}/students/${uid}/detach`, {}, authenticated())
+        .post(`${API}/courses/${course}/students/${uid}/detach`, {})
     }
 
     this.attachStudent = (uid, course) => {
       return $http
-        .post(`${API}/courses/${course}/students/${uid}/attach`, {}, authenticated())
+        .post(`${API}/courses/${course}/students/${uid}/attach`, {})
     }
 
     this.transfer = (uid, course, destination) => {
       return $http
-        .post(`${API}/courses/${course}/students/${uid}/transfer`, { destination }, authenticated())
+        .post(`${API}/courses/${course}/students/${uid}/transfer`, { destination })
     }
 
     this.comment = (data, course) => {
       return $http
-        .post(`${API}/courses/${course}/comments`, data, authenticated())
+        .post(`${API}/courses/${course}/comments`, data)
     }
 
     this.follow = (uid, email, course) => {
       return $http
-        .post(`${API}/courses/${course}/followers`, { uid, email, course }, authenticated())
+        .post(`${API}/courses/${course}/followers`, { uid, email, course })
     }
 
     this.unfollow = (uid, email, course) => {
       return $http
-        .delete(`${API}/courses/${course}/followers/${email}/${uid}`, authenticated())
+        .delete(`${API}/courses/${course}/followers/${email}/${uid}`)
     }
 
     this.getFollowers = (email, course) => {
       return $http
-        .get(`${API}/courses/${course}/followers/${email}`, authenticated())
+        .get(`${API}/courses/${course}/followers/${email}`)
         .then((data) => {
           const groupedData = _.groupBy(data.data.followers, "course");
           return _.forEach(groupedData, (v, k) => groupedData[k] = _.head(groupedData[k]));
@@ -156,7 +156,7 @@ angular
 
     this.addPermission = (slug, email) => {
       return $http
-        .post(`${API}/courses/${slug}/permissions`, { email }, authenticated())
+        .post(`${API}/courses/${slug}/permissions`, { email })
     }
 
     this.getOrganization = () => {
@@ -166,12 +166,17 @@ angular
 
     this.getPermissions = () => {
       return $http
-        .get(`${API}/permissions`, authenticated())
+        .get(`${API}/permissions`)
+        .then((res) => res.data);
     }
 
     this.addStudent = (course, student) => {
       return $http
-        .post(`${API}/courses/${course}/students`, student, authenticated())
+        .post(`${API}/courses/${course}/students`, student)
     }
+
+    this.origin = () => `?origin=${encodeURIComponent(document.location.href)}`;
+    this.getLoginUrl = () =>  `${API}/login${this.origin()}`;
+    this.getLogoutUrl = () =>  `${API}/logout${this.origin()}`;
 
   });

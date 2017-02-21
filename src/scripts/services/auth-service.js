@@ -1,96 +1,48 @@
 
 angular
   .module('classroom')
-  .service('Auth', function ($injector, $state, $location, auth, store, jwtHelper, Domain, Organization) {
+  .service('Auth', function ($injector, $state, $location, $cookies, Permissions, CONFIG) {
 
-    const subdomain = Domain.tenant();
+    let profile = null;
 
-    const regex = new RegExp(`^(\\\*|\\\*\\\/\\\*|${subdomain}\\\/\\\*)$`);
-
-    this.permissions = (role) => {
-      return _.get(store.get('permissions'), role, '').split(':');
+    const updatePermissions = () => {
+      $injector.get('Api')
+        .getPermissions()
+        .then((data) => Permissions.set(data.permissions))
     };
-
-    this.ownerPermissions = () => {
-      return  this.permissions('owner');
-    };
-
-    this.teacherPermissions = () => {
-      return  this.permissions('teacher');
-    };
-
-    this.headmasterPermissions = () => {
-      return  this.permissions('headmaster');
-    };
-
-    this.janitorPermissions = () => {
-      return  this.permissions('janitor');
-    };
-
-    this.isOwner = () => {
-      return _.some(this.ownerPermissions(), (p) => regex.test(p));
-    };
-
-    this.isJanitor = () => {
-      return _.some(this.janitorPermissions(), (p) => regex.test(p)) || this.isOwner();
-    };
-
-    this.isHeadmaster = () => {
-      return _.some(this.headmasterPermissions(), (p) => regex.test(p)) || this.isJanitor();
-    };
-
-    this.isTeacher = () => {
-      return _.some(this.teacherPermissions(), (p) => regex.test(p.split('/')[0])) || this.isHeadmaster();
-    };
-
-    this.profile = () => {
-      return store.get('profile');
-    };
-
-    this.token = () => {
-      return store.get('token');
-    };
-
 
     this.signin = (callback) => {
-      Organization
-        .getLockJson()
-        .then((modalJson) => {
-          auth.signin(_.merge(modalJson, { icon: '/images/icon.png', authParams: { scope: 'openid email' } }), (profile, token) => {
-            store.set('profile', profile);
-            store.set('token', token);
-            $injector
-              .get('Api')
-              .getPermissions()
-              .then((res) => store.set('permissions', res.data.permissions));
-            if (_.isFunction(callback)) callback(profile);
-          });
-        });
+      document.location.href = $injector.get('Api').getLoginUrl();
     };
 
     this.signout = () => {
-      auth.signout();
-      store.remove('token');
-      store.remove('profile');
-      $state.go('classroom.home');
+      $cookies.remove(CONFIG.cookie.session, { domain: CONFIG.cookie.session });
+      profile = null;
+      document.location.href = $injector.get('Api').getLogoutUrl();
     };
+
+    this.checkProfile = () => {
+      let encodedProfile = $cookies.get('mucookie_profile');
+      if (encodedProfile) {
+        profile = JSON.parse(atob(encodedProfile));
+      }
+    };
+
+    this.profile = () => profile;
 
     this.isLoggedIn = () => {
-      return auth.isAuthenticated;
-    };
-
-    this.isTokenExpired = () => {
-      return _.isEmpty(this.token()) || jwtHelper.isTokenExpired(this.token());
-    };
-
-    this.authenticate = () => {
-      auth.authenticate(this.profile(), this.token());
+      if (profile === null) {
+        this.checkProfile()
+      }
+      return profile !== null;
     };
 
     this.authenticateIfPossible = () => {
-      if(!this.isTokenExpired() && !this.isLoggedIn()) {
-        this.authenticate();
+      if(this.isLoggedIn()) {
+        if(Permissions.isEmpty()) {
+          updatePermissions();
+        }
       }
-    }
+    };
 
   });

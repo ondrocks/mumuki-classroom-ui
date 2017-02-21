@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ListHeaderController', function ($scope, $stateParams, list, uidField, itemTemplate, Api, Auth, Preferences, Followers, Domain) {
+  .controller('ListHeaderController', function ($scope, $stateParams, list, uidField, itemTemplate, Api, Auth, Preferences, Followers, Domain, Permissions) {
 
     $scope.listOptions = {
       search: ''
@@ -15,7 +15,7 @@ angular
     $scope.withFilter = true;
     $scope.withDetails = true;
     $scope.withFollowers = true;
-    $scope.withDetachedStudents = Auth.isTeacher();
+    $scope.withDetachedStudents = Permissions.isTeacher();
 
     $scope.list = list;
     $scope.itemTemplate = itemTemplate;

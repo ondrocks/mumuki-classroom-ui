@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $controller, $stateParams, toastr, $filter, students, Auth, Followers, Api, Modal, Domain, Breadcrumb, Humanizer) {
+  .controller('StudentsController', function ($scope, $state, $controller, $stateParams, toastr, $filter, students, Auth, Followers, Api, Modal, Domain, Breadcrumb, Humanizer, Permissions) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -22,10 +22,10 @@ angular
 
     $scope.withDetails = false;
 
-    $scope.isOwner = Auth.isOwner();
-    $scope.canTransfer = Auth.isJanitor();
-    $scope.canDetach = Auth.isJanitor();
-    $scope.canAddStudent = Auth.isJanitor();
+    $scope.isOwner = Permissions.isOwner();
+    $scope.canTransfer = Permissions.isJanitor();
+    $scope.canDetach = Permissions.isJanitor();
+    $scope.canAddStudent = Permissions.isJanitor();
 
     $scope.setCount(students.length);
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();

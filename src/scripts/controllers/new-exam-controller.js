@@ -1,12 +1,12 @@
 
 angular
   .module('classroom')
-  .controller('NewExamController', function ($scope, $controller, guides, Auth, Api) {
+  .controller('NewExamController', function ($scope, $controller, guides, Auth, Api, Permissions) {
 
     angular.extend(this, $controller('ExamController', { $scope: $scope }));
 
     $scope.exam_type = 'new_exam';
-    $scope.isTeacher = Auth.isTeacher;
+    $scope.isTeacher = Permissions.isTeacher;
     $scope.guides = guides;
     $scope.isNew = true;
 

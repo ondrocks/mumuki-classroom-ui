@@ -18,7 +18,7 @@
               img.rounded-x.profile(ng-src='{{ profile().picture }}', width='40px')
             ul.dropdown-menu()
               li
-                a {{ profile().name }}
+                a {{ profile().user_name }}
               li.divider(role='separator')
               li
                 a(href='', ng-click='signout()') {{ 'log_out' | translate }}
