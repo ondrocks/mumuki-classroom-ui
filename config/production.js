@@ -14,7 +14,6 @@ angular
 
     cookie: {
       domain: '.localmumuki.io',
-      session: '_mumuki_classroom_session',
-      regular: 'mucookie'
+      session: '_mumuki_classroom_session'
     }
   });
