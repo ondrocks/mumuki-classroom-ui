@@ -9,13 +9,13 @@ angular
     const UNIFIED = { type: 'line-by-line', name: 'unified' };
     const LAST_SOLUTION = { type: 'only-last', name: 'last_solution' };
 
-    const exerciseToView = _.find(exercisesProgress, (progress) => progress.exercise.id === Number($stateParams.eid));
+    const exerciseToView = _.find(exercisesProgress, (progress) => progress.exercise.eid === Number($stateParams.eid));
 
     $scope.exercisesProgress = $filter('orderBy')(exercisesProgress, ['exercise.number', 'exercise.name']);
 
     $scope.atheneumLink = () => _.isEmpty(exerciseProgress.exercise.bilbiotheca_id)
-                                  ? Domain.exerciseURL(exerciseProgress.exercise.id)
-                                  : Domain.exerciseURLByBibliotheca(exerciseProgress.guide.slug, exerciseProgress.exercise.bibliotheca_id)
+                                  ? Domain.exerciseURL(exerciseProgress.exercise.eid)
+                                  : Domain.exerciseURLByBibliotheca(exerciseProgress.guide.slug, exerciseProgress.exercise.bibliotheca_id);
 
     let exerciseProgress = exerciseToView || exercisesProgress[0];
 
@@ -56,7 +56,7 @@ angular
       });
 
     const currentExerciseProgressIndex = () => {
-      return _.findIndex($scope.exercisesProgress, (p) => p.exercise.id === Number($stateParams.eid));
+      return _.findIndex($scope.exercisesProgress, (p) => p.exercise.eid === Number($stateParams.eid));
     }
 
     $scope.nextExercise = () => {
@@ -70,7 +70,7 @@ angular
     }
 
     $scope.selectExercise = (exerciseProgress) => {
-      $stateParams.eid = exerciseProgress.exercise.id;
+      $stateParams.eid = exerciseProgress.exercise.eid;
       const diffs = exerciseProgress.diffs;
 
       if (_.isEmpty($scope.options)) $scope.options = { viewMode: UNIFIED };
@@ -114,7 +114,7 @@ angular
       $scope.lastSubmission = _.last(exerciseProgress.submissions);
       $scope.lastSubmissionDate = Humanizer.date($scope.lastSubmission.created_at);
       $scope.submissionsCount = exerciseProgress.submissions.length;
-      $scope.progressSelected = (progress) => progress.exercise.id === $scope.progress.exercise.id
+      $scope.progressSelected = (progress) => progress.exercise.eid === $scope.progress.exercise.eid;
 
       $scope.selectDiff(diffs[MAX]);
 
@@ -146,8 +146,8 @@ angular
       const getCommentToPost = (submission) => {
         return {
           uid: $stateParams.student,
-          exercise_id: exerciseProgress.exercise.id,
-          submission_id: submission.id,
+          exercise_id: exerciseProgress.exercise.eid,
+          submission_id: submission.sid,
           comment: {
             content: submission.comment,
             type: submission.commentType,
