@@ -5,8 +5,14 @@ angular
 
     this.set = (org) => {
       this.organization = org;
-      $translate.use(org.locale);
-    }
+      $translate.use(this.locale());
+    };
+
+    this.locale = () => {
+      return _.includes(this.organization.locale, '-')
+        ? this.organization.locale.split('-')[0]
+        : this.organization.locale;
+    };
 
     this.setCustomAssets = (org) => {
       $rootScope.customJsUrl = org.extension_javascript_url;
