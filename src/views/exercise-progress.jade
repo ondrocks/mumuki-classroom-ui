@@ -1,33 +1,28 @@
 .container
-  .row
-    .col-sm-3(style='margin-top: 20px')
-      .text-center
-        img.img-circle(with-default='{{ progress.student.image_url }}', width='40%')
-        h4 {{ progress.student.fullName() }}
-        h5.exercise-item
-          div(ng-if='!progress.student.email') {{ 'email_not_provided' | translate }}
-          a(ng-if='progress.student.email', href='mailto:{{progress.student.email}}') {{progress.student.email}}
-      br
-      section
-        .row(ng-repeat='progress in exercisesProgress | orderBy:["exercise.number", "exercise.name"]')
-          span.col-sm-8.exercise-item(ng-class="{'active-exercise': progressSelected(progress)}")
-            a(href='', ng-click='selectExercise(progress)')
-              | {{ progress.exercise.getName() }}
-          span.col-sm-2.pull-right
-            status-icon(status='progress.lastSubmission().status')
-          span.col-sm-2.pull-right(ng-if='hasComments(progress)')
-            i.fa(ng-class='{                                          \
-                  "fa-comments-o": showCommentsIcon(progress),        \
-                  "fa-pencil-square-o": showNewCommentsIcon(progress) \
-                }') &nbsp;
 
-    .col-sm-9
-      .row
-        h1.title
-          span {{ progress.exercise.getName() }}
-          small
-            a.view-in-atheneum(target='_blank' href="{{atheneumLink()}}")
-              i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}" data-placement="top" tooltip data-toggle="tooltip")
+  .mu-content
+
+    h1.detail-title.exercise-title
+      .title
+        span(style='white-space: nowrap') {{ 'exercise' | translate }} {{ progress.exercise.getName() }}
+        small
+          a.view-in-atheneum(target='_blank' href="{{atheneumLink()}}")
+            i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}" data-placement="top" tooltip data-toggle="tooltip")
+      .language
+        //- img.da.img-circle(with-default='{{ progress.student.image_url }}', width='44px', height='44px')
+        i.da(class='da-{{progress.guide.language.name}}')
+
+
+    main.detail-main
+      .exercises-list
+        a.text-center.pointer(
+          ng-repeat='progress in exercisesProgress | orderBy:["exercise.number", "exercise.name"]',
+          ng-class='{"active-exercise": progressSelected(progress)}',
+          title='{{ progress.exercise.getName() }}',
+          ng-click='selectExercise(progress)')
+
+  .row
+    .col-sm-12
       .row
         h5.title
           span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" tooltip title="{{lastSubmission.created_at | date:'medium'}}")

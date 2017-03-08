@@ -52,6 +52,7 @@ angular
     exam_link: 'Exam link',
     exam_updated: 'Exam updated successfully',
     exams: 'Exams',
+    exercise: 'Exercise',
     expectations: 'Expectations',
     export_solutions_disclaimer: 'Warning! This data is sensitive. Do not use or distribute it without explicit users consent.<br><br>Do you want to continue anyway?',
     export_solutions_button: 'Export solutions',
