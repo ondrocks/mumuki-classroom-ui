@@ -5,32 +5,35 @@ angular
 
     Preferences($scope, 'options');
 
-    let currentExerciseId
+    let currentExerciseId;
 
     const SPLIT = { type: 'side-by-side', name: 'split' };
     const UNIFIED = { type: 'line-by-line', name: 'unified' };
     const LAST_SOLUTION = { type: 'only-last', name: 'last_solution' };
 
     const exerciseToView = _.find(exercisesProgress, (progress) => progress.exercise.eid === Number($stateParams.eid));
-    const toExerciseProgress = (e) => {
-      _.merge(e, {eid: (_.get(exerciseToView, 'exercise.name') === e.name ? exerciseToView.exercise.eid : e.eid)});
-      const exerciseProgress = _.find(exercisesProgress, (p) => e.name === p.exercise.name)
+
+    const toExerciseProgress = (e, i) => {
+      const currentExercise = _.find(exercisesProgress, (progress) => progress.exercise.eid === e.id);
+      e = _.merge(e, {
+        eid: (_.get(currentExercise, 'exercise.eid') === e.id ? currentExercise.exercise.eid : e.id),
+        number: i + 1
+      });
+      const exerciseProgress = _.find(exercisesProgress, (p) => e.eid === p.exercise.eid);
       return ExerciseProgress.from({
         guide: _.omit(guide, 'exercises'),
         student: _.get(exercisesProgress[0], 'student', {}),
         exercise: e,
-        submissions: _.get(exerciseProgress, 'submissions', []),
+        submissions: _.get(exerciseProgress, 'submissions', [])
       });
     };
 
     $scope.guide = guide;
     $scope.exercisesProgress = _.map(guide.exercises, toExerciseProgress);
 
-    $scope.atheneumLink = () => _.isEmpty(exerciseProgress.exercise.bilbiotheca_id)
-                                  ? Domain.exerciseURL(exerciseProgress.exercise.eid)
-                                  : Domain.exerciseURLByBibliotheca(exerciseProgress.guide.slug, exerciseProgress.exercise.bibliotheca_id);
+    $scope.atheneumLink = () => Domain.exerciseURLByBibliotheca(exerciseProgress.guide.slug, exerciseProgress.exercise.bibliotheca_id);
 
-    let exerciseProgress = exerciseToView || exercisesProgress[0];
+    let exerciseProgress = exerciseToView || $scope.exercisesProgress[0];
 
     const course = $stateParams.course;
     Breadcrumb.setCourse(course);
@@ -70,17 +73,17 @@ angular
 
     const currentExerciseProgressIndex = () => {
       return _.findIndex($scope.exercisesProgress, (p) => p.exercise.eid === currentExerciseId);
-    }
+    };
 
     $scope.nextExercise = () => {
       const exercisesProgressIndex = currentExerciseProgressIndex();
-      return $scope.exercisesProgress[Math.min(exercisesProgressIndex + 1, exercisesProgress.length - 1)];
-    }
+      return $scope.exercisesProgress[Math.min(exercisesProgressIndex + 1, $scope.exercisesProgress.length - 1)];
+    };
 
     $scope.prevExercise = () => {
       const exercisesProgressIndex = currentExerciseProgressIndex();
       return $scope.exercisesProgress[Math.max(exercisesProgressIndex - 1, 0)]
-    }
+    };
 
     $scope.selectExercise = (exerciseProgress) => {
       currentExerciseId = exerciseProgress.exercise.eid;
