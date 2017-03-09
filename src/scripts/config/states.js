@@ -148,6 +148,11 @@ angular
             templateUrl: 'views/exercise-progress.html',
             controller: 'ExerciseProgressController',
             resolve: {
+              guide: ($state, $stateParams, Api) => {
+                return Api
+                  .getBibliothecaGuide($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides.guide', $stateParams, { location: 'replace' }));
+              },
               exercisesProgress: ($state, $stateParams, Api) => {
                 return Api
                   .getExerciseProgress($stateParams)

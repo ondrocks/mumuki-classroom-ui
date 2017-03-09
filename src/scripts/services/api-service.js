@@ -30,6 +30,12 @@ angular
         .then((res) => res.data.guides)
     }
 
+    this.getBibliothecaGuide = ({org, repo}) => {
+      return $http
+        .get(`http://bibliotheca-api.mumuki.io/guides/${org}/${repo}`)
+        .then((res) => Guide.from(res.data))
+    }
+
     this.getGuides = ({ course }) => {
       return $http
         .get(`${API}/courses/${course}/guides`)

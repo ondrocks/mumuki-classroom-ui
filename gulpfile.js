@@ -19,7 +19,7 @@ const useminOptions = () => {
       scss: [],
       es6: [],
       css: [$.minifyCss, $.rev],
-      js: [$.uglify, $.rev]
+      js: [$.rev]
     },
     production: {
       scss: [$.rev],

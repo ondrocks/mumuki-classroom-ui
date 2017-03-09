@@ -1,17 +1,30 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, hotkeys, exercisesProgress, containsHtml, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain) {
+  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, hotkeys, guide, exercisesProgress, containsHtml, ExerciseProgress, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain) {
 
     Preferences($scope, 'options');
+
+    let currentExerciseId
 
     const SPLIT = { type: 'side-by-side', name: 'split' };
     const UNIFIED = { type: 'line-by-line', name: 'unified' };
     const LAST_SOLUTION = { type: 'only-last', name: 'last_solution' };
 
     const exerciseToView = _.find(exercisesProgress, (progress) => progress.exercise.eid === Number($stateParams.eid));
+    const toExerciseProgress = (e) => {
+      _.merge(e, {eid: (_.get(exerciseToView, 'exercise.name') === e.name ? exerciseToView.exercise.eid : e.eid)});
+      const exerciseProgress = _.find(exercisesProgress, (p) => e.name === p.exercise.name)
+      return ExerciseProgress.from({
+        guide: _.omit(guide, 'exercises'),
+        student: _.get(exercisesProgress[0], 'student', {}),
+        exercise: e,
+        submissions: _.get(exerciseProgress, 'submissions', []),
+      });
+    };
 
-    $scope.exercisesProgress = $filter('orderBy')(exercisesProgress, ['exercise.number', 'exercise.name']);
+    $scope.guide = guide;
+    $scope.exercisesProgress = _.map(guide.exercises, toExerciseProgress);
 
     $scope.atheneumLink = () => _.isEmpty(exerciseProgress.exercise.bilbiotheca_id)
                                   ? Domain.exerciseURL(exerciseProgress.exercise.eid)
@@ -56,7 +69,7 @@ angular
       });
 
     const currentExerciseProgressIndex = () => {
-      return _.findIndex($scope.exercisesProgress, (p) => p.exercise.eid === Number($stateParams.eid));
+      return _.findIndex($scope.exercisesProgress, (p) => p.exercise.eid === currentExerciseId);
     }
 
     $scope.nextExercise = () => {
@@ -70,8 +83,9 @@ angular
     }
 
     $scope.selectExercise = (exerciseProgress) => {
-      $stateParams.eid = exerciseProgress.exercise.eid;
-      const diffs = exerciseProgress.diffs;
+      currentExerciseId = exerciseProgress.exercise.eid;
+      $stateParams.eid = currentExerciseId;
+      const diffs = exerciseProgress.diffs || [];
 
       if (_.isEmpty($scope.options)) $scope.options = { viewMode: UNIFIED };
 
@@ -112,7 +126,7 @@ angular
       $scope.diffs = diffs;
       $scope.progress = exerciseProgress;
       $scope.lastSubmission = _.last(exerciseProgress.submissions);
-      $scope.lastSubmissionDate = Humanizer.date($scope.lastSubmission.created_at);
+      $scope.lastSubmissionDate = Humanizer.date(_.get($scope, 'lastSubmission.created_at'));
       $scope.submissionsCount = exerciseProgress.submissions.length;
       $scope.progressSelected = (progress) => progress.exercise.eid === $scope.progress.exercise.eid;
 

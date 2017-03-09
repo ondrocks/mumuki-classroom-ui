@@ -10,13 +10,13 @@
             i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}" data-placement="top" tooltip data-toggle="tooltip")
       .language
         //- img.da.img-circle(with-default='{{ progress.student.image_url }}', width='44px', height='44px')
-        i.da(class='da-{{progress.guide.language.name}}')
+        i.da(class='da-{{guide.language}}')
 
 
     main.detail-main
       .exercises-list
         a.text-center.pointer(
-          ng-repeat='progress in exercisesProgress | orderBy:["exercise.number", "exercise.name"]',
+          ng-repeat='progress in exercisesProgress',
           ng-class='{"active-exercise": progressSelected(progress)}',
           title='{{ progress.exercise.getName() }}',
           ng-click='selectExercise(progress)')
