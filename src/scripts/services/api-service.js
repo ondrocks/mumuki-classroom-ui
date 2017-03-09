@@ -33,8 +33,9 @@ angular
     this.getBibliothecaGuide = ({org, repo}) => {
       return $http
         .get(`http://bibliotheca-api.mumuki.io/guides/${org}/${repo}`)
+        .then((res) => $http.post(`http://bibliotheca-api.mumuki.io/markdowns`, res.data))
         .then((res) => Guide.from(res.data))
-    }
+    };
 
     this.getGuides = ({ course }) => {
       return $http

@@ -22,12 +22,8 @@ angular
 
         $scope.content = $scope.content || '';
 
-        const renderMarkdown = () => {
-          return Api.renderMarkdown($scope.content).then((markdown) => _html = markdown);
-        };
-
-        $scope.$watch('content', () => {
-            renderMarkdown().then(() => $scope.$apply());
+        $scope.$watch('content', (newVal) => {
+          _html = newVal;
         });
 
       }
