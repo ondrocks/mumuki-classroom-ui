@@ -79,7 +79,6 @@ $color-danger: #d9534f;
 }
 
 .title {
-  margin-left: 1rem;
   span.fa {
     margin-right: 5px;
   }
@@ -130,8 +129,6 @@ span.active-exercise {
   justify-content: $justify-content;
 }
 
-$list-columns: 200px 3;
-
 .mu-content {
   @include display-flex(column, flex-start, flex-start);
   width: 100%;
@@ -171,15 +168,6 @@ $list-columns: 200px 3;
     .detail-exercises {
       h3 {
         text-transform: capitalize;
-      }
-      .progress-listing {
-        -webkit-columns: $list-columns;
-        -moz-columns: $list-columns;
-        columns: $list-columns;
-        list-style: none;
-        .fa-circle {
-          margin-right: 3px;
-        }
       }
     }
     .detail-license {
@@ -318,8 +306,18 @@ $list-columns: 200px 3;
   flex-flow: column nowrap;
 }
 
+.bottom-10 {
+  margin-bottom: 10px;
+}
+
 .flex-center {
   align-self: center;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center
 }
 
 .flex-start {

@@ -5,11 +5,8 @@
     h1.detail-title.exercise-title
       .title
         span(style='white-space: nowrap') {{ 'exercise' | translate }} {{ progress.exercise.number }}: {{ progress.exercise.name }}
-        small
-          a.view-in-atheneum(target='_blank' href="{{atheneumLink()}}")
-            i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}" data-placement="top" tooltip data-toggle="tooltip")
+
       .language
-        //- img.da.img-circle(with-default='{{ progress.student.image_url }}', width='44px', height='44px')
         i.da(class='da-{{guide.language}}')
 
 
@@ -28,25 +25,14 @@
         .exercise-detail-area-editor
           .row
             .col-sm-12.solutions-preview
-              .row
-                h5.title
-                  span.fa(class='fa-clock-o', data-placement="top" data-toggle="tooltip" tooltip title="{{lastSubmission.created_at | date:'medium'}}")
-                  span {{ 'submissions_count' | translate:{submissionsCount: submissionsCount, lastSubmissionDate: lastSubmissionDate} }}
 
-              nav.nav.flex-start
-                .nav.navbar-nav.navbar-right.pagination
-                  .dropdown
-                    span.view-mode {{ 'view_mode' | translate }}
-                    button.btn.btn-primary.dropdown-toggle(id='viewModeId', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-                      span {{ getViewMode().name | translate }}
-                      span.caret(style="margin-left: .5em")
-                    ul.dropdown-menu(aria-labelledby='viewModeId')
-                      li
-                        a(href='', ng-click='unified()') {{ 'unified' | translate }}
-                      li
-                        a(href='', ng-click='split()') {{ 'split' | translate }}
-                      li
-                        a(href='', ng-click='lastSolution()') {{ 'last_solution' | translate }}
+              ul.nav.nav-tabs.bottom-10
+                li(ng-class='{ "active": getViewMode().name === "unified" }')
+                  a(href='', ng-click='unified()') {{ 'unified' | translate }}
+                li(ng-class='{ "active": getViewMode().name === "split" }')
+                  a(href='', ng-click='split()') {{ 'split' | translate }}
+                li(ng-class='{ "active": getViewMode().name === "last_solution" }')
+                  a(href='', ng-click='lastSolution()') {{ 'last_solution' | translate }}
 
               diff-side(
                 ng-if='!isLastSolutionActivated()',
@@ -77,29 +63,8 @@
                   a(href='', aria-label='Siguiente', ng-click='last()')
                     span(aria-hidden='true') &raquo;
 
-
       .row
         .col-sm-12(ng-repeat='submission in [ selectedDiff.right ]')
-
-          .row(ng-init='submission.commentType = "success"')
-            .col-sm-9.col-md-10
-              textarea.form-control(
-                  ng-model='submission.comment',
-                  placeholder='{{ "comment_this_solution" | translate }}',
-                  class="textarea-{{submission.commentType}}",
-                  rows='3')
-
-            .col-sm-3.col-md-2
-              .btn-group.btn-group-justified
-                .btn-group
-                  button.btn.btn-success.comment-success(ng-click='submission.commentType = "success"')
-                .btn-group
-                  button.btn.btn-warning(ng-click='submission.commentType = "warning"')
-                .btn-group
-                  button.btn.btn-danger(ng-click='submission.commentType = "danger"')
-              br
-              button.btn.btn-success.btn-block(ng-click='addComment(submission)')
-                | {{ 'comment_solution' | translate  }}
 
           .bs-callout(ng-repeat='comment in submission.comments | orderBy:$index:true', class='bs-callout-{{ comment.type }}')
             h4 {{ 'comment' | translate  }}

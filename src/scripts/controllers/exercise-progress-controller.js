@@ -5,7 +5,7 @@ angular
 
     Preferences($scope, 'options');
 
-    let currentExerciseId;
+    let currentExercise;
 
     const SPLIT = { type: 'side-by-side', name: 'split' };
     const UNIFIED = { type: 'line-by-line', name: 'unified' };
@@ -72,7 +72,7 @@ angular
       });
 
     const currentExerciseProgressIndex = () => {
-      return _.findIndex($scope.exercisesProgress, (p) => p.exercise.eid === currentExerciseId);
+      return _.findIndex($scope.exercisesProgress, (p) => p.exercise.eid === currentExercise.eid);
     };
 
     $scope.progressStatus = (progress) => _.get(_.last(progress.submissions), 'status', '');
@@ -88,8 +88,8 @@ angular
     };
 
     $scope.selectExercise = (exerciseProgress) => {
-      currentExerciseId = exerciseProgress.exercise.eid;
-      $stateParams.eid = currentExerciseId;
+      currentExercise = exerciseProgress.exercise;
+      $stateParams.eid = currentExercise.eid;
       const diffs = exerciseProgress.diffs || [];
 
       if (_.isEmpty($scope.options)) $scope.options = { viewMode: UNIFIED };
