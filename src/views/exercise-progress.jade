@@ -18,6 +18,7 @@
         a.text-center.pointer(
           ng-repeat='progress in exercisesProgress',
           ng-class='{"active-exercise": progressSelected(progress)}',
+          class='{{progressStatus(progress)}}'
           title='{{ progress.exercise.getName() }}',
           ng-click='selectExercise(progress)')
 

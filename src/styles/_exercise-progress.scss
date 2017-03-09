@@ -204,6 +204,9 @@ $list-columns: 200px 3;
     border: 1px solid white;
     width: 100%;
     height: 10px;
+    &.failed { background-color: $brand-danger }
+    &.passed { background-color: $brand-success }
+    &.passed_with_warnings { background-color: $brand-warning }
     &.active-exercise:after {
       color: $mu-color-link;
       content: '•';

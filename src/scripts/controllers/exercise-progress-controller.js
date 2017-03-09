@@ -75,6 +75,8 @@ angular
       return _.findIndex($scope.exercisesProgress, (p) => p.exercise.eid === currentExerciseId);
     };
 
+    $scope.progressStatus = (progress) => _.get(_.last(progress.submissions), 'status', '');
+
     $scope.nextExercise = () => {
       const exercisesProgressIndex = currentExerciseProgressIndex();
       return $scope.exercisesProgress[Math.min(exercisesProgressIndex + 1, $scope.exercisesProgress.length - 1)];
@@ -185,7 +187,7 @@ angular
         }
       }
 
-    }
+    };
 
     $scope.selectExercise(exerciseToView);
 
