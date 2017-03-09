@@ -11,8 +11,6 @@ angular
     const UNIFIED = { type: 'line-by-line', name: 'unified' };
     const LAST_SOLUTION = { type: 'only-last', name: 'last_solution' };
 
-    const exerciseToView = _.find(exercisesProgress, (progress) => progress.exercise.eid === Number($stateParams.eid));
-
     const toExerciseProgress = (e, i) => {
       const currentExercise = _.find(exercisesProgress, (progress) => progress.exercise.eid === e.id);
       e = _.merge(e, {
@@ -30,6 +28,8 @@ angular
 
     $scope.guide = guide;
     $scope.exercisesProgress = _.map(guide.exercises, toExerciseProgress);
+
+    const exerciseToView = _.find($scope.exercisesProgress, (progress) => progress.exercise.eid === Number($stateParams.eid));
 
     $scope.atheneumLink = () => Domain.exerciseURLByBibliotheca(exerciseProgress.guide.slug, exerciseProgress.exercise.eid);
 

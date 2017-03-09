@@ -185,4 +185,10 @@ angular
     this.getLoginUrl = () =>  `${API}/login${this.origin()}`;
     this.getLogoutUrl = () =>  `${API}/logout${this.origin()}`;
 
+    this.renderMarkdown = (markdown) => {
+      return $http
+        .post(`http://bibliotheca-api.mumuki.io/markdown`, { markdown })
+        .then((res) => res.data.markdown);
+    };
+
   });
