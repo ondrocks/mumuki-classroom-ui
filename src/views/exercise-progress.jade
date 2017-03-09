@@ -4,7 +4,7 @@
 
     h1.detail-title.exercise-title
       .title
-        span(style='white-space: nowrap') {{ 'exercise' | translate }} {{ progress.exercise.getName() }}
+        span(style='white-space: nowrap') {{ 'exercise' | translate }} {{ progress.exercise.number }}: {{ progress.exercise.name }}
         small
           a.view-in-atheneum(target='_blank' href="{{atheneumLink()}}")
             i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}" data-placement="top" tooltip data-toggle="tooltip")

@@ -31,7 +31,7 @@ angular
     $scope.guide = guide;
     $scope.exercisesProgress = _.map(guide.exercises, toExerciseProgress);
 
-    $scope.atheneumLink = () => Domain.exerciseURLByBibliotheca(exerciseProgress.guide.slug, exerciseProgress.exercise.bibliotheca_id);
+    $scope.atheneumLink = () => Domain.exerciseURLByBibliotheca(exerciseProgress.guide.slug, exerciseProgress.exercise.eid);
 
     let exerciseProgress = exerciseToView || $scope.exercisesProgress[0];
 
@@ -43,12 +43,12 @@ angular
     hotkeys
       .bindTo($scope)
       .add({
-        combo: ['ctrl+up', 'ctrl+left', 'command+up', 'command+left', 'k'],
+        combo: ['ctrl+left', 'shift+left'],
         description: $filter('translate')('next_exercise_description'),
         callback: () => $scope.selectExercise($scope.prevExercise()),
       })
       .add({
-        combo: ['ctrl+down', 'ctrl+right', 'command+down', 'command+right', 'j'],
+        combo: ['ctrl+right', 'shift+right'],
         description: $filter('translate')('prev_exercise_description'),
         callback: () => $scope.selectExercise($scope.nextExercise()),
       })
