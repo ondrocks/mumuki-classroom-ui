@@ -4,7 +4,8 @@ angular
   .service('Api', function ($http, $location, Course, Guide, Student, Teacher, GuideProgress, ExerciseProgress, Exam, Auth, Domain, Organization, CONFIG) {
 
     const subdomain = Domain.tenant();
-    const API = `http://${subdomain}.${CONFIG.classroom.url}`;
+    const API = `//${subdomain}.${CONFIG.classroom.url}`;
+    const BIBLIOTHECA = `//${CONFIG.bibliotheca.url}`;
 
     const authenticated = (requestOptions = {}) => _.defaultsDeep(requestOptions, {
       headers: { Authorization: `Bearer ${Auth.token()}` }
@@ -26,14 +27,13 @@ angular
 
     this.getBibliothecaGuides = () => {
       return $http
-        .get(`http://bibliotheca-api.mumuki.io/guides`)
+        .get(`${BIBLIOTHECA}/guides`)
         .then((res) => res.data.guides)
     }
 
     this.getBibliothecaGuide = ({org, repo}) => {
       return $http
-        .get(`http://bibliotheca-api.mumuki.io/guides/${org}/${repo}`)
-        .then((res) => $http.post(`http://bibliotheca-api.mumuki.io/markdowns`, res.data))
+        .get(`${BIBLIOTHECA}/guides/${org}/${repo}/markdown`)
         .then((res) => Guide.from(res.data))
     };
 
@@ -187,9 +187,10 @@ angular
     this.getLogoutUrl = () =>  `${API}/logout${this.origin()}`;
 
     this.renderMarkdown = (markdown) => {
+      console.log(111, markdown)
       return $http
-        .post(`http://bibliotheca-api.mumuki.io/markdown`, { markdown })
-        .then((res) => res.data.markdown);
+        .post(`${BIBLIOTHECA}/markdown`, { markdown })
+        .then((res) => _.get(res, 'data.markdown'));
     };
 
   });
