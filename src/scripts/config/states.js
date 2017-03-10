@@ -157,6 +157,12 @@ angular
                 return Api
                   .getExerciseProgress($stateParams)
                   .catch(() => $state.go('classroom.courses.course.guides.guide', $stateParams, { location: 'replace' }));
+              },
+              guideProgress: ($state, $stateParams, Api) => {
+                return Api
+                  .getGuideProgress($stateParams)
+                  .then((data) => data.guideProgress)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }
           }

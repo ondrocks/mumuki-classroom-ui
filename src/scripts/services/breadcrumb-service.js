@@ -19,6 +19,10 @@ angular
       return this._student && this._student.getName();
     }
 
+    this.getStudentImage = () => {
+      return this._student && this._student.image_url;
+    }
+
     this.getExamName = () => {
       return this._exam && this._exam.getName();
     }
@@ -39,6 +43,14 @@ angular
       this._exam = exam;
     }
 
+    this.setStudents = (students) => {
+      this._students = students;
+    }
+
+    this.getStudents = () => {
+      return this._students;
+    }
+
     this._course = null;
     this._guide = null;
     this._student = null;
@@ -51,7 +63,7 @@ angular
       { name: () => 'new_exam', state: 'classroom.courses.course.exams.new' },
       { name: () => this.getExamName(), state: 'classroom.courses.course.exams.edit' },
       { name: () => this.getGuideName(), state: 'classroom.courses.course.guides.guide' },
-      { name: () => this.getStudentName(), state: 'classroom.courses.course.guides.guide.students' }
+      { name: () => this.getStudentName(), state: 'classroom.courses.course.guides.guide.students', student: true, students: this.getStudents, image: () => this.getStudentImage() }
     ];
 
   });

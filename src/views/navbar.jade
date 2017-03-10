@@ -9,13 +9,34 @@
                 i.da.da-mumuki
           li
             a(ui-sref='classroom.home') {{ 'courses' | translate}}
-          li(ng-repeat='item in Breadcrumb.list()')
-            a(href='', ng-click='Breadcrumb.goTo(item)') {{ item.name() | translate }}
+          li(ng-repeat='item in Breadcrumb.list()', ng-class='{"dropdown": item.student}')
+            a(ng-if='!item.student', href='', ng-click='Breadcrumb.goTo(item)') {{ item.name() | translate }}
+            img.rounded-x.profile.adjust-position(ng-if='item.student', with-default='{{ item.image() }}', width='20px')
+            span &nbsp;
+            a.dropdown-toggle(href='' ng-if='item.student' data-toggle='dropdown') {{ item.name() | translate }}
+              span &nbsp;
+              i.fa.fa-caret-down
+            ul.dropdown-menu
+              input.form-control.student-dropdown-search(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch', autofocus, autocomplete='off')
+              script(type='text/javascript').
+                $('.dropdown-menu input').on('click', function(e) {
+                  console.log(e);
+                  e.stopPropagation();
+                });
+              li.scrollable-menu
+                a.list-group-item.list-group-item-action(ng-repeat='student in item.students() | filter:listSearch'
+                    ui-sref='classroom.courses.course.guides.guide.students({ \
+                        student: student.uid                                    \
+                      })')
+                  img.rounded-x.profile.adjust-position(ng-if='item.student', with-default='{{ student.image_url }}', width='20px')
+                  span &nbsp;
+                  span {{ student.fullName() }}
+
       .col-md-2
         .user-menu
           dropdown(ng-if='isLoggedIn()')
             a.dropdown-toggle(href='', data-toggle='dropdown', role='button')
-              img.rounded-x.profile(ng-src='{{ profile().picture }}', width='40px')
+              img.rounded-x.profile(with-default='{{ profile().user_image_url }}', width='40px')
             ul.dropdown-menu()
               li
                 a {{ profile().user_name }}

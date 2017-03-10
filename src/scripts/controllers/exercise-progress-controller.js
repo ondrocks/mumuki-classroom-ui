@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $timeout, $filter, toastr, hotkeys, guide, exercisesProgress, containsHtml, ExerciseProgress, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain) {
+  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $timeout, $filter, toastr, hotkeys, guide, guideProgress, exercisesProgress, containsHtml, ExerciseProgress, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student) {
 
     Preferences($scope, 'options');
 
@@ -39,6 +39,7 @@ angular
     Breadcrumb.setCourse(course);
     Breadcrumb.setGuide(exerciseProgress.guide);
     Breadcrumb.setStudent(exerciseProgress.student);
+    Breadcrumb.setStudents(_.map(guideProgress, (progress) => Student.from(progress.student)));
 
     hotkeys
       .bindTo($scope)
@@ -189,7 +190,7 @@ angular
             .then(() => submission.restartComment())
             .then(() => toastr.success($filter('translate')('do_comment')))
         }
-      }
+      };
 
       if (!$scope.lastSolutionMarkdown[currentExercise.eid]) {
         Api
