@@ -28,11 +28,17 @@
 
               ul.nav.nav-tabs.bottom-10
                 li(ng-class='{ "active": getViewMode().name === "unified" }')
-                  a(href='', ng-click='unified()') {{ 'unified' | translate }}
+                  a(href='', ng-click='unified()')
+                    i.fa.fa-window-maximize
+                    span &nbsp;{{ 'unified' | translate }}
                 li(ng-class='{ "active": getViewMode().name === "split" }')
-                  a(href='', ng-click='split()') {{ 'split' | translate }}
+                  a(href='', ng-click='split()')
+                    i.fa.fa-columns
+                    span &nbsp;{{ 'split' | translate }}
                 li(ng-class='{ "active": getViewMode().name === "last_solution" }')
-                  a(href='', ng-click='lastSolution()') {{ 'last_solution' | translate }}
+                  a(href='', ng-click='lastSolution()')
+                    i.fa.fa-code
+                    span &nbsp;{{ 'last_solution' | translate }}
 
               diff-side(
                 ng-if='!isLastSolutionActivated()',
