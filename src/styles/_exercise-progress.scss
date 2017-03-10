@@ -237,24 +237,33 @@ span.active-exercise {
 
   .exercise-detail-area-text {
     @include display-flex(column, flex-start, flex-start);
-    width: 100%;
   }
   .exercise-detail-area-editor {
-    width: 100%;
   }
 
   &.input_right {
     @include display-flex(row, flex-start, flex-start);
+    width: 100%;
     .exercise-detail-area-text {
+      width: 50%;
       margin-right: 15px;
     }
     .exercise-detail-area-editor {
+      width: 50%;
       margin-left: 15px;
     }
   }
 
   &.input_bottom {
     @include input-bottom;
+    width: 100%;
+
+    .exercise-detail-area-text {
+      width: 100%;
+    }
+    .exercise-detail-area-editor {
+      width: 100%;
+    }
   }
 
 }
