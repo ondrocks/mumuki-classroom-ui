@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $filter, toastr, hotkeys, guide, exercisesProgress, containsHtml, ExerciseProgress, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain) {
+  .controller('ExerciseProgressController', function ($scope, $state, $sce, $stateParams, $timeout, $filter, toastr, hotkeys, guide, exercisesProgress, containsHtml, ExerciseProgress, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain) {
 
     Preferences($scope, 'options');
 
@@ -75,6 +75,9 @@ angular
       return _.findIndex($scope.exercisesProgress, (p) => p.exercise.eid === currentExercise.eid);
     };
 
+    $scope.lastSolutionMarkdown = {};
+    $scope.$watch('lastSolutionMarkdown', () => {}, true);
+
     $scope.progressStatus = (progress) => _.get(_.last(progress.submissions), 'status', '');
 
     $scope.nextExercise = () => {
@@ -145,7 +148,8 @@ angular
       $scope.split = () => $scope.options.viewMode = SPLIT;
       $scope.unified = () => $scope.options.viewMode = UNIFIED;
       $scope.lastSolution = () => {
-        $scope.selectDiff($scope.lastDiff());
+        const lastDiff = $scope.lastDiff();
+        $scope.selectDiff(lastDiff);
         $scope.options.viewMode = LAST_SOLUTION;
       };
 
@@ -185,6 +189,12 @@ angular
             .then(() => submission.restartComment())
             .then(() => toastr.success($filter('translate')('do_comment')))
         }
+      }
+
+      if (!$scope.lastSolutionMarkdown[currentExercise.eid]) {
+        Api
+          .renderMarkdown(`\`\`\`${guide.language}\n${$scope.lastDiff().right.content}\n\`\`\``)
+          .then((markdown) => $scope.lastSolutionMarkdown[currentExercise.eid] = markdown);
       }
 
     };

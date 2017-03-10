@@ -47,8 +47,9 @@
                 right='selectedDiff.right',
                 view-mode='getViewMode().type')
 
-              pre(ng-if='isLastSolutionActivated()')
-                code {{ lastDiff().right.content }}
+              markdown-preview.markdown-preview(
+                  ng-if='isLastSolutionActivated()',
+                  content='lastSolutionMarkdown[progress.exercise.id]')
 
               ul.pagination.pagination-sm.flex-center(ng-if='!isLastSolutionActivated()')
 
