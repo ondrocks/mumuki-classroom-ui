@@ -43,15 +43,15 @@
               diff-side(
                 ng-if='!isLastSolutionActivated()',
                 language='{{ assignment.guide.language.name }}',
-                left='selectedDiff.left',
-                right='selectedDiff.right',
+                left='diffs.selected.left',
+                right='diffs.selected.right',
                 view-mode='getViewMode().type')
 
               markdown-preview.markdown-preview(
                   ng-if='isLastSolutionActivated()',
                   content='lastSolutionMarkdown[assignment.exercise.id]')
 
-              ul.pagination.pagination-sm.flex-center(ng-if='!isLastSolutionActivated()')
+              ul.pagination.pagination-sm.flex-center(ng-if='!isLastSolutionActivated() && !diffs.isEmpty()')
 
                 li
                   a(href='', aria-label='Anterior', ng-click='first()')
@@ -60,7 +60,7 @@
                   a(href='', aria-label='Anterior', ng-click='prev()')
                     span(aria-hidden='true') &lt;
 
-                li(ng-repeat='diff in diffs | limitTo:limit:begin()', ng-class='{ active: isSelectedDiff(diff) }')
+                li(ng-repeat='diff in diffs._diffs | limitTo:limit:begin()', ng-class='{ active: isSelectedDiff(diff) }')
                   a(href='', ng-click='selectDiff(diff)') {{ indexNumber($index) }}
 
                 li
@@ -71,7 +71,7 @@
                     span(aria-hidden='true') &raquo;
 
       .row
-        .col-sm-12(ng-repeat='submission in [ selectedDiff.right ]')
+        .col-sm-12(ng-repeat='submission in [ diffs.selected.right ]')
 
           .bs-callout(ng-repeat='comment in submission.comments | orderBy:$index:true', class='bs-callout-{{ comment.type }}')
             h4 {{ 'comment' | translate  }}

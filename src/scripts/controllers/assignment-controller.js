@@ -91,30 +91,19 @@ angular
     $scope.selectAssignment = (assignment) => {
       currentExercise = assignment.exercise;
       $stateParams.eid = currentExercise.eid;
-      const diffs = assignment.diffs || [];
+      const diffs = assignment.diffs;
 
       if (_.isEmpty($scope.options)) $scope.options = { viewMode: UNIFIED };
 
-      const MIN = 0;
-      const MAX = diffs.length - 1 ;
+      $scope.first = () => $scope.selectDiff(diffs.first());
+      $scope.last = () => $scope.selectDiff(diffs.last());
 
-      const index = () => _.indexOf(diffs, $scope.selectedDiff);
-      const prev = () => Math.max(index() - 1, MIN);
-      const next = () => Math.min(index() + 1, MAX);
-
-      $scope.lastDiff = () => _.last(diffs);
-
-      $scope.first = () => $scope.selectDiff(_.first(diffs));
-      $scope.last = () => $scope.selectDiff($scope.lastDiff());
-
-      $scope.prev = () => $scope.selectDiff(diffs[prev()]);
-      $scope.next = () => $scope.selectDiff(diffs[next()]);
-
-      $scope.index = () => _.findIndex(diffs, $scope.isSelectedDiff);
+      $scope.prev = () => $scope.selectDiff(diffs.prev());
+      $scope.next = () => $scope.selectDiff(diffs.next());
 
       $scope.begin = () => {
         // This ugly logic is for fancy pagination;
-        const number = _.floor($scope.index() / $scope.limit) * $scope.limit;
+        const number = _.floor(diffs.selectedIndex() / $scope.limit) * $scope.limit;
         const diffLengthBiggerThanLimit = diffs.length >= $scope.limit;
         const numberBiggerThanDiffLength = number + $scope.limit >= diffs.length;
 
@@ -124,19 +113,19 @@ angular
       $scope.indexNumber = ($index) => _.padStart($scope.begin() + $index + 1, 2, '0');
 
       $scope.trust = (html) => $sce.trustAsHtml(html);
-      $scope.containsHtml = containsHtml;
-      $scope.selectDiff = (diff) => $scope.selectedDiff = diff;
-      $scope.isSelectedDiff = (diff) => _.isEqual($scope.selectedDiff, diff);
+      $scope.isSelectedDiff = (diff) => diffs.selected && diffs.selected.id === diff.id;
+      $scope.selectDiff = (diff) => diffs.selected = diff;
 
       $scope.limit = 4;
       $scope.diffs = diffs;
       $scope.assignment = assignment;
-      $scope.lastSubmission = _.last(assignment.submissions);
+      $scope.containsHtml = containsHtml;
+      $scope.lastSubmission = assignment.lastSubmission();
+      $scope.submissionsCount = assignment.submissionsCount();
       $scope.lastSubmissionDate = Humanizer.date(_.get($scope, 'lastSubmission.created_at'));
-      $scope.submissionsCount = assignment.submissions.length;
-      $scope.assignmentSelected = (assignment) => assignment.exercise.eid === $scope.assignment.exercise.eid;
+      $scope.selectDiff(diffs.last());
 
-      $scope.selectDiff(diffs[MAX]);
+      $scope.assignmentSelected = (assignment) => assignment.exercise.eid === $scope.assignment.exercise.eid;
 
       $scope.time = (comment) => moment(comment.date).fromNow();
 
@@ -146,8 +135,7 @@ angular
       $scope.split = () => $scope.options.viewMode = SPLIT;
       $scope.unified = () => $scope.options.viewMode = UNIFIED;
       $scope.lastSolution = () => {
-        const lastDiff = $scope.lastDiff();
-        $scope.selectDiff(lastDiff);
+        $scope.selectDiff(diffs.last());
         $scope.options.viewMode = LAST_SOLUTION;
       };
 
@@ -191,7 +179,7 @@ angular
 
       if (!$scope.lastSolutionMarkdown[currentExercise.eid]) {
         Api
-          .renderMarkdown(`\`\`\`${guide.language}\n${_.get($scope.lastDiff(), 'right.content')}\n\`\`\``)
+          .renderMarkdown(`\`\`\`${guide.language}\n${_.get(diffs.last(), 'right.content')}\n\`\`\``)
           .then((markdown) => $scope.lastSolutionMarkdown[currentExercise.eid] = markdown);
       }
 
