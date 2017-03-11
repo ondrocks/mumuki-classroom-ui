@@ -50,8 +50,6 @@ gulp.task('dev:js', ['config'], () => {
     .pipe($.sourcemaps.init())
       .pipe($.babel({ presets: ['es2015'] }))
       .pipe($.concat('main.js'))
-      .pipe($.ngAnnotate())
-      .pipe($.uglify())
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(`${outFolder}/scripts`))
     .pipe($.livereload());
