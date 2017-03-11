@@ -4,7 +4,7 @@
 
     h1.detail-title.exercise-title
       .title
-        span(style='white-space: nowrap') {{ 'exercise' | translate }} {{ progress.exercise.number }}: {{ progress.exercise.name }}
+        span(style='white-space: nowrap') {{ 'exercise' | translate }} {{ assignment.exercise.number }}: {{ assignment.exercise.name }}
 
       .language
         i.da(class='da-{{guide.language}}')
@@ -13,15 +13,15 @@
     main.detail-main
       .exercises-list
         a.text-center.pointer(
-          ng-repeat='progress in exercisesProgress',
-          ng-class='{"active-exercise": progressSelected(progress)}',
-          class='{{progressStatus(progress)}}'
-          title='{{ progress.exercise.getName() }}',
-          ng-click='selectExercise(progress)')
+          ng-repeat='assignment in assignments',
+          ng-class='{"active-exercise": assignmentSelected(assignment)}',
+          class='{{assignmentStatus(assignment)}}'
+          title='{{ assignment.exercise.getName() }}',
+          ng-click='selectAssignment(assignment)')
 
-      .exercise-detail-area(class='{{ progress.exercise.layout }}')
+      .exercise-detail-area(class='{{ assignment.exercise.layout }}')
         .exercise-detail-area-text
-          markdown-preview.markdown-preview(content='progress.exercise.description')
+          markdown-preview.markdown-preview(content='assignment.exercise.description')
         .exercise-detail-area-editor
           .row
             .col-sm-12.solutions-preview
@@ -42,14 +42,14 @@
 
               diff-side(
                 ng-if='!isLastSolutionActivated()',
-                language='{{ progress.guide.language.name }}',
+                language='{{ assignment.guide.language.name }}',
                 left='selectedDiff.left',
                 right='selectedDiff.right',
                 view-mode='getViewMode().type')
 
               markdown-preview.markdown-preview(
                   ng-if='isLastSolutionActivated()',
-                  content='lastSolutionMarkdown[progress.exercise.id]')
+                  content='lastSolutionMarkdown[assignment.exercise.id]')
 
               ul.pagination.pagination-sm.flex-center(ng-if='!isLastSolutionActivated()')
 

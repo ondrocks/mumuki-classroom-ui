@@ -152,17 +152,17 @@ angular
         authenticated: true,
         views: {
           'content@classroom': {
-            templateUrl: 'views/exercise-progress.html',
-            controller: 'ExerciseProgressController',
+            templateUrl: 'views/assignment.html',
+            controller: 'AssignmentController',
             resolve: {
               guide: ($state, $stateParams, Api) => {
                 return Api
                   .getBibliothecaGuide($stateParams)
                   .catch(() => $state.go('classroom.courses.course.guides.guide', $stateParams, { location: 'replace' }));
               },
-              exercisesProgress: ($state, $stateParams, Api) => {
+              assignments: ($state, $stateParams, Api) => {
                 return Api
-                  .getExerciseProgress($stateParams)
+                  .getAssignments($stateParams)
                   .catch(() => $state.go('classroom.courses.course.guides.guide', $stateParams, { location: 'replace' }));
               },
               guideProgress: ($state, $stateParams, Api) => {

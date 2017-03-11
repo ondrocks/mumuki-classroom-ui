@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Api', function ($http, $location, Course, Guide, Student, Teacher, GuideProgress, ExerciseProgress, Exam, Auth, Domain, Organization, CONFIG) {
+  .service('Api', function ($http, $location, Course, Guide, Student, Teacher, GuideProgress, Assignment, Exam, Auth, Domain, Organization, CONFIG) {
 
     const subdomain = Domain.tenant();
     const API = `//${subdomain}.${CONFIG.classroom.url}`;
@@ -52,10 +52,10 @@ angular
         }))
     };
 
-    this.getExerciseProgress = ({ org, course, repo, student, exercise }) => {
+    this.getAssignments = ({ org, course, repo, student }) => {
       return $http
         .get(`${API}/courses/${course}/guides/${org}/${repo}/${student}`)
-        .then((res) => _.map(res.data.exercise_student_progress, ExerciseProgress.from))
+        .then((res) => _.map(res.data.exercise_student_progress, Assignment.from))
     };
 
     this.getExams = ({ course }) => {
