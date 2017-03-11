@@ -43,35 +43,35 @@
               diff-side(
                 ng-if='!isLastSolutionActivated()',
                 language='{{ assignment.guide.language.name }}',
-                left='diffs.selected.left',
-                right='diffs.selected.right',
+                left='assignment.diffs.selected.left',
+                right='assignment.diffs.selected.right',
                 view-mode='getViewMode().type')
 
               markdown-preview.markdown-preview(
                   ng-if='isLastSolutionActivated()',
                   content='lastSolutionMarkdown[assignment.exercise.id]')
 
-              ul.pagination.pagination-sm.flex-center(ng-if='!isLastSolutionActivated() && !diffs.isEmpty()')
+              ul.pagination.pagination-sm.flex-center(ng-if='!isLastSolutionActivated() && !assignment.diffs.isEmpty()')
 
                 li
-                  a(href='', aria-label='Anterior', ng-click='first()')
+                  a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectFirst()')
                     span(aria-hidden='true') &laquo;
                 li
-                  a(href='', aria-label='Anterior', ng-click='prev()')
+                  a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectPrev()')
                     span(aria-hidden='true') &lt;
 
-                li(ng-repeat='diff in diffs._diffs | limitTo:limit:begin()', ng-class='{ active: isSelectedDiff(diff) }')
-                  a(href='', ng-click='selectDiff(diff)') {{ indexNumber($index) }}
+                li(ng-repeat='diff in assignment.diffs._diffs | limitTo:assignment.diffs.pages:assignment.diffs.pageStartNumber()', ng-class='{ active: isSelectedDiff(diff) }')
+                  a(href='', ng-click='selectDiff(diff)') {{ assignment.diffs.pageNumber($index) }}
 
                 li
-                  a(href='', aria-label='Siguiente', ng-click='next()')
+                  a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectNext()')
                     span(aria-hidden='true') &gt;
                 li
-                  a(href='', aria-label='Siguiente', ng-click='last()')
+                  a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectLast()')
                     span(aria-hidden='true') &raquo;
 
       .row
-        .col-sm-12(ng-repeat='submission in [ diffs.selected.right ]')
+        .col-sm-12(ng-repeat='submission in [ assignment.diffs.selected.right ]')
 
           .bs-callout(ng-repeat='comment in submission.comments | orderBy:$index:true', class='bs-callout-{{ comment.type }}')
             h4 {{ 'comment' | translate  }}

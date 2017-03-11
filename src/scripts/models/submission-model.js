@@ -9,6 +9,8 @@ angular
         submission.content = submission.content || '';
         submission.comments = submission.comments || [];
 
+        if (submission.status === 'errored') submission.status = 'failed';
+
         _.defaults(this, submission);
 
         this.restartComment();
