@@ -18,7 +18,7 @@ angular
       }
 
       iconClass() {
-        return `da da-${_.get(this, 'language.name')}`;;
+        return `da da-${_.get(this, 'language.name') || _.get(this, 'language')}`;;
       }
 
       static from(guide) {

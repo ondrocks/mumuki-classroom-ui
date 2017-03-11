@@ -134,6 +134,13 @@ angular
               data: ($state, $stateParams, Api) => {
                 return Api
                   .getGuideProgress($stateParams)
+                  .then((data) => {
+                    return Api.getBibliothecaGuide($stateParams)
+                      .then((guide) => ({
+                        guide: guide,
+                        guideProgress: data.guideProgress
+                      }));
+                  })
                   .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }

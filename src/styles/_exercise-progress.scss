@@ -272,6 +272,16 @@ span.active-exercise {
   .exercise-detail-area {
     &.input_right {
       @include input-bottom;
+      width: 100%;
+      .exercise-detail-area-text {
+        width: 100%;
+      }
+      .exercise-detail-area-editor {
+        width: 100%;
+        .title {
+          display: none
+        }
+      }
     }
   }
 }

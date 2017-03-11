@@ -4,12 +4,7 @@
     h2
       .col-sm-8
         span {{ guide.name }}
-
-        small
-          a.view-in-atheneum(target='_blank' href="{{guide.getMumukiURL()}}")
-            i.fa.fa-external-link(title="{{ 'view_in_atheneum' | translate }}" data-placement="top" tooltip data-toggle="tooltip")
-
-        small.show {{ guide.lesson.name }}
+        small &nbsp; ({{ guide.exercises.length }})
 
       .col-sm-4
         i.pull-right(class='{{ guide.iconClass() }}')

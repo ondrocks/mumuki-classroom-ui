@@ -7,8 +7,8 @@ div
         img.img-circle.pointer(
           with-default='{{ item.student.image_url }}',
           ui-sref='classroom.courses.course.guides.guide.students({ \
-              student: item.student.uid,                      \
-              eid: item.lastExerciseSubmitted().eid                  \
+              student: item.student.uid,                            \
+              eid: item.lastExerciseSubmitted().eid                 \
             })')
       .student-card-profile-data
         .student-card-profile-data-item
@@ -27,19 +27,19 @@ div
 
       .student-card-profile-status
         .student-card-profile-status-row.failed(
-            ng-class='{ "empty": item.stats.failed === 0 }'
+            ng-class='{ "empty": item.noFailed() }'
             data-toggle="tooltip" tooltip title="{{ 'failed' | translate }}")
-          span {{ item.stats.failed }}
+          span {{ item.statsRatio(guide).failed }}%
           span.fa.fa-fw.fa-times-circle
         .student-card-profile-status-row.passed_with_warnings(
-            ng-class='{ "empty": item.stats.passed_with_warnings === 0 }'
+            ng-class='{ "empty": item.noWarnings() }'
             data-toggle="tooltip" tooltip title="{{ 'with_warnings' | translate }}")
-          span {{ item.stats.passed_with_warnings }}
+          span {{ item.statsRatio(guide).passed_with_warnings }}%
           span.fa.fa-fw.fa-exclamation-circle
         .student-card-profile-status-row.passed(
-            ng-class='{ "empty": item.stats.passed === 0 }'
+            ng-class='{ "empty": item.noPassed() }'
             data-toggle="tooltip" tooltip title="{{ 'passed' | translate }}")
-          span {{ item.stats.passed }}
+          span {{ item.statsRatio(guide).passed }}%
           span.fa.fa-fw.fa-check-circle
 
     .student-guide-details(ng-show='showDetails()')

@@ -187,7 +187,6 @@ angular
     this.getLogoutUrl = () =>  `${API}/logout${this.origin()}`;
 
     this.renderMarkdown = (markdown) => {
-      console.log(111, markdown)
       return $http
         .post(`${BIBLIOTHECA}/markdown`, { markdown })
         .then((res) => _.get(res, 'data.markdown'));
