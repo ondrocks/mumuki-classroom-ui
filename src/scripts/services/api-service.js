@@ -95,7 +95,7 @@ angular
 
     this.updateExam = (course, exam) => {
       return $http
-        .put(`${API}/courses/${course}/exams/${exam.id}`, exam)
+        .put(`${API}/courses/${course}/exams/${exam.eid}`, exam)
     }
 
     this.getStudents = ({ course }) => {

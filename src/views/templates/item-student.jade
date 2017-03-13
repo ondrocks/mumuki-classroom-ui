@@ -85,7 +85,7 @@
   .student-card-recent(ng-class='{ "detached-student": item.detached }')
     .student-card-recent-column.right-separator
       .student-card-recent-column-text
-        a.small-font(href='' ui-sref='classroom.courses.course.guides.guide.students({org: item.lastGuideOrg(), repo: item.lastGuideRepo(), student: item.uid, eid: item.lastExerciseSubmitted().id })') {{ item.lastGuideName() || '-' }}
+        a.small-font(href='' ui-sref='classroom.courses.course.guides.guide.students({org: item.lastGuideOrg(), repo: item.lastGuideRepo(), student: item.uid, eid: item.lastExerciseSubmitted().eid })') {{ item.lastGuideName() || '-' }}
       .student-card-recent-column-text
         small
           span
