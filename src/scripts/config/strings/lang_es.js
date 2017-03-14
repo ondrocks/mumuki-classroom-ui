@@ -78,6 +78,7 @@ angular
     log_in_first: 'Tenés que iniciar sesión primero',
     log_out: 'Cerrar sesión',
     messages: 'Mensajes',
+    more_messages: 'Ver más',
     new_course: 'Nuevo curso',
     new_course_code: 'Código del curso - Ej: K2000 o ABC-123',
     new_course_code_error: 'El código del curso es obligatorio',

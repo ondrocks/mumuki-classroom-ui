@@ -57,6 +57,8 @@
 
               .messages(ng-if='getViewMode().showMessages')
                 ol.chat
+                  li
+                    a(href='') {{ 'more_messages' | translate }}
                   li(class='{{messageSenderClass(message)}}' ng-repeat='message in assignment.lastSubmission().messages')
                     div.msg
                       p(ng-bind-html='trust((message.content | markdown))')

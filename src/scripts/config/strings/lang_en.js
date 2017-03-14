@@ -77,6 +77,7 @@ angular
     log_in_first: 'You must login first',
     log_out: 'Log out',
     messages: 'Messages',
+    more_messages: 'Load More',
     new_course: 'New course',
     new_course_code: 'Course code - i.e. K2000 or ABC-123',
     new_course_code_error: 'Course code is mandatory',
