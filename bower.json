@@ -16,6 +16,7 @@
   "main": [
     "src/bower_components/moment/locale/es.js",
     "src/bower_components/angular-ui-bootstrap/index.js",
+    "src/bower_components/bootstrap-sass/assets/javascripts/bootstrap/dropdown.js",
     "src/bower_components/bootstrap-sass/assets/javascripts/bootstrap/tooltip.js",
     "src/bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js",
     "src/bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css",
