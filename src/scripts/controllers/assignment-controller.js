@@ -42,6 +42,9 @@ angular
     const currentAssignmentIndex = () => {
       return _.findIndex($scope.assignments, (p) => p.exercise.eid === currentExercise.eid);
     };
+    const scrollChatToBottom = () => {
+      $timeout(() => $('.chat').scrollTop($('.chat')[0].scrollHeight));
+    };
 
     $scope.lastSolutionMarkdown = {};
     $scope.$watch('lastSolutionMarkdown', () => {}, true);
@@ -88,6 +91,7 @@ angular
       };
       $scope.messages = () => {
         $scope.options.viewMode = MESSAGES;
+        scrollChatToBottom();
       }
 
       $scope.submissionHasMessages = (submission) => {
@@ -134,6 +138,8 @@ angular
           .renderMarkdown(`\`\`\`${guide.language}\n${_.get(assignment.diffs.last(), 'right.content', '').trim()}\n\`\`\``)
           .then((markdown) => $scope.lastSolutionMarkdown[currentExercise.eid] = markdown);
       }
+
+      scrollChatToBottom();
 
     };
 
