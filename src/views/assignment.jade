@@ -64,6 +64,9 @@
                       p(ng-bind-html='trust((message.content | markdown))')
                       .sender {{message.sender}}
                       time {{Humanizer.date(message.created_at)}}
+                btn.btn.btn-success.btn-block
+                  i.fa.fa-paper-plane &nbsp
+                  span {{'new_message' | translate}}
 
 
               ul.pagination.pagination-sm.flex-center(ng-if='getViewMode().showDiff && !assignment.diffs.isEmpty()')

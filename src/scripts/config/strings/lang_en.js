@@ -91,6 +91,7 @@ angular
     new_course_shift: 'Shift',
     new_course_shift_error: 'Select at least one shift',
     new_exam: 'New exam',
+    new_message: 'New message',
     new_student: 'New student',
     new_teacher: 'New teacher',
     next_exercise_description: 'Go to next exercise',
