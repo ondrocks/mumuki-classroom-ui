@@ -5,9 +5,10 @@ angular
 
     Preferences($scope, 'options');
 
-    const SPLIT = { type: 'side-by-side', name: 'split' };
-    const UNIFIED = { type: 'line-by-line', name: 'unified' };
-    const LAST_SOLUTION = { type: 'only-last', name: 'last_solution' };
+    const SPLIT = { type: 'side-by-side', name: 'split', showDiff: true };
+    const UNIFIED = { type: 'line-by-line', name: 'unified', showDiff: true };
+    const LAST_SOLUTION = { type: 'only-last', name: 'last_solution', showMarkdown: true };
+    const MESSAGES = { type: 'messages', name: 'messages', showMessages: true };
 
     const toAssignment = (exercise, index) => {
       const currentAssignment = _.find(assignments, (assignment) => assignment.exercise.eid === exercise.id);
@@ -28,6 +29,7 @@ angular
 
     $scope.guide = guide;
     $scope.assignments = _.map(guide.exercises, toAssignment);
+    $scope.Humanizer = Humanizer;
 
     const assignment = _.find($scope.assignments, (assignment) => assignment.exercise.eid === Number($stateParams.eid)) || $scope.assignments[0]
     const course = $stateParams.course;
@@ -84,6 +86,9 @@ angular
         assignment.diffs.selectLast();
         $scope.options.viewMode = LAST_SOLUTION;
       };
+      $scope.messages = () => {
+        $scope.options.viewMode = MESSAGES;
+      }
 
       $scope.submissionHasMessages = (submission) => {
         return !_.isEmpty(submission.messages);
@@ -97,6 +102,8 @@ angular
       $scope.showNewMessagesIcon = (assignment) => {
         return !$scope.showMessagesIcon(assignment) && $scope.hasMessages(assignment);
       };
+
+      $scope.messageSenderClass = (message) => message.sender === Auth.profile().user_uid ? 'self' : 'other';
 
       const getMessageToPost = (submission) => {
         return {

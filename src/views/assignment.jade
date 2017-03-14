@@ -39,19 +39,32 @@
                   a(href='', ng-click='lastSolution()')
                     i.fa.fa-code
                     span &nbsp;{{ 'last_solution' | translate }}
+                li(ng-class='{ "active": getViewMode().name === "messages" }')
+                  a(href='', ng-click='messages()')
+                    i.fa.fa-comments-o
+                    span &nbsp;{{ 'messages' | translate }}
 
               diff-side(
-                ng-if='!isLastSolutionActivated()',
+                ng-if='getViewMode().showDiff',
                 language='{{ assignment.guide.language.name }}',
                 left='assignment.diffs.selected.left',
                 right='assignment.diffs.selected.right',
                 view-mode='getViewMode().type')
 
               markdown-preview.markdown-preview(
-                  ng-if='isLastSolutionActivated()',
+                  ng-if='getViewMode().showMarkdown',
                   content='lastSolutionMarkdown[assignment.exercise.id]')
 
-              ul.pagination.pagination-sm.flex-center(ng-if='!isLastSolutionActivated() && !assignment.diffs.isEmpty()')
+              .messages(ng-if='getViewMode().showMessages')
+                ol.chat
+                  li(class='{{messageSenderClass(message)}}' ng-repeat='message in assignment.lastSubmission().messages')
+                    div.msg
+                      p(ng-bind-html='trust((message.content | markdown))')
+                      .sender {{message.sender}}
+                      time {{Humanizer.date(message.created_at)}}
+
+
+              ul.pagination.pagination-sm.flex-center(ng-if='getViewMode().showDiff && !assignment.diffs.isEmpty()')
 
                 li
                   a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectFirst()')
