@@ -1,9 +1,10 @@
 .breadcrumb {
-  margin: 0;
+  margin: 6px 0 3px;
   padding: 0;
   background-color: transparent;
   .brand {
-    font-size: 44px;
+    font-size: 38px;
+    padding: 0px 3px 0;
     a {
       color: $brand-primary;
       &:hover, &:focus {
@@ -31,4 +32,19 @@
   display: inline-block;
   margin-right: 15px;
   margin-left: 10px;
+}
+
+.scrollable-menu {
+  height: auto;
+  max-height: 350px;
+  overflow-x: hidden;
+}
+
+.student-dropdown-search {
+  border-radius: 0px;
+  margin-top: -5px;
+}
+
+.adjust-position {
+  margin-top: -15px;
 }

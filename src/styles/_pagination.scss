@@ -1,22 +1,30 @@
 .pagination > li {
   a {
-    background-color: $brand-info;
+    background-color: $mu-color-complementary;
     &:hover {
-      background-color: darken($brand-info, 15%);
+      background-color: darken($mu-color-complementary, 15%);
     }
     &:focus {
-      background-color: darken($brand-info, 15%);
+      background-color: darken($mu-color-complementary, 15%);
     }
   }
 }
 .pagination > .active {
   a {
-    background-color: darken($brand-info, 15%);
+    background-color: darken($mu-color-complementary, 15%);
     &:hover {
-      background-color: darken($brand-info, 15%);
+      background-color: darken($mu-color-complementary, 15%);
     }
     &:focus {
-      background-color: darken($brand-info, 15%);
+      background-color: darken($mu-color-complementary, 15%);
     }
   }
+}
+
+.pagination {
+  margin: 0 0 15px;
+}
+
+.block {
+  width: 100%;
 }

@@ -134,6 +134,13 @@ angular
               data: ($state, $stateParams, Api) => {
                 return Api
                   .getGuideProgress($stateParams)
+                  .then((data) => {
+                    return Api.getBibliothecaGuide($stateParams)
+                      .then((guide) => ({
+                        guide: guide,
+                        guideProgress: data.guideProgress
+                      }));
+                  })
                   .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }
@@ -145,13 +152,24 @@ angular
         authenticated: true,
         views: {
           'content@classroom': {
-            templateUrl: 'views/exercise-progress.html',
-            controller: 'ExerciseProgressController',
+            templateUrl: 'views/assignment.html',
+            controller: 'AssignmentController',
             resolve: {
-              exercisesProgress: ($state, $stateParams, Api) => {
+              guide: ($state, $stateParams, Api) => {
                 return Api
-                  .getExerciseProgress($stateParams)
+                  .getBibliothecaGuide($stateParams)
                   .catch(() => $state.go('classroom.courses.course.guides.guide', $stateParams, { location: 'replace' }));
+              },
+              assignments: ($state, $stateParams, Api) => {
+                return Api
+                  .getAssignments($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides.guide', $stateParams, { location: 'replace' }));
+              },
+              guideProgress: ($state, $stateParams, Api) => {
+                return Api
+                  .getGuideProgress($stateParams)
+                  .then((data) => data.guideProgress)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }
           }

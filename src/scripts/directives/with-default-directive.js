@@ -8,7 +8,7 @@ angular
         withDefault: '@'
       },
       link: (scope, element, attr) => {
-        element.attr('src', scope.withDefault);
+        scope.$watch('withDefault', () => element.attr('src', scope.withDefault));
         element.attr('onerror', 'this.src = "images/avatar.svg"');
       }
     };

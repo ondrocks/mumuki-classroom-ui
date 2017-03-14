@@ -14,7 +14,7 @@ angular
       controller: ($scope, Humanizer) => {
         $scope.$watchGroup(['left', 'right', 'viewMode'], () => {
 
-          const lines = JsDiff.diffLines($scope.left.content, $scope.right.content);
+          const lines = JsDiff.diffLines(_.get($scope, 'left.content', ''), _.get($scope, 'right.content', ''));
 
           const prefix = (line, pre) => {
             let subLines = line.value.split('\n');
@@ -27,8 +27,8 @@ angular
                   (line.removed) ? prefix(line, '-') : prefix(line, '  ');
           });
 
-          const date = Humanizer.date($scope.right.created_at);
-          const dateText = $filter('translate')('solved_at', { date })
+          const date = Humanizer.date(_.get($scope, 'right.created_at'));
+          const dateText = date ? $filter('translate')('solved_at', { date }) : '';
 
           const diffText = [
             `diff --git`,

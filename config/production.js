@@ -7,9 +7,8 @@ angular
       url: 'classroom-api.mumuki.io'
     },
 
-    auth: {
-      domain: 'mumuki.auth0.com',
-      clientID: 'w3q8vwGkOmcOi6AEKKgu02iYBzRlea5Q'
+    bibliotheca: {
+      url: 'bibliotheca-api.mumuki.io'
     },
 
     cookie: {

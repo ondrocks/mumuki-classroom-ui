@@ -16,7 +16,13 @@ angular
     Breadcrumb.setCourse($stateParams.course);
     Breadcrumb.setGuide(guide);
 
-    const setGuideProgress = (guideProgress) => $scope.list = guideProgress;
+    const setGuideProgress = (guideProgresses) => {
+      guideProgresses.forEach((guideProgress) => {
+        const item = _.find($scope.list, (item) => item.student.uid === guideProgress.student.uid)
+        if (item) _.merge(item, guideProgress);
+        else $scope.list.push(guideProgress);
+      });
+    }
 
     $scope.Humanizer = Humanizer;
 

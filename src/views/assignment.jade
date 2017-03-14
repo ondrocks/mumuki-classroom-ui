@@ -1,0 +1,105 @@
+.container
+
+  .mu-content
+
+    h1.detail-title.exercise-title
+      .title
+        span(style='white-space: nowrap') {{ 'exercise' | translate }} {{ assignment.exercise.number }}: {{ assignment.exercise.name }}
+
+      .language
+        i.da(class='da-{{guide.language}}')
+
+
+    main.detail-main
+      .exercises-list
+        a.text-center.pointer(
+          ng-repeat='assignment in assignments',
+          ng-class='{"active-exercise": assignmentSelected(assignment)}',
+          class='{{assignmentStatus(assignment)}}'
+          title='{{ assignment.exercise.getName() }}',
+          ng-click='selectAssignment(assignment)')
+
+      .exercise-detail-area(class='{{ assignment.exercise.layout }}')
+        .exercise-detail-area-text
+          markdown-preview.markdown-preview(content='assignment.exercise.description')
+        .exercise-detail-area-editor
+          .row
+            .col-sm-12.solutions-preview
+
+              ul.nav.nav-tabs.bottom-10
+                li(ng-class='{ "active": getViewMode().name === "unified" }')
+                  a(href='', ng-click='unified()')
+                    i.fa.fa-window-maximize
+                    span &nbsp;{{ 'unified' | translate }}
+                li(ng-class='{ "active": getViewMode().name === "split" }')
+                  a(href='', ng-click='split()')
+                    i.fa.fa-columns
+                    span &nbsp;{{ 'split' | translate }}
+                li(ng-class='{ "active": getViewMode().name === "last_solution" }')
+                  a(href='', ng-click='lastSolution()')
+                    i.fa.fa-code
+                    span &nbsp;{{ 'last_solution' | translate }}
+
+              diff-side(
+                ng-if='!isLastSolutionActivated()',
+                language='{{ assignment.guide.language.name }}',
+                left='assignment.diffs.selected.left',
+                right='assignment.diffs.selected.right',
+                view-mode='getViewMode().type')
+
+              markdown-preview.markdown-preview(
+                  ng-if='isLastSolutionActivated()',
+                  content='lastSolutionMarkdown[assignment.exercise.id]')
+
+              ul.pagination.pagination-sm.flex-center(ng-if='!isLastSolutionActivated() && !assignment.diffs.isEmpty()')
+
+                li
+                  a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectFirst()')
+                    span(aria-hidden='true') &laquo;
+                li
+                  a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectPrev()')
+                    span(aria-hidden='true') &lt;
+
+                li(ng-repeat='diff in assignment.diffs._diffs | limitTo:assignment.diffs.pages:assignment.diffs.pageStartNumber()', ng-class='{ active: isSelectedDiff(diff) }')
+                  a(href='', ng-click='selectDiff(diff)') {{ assignment.diffs.pageNumber($index) }}
+
+                li
+                  a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectNext()')
+                    span(aria-hidden='true') &gt;
+                li
+                  a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectLast()')
+                    span(aria-hidden='true') &raquo;
+
+      .row
+        .col-sm-12(ng-repeat='submission in [ assignment.diffs.selected.right ]')
+
+          .bs-callout(ng-repeat='comment in submission.comments | orderBy:$index:true', class='bs-callout-{{ comment.type }}')
+            h4 {{ 'comment' | translate  }}
+              small &nbsp;- {{ comment.email }} - {{ time(comment) }}
+            div(ng-bind-html='trust((comment.content | markdown))')
+
+          .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.test_results.length')
+            h4 {{ 'tests' | translate }}
+            p
+              .row(ng-repeat='result in submission.test_results')
+                .col-sm-11
+                  span {{ result.title || 'Example ' + ($index + 1) }}
+                  div(ng-if="result.status != 'passed'")
+                    div(ng-if="containsHtml(result.result)", ng-bind-html='trust(result.result)')
+                    pre(ng-if="!containsHtml(result.result)") {{ result.result }}
+                .col-sm-1
+                  status-icon(status='result.status')
+
+          .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.result')
+            h4 {{ 'results' | translate }}
+            p
+              div(ng-bind-html='trust(submission.result)')
+
+          .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.expectation_results.length')
+            h4 {{ 'expectations' | translate }}
+            p
+              .row(ng-repeat='expectationResult in submission.expectation_results')
+                .col-sm-11
+                  div(ng-bind-html="trust(expectationResult.html)")
+                .col-sm-1
+                  status-icon(status='expectationResult.result')

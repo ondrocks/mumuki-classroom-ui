@@ -1,10 +1,11 @@
 
 angular
   .module('classroom')
-  .service('Api', function ($http, $location, Course, Guide, Student, Teacher, GuideProgress, ExerciseProgress, Exam, Auth, Domain, Organization, CONFIG) {
+  .service('Api', function ($http, $location, Course, Guide, Student, Teacher, GuideProgress, Assignment, Exam, Auth, Domain, Organization, CONFIG) {
 
     const subdomain = Domain.tenant();
-    const API = `http://${subdomain}.${CONFIG.classroom.url}`;
+    const API = `//${subdomain}.${CONFIG.classroom.url}`;
+    const BIBLIOTHECA = `//${CONFIG.bibliotheca.url}`;
 
     const authenticated = (requestOptions = {}) => _.defaultsDeep(requestOptions, {
       headers: { Authorization: `Bearer ${Auth.token()}` }
@@ -26,9 +27,15 @@ angular
 
     this.getBibliothecaGuides = () => {
       return $http
-        .get(`http://bibliotheca-api.mumuki.io/guides`)
+        .get(`${BIBLIOTHECA}/guides`)
         .then((res) => res.data.guides)
     }
+
+    this.getBibliothecaGuide = ({org, repo}) => {
+      return $http
+        .get(`${BIBLIOTHECA}/guides/${org}/${repo}/markdown`)
+        .then((res) => Guide.from(res.data))
+    };
 
     this.getGuides = ({ course }) => {
       return $http
@@ -45,10 +52,10 @@ angular
         }))
     };
 
-    this.getExerciseProgress = ({ org, course, repo, student, exercise }) => {
+    this.getAssignments = ({ org, course, repo, student }) => {
       return $http
         .get(`${API}/courses/${course}/guides/${org}/${repo}/${student}`)
-        .then((res) => _.map(res.data.exercise_student_progress, ExerciseProgress.from))
+        .then((res) => _.map(res.data.exercise_student_progress, Assignment.from))
     };
 
     this.getExams = ({ course }) => {
@@ -178,5 +185,11 @@ angular
     this.origin = () => `?origin=${encodeURIComponent(document.location.href)}`;
     this.getLoginUrl = () =>  `${API}/login${this.origin()}`;
     this.getLogoutUrl = () =>  `${API}/logout${this.origin()}`;
+
+    this.renderMarkdown = (markdown) => {
+      return $http
+        .post(`${BIBLIOTHECA}/markdown`, { markdown })
+        .then((res) => _.get(res, 'data.markdown'));
+    };
 
   });

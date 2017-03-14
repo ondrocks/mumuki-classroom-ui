@@ -24,6 +24,18 @@ angular
                passedAverage <= 0.7 ? 'medium' : 'high';
       }
 
+      ratioFor(field, guide) {
+        return _.round(this.stats[field] * 100 / guide.exercises.length, 1);
+      }
+
+      statsRatio(guide) {
+        return {
+          failed: this.ratioFor('failed', guide),
+          passed: this.ratioFor('passed', guide),
+          passed_with_warnings: this.ratioFor('passed_with_warnings', guide),
+        }
+      }
+
       noPassed() {
         return this.stats.passed === 0;
       }
