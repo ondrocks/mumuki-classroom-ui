@@ -74,7 +74,7 @@ angular
       $scope.isSelectedDiff = (diff) => assignment.diffs.isSelected(diff);
       $scope.assignmentSelected = (assignment) => assignment.exercise.eid === $scope.assignment.exercise.eid;
 
-      $scope.time = (comment) => moment(comment.date).fromNow();
+      $scope.time = (message) => moment(message.created_at).fromNow();
       $scope.isLastSolutionActivated = () => _.isEqual($scope.options.viewMode, LAST_SOLUTION);
       $scope.getViewMode = () => $scope.options.viewMode;
 
@@ -85,41 +85,40 @@ angular
         $scope.options.viewMode = LAST_SOLUTION;
       };
 
-      $scope.submissionHasComments = (submission) => {
-        return !_.isEmpty(submission.comments);
+      $scope.submissionHasMessages = (submission) => {
+        return !_.isEmpty(submission.messages);
       }
-      $scope.hasComments = (assignment) => {
-        return _.some(assignment.submissions, (submission) => $scope.submissionHasComments(submission));
+      $scope.hasMessages = (assignment) => {
+        return _.some(assignment.submissions, (submission) => $scope.submissionHasMessages(submission));
       }
-      $scope.showCommentsIcon = (assignment) => {
-        return $scope.submissionHasComments(assignment.lastSubmission());
+      $scope.showMessagesIcon = (assignment) => {
+        return $scope.submissionHasMessages(assignment.lastSubmission());
       };
-      $scope.showNewCommentsIcon = (assignment) => {
-        return !$scope.showCommentsIcon(assignment) && $scope.hasComments(assignment);
+      $scope.showNewMessagesIcon = (assignment) => {
+        return !$scope.showMessagesIcon(assignment) && $scope.hasMessages(assignment);
       };
 
-      const getCommentToPost = (submission) => {
+      const getMessageToPost = (submission) => {
         return {
           uid: $stateParams.student,
           exercise_id: assignment.exercise.eid,
           submission_id: submission.sid,
-          comment: {
-            content: submission.comment,
-            type: submission.commentType,
-            date: new Date(),
-            email: Auth.profile().email
+          message: {
+            sender: Auth.profile().email,
+            content: submission.message,
+            created_at: new Date()
           }
         }
       }
 
-      $scope.addComment = (submission) => {
-        if (submission.comment) {
-          const data = getCommentToPost(submission);
-          submission.comments.push(data.comment);
+      $scope.addMessage = (submission) => {
+        if (submission.message) {
+          const data = getMessageToPost(submission);
+          submission.messages.push(data.message);
           Api
-            .comment(data, course)
-            .then(() => submission.restartComment())
             .then(() => toastr.success($filter('translate')('do_comment')))
+            .message(data, course)
+            .then(() => submission.restartMessage())
         }
       };
 

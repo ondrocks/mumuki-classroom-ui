@@ -136,9 +136,9 @@ angular
         .post(`${API()}/courses/${course}/students/${uid}/transfer`, { destination })
     }
 
-    this.comment = (data, course) => {
+    this.addMessage = (data, course) => {
       return $http
-        .post(`${API()}/courses/${course}/comments`, data)
+        .post(`${API()}/courses/${course}/messages`, data);
     }
 
     this.follow = (uid, email, course) => {
