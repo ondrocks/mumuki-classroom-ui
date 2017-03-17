@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $timeout, $filter, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student) {
+  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $timeout, $filter, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student, Modal) {
 
     Preferences($scope, 'options');
 
@@ -115,22 +115,18 @@ angular
           exercise_id: assignment.exercise.eid,
           submission_id: submission.sid,
           message: {
-            sender: Auth.profile().email,
+            sender: Auth.profile().user_uid,
             content: submission.message,
             created_at: new Date()
           }
         }
       }
 
-      $scope.addMessage = (submission) => {
-        if (submission.message) {
-          const data = getMessageToPost(submission);
-          submission.messages.push(data.message);
-          Api
-            .then(() => toastr.success($filter('translate')('do_comment')))
-            .message(data, course)
-            .then(() => submission.restartMessage())
-        }
+      $scope.newMessage = () => {
+        Modal.newMessage(getMessageToPost(assignment.lastSubmission()), Breadcrumb.getStudent(), course, (message) => {
+          assignment.lastSubmission().messages.push(message);
+          scrollChatToBottom();
+        });
       };
 
       if (!$scope.lastSolutionMarkdown[currentExercise.eid]) {

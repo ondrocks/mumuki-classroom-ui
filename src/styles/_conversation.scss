@@ -12,6 +12,7 @@
   .chat {
     list-style: none;
     background: $mu-color-content-editable;
+    border: 1px solid #cccccc;
     margin: 0;
     padding: 0 0 0 0;
     height: 253px;
@@ -82,7 +83,7 @@
   }
   .msg {
     background: white;
-    border: 1px solid white;
+    border: 1px solid #e6e6e6;
     min-width: 50px;
     padding: 10px;
     border-radius: 15px;

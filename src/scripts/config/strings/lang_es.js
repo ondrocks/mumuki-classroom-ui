@@ -111,6 +111,7 @@ angular
     remove: 'Eliminar',
     results: 'Resultados',
     save: 'Guardar',
+    send: 'Enviar',
     shift: 'Turno',
     shift_afternoon: 'Tarde',
     shift_morning: 'Mañana',

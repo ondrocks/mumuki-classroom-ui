@@ -15,6 +15,10 @@ angular
       return this._guide && this._guide.getName();
     }
 
+    this.getStudent = () => {
+      return this._student;
+    }
+
     this.getStudentName = () => {
       return this._student && this._student.getName();
     }

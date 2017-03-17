@@ -136,7 +136,7 @@ angular
         .post(`${API()}/courses/${course}/students/${uid}/transfer`, { destination })
     }
 
-    this.addMessage = (data, course) => {
+    this.newMessage = (data, course) => {
       return $http
         .post(`${API()}/courses/${course}/messages`, data);
     }

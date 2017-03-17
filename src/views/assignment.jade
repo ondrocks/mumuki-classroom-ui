@@ -64,8 +64,8 @@
                       p(ng-bind-html='trust((message.content | markdown))')
                       .sender {{message.sender}}
                       time {{Humanizer.date(message.created_at)}}
-                btn.btn.btn-success.btn-block
-                  i.fa.fa-paper-plane &nbsp
+                btn.btn.btn-success.btn-block(ng-click='newMessage()')
+                  i.fa.fa-paper-plane &nbsp;
                   span {{'new_message' | translate}}
 
 

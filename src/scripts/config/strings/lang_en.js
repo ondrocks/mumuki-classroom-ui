@@ -110,6 +110,7 @@ angular
     remove: 'Remove',
     results: 'Results',
     save: 'Save',
+    send: 'Send',
     shift: 'Shift',
     shift_afternoon: 'Afternoon',
     shift_morning: 'Morning',
