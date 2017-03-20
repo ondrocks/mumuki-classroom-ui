@@ -27,29 +27,35 @@
             .col-sm-12.solutions-preview
 
               ul.nav.nav-tabs.bottom-10
-                li(ng-class='{ "active": getViewMode().name === "unified" }')
-                  a(href='', ng-click='unified()')
-                    i.fa.fa-window-maximize
-                    span &nbsp;{{ 'unified' | translate }}
-                li(ng-class='{ "active": getViewMode().name === "split" }')
-                  a(href='', ng-click='split()')
-                    i.fa.fa-columns
-                    span &nbsp;{{ 'split' | translate }}
                 li(ng-class='{ "active": getViewMode().name === "last_solution" }')
                   a(href='', ng-click='lastSolution()')
                     i.fa.fa-code
                     span &nbsp;{{ 'last_solution' | translate }}
+                li(ng-class='{ "active": getViewMode().showDiff }')
+                  a(href='', ng-click='diff()')
+                    i.fa.fa-columns
+                    span &nbsp;Diff
                 li(ng-class='{ "active": getViewMode().name === "messages" }')
                   a(href='', ng-click='messages()')
                     i.fa.fa-comments-o
                     span &nbsp;{{ 'messages' | translate }}
+
+
+              input(
+                  ng-if='getViewMode().showDiff',
+                  bs-switch,
+                  ng-model='getViewMode().isUnified',
+                  type='checkbox',
+                  switch-on-text="{{ 'unified' | translate }}",
+                  switch-off-text="{{ 'split' | translate }}",
+                  switch-size='mini')
 
               diff-side(
                 ng-if='getViewMode().showDiff',
                 language='{{ assignment.guide.language.name }}',
                 left='assignment.diffs.selected.left',
                 right='assignment.diffs.selected.right',
-                view-mode='getViewMode().type')
+                view-mode='getViewMode().current.type')
 
               markdown-preview.markdown-preview(
                   ng-if='getViewMode().showMarkdown',

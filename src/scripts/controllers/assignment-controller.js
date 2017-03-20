@@ -5,10 +5,23 @@ angular
 
     Preferences($scope, 'options');
 
-    const SPLIT = { type: 'side-by-side', name: 'split', showDiff: true };
-    const UNIFIED = { type: 'line-by-line', name: 'unified', showDiff: true };
+    const SPLIT = { type: 'side-by-side', name: 'split' };
+    const UNIFIED = { type: 'line-by-line', name: 'unified' };
+
     const LAST_SOLUTION = { type: 'only-last', name: 'last_solution', showMarkdown: true };
     const MESSAGES = { type: 'messages', name: 'messages', showMessages: true };
+    const DIFF = {
+      current: $scope.options.diffMode,
+      showDiff: true,
+      set isUnified(boolean) {
+        console.log(boolean, this.current);
+        this.current = boolean ? UNIFIED : SPLIT;
+        $scope.options.diffMode = this.current;
+      },
+      get isUnified() {
+        return this.current === UNIFIED;
+      }
+    }
 
     const toAssignment = (exercise, index) => {
       const currentAssignment = _.find(assignments, (assignment) => assignment.exercise.eid === exercise.id);
@@ -30,7 +43,6 @@ angular
     $scope.guide = guide;
     $scope.assignments = _.map(guide.exercises, toAssignment);
     $scope.Humanizer = Humanizer;
-
     const assignment = _.find($scope.assignments, (assignment) => assignment.exercise.eid === Number($stateParams.eid)) || $scope.assignments[0]
     const course = $stateParams.course;
 
@@ -63,7 +75,7 @@ angular
 
     $scope.selectAssignment = (assignment) => {
 
-      if (_.isEmpty($scope.options)) $scope.options = { viewMode: UNIFIED };
+      if (_.isEmpty($scope.options)) $scope.options = { viewMode: LAST_SOLUTION };
 
       currentExercise = assignment.exercise;
 
@@ -83,8 +95,9 @@ angular
       $scope.isLastSolutionActivated = () => _.isEqual($scope.options.viewMode, LAST_SOLUTION);
       $scope.getViewMode = () => $scope.options.viewMode;
 
-      $scope.split = () => $scope.options.viewMode = SPLIT;
-      $scope.unified = () => $scope.options.viewMode = UNIFIED;
+      $scope.diff = () => {
+        $scope.options.viewMode = DIFF;
+      }
       $scope.lastSolution = () => {
         assignment.diffs.selectLast();
         $scope.options.viewMode = LAST_SOLUTION;
