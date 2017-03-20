@@ -27,72 +27,73 @@
             .col-sm-12.solutions-preview
 
               ul.nav.nav-tabs.bottom-10
-                li(ng-class='{ "active": getViewMode().name === "last_solution" }')
+                li(ng-class='{ "active": getViewMode().showMarkdown }')
                   a(href='', ng-click='lastSolution()')
                     i.fa.fa-code
                     span &nbsp;{{ 'last_solution' | translate }}
                 li(ng-class='{ "active": getViewMode().showDiff }')
                   a(href='', ng-click='diff()')
                     i.fa.fa-columns
-                    span &nbsp;Diff
-                li(ng-class='{ "active": getViewMode().name === "messages" }')
+                    span &nbsp;{{ 'diff' | translate }}
+                li(ng-class='{ "active": getViewMode().showMessages }')
                   a(href='', ng-click='messages()')
                     i.fa.fa-comments-o
                     span &nbsp;{{ 'messages' | translate }}
 
+              .tab-content
+                .tab-pane(ng-class='{ "active": getViewMode().showDiff }')
 
-              input(
-                  ng-if='getViewMode().showDiff',
-                  bs-switch,
-                  ng-model='getViewMode().isUnified',
-                  type='checkbox',
-                  switch-on-text="{{ 'unified' | translate }}",
-                  switch-off-text="{{ 'split' | translate }}",
-                  switch-size='mini')
+                  diff-side(
+                    language='{{ assignment.guide.language.name }}',
+                    left='assignment.diffs.selected.left',
+                    right='assignment.diffs.selected.right',
+                    view-mode='getViewMode().current.type')
 
-              diff-side(
-                ng-if='getViewMode().showDiff',
-                language='{{ assignment.guide.language.name }}',
-                left='assignment.diffs.selected.left',
-                right='assignment.diffs.selected.right',
-                view-mode='getViewMode().current.type')
+                  .pull-right
+                    input(
+                        bs-switch,
+                        ng-model='getViewMode().isUnified',
+                        type='checkbox',
+                        switch-on-text="{{ 'unified' | translate }}",
+                        switch-off-text="{{ 'split' | translate }}",
+                        switch-size='mini')
 
-              markdown-preview.markdown-preview(
-                  ng-if='getViewMode().showMarkdown',
-                  content='lastSolutionMarkdown[assignment.exercise.id]')
+                  ul.pagination.pagination-sm(ng-if='!assignment.diffs.isEmpty()')
 
-              .messages(ng-if='getViewMode().showMessages')
-                ol.chat
-                  li
-                    a(href='') {{ 'more_messages' | translate }}
-                  li(class='{{messageSenderClass(message)}}' ng-repeat='message in assignment.lastSubmission().messages')
-                    div.msg
-                      p(ng-bind-html='trust((message.content | markdown))')
-                      .sender {{message.sender}}
-                      time {{Humanizer.date(message.created_at)}}
-                btn.btn.btn-success.btn-block(ng-click='newMessage()')
-                  i.fa.fa-paper-plane &nbsp;
-                  span {{'new_message' | translate}}
+                    li
+                      a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectFirst()')
+                        span(aria-hidden='true') &laquo;
+                    li
+                      a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectPrev()')
+                        span(aria-hidden='true') &lt;
 
+                    li(ng-repeat='diff in assignment.diffs._diffs | limitTo:assignment.diffs.pages:assignment.diffs.pageStartNumber()', ng-class='{ active: isSelectedDiff(diff) }')
+                      a(href='', ng-click='selectDiff(diff)') {{ assignment.diffs.pageNumber($index) }}
 
-              ul.pagination.pagination-sm.flex-center(ng-if='getViewMode().showDiff && !assignment.diffs.isEmpty()')
+                    li
+                      a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectNext()')
+                        span(aria-hidden='true') &gt;
+                    li
+                      a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectLast()')
+                        span(aria-hidden='true') &raquo;
 
-                li
-                  a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectFirst()')
-                    span(aria-hidden='true') &laquo;
-                li
-                  a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectPrev()')
-                    span(aria-hidden='true') &lt;
+                .tab-pane(ng-class='{ "active": getViewMode().showMarkdown }')
+                  markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
 
-                li(ng-repeat='diff in assignment.diffs._diffs | limitTo:assignment.diffs.pages:assignment.diffs.pageStartNumber()', ng-class='{ active: isSelectedDiff(diff) }')
-                  a(href='', ng-click='selectDiff(diff)') {{ assignment.diffs.pageNumber($index) }}
+                .tab-pane(ng-class='{ "active": getViewMode().showMessages }')
+                  .messages
+                    ol.chat
+                      li
+                        a(href='') {{ 'more_messages' | translate }}
+                      li(class='{{messageSenderClass(message)}}' ng-repeat='message in assignment.lastSubmission().messages')
+                        div.msg
+                          p(ng-bind-html='trust((message.content | markdown))')
+                          .sender {{message.sender}}
+                          time {{Humanizer.date(message.created_at)}}
+                    btn.btn.btn-success.btn-block(ng-click='newMessage()')
+                      i.fa.fa-paper-plane &nbsp;
+                      span {{'new_message' | translate}}
 
-                li
-                  a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectNext()')
-                    span(aria-hidden='true') &gt;
-                li
-                  a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectLast()')
-                    span(aria-hidden='true') &raquo;
 
       .row
         .col-sm-12(ng-repeat='submission in [ assignment.diffs.selected.right ]')

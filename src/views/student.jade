@@ -1,5 +1,6 @@
 .container
-  input(bs-switch, ng-model='isMultiple', type='checkbox', switch-on-text="{{ 'bulk' | translate }}", switch-off-text="{{ 'single' | translate }}", switch-size='mini')
+  .student-switch.pull-right
+    input(bs-switch, ng-model='isMultiple', type='checkbox', switch-on-text="{{ 'bulk' | translate }}", switch-off-text="{{ 'single' | translate }}", switch-size='mini')
   .single-student(ng-if='!isMultiple')
     h3 {{ 'new_student' | translate }}
     fieldset.form-group

@@ -38,6 +38,7 @@ angular
     day_wednesday: 'Wednesday',
     detach: 'Detach',
     detach_students: 'Detached students',
+    diff: 'Diff',
     do_comment: 'Successful comment!',
     do_follow: 'Following!',
     duration: 'Duration',

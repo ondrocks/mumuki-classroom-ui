@@ -10,18 +10,9 @@ angular
 
     const LAST_SOLUTION = { type: 'only-last', name: 'last_solution', showMarkdown: true };
     const MESSAGES = { type: 'messages', name: 'messages', showMessages: true };
-    const DIFF = {
-      current: $scope.options.diffMode,
-      showDiff: true,
-      set isUnified(boolean) {
-        console.log(boolean, this.current);
-        this.current = boolean ? UNIFIED : SPLIT;
-        $scope.options.diffMode = this.current;
-      },
-      get isUnified() {
-        return this.current === UNIFIED;
-      }
-    }
+    const DIFF = { type: 'diff', name: 'diff', showDiff: true }
+
+    const isUnified = () => _.isEqual($scope.options.diffMode, UNIFIED);
 
     const toAssignment = (exercise, index) => {
       const currentAssignment = _.find(assignments, (assignment) => assignment.exercise.eid === exercise.id);
@@ -73,9 +64,15 @@ angular
       return $scope.assignments[Math.max(assignmentsIndex - 1, 0)]
     };
 
-    $scope.selectAssignment = (assignment) => {
+    _.defaults($scope.options, { viewMode: LAST_SOLUTION, diffMode: UNIFIED });
 
-      if (_.isEmpty($scope.options)) $scope.options = { viewMode: LAST_SOLUTION };
+    DIFF.isUnified = isUnified();
+
+    $scope.$watch(() => DIFF.isUnified, (bool) => {
+      DIFF.current = $scope.options.diffMode = bool ? UNIFIED : SPLIT;
+    });
+
+    $scope.selectAssignment = (assignment) => {
 
       currentExercise = assignment.exercise;
 
@@ -84,7 +81,6 @@ angular
       $scope.assignment = assignment;
       $scope.containsHtml = containsHtml;
       $scope.lastSubmissionDate = Humanizer.date(_.get($scope, 'lastSubmission.created_at'));
-
 
       $scope.trust = (html) => $sce.trustAsHtml(html);
       $scope.selectDiff = (diff) => assignment.diffs.selected = diff;
@@ -106,6 +102,8 @@ angular
         $scope.options.viewMode = MESSAGES;
         scrollChatToBottom();
       }
+
+      if ($scope.getViewMode().type === 'diff') $scope.diff();
 
       $scope.submissionHasMessages = (submission) => {
         return !_.isEmpty(submission.messages);
