@@ -31,6 +31,10 @@ angular
       return this._exam && this._exam.getName();
     }
 
+    this.getExerciseId = () => {
+      return this._exercise && this._exercise.eid;
+    }
+
     this.setCourse = (course) => {
       this._course = course;
     }
@@ -49,6 +53,10 @@ angular
 
     this.setStudents = (students) => {
       this._students = students;
+    }
+
+    this.setExercise = (exercise) => {
+      this._exercise = exercise;
     }
 
     this.getStudents = () => {

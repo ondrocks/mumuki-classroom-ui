@@ -77,6 +77,7 @@ angular
       currentExercise = assignment.exercise;
 
       $stateParams.eid = currentExercise.eid;
+      Breadcrumb.setExercise(currentExercise);
 
       $scope.assignment = assignment;
       $scope.containsHtml = containsHtml;
