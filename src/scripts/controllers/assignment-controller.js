@@ -64,7 +64,7 @@ angular
       return $scope.assignments[Math.max(assignmentsIndex - 1, 0)]
     };
 
-    _.defaults($scope.options, { viewMode: LAST_SOLUTION, diffMode: UNIFIED });
+    $scope.options = _.defaultsDeep($scope.options, { viewMode: LAST_SOLUTION, diffMode: UNIFIED });
 
     DIFF.isUnified = isUnified();
 
