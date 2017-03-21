@@ -105,6 +105,8 @@ angular
       }
 
       if ($scope.getViewMode().type === 'diff') $scope.diff();
+      if ($scope.getViewMode().type === 'messages') $scope.messages();
+      if ($scope.getViewMode().type === 'last_solution') $scope.lastSolution();
 
       $scope.submissionHasMessages = (submission) => {
         return !_.isEmpty(submission.messages);
