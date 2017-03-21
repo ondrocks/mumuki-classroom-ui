@@ -14,6 +14,10 @@ angular
 
     const isUnified = () => _.isEqual($scope.options.diffMode, UNIFIED);
 
+    const viewModeIsDiff = () => $scope.getViewMode().showDiff;
+    const viewModeIsMessages = () => $scope.getViewMode().showMessages;
+    const viewModeIsLastSolution = () => $scope.getViewMode().showMarkdown;
+
     const toAssignment = (exercise, index) => {
       const currentAssignment = _.find(assignments, (assignment) => assignment.exercise.eid === exercise.id);
       exercise = _.merge(exercise, {
@@ -100,13 +104,14 @@ angular
         $scope.options.viewMode = LAST_SOLUTION;
       };
       $scope.messages = () => {
+        assignment.diffs.selectLast();
         $scope.options.viewMode = MESSAGES;
         scrollChatToBottom();
       }
 
-      if ($scope.getViewMode().type === 'diff') $scope.diff();
-      if ($scope.getViewMode().type === 'messages') $scope.messages();
-      if ($scope.getViewMode().type === 'last_solution') $scope.lastSolution();
+      if (viewModeIsDiff()) $scope.diff();
+      if (viewModeIsMessages()) $scope.messages();
+      if (viewModeIsLastSolution()) $scope.lastSolution();
 
       $scope.submissionHasMessages = (submission) => {
         return !_.isEmpty(submission.messages);
@@ -171,7 +176,7 @@ angular
         combo: ['left'],
         description: $filter('translate')('next_solution_description'),
         callback: () => {
-          if (!_.isEqual($scope.options.viewMode, LAST_SOLUTION)) {
+          if (viewModeIsDiff()) {
             $scope.assignment.diffs.selectPrev();
           }
         }
@@ -180,7 +185,7 @@ angular
         combo: ['right'],
         description: $filter('translate')('prev_solution_description'),
         callback: () => {
-          if (!_.isEqual($scope.options.viewMode, LAST_SOLUTION)) {
+          if (viewModeIsDiff()) {
             $scope.assignment.diffs.selectNext();
           }
         },
