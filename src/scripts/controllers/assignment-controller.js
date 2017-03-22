@@ -148,6 +148,12 @@ angular
         });
       };
 
+      $scope.viewMessages = () => {
+        Api
+          .getMessages(_.merge($stateParams, {eid: Breadcrumb.getExerciseId()}))
+          .then((html) => Modal.viewMessages(html, () => {}));
+      };
+
       if (!$scope.lastSolutionMarkdown[currentExercise.eid]) {
         Api
           .renderMarkdown(`\`\`\`${guide.language}\n${_.get(assignment.diffs.last(), 'right.content', '').trim()}\n\`\`\``)

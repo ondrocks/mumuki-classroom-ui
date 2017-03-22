@@ -141,6 +141,12 @@ angular
         .post(`${API()}/courses/${course}/messages`, data);
     }
 
+    this.getMessages = ({course, org, repo, student, eid}) => {
+      return $http
+        .get(`${API}/courses/${course}/guides/${org}/${repo}/${student}/${eid}/messages`)
+        .then((res) => res.data)
+    }
+
     this.follow = (uid, email, course) => {
       return $http
         .post(`${API()}/courses/${course}/followers`, { uid, email, course })

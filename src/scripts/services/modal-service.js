@@ -65,4 +65,13 @@ angular
       }
     });
 
+    this.viewMessages = (html, callback) => $uibModal.open({
+      templateUrl: 'views/modals/view-messages.html',
+      controller: 'ViewMessagesController',
+      resolve: {
+        html: () => html,
+        callback: () => callback
+      }
+    });
+
   });

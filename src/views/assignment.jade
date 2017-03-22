@@ -83,7 +83,7 @@
                 .tab-pane(ng-class='{ "active": getViewMode().showMessages }')
                   .messages
                     ol.chat
-                      li
+                      li(ng-click='viewMessages()')
                         a(href='') {{ 'more_messages' | translate }}
                       li(class='{{messageSenderClass(message)}}' ng-repeat='message in assignment.lastSubmission().messages')
                         div.msg
