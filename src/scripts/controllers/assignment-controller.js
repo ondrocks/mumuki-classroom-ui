@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $timeout, $filter, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student, Modal) {
+  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $filter, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student, Modal, Scroll) {
 
     Preferences($scope, 'options');
 
@@ -50,7 +50,7 @@ angular
       return _.findIndex($scope.assignments, (p) => p.exercise.eid === currentExercise.eid);
     };
     const scrollChatToBottom = () => {
-      $timeout(() => $('.chat').scrollTop($('.chat')[0].scrollHeight));
+      Scroll.bottom('.chat');
     };
 
     $scope.lastSolutionMarkdown = {};

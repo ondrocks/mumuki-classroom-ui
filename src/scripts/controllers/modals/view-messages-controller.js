@@ -1,6 +1,6 @@
 angular
   .module('classroom')
-  .controller('ViewMessagesController', function ($scope, $uibModalInstance, $sce, $timeout, html, callback, Api) {
+  .controller('ViewMessagesController', function ($scope, $uibModalInstance, $sce, html, callback, Scroll, Api) {
 
     $scope.html = $sce.trustAsHtml(html);
 
@@ -8,6 +8,6 @@ angular
       $uibModalInstance.close();
     }
 
-    $timeout(() => $('.view-messages .chat').scrollTop($('.view-messages .chat')[0].scrollHeight));
+    Scroll.bottom('.view-messages .chat');
 
   });
