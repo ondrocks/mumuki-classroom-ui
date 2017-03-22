@@ -87,7 +87,7 @@
                         a(href='') {{ 'more_messages' | translate }}
                       li(class='{{messageSenderClass(message)}}' ng-repeat='message in assignment.lastSubmission().messages')
                         div.msg
-                          p(ng-bind-html='trust((message.content | markdownify))')
+                          p(ng-bind-html='trust(message.content)')
                           .sender {{message.sender}}
                           time {{Humanizer.date(message.created_at)}}
                     btn.btn.btn-success.btn-block(ng-click='newMessage()')
