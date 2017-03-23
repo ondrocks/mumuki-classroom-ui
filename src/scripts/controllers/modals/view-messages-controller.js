@@ -4,6 +4,11 @@ angular
 
     $scope.html = $sce.trustAsHtml(html);
 
+    $scope.send = () => {
+      $scope.cancel();
+      callback();
+    }
+
     $scope.cancel = () => {
       $uibModalInstance.close();
     }

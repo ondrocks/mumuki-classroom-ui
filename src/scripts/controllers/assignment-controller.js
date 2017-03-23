@@ -151,7 +151,7 @@ angular
       $scope.viewMessages = () => {
         Api
           .getMessages(_.merge($stateParams, {eid: Breadcrumb.getExerciseId()}))
-          .then((html) => Modal.viewMessages(html, () => {}));
+          .then((html) => Modal.viewMessages(html, () => $scope.newMessage()));
       };
 
       if (!$scope.lastSolutionMarkdown[currentExercise.eid]) {
