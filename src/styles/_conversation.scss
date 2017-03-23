@@ -145,8 +145,30 @@
 .view-messages {
   overflow-x: hidden;
   overflow-y: auto;
+
   .chat {
     height: 500px;
+
+    .solution {
+      @include display-flex(column, flex-start, flex-start);
+      border: none;
+      border-top: 1px solid #cccccc;
+      border-radius: 0;
+      width: 100%;
+
+      a {
+        align-self: center;
+        margin: auto;
+        cursor: pointer;
+        top: 0;
+      }
+
+      pre {
+        margin-top: 0;
+        border: none;
+        border-radius: 0;
+      }
+    }
   }
 }
 
