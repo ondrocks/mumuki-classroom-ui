@@ -1,9 +1,10 @@
 .breadcrumb {
-  margin: 0;
+  margin: 6px 0 3px;
   padding: 0;
   background-color: transparent;
   .brand {
-    font-size: 44px;
+    font-size: 38px;
+    padding: 0px 3px 0;
     a {
       color: $brand-primary;
       &:hover, &:focus {
@@ -15,6 +16,8 @@
 
 .user-menu {
   margin: 20px 0;
+  padding-top: 2px;
+  margin-right: -1px;
   text-align: right;
   #profileDropdown {
     cursor: pointer;
