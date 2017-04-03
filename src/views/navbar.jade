@@ -15,7 +15,7 @@
         .user-menu
           dropdown(ng-if='isLoggedIn()')
             a.dropdown-toggle(href='', data-toggle='dropdown', role='button')
-              img.rounded-x.profile(ng-src='{{ profile().picture }}', width='40px')
+              img.rounded-x.profile(ng-src='{{ imageUrl() }}', width='40px')
             ul.dropdown-menu()
               li
                 a {{ profile().user_name }}
