@@ -15,9 +15,9 @@
     ng-csv-import.import(content='csv.content', callback='applyCsv', header='csv.header', header-visible='csv.headerVisible', separator='csv.separator', result='csv.result', upload-button-label='csv.uploadButtonLabel')
     table.table(ng-if='csv.result')
       tr
-        th {{ 'email' | translate }}
         th {{ 'first_name' | translate}}
         th {{ 'last_name' | translate}}
+        th {{ 'email' | translate }}
       tr(ng-repeat='student in csv.result')
         td
           input.form-control(ng-model='student.first_name', type='text', placeholder='Nombre', autofocus)
