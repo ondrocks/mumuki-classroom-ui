@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('CourseController', function ($scope, $state, $stateParams, $location, $timeout, toastr, clipboard, Api, Download, Modal) {
+  .controller('CourseController', function ($scope, $state, $stateParams, toastr, Api, Download, Modal) {
 
     const tabs = {
       guides: 'classroom.courses.course.guides',
@@ -15,17 +15,7 @@ angular
 
     $scope.setCount = (count) => $scope.count = count;
 
-    const protocol = $location.protocol();
-    const host = $location.host();
-    const href = $state.href('classroom.students', { course: $stateParams.course })
-
-    $scope.url = () => `${protocol}://${host}/${href}`;
-
-    $scope.copy = () => {
-      clipboard.copyText($scope.url());
-      $scope.isCopied = true;
-      $timeout(() => $scope.isCopied = false, 5000);
-    };
+    $scope.goToAddStudents = () => $state.go('classroom.students', { course: $stateParams.course });
 
     $scope.export = () => {
       Modal.exportCourseDataToJson($stateParams.course, () => {

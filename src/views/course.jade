@@ -7,20 +7,14 @@
 
   br
 
-  div
-    div.mu-inline-block-right
-      a(href='', ng-click='export()')
-        span.view-mode {{ 'export_solutions_button' | translate }}
-        i.fa.fa-download
-      a#downloadAnchor(style='display:none')
-    div.mu-inline-block-left
-      small.text-muted {{ 'students_subscription_address' | translate }}:&nbsp;
-      small.text-muted.text-primary
-        span.view-mode {{ url() }}
-      span.clipboard
-        i.fa.fa-clipboard(ng-click='copy()')
-        small.text-muted(ng-show='isCopied') &nbsp; {{ 'copied' | translate }}!
-
+  div.row
+    div.col-md-12
+      div.pull-right
+        a.btn.btn-link(href='', ng-click='export()')
+          span.view-mode {{ 'export_solutions_button' | translate }}
+          i.fa.fa-download
+        a#downloadAnchor(style='display:none')
+      button.btn.btn-success.pull-left(ng-click='goToAddStudents()') {{ 'new_student' | translate }}
   br
 
   div(ui-view='main')
