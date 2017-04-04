@@ -1,25 +1,26 @@
-.navbar
-  .container
-    .row
-      .col-md-10
-        ol.breadcrumb(ng-if='isLoggedIn() && isTeacher()')
+.container
+  nav.mu-navbar
+    div.mu-navbar-breadcrumb
+      ul.mu-breadcrumb-list(ng-if='isLoggedIn() && isTeacher()')
+        li.mu-breadcrumb-list-item.brand
+          a(ui-sref='classroom.home')
+            i.da.da-mumuki
+        li.mu-breadcrumb-list-item(ng-class='{ "last": Breadcrumb.list().length === 0 }')
+          a(ui-sref='classroom.home') {{ 'courses' | translate}}
+        li.mu-breadcrumb-list-item(ng-repeat='item in Breadcrumb.list()', ng-class='{ "last": $last }')
+          a(href='', ng-click='Breadcrumb.goTo(item)') {{ item.name() | translate }}
+
+    div.mu-navbar-avatar
+      a(ng-if='!isLoggedIn()' href='', ng-click='signin()') {{ 'log_in' | translate }}
+
+      .dropdown(ng-if='isLoggedIn()')
+
+        img.mu-profile-avatar.dropdown-toggle(ng-src='{{ imageUrl() }}', data-toggle='dropdown')
+
+        ul.dropdown-menu.dropdown-menu-right
           li
-            span.brand
-              a(ui-sref='classroom.home')
-                i.da.da-mumuki
+            a {{ profile().user_name }}
           li
-            a(ui-sref='classroom.home') {{ 'courses' | translate}}
-          li(ng-repeat='item in Breadcrumb.list()')
-            a(href='', ng-click='Breadcrumb.goTo(item)') {{ item.name() | translate }}
-      .col-md-2
-        .user-menu
-          dropdown(ng-if='isLoggedIn()')
-            a.dropdown-toggle(href='', data-toggle='dropdown', role='button')
-              img.rounded-x.profile(ng-src='{{ imageUrl() }}', width='40px')
-            ul.dropdown-menu()
-              li
-                a {{ profile().user_name }}
-              li.divider(role='separator')
-              li
-                a(href='', ng-click='signout()') {{ 'log_out' | translate }}
-            a(ng-if='!isLoggedIn()' href='', ng-click='signin()') {{ 'log_in' | translate }}
+            .divider(role='separator')
+          li
+            a(href='', ng-click='signout()') {{ 'log_out' | translate }}
