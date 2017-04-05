@@ -28,7 +28,7 @@ angular
       }
     };
 
-    this.profile = () => profile;
+    this.profile = () => _.defaults(profile, {email: profile.user_uid});
 
     this.imageUrl = () => {
       const image = this.profile().user_image_url;
