@@ -140,6 +140,15 @@
     display: inline-block;
     margin-right: 4px;
   }
+  .passed {
+    background-color: $brand-success-light;
+  }
+  .failed {
+    background-color: $brand-danger-light;
+  }
+  .passed_with_warning {
+    background-color: $brand-warning-light;
+  }
 }
 
 .view-messages {
@@ -150,7 +159,7 @@
     height: 500px;
 
     .solution {
-      @include display-flex(column, flex-start, flex-start);
+      @include display-flex(column, flex-start, flex-end);
       border: none;
       border-top: 1px solid #cccccc;
       border-radius: 0;
@@ -164,7 +173,21 @@
         text-decoration: none;
       }
 
+      div {
+        width: 100%;
+
+        &.magia-no {
+          height: 100px;
+          overflow: hidden;
+        }
+
+        &.magia {
+          height: 100%;
+        }
+      }
+
       pre {
+        background: none;
         font-size: 0.7em;
         margin-top: 0;
         border: none;
