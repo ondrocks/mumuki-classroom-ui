@@ -54,14 +54,15 @@ angular
       }
     });
 
-    this.newMessage = (message, student, course, callback) => $uibModal.open({
+    this.newMessage = (message, student, course, currentCode, callback) => $uibModal.open({
       templateUrl: 'views/modals/new-message.html',
       controller: 'NewMessageController',
       resolve: {
         course: () => course,
         student: () => student,
         message: () => message,
-        callback: () => callback
+        callback: () => callback,
+        currentCode: () => Api.renderMarkdown(currentCode)
       }
     });
 

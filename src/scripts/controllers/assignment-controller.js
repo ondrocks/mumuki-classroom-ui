@@ -141,8 +141,12 @@ angular
         }
       }
 
+      const getLastSubmissionMarkdown = () => {
+        return `\`\`\`${assignment.guide.language}\n${assignment.lastSubmission().content}\n\`\`\``;
+      }
+
       $scope.newMessage = () => {
-        Modal.newMessage(getMessageToPost(assignment.lastSubmission()), Breadcrumb.getStudent(), course, (message) => {
+        Modal.newMessage(getMessageToPost(assignment.lastSubmission()), Breadcrumb.getStudent(), course, getLastSubmissionMarkdown(), (message) => {
           assignment.lastSubmission().messages.push(message);
           scrollChatToBottom();
         });

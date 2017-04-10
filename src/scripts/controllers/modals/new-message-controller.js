@@ -1,9 +1,11 @@
 angular
   .module('classroom')
-  .controller('NewMessageController', function ($scope, $stateParams, $uibModalInstance, student, message, course, callback, Api) {
+  .controller('NewMessageController', function ($scope, $sce, $stateParams, $uibModalInstance, student, message, course, currentCode, callback, Api) {
 
     $scope.student = student;
     $scope.message = message;
+
+    $scope.currentCode = $sce.trustAsHtml(currentCode);
 
     $scope.send = () => {
       return Api
