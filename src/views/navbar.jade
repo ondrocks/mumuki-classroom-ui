@@ -22,10 +22,10 @@
               });
             li.scrollable-menu
               a.list-group-item.list-group-item-action(ng-repeat='student in item.students() | filter:listSearch'
-                ui-sref='classroom.courses.course.guides.guide.students({ \
-                  student: student.uid                                    \
-                  eid: Breadcrumb.getExerciseId()                         \
-                })')
+                  ui-sref='classroom.courses.course.guides.guide.students({ \
+                    student: student.uid,                                   \
+                    eid: Breadcrumb.getExerciseId()                         \
+                  })')
                 img.rounded-x.profile.adjust-position(ng-if='item.student', with-default='{{ student.image_url }}', width='20px')
                 span &nbsp;
                 span {{ student.fullName() }}
