@@ -1,4 +1,3 @@
-
 process.env.PORT = process.env.PORT || 8080;
 process.env.TENANT = process.env.TENANT || 'central';
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -107,14 +106,20 @@ gulp.task('images', () => {
     .pipe($.livereload());
 });
 
+gulp.task('assets', () => {
+  return gulp.src([`${srcFolder}/assets/**/*`])
+    .pipe(gulp.dest(`${outFolder}/assets`))
+    .pipe($.livereload());
+});
+
 gulp.task('jade', ['jade:index', 'jade:views']);
 
 gulp.task('dev:build', (done) => {
-  runSequence('clean', 'dev:js', 'scss', 'jade', 'fonts', 'images', done);
+  runSequence('clean', 'dev:js', 'scss', 'jade', 'fonts', 'images', 'assets', done);
 });
 
 gulp.task('prod:build', (done) => {
-  runSequence('clean', 'prod:js', 'scss', 'jade', 'fonts', 'images', 'release', done);
+  runSequence('clean', 'prod:js', 'scss', 'jade', 'fonts', 'images', 'assets', 'release', done);
 });
 
 gulp.task('dev:serve', ['dev:build'], () => {
@@ -131,6 +136,7 @@ gulp.task('dev:watch', () => {
   gulp.watch(`${configFile()}`, ['dev:js']);
   gulp.watch(`${srcFolder}/index.jade`, ['jade:index']);
   gulp.watch(`${fontPaths}`, ['fonts']);
+  gulp.watch(`${srcFolder}/assets/**/*`, ['assets']);
   gulp.watch(`${srcFolder}/images/**/*`, ['images']);
   gulp.watch(`${srcFolder}/scripts/**/*.js`, ['dev:js']);
   gulp.watch(`${srcFolder}/styles/**/*.scss`, ['scss']);
@@ -175,4 +181,3 @@ gulp.task('test', (done) => {
       ])
   }, done).start();
 });
-
