@@ -29,9 +29,9 @@
 }
 
 .bootstrap-switch-wrapper {
-  position: absolute;
-  right: 150px;
-  top: 120px;
+  position: relative;
+  float: right;
+  top: 35px;
 }
 .bootstrap-switch-primary {
   background: $btn-primary-bg !important;
