@@ -32,6 +32,7 @@
     "gulp-rev": "^7.1.2",
     "gulp-sass": "^2.1.1",
     "gulp-sourcemaps": "^1.6.0",
+    "gulp-string-replace": "0.3.1",
     "gulp-uglify": "^1.5.3",
     "gulp-usemin": "^0.3.16",
     "gulp-webserver": "^0.9.1",

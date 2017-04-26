@@ -8,6 +8,7 @@ const del = require('del');
 const gulp = require('gulp');
 const runSequence = require('run-sequence');
 const gulpLoadPlugins = require('gulp-load-plugins');
+const replaceEnvVar = (variable) => $.stringReplace(`<${variable}>`, process.env[variable]);
 
 const $ = gulpLoadPlugins();
 
@@ -41,6 +42,7 @@ gulp.task('release', (done) => {
 
 gulp.task('config', () => {
   return gulp.src(`${configFile()}`)
+    .pipe(replaceEnvVar('MUMUKI_CLASSROOM_API_URL'))
     .pipe($.rename('config.js'))
     .pipe(gulp.dest(`${srcFolder}/scripts/config`))
 });
@@ -116,6 +118,7 @@ gulp.task('dev:build', (done) => {
 });
 
 gulp.task('prod:build', (done) => {
+  process.env.NODE_ENV = 'production';
   runSequence('clean', 'prod:js', 'scss', 'jade', 'fonts', 'images', 'release', done);
 });
 

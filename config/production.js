@@ -4,7 +4,7 @@ angular
   .constant('CONFIG', {
 
     classroom: {
-      url: 'classroom-api.mumuki.io'
+      url: '<MUMUKI_CLASSROOM_API_URL>'
     },
 
     auth: {
