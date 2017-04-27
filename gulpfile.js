@@ -30,6 +30,7 @@ const useminOptions = () => {
 }
 
 const configFile = () => `config/${process.env.NODE_ENV}.js`;
+const replaceEnvVar = (variable) => $.stringReplace(`<${variable}>`, process.env[variable]);
 
 gulp.task('clean', () => del(`${outFolder}`, { force: true }));
 gulp.task('release', (done) => {
@@ -40,6 +41,9 @@ gulp.task('release', (done) => {
 
 gulp.task('config', () => {
   return gulp.src(`${configFile()}`)
+    .pipe(replaceEnvVar('MUMUKI_CLASSROOM_API_URL'))
+    .pipe(replaceEnvVar('MUMUKI_BIBLIOTHECA_API_URL'))
+    .pipe(replaceEnvVar('MUMUKI_COOKIES_DOMAIN'))
     .pipe($.rename('config.js'))
     .pipe(gulp.dest(`${srcFolder}/scripts/config`))
 });
