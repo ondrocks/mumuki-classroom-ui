@@ -3,6 +3,8 @@ angular
   .module('classroom')
   .provider('OrganizationMapper', function (CONFIG) {
 
+    let location;
+
     this.current = () => {
       return this.organizationMappers[CONFIG.organizationMappingMode];
     }
@@ -11,30 +13,40 @@ angular
 
       subdomain: {
 
-        tenant(location, stateParams) {
+        tenant() {
           return location.host().split('.')[0];
         },
 
-        stateUrl(url) {
-          return url;
+        classroomApiURL() {
+          return `//${this.tenant()}.${CONFIG.classroom.url}`;
+        },
+
+        stateUrl() {
+          return '';
         }
 
       },
 
       path: {
 
-        tenant(location, stateParams) {
-          console.log(stateParams);
-          return stateParams.tenant;
+        tenant() {
+          return location.url().split('/')[1];
         },
 
-        stateUrl(url) {
+        classroomApiURL() {
+          return `//${this.tenant()}.${CONFIG.classroom.url}`;
+        },
+
+        stateUrl() {
           return '/:tenant';
         }
 
       }
     }
 
-    this.$get = () => this.current();
+    this.$get = ($location) => {
+      location = $location;
+      return this.current();
+    }
 
   });

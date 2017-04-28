@@ -12,10 +12,12 @@ angular
     this.exerciseURL = (exerciseId) => `${this.atheneumURL()}/exercises/${exerciseId}`;
     this.exerciseURLByBibliotheca = (guideSlug, exerciseId) => `${this.atheneumURL()}/exercises/${guideSlug}/${exerciseId}`;
 
-    this.tenant = () => OrganizationMapper.tenant($location, $stateParams);
+    this.tenant = () => OrganizationMapper.tenant();
 
     this.openAtheneum = () => openAth('_self');
     this.openExamInAtheneum = (exam) => openAth('_blank', `/exams/${exam}`);
     this.examURL = (exam) => `${this.atheneumURL()}/exams/${exam}`;
+
+    this.classroomApiURL = () => OrganizationMapper.classroomApiURL();
 
   });
