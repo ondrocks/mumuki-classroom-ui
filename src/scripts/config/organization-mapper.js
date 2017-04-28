@@ -9,6 +9,11 @@ angular
       return this.organizationMappers[CONFIG.organizationMappingMode];
     }
 
+    const tenantizedURL = (URL, tenant) => {
+      const [protocol, host] = URL.split('://');
+      return `${protocol}://${tenant}.${host}`;
+    }
+
     this.organizationMappers = {
 
       subdomain: {
@@ -17,8 +22,16 @@ angular
           return location.host().split('.')[0];
         },
 
+        atheneumURL() {
+          return tenantizedURL(CONFIG.laboratory.url, this.tenant());
+        },
+
         classroomApiURL() {
-          return `//${this.tenant()}.${CONFIG.classroom.url}`;
+          return tenantizedURL(CONFIG.classroom.url, this.tenant());
+        },
+
+        bibliothecaApiURL() {
+          return CONFIG.bibliotheca.url;
         },
 
         stateUrl() {
@@ -33,8 +46,16 @@ angular
           return location.url().split('/')[1];
         },
 
+        atheneumURL() {
+          return tenantizedURL(CONFIG.laboratory.url, this.tenant());
+        },
+
         classroomApiURL() {
-          return `//${this.tenant()}.${CONFIG.classroom.url}`;
+          return tenantizedURL(CONFIG.classroom.url, this.tenant());
+        },
+
+        bibliothecaApiURL() {
+          return CONFIG.bibliotheca.url;
         },
 
         stateUrl() {

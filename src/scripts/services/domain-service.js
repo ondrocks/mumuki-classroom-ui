@@ -8,12 +8,8 @@ angular
       return true;
     }
 
-    this.atheneumURL = () => `${$location.protocol()}://${this.tenant()}.mumuki.io`;
     this.openAtheneum = () => openAth('_self');
     this.openExamInAtheneum = (exam) => openAth('_blank', `/exams/${exam}`);
-
-    this.tenant = () => OrganizationMapper.tenant();
-
 
     this.tosURL = () => `${atheneumURL()}/static/tos/tos-${this.currentLocale()}.txt`
 
@@ -25,6 +21,9 @@ angular
     this.examURL = (exam) => `${this.atheneumURL()}/exams/${exam}`;
 
 
+    this.tenant = () => OrganizationMapper.tenant();
+    this.atheneumURL = () => OrganizationMapper.atheneumURL();
     this.classroomApiURL = () => OrganizationMapper.classroomApiURL();
+    this.bibliothecaApiURL = () => OrganizationMapper.bibliothecaApiURL();
 
   });

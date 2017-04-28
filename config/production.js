@@ -7,6 +7,10 @@ angular
       url: '<MUMUKI_CLASSROOM_API_URL>'
     },
 
+    laboratory: {
+      url: '<MUMUKI_ATHENEUM_URL>'
+    },
+
     bibliotheca: {
       url: '<MUMUKI_BIBLIOTHECA_API_URL>'
     },

@@ -10,12 +10,12 @@ classroomTest('Domain Service', (mocks) => {
   }));
 
   it('#openAtheneum', inject((Domain) => {
-    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.mumuki.io', '_self');
+    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.localmumuki.io:3000', '_self');
     Domain.openAtheneum();
   }));
 
   it('#openExamInAtheneum', inject((Domain) => {
-    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.mumuki.io/exams/1234', '_blank');
+    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.localmumuki.io:3000/exams/1234', '_blank');
     Domain.openExamInAtheneum(1234);
   }));
 
