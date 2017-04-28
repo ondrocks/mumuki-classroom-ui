@@ -180,8 +180,9 @@ gulp.task('test', (done) => {
       .concat(bower.filter((dep) => /\.js$/.test(dep)))
       .concat([
         'test/context.js',
-        'src/scripts/**/*.js',
+        'src/scripts/app.js',
         'config/test.js',
+        'src/scripts/**/*.js',
         'test/**/*.test.js'
       ])
   }, done).start();

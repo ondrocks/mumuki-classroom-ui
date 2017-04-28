@@ -57,7 +57,7 @@ angular
       course.days   = $scope.getCheckedNames(course.days);
       course.shifts = $scope.getCheckedNames(course.shifts);
       course.period = course.period.toLowerCase();
-      course.slug   = `${Api.subdomain}/${course.period}-${course.code}`.toLowerCase();
+      course.slug   = `${Api.subdomain()}/${course.period}-${course.code}`.toLowerCase();
       return course;
     }
 

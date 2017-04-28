@@ -1,10 +1,9 @@
 
 angular
   .module('classroom')
-  .controller('CoursesController', function ($scope, $state, courses, Api, Permissions) {
+  .controller('CoursesController', function ($scope, $state, courses, Permissions) {
 
     $scope.list = courses;
-    $scope.preTitle = _.capitalize(Api.subdomain);
     $scope.noItemsToShow = 'no_courses_to_show';
     $scope.inputPlaceholder = 'filter_available_courses';
 

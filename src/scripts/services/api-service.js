@@ -3,7 +3,6 @@ angular
   .module('classroom')
   .service('Api', function ($http, $location, Course, Guide, Student, Teacher, GuideProgress, Assignment, Exam, Auth, Domain, Organization, CONFIG) {
 
-    const subdomain = Domain.tenant();
     const BIBLIOTHECA = `//${CONFIG.bibliotheca.url}`;
 
     const API = () => Domain.classroomApiURL();
@@ -12,7 +11,7 @@ angular
       headers: { Authorization: `Bearer ${Auth.token()}` }
     });
 
-    this.subdomain = subdomain;
+    this.subdomain = Domain.tenant;
 
     this.getCourses = () => {
       return $http

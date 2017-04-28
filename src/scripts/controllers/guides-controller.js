@@ -16,7 +16,6 @@ angular
     $scope.exams = $scope.dict.Exam;
     $scope.complements = $scope.dict.Complement;
     $scope.others = $scope.dict.undefined;
-    $scope.preTitle = _.capitalize($stateParams.course.toUpperCase());
     $scope.noItemsToShow = 'no_guides_to_show';
     $scope.inputPlaceholder = 'filter_available_guides';
 
