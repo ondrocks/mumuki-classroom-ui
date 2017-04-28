@@ -3,9 +3,8 @@ angular
   .module('classroom')
   .service('Api', function ($http, $location, Course, Guide, Student, Teacher, GuideProgress, Assignment, Exam, Auth, Domain, Organization, CONFIG) {
 
-    const BIBLIOTHECA = `//${CONFIG.bibliotheca.url}`;
-
     const API = () => Domain.classroomApiURL();
+    const BIBLIOTHECA = () => Domain.bibliothecaApiURL();
 
     const authenticated = (requestOptions = {}) => _.defaultsDeep(requestOptions, {
       headers: { Authorization: `Bearer ${Auth.token()}` }
@@ -27,13 +26,13 @@ angular
 
     this.getBibliothecaGuides = () => {
       return $http
-        .get(`${BIBLIOTHECA}/guides`)
+        .get(`${BIBLIOTHECA()}/guides`)
         .then((res) => res.data.guides)
     }
 
     this.getBibliothecaGuide = ({org, repo}) => {
       return $http
-        .get(`${BIBLIOTHECA}/guides/${org}/${repo}/markdown`)
+        .get(`${BIBLIOTHECA()}/guides/${org}/${repo}/markdown`)
         .then((res) => Guide.from(res.data))
     };
 
@@ -188,7 +187,7 @@ angular
 
     this.renderMarkdown = (markdown) => {
       return $http
-        .post(`${BIBLIOTHECA}/markdown`, { markdown })
+        .post(`${BIBLIOTHECA()}/markdown`, { markdown })
         .then((res) => _.get(res, 'data.markdown'));
     };
 
