@@ -4,25 +4,25 @@ angular
   .service('Domain', function ($location, $stateParams, $window, OrganizationMapper) {
 
     const openAth = (mode, path='') => {
-      $window.open(`${this.atheneumURL()}${path}`, mode);
+      $window.open(`${this.laboratoryURL()}${path}`, mode);
       return true;
     }
 
-    this.openAtheneum = () => openAth('_self');
-    this.openExamInAtheneum = (exam) => openAth('_blank', `/exams/${exam}`);
+    this.openLaboratory = () => openAth('_self');
+    this.openExamInLaboratory = (exam) => openAth('_blank', `/exams/${exam}`);
 
-    this.tosURL = () => `${atheneumURL()}/static/tos/tos-${this.currentLocale()}.txt`
+    this.tosURL = () => `${laboratoryURL()}/static/tos/tos-${this.currentLocale()}.txt`
 
-    this.guideURL = (slug) => `${atheneumURL()}/guides/${slug}`
+    this.guideURL = (slug) => `${laboratoryURL()}/guides/${slug}`
 
-    this.exerciseURL = (exerciseId) => `${this.atheneumURL()}/exercises/${exerciseId}`;
-    this.exerciseURLByBibliotheca = (guideSlug, exerciseId) => `${this.atheneumURL()}/exercises/${guideSlug}/${exerciseId}`;
+    this.exerciseURL = (exerciseId) => `${this.laboratoryURL()}/exercises/${exerciseId}`;
+    this.exerciseURLByBibliotheca = (guideSlug, exerciseId) => `${this.laboratoryURL()}/exercises/${guideSlug}/${exerciseId}`;
 
-    this.examURL = (exam) => `${this.atheneumURL()}/exams/${exam}`;
+    this.examURL = (exam) => `${this.laboratoryURL()}/exams/${exam}`;
 
 
     this.tenant = () => OrganizationMapper.tenant();
-    this.atheneumURL = () => OrganizationMapper.atheneumURL();
+    this.laboratoryURL = () => OrganizationMapper.laboratoryURL();
     this.classroomApiURL = () => OrganizationMapper.classroomApiURL();
     this.bibliothecaApiURL = () => OrganizationMapper.bibliothecaApiURL();
 

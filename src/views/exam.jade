@@ -21,7 +21,7 @@
       .col-sm-12(ng-if='!isNew')
         label {{ 'guide' | translate }}
         .form-group
-          .input-group.pointer(target='_blank' href='', ng-click='openExamInAtheneum()')
+          .input-group.pointer(target='_blank' href='', ng-click='openExamInLaboratory()')
             span.input-group-addon
               i(class='{{ exam.iconClass() }}')
             input.form-control(type='text', value='{{exam.fullName()}}', readonly)

@@ -22,7 +22,7 @@ angular
           return location.host().split('.')[0];
         },
 
-        atheneumURL() {
+        laboratoryURL() {
           return tenantizedURL(CONFIG.laboratory.url, this.tenant());
         },
 
@@ -46,7 +46,7 @@ angular
           return location.url().split('/')[1];
         },
 
-        atheneumURL() {
+        laboratoryURL() {
           return tenantizedURL(CONFIG.laboratory.url, this.tenant());
         },
 
