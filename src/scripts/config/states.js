@@ -1,12 +1,13 @@
 
 angular
   .module('classroom')
-  .config(function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider, OrganizationMapperProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
 
     $stateProvider
       .state('classroom', {
         abstract: true,
+        url: OrganizationMapperProvider.current().stateUrl(),
         views: {
           '@': {
             templateUrl: 'views/layout.html',
@@ -30,17 +31,6 @@ angular
           }
         }
       })
-      // .state('classroom.students', {
-      //   url: '/students/:course',
-      //   authenticated: false,
-      //   views: {
-      //     'navbar@classroom': {},
-      //     'content@classroom': {
-      //       templateUrl: 'views/student.html',
-      //       controller: 'StudentController'
-      //     }
-      //   }
-      // })
       .state('classroom.students', {
         url: '/students/:course',
         authenticated: true,

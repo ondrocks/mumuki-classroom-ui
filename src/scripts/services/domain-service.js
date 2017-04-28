@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Domain', function ($location, $window) {
+  .service('Domain', function ($location, $stateParams, $window, OrganizationMapper) {
 
     const openAth = (mode, path='') => {
       $window.open(`${this.atheneumURL()}${path}`, mode);
@@ -12,7 +12,7 @@ angular
     this.exerciseURL = (exerciseId) => `${this.atheneumURL()}/exercises/${exerciseId}`;
     this.exerciseURLByBibliotheca = (guideSlug, exerciseId) => `${this.atheneumURL()}/exercises/${guideSlug}/${exerciseId}`;
 
-    this.tenant = () => $location.host().split('classroom')[0].replace(/[.]$/g, '');
+    this.tenant = () => OrganizationMapper.tenant($location, $stateParams);
 
     this.openAtheneum = () => openAth('_self');
     this.openExamInAtheneum = (exam) => openAth('_blank', `/exams/${exam}`);
