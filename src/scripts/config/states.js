@@ -17,6 +17,9 @@ angular
           },
           'navbar@classroom': {
             templateUrl: 'views/navbar.html',
+            resolve: {
+              notifications: (Api) => Api.getNotifications()
+            },
             controller: 'NavbarController'
           }
         }

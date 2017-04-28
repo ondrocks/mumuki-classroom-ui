@@ -187,6 +187,13 @@ angular
         .post(`${API()}/courses/${course}/students`, student)
     }
 
+    this.getNotifications = () => {
+      return $http
+        .get(`${API}/notifications`)
+        .then((res) => res.data);
+    };
+
+    this.origin = () => `?origin=${encodeURIComponent(document.location.href)}`;
     this.getLoginUrl = () => Domain.loginURL();
     this.getLogoutUrl = () => Domain.logoutURL();
 

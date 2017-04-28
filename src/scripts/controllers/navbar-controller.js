@@ -1,8 +1,10 @@
 
 angular
   .module('classroom')
-  .controller('NavbarController', function ($scope, hotkeys, Auth, Breadcrumb, Permissions) {
+  .controller('NavbarController', function ($scope, hotkeys, notifications, Auth, Breadcrumb, Permissions, Notification) {
 
+    Notification.set(notifications);
+    $scope.Notification = Notification;
     $scope.signin = Auth.signin;
     $scope.signout = Auth.signout;
     $scope.profile = Auth.profile;
