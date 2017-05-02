@@ -47,11 +47,11 @@ angular
         },
 
         laboratoryURL() {
-          return tenantizedURL(CONFIG.laboratory.url, this.tenant());
+          return `${CONFIG.laboratory.url}/${this.tenant()}`;
         },
 
         classroomApiURL() {
-          return tenantizedURL(CONFIG.classroom.url, this.tenant());
+          return `${CONFIG.classroom.url}/${this.tenant()}`;
         },
 
         bibliothecaApiURL() {
