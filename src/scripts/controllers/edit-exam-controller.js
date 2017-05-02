@@ -38,7 +38,7 @@ angular
 
     $scope.allSelected = () => _.every($scope.students, 'isSelected');
 
-    $scope.openExamInAtheneum = () => Domain.openExamInAtheneum($state.params.exam);
+    $scope.openExamInLaboratory = () => Domain.openExamInLaboratory($state.params.exam);
 
     $scope.url = () => Domain.examURL($scope.exam.id);
 

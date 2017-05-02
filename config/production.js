@@ -4,15 +4,22 @@ angular
   .constant('CONFIG', {
 
     classroom: {
-      url: 'classroom-api.mumuki.io'
+      url: '<MUMUKI_CLASSROOM_API_URL>'
+    },
+
+    laboratory: {
+      url: '<MUMUKI_ATHENEUM_URL>'
     },
 
     bibliotheca: {
-      url: 'bibliotheca-api.mumuki.io'
+      url: '<MUMUKI_BIBLIOTHECA_API_URL>'
     },
 
     cookie: {
-      domain: '.localmumuki.io',
+      domain: '<MUMUKI_COOKIES_DOMAIN>',
       session: '_mumuki_classroom_session'
-    }
+    },
+
+    organizationMappingMode: '<MUMUKI_ORGANIZATION_MAPPING>'
+
   });

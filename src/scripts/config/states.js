@@ -1,12 +1,13 @@
 
 angular
   .module('classroom')
-  .config(function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, cfpLoadingBarProvider, OrganizationMapperProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
 
     $stateProvider
       .state('classroom', {
         abstract: true,
+        url: OrganizationMapperProvider.current().stateUrl(),
         views: {
           '@': {
             templateUrl: 'views/layout.html',
@@ -30,17 +31,6 @@ angular
           }
         }
       })
-      // .state('classroom.students', {
-      //   url: '/students/:course',
-      //   authenticated: false,
-      //   views: {
-      //     'navbar@classroom': {},
-      //     'content@classroom': {
-      //       templateUrl: 'views/student.html',
-      //       controller: 'StudentController'
-      //     }
-      //   }
-      // })
       .state('classroom.students', {
         url: '/students/:course',
         authenticated: true,
@@ -76,10 +66,10 @@ angular
             templateUrl: 'views/select.html',
             controller: 'CoursesController',
             resolve: {
-              courses: ($state, Api) => {
+              courses: ($state, Api, $stateParams) => {
                 return Api
                   .getCourses()
-                  .catch(() => $state.go('classroom.home', {}, { location: 'replace' }));
+                  .catch(() => $state.go('classroom.home', $stateParams, { location: 'replace' }));
               }
             }
           }
@@ -277,23 +267,25 @@ angular
       });
 
     $urlRouterProvider.otherwise(($injector) => {
-      $injector.get('$state').go('classroom.home', {}, { reload: true, location: 'replace' });
+      const $state = $injector.get('$state');
+      const $stateParams = $injector.get('$stateParams');
+      $state.go('classroom.home', $stateParams, { reload: true, location: 'replace' });
     });
 
   })
   .run(($rootScope, $state, Auth) => {
 
-    $rootScope.$on('$stateChangeStart', function(ev, toState) {
+    $rootScope.$on('$stateChangeStart', function(ev, toState, toParams) {
 
       Auth.authenticateIfPossible();
 
       if(toState.authenticated && !Auth.isLoggedIn()) {
-        $state.go('classroom.home', {}, { location: 'replace' });
+        $state.go('classroom.home', toParams, { location: 'replace' });
         ev.preventDefault();
       }
 
       if(toState.name === 'classroom.home' && Auth.isLoggedIn()) {
-        $state.go('classroom.courses', {}, { location: 'replace' });
+        $state.go('classroom.courses', toParams, { location: 'replace' });
         ev.preventDefault();
       }
 

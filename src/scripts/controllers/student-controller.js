@@ -34,7 +34,7 @@ angular
     $scope.addStudent = () => {
       return Api
         .addStudent($stateParams.course, $scope.student)
-        .then(() => $state.go('classroom.courses.course.guides', { course: $stateParams.course }))
+        .then(() => $state.go('classroom.courses.course.guides', $stateParams))
         .catch((res) => toastr.error(res.data.message));
     };
 
@@ -45,7 +45,7 @@ angular
           .then(() => _.pullAllBy($scope.csv.result, [{'email': s.email}], 'email'))
           .then(() => {
             if($scope.csv.result.length === 0)
-              $state.go('classroom.courses.course.guides', { course: $stateParams.course });
+              $state.go('classroom.courses.course.guides', $stateParams);
           })
           .catch((res) => toastr.error(res.data.message));
       })

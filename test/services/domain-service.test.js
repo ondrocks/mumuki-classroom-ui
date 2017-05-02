@@ -9,14 +9,14 @@ classroomTest('Domain Service', (mocks) => {
     Domain.tenant().should.be.eql('pdep-utn');
   }));
 
-  it('#openAtheneum', inject((Domain) => {
-    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.mumuki.io', '_self');
-    Domain.openAtheneum();
+  it('#openLaboratory', inject((Domain) => {
+    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.localmumuki.io:3000', '_self');
+    Domain.openLaboratory();
   }));
 
-  it('#openExamInAtheneum', inject((Domain) => {
-    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.mumuki.io/exams/1234', '_blank');
-    Domain.openExamInAtheneum(1234);
+  it('#openExamInLaboratory', inject((Domain) => {
+    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.localmumuki.io:3000/exams/1234', '_blank');
+    Domain.openExamInLaboratory(1234);
   }));
 
 });
