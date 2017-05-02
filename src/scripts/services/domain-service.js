@@ -26,4 +26,7 @@ angular
     this.classroomApiURL = () => OrganizationMapper.classroomApiURL();
     this.bibliothecaApiURL = () => OrganizationMapper.bibliothecaApiURL();
 
+    this.loginURL = () => OrganizationMapper.loginURL();
+    this.logoutURL = () => OrganizationMapper.logoutURL();
+
   });

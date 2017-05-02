@@ -181,9 +181,8 @@ angular
         .post(`${API()}/courses/${course}/students`, student)
     }
 
-    this.origin = () => `?origin=${encodeURIComponent(document.location.href)}`;
-    this.getLoginUrl = () => `${API()}/login${this.origin()}`;
-    this.getLogoutUrl = () => `${API()}/logout${this.origin()}`;
+    this.getLoginUrl = () => Domain.loginURL();
+    this.getLogoutUrl = () => Domain.logoutURL();
 
     this.renderMarkdown = (markdown) => {
       return $http

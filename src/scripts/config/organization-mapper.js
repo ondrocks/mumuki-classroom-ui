@@ -14,6 +14,17 @@ angular
       return `${protocol}://${tenant}.${host}`;
     }
 
+    const withOrigin = (callback_uri) => `?origin=${encodeURIComponent(callback_uri)}`
+
+    const redirectURL = (tenant = '') => {
+      const protocol = location.protocol();
+      const host = location.host();
+      const port = location.port();
+      const portString = port ? `:${port}` : '';
+      const homePath = _.isEmpty(tenant) ? 'home' : `${tenant}/home`;
+      return `${protocol}://${host}${portString}/#/${homePath}`;
+    }
+
     this.organizationMappers = {
 
       subdomain: {
@@ -32,6 +43,14 @@ angular
 
         bibliothecaApiURL() {
           return CONFIG.bibliotheca.url;
+        },
+
+        loginURL() {
+          return `${this.classroomApiURL()}/login${withOrigin(location.absUrl())}`
+        },
+
+        logoutURL() {
+          return `${this.classroomApiURL()}/logout${withOrigin(redirectURL())}`
         },
 
         stateUrl() {
@@ -56,6 +75,14 @@ angular
 
         bibliothecaApiURL() {
           return CONFIG.bibliotheca.url;
+        },
+
+        loginURL() {
+          return `${CONFIG.classroom.url}/login${withOrigin(location.absUrl())}`
+        },
+
+        logoutURL() {
+          return `${CONFIG.classroom.url}/logout${withOrigin(redirectURL(this.tenant()))}`
         },
 
         stateUrl() {
