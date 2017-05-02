@@ -66,10 +66,10 @@ angular
             templateUrl: 'views/select.html',
             controller: 'CoursesController',
             resolve: {
-              courses: ($state, Api) => {
+              courses: ($state, Api, $stateParams) => {
                 return Api
                   .getCourses()
-                  .catch(() => $state.go('classroom.home', {}, { location: 'replace' }));
+                  .catch(() => $state.go('classroom.home', $stateParams, { location: 'replace' }));
               }
             }
           }
@@ -267,23 +267,26 @@ angular
       });
 
     $urlRouterProvider.otherwise(($injector) => {
-      $injector.get('$state').go('classroom.home', {}, { reload: true, location: 'replace' });
+      const $state = $injector.get('$state');
+      const $stateParams = $injector.get('$stateParams');
+      console.log('HOLALALA', $stateParams)
+      $state.go('classroom.home', $stateParams, { reload: true, location: 'replace' });
     });
 
   })
-  .run(($rootScope, $state, Auth) => {
+  .run(($rootScope, $state, $stateParams, Auth) => {
 
     $rootScope.$on('$stateChangeStart', function(ev, toState) {
 
       Auth.authenticateIfPossible();
 
       if(toState.authenticated && !Auth.isLoggedIn()) {
-        $state.go('classroom.home', {}, { location: 'replace' });
+        $state.go('classroom.home', $stateParams, { location: 'replace' });
         ev.preventDefault();
       }
 
       if(toState.name === 'classroom.home' && Auth.isLoggedIn()) {
-        $state.go('classroom.courses', {}, { location: 'replace' });
+        $state.go('classroom.courses', $stateParams, { location: 'replace' });
         ev.preventDefault();
       }
 
