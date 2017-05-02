@@ -269,24 +269,23 @@ angular
     $urlRouterProvider.otherwise(($injector) => {
       const $state = $injector.get('$state');
       const $stateParams = $injector.get('$stateParams');
-      console.log('HOLALALA', $stateParams)
       $state.go('classroom.home', $stateParams, { reload: true, location: 'replace' });
     });
 
   })
-  .run(($rootScope, $state, $stateParams, Auth) => {
+  .run(($rootScope, $state, Auth) => {
 
-    $rootScope.$on('$stateChangeStart', function(ev, toState) {
+    $rootScope.$on('$stateChangeStart', function(ev, toState, toParams) {
 
       Auth.authenticateIfPossible();
 
       if(toState.authenticated && !Auth.isLoggedIn()) {
-        $state.go('classroom.home', $stateParams, { location: 'replace' });
+        $state.go('classroom.home', toParams, { location: 'replace' });
         ev.preventDefault();
       }
 
       if(toState.name === 'classroom.home' && Auth.isLoggedIn()) {
-        $state.go('classroom.courses', $stateParams, { location: 'replace' });
+        $state.go('classroom.courses', toParams, { location: 'replace' });
         ev.preventDefault();
       }
 

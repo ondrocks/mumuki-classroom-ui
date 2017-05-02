@@ -12,7 +12,7 @@ angular
     $scope.addTeacher = () => {
       Api.updateTeacher($scope.course, $scope.teacher)
         .then(() => toastr.success($filter('translate')('added_teacher')))
-        .then(() => $state.go('classroom.courses.course.teachers', { course_slug: $scope.course }, { reload: true }))
+        .then(() => $state.go('classroom.courses.course.teachers', $stateParams, { reload: true }))
         .catch((e) => toastr.error(e.data.message))
     }
 

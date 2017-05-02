@@ -14,7 +14,7 @@ angular
     $scope.sortCriteria = () => ['getName()'];
 
     $scope.open = (item) => {
-      const params = { course: $stateParams.course, exam: item.eid };
+      const params = _.defaults({ exam: item.eid }, $stateParams);
       return $state.go('classroom.courses.course.exams.edit', params);
     }
 

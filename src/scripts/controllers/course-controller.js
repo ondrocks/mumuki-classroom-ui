@@ -15,7 +15,7 @@ angular
 
     $scope.setCount = (count) => $scope.count = count;
 
-    $scope.goToAddStudents = () => $state.go('classroom.students', { course: $stateParams.course });
+    $scope.goToAddStudents = () => $state.go('classroom.students', $stateParams);
 
     $scope.export = () => {
       Modal.exportCourseDataToJson($stateParams.course, () => {

@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('NewCourseController', function ($scope, $state, $filter, toastr, Auth, Api, Permissions) {
+  .controller('NewCourseController', function ($scope, $state, $filter, $stateParams, toastr, Auth, Api, Permissions) {
 
     $scope.isJanitor = Permissions.isJanitor;
     $scope.course = {
@@ -65,7 +65,7 @@ angular
       const course = $scope.getCourseToPost();
       return Api
         .createCourse(course)
-        .then(() => $state.go('classroom.courses', {}, { reload: true }))
+        .then(() => $state.go('classroom.courses', $stateParams, { reload: true }))
         .then(() => toastr.success('Curso creado satisfactoriamente'))
         .catch((res) => toastr.error(res.data.message));
     }

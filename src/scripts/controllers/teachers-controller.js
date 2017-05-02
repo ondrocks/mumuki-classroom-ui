@@ -11,7 +11,7 @@ angular
 
     $scope.isHeadmaster = () => Permissions.isHeadmaster();
 
-    $scope.newTeacher = () => $state.go('classroom.courses.course.teachers.new', { course_slug });
+    $scope.newTeacher = () => $state.go('classroom.courses.course.teachers.new', $stateParams);
 
     $scope.sortCriteria = (teacher) => teacher.fullName();
 

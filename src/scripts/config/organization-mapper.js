@@ -21,8 +21,8 @@ angular
       const host = location.host();
       const port = location.port();
       const portString = port ? `:${port}` : '';
-      const homePath = _.isEmpty(tenant) ? 'home' : `${tenant}/home`;
-      return `${protocol}://${host}${portString}/#/${homePath}`;
+      const path = _.isEmpty(tenant) ? '' : `/${tenant}`;
+      return `${protocol}://${host}${portString}/#${path}/home`;
     }
 
     this.organizationMappers = {
