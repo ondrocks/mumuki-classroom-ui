@@ -81,12 +81,12 @@
                   markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
 
                 .tab-pane(ng-class='{ "active": getViewMode().showMessages }')
-                  .messages
-                    ol.chat
+                  .mu-messages
+                    ol.mu-chat
                       li(ng-click='viewMessages()')
                         a(href='') {{ 'more_messages' | translate }}
                       li(class='{{messageSenderClass(message)}}' ng-repeat='message in assignment.lastSubmission().messages')
-                        div.msg
+                        div.message
                           p(ng-bind-html='trust(message.content)')
                           .sender {{message.sender}}
                           time {{Humanizer.date(message.created_at)}}
