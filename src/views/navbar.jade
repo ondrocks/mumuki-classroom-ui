@@ -34,7 +34,7 @@
       a(ng-if='!isLoggedIn()' href='', ng-click='signin()') {{ 'log_in' | translate }}
 
       .dropdown
-        a.messages-box(ng-if='Notification.hasNotifications', data-toggle='dropdown')
+        a.messages-box(ng-if='Notification.hasNotifications()', data-toggle='dropdown' href='')
           span.badge.badge-messages {{ Notification.count() }}
         ul.dropdown-menu.dropdown-menu-right
           li(ng-repeat='notification in Notification.get()')

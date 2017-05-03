@@ -193,6 +193,11 @@ angular
         .then((res) => res.data);
     };
 
+    this.readNotification = (notificationId) => {
+      return $http
+        .put(`${API()}/notifications/${notificationId}/read`);
+    };
+
     this.getLoginUrl = () => Domain.loginURL();
     this.getLogoutUrl = () => Domain.logoutURL();
 

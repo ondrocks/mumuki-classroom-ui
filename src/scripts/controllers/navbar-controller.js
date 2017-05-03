@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('NavbarController', function ($scope, $state, hotkeys, notifications, Auth, Breadcrumb, Permissions, Notification) {
+  .controller('NavbarController', function ($scope, $state, hotkeys, notifications, Auth, Breadcrumb, Permissions, Notification, Api) {
 
     Notification.set(notifications);
     $scope.Notification = Notification;
@@ -16,14 +16,18 @@ angular
     $scope.goToAssignment = (notification) => {
       const [org, repo] = notification.assignment.guide.slug.split('/');
       const [__, course] = notification.assignment.course.split('/');
-      $state.go('classroom.courses.course.guides.guide.students', {
-        course: course,
-        org: org,
-        repo: repo,
-        student: notification.sender,
-        eid: notification.assignment.exercise.eid,
-        tab: 'messages'
-      });
+      Api.readNotification(notification.id)
+        .then(() => Notification.remove(notification.id))
+        .finally(() => {
+          $state.go('classroom.courses.course.guides.guide.students', {
+            course: course,
+            org: org,
+            repo: repo,
+            student: notification.sender,
+            eid: notification.assignment.exercise.eid,
+            tab: 'messages'
+          });
+        });
     };
 
     hotkeys
