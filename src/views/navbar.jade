@@ -38,7 +38,7 @@
           span.badge.badge-messages {{ Notification.count() }}
         ul.dropdown-menu.dropdown-menu-right
           li(ng-repeat='notification in Notification.get()')
-            a {{ notification.type }}
+            a(href='' ng-click='goToAssignment(notification)') {{ notification.type | lowercase | translate:notification }}
 
       .dropdown(ng-if='isLoggedIn()')
 

@@ -78,6 +78,7 @@ angular
     log_in: 'Iniciar sesión',
     log_in_first: 'Tenés que iniciar sesión primero',
     log_out: 'Cerrar sesión',
+    message: 'Mensaje de {{sender}}',
     messages: 'Mensajes',
     more_messages: 'Ver más',
     new_course: 'Nuevo curso',

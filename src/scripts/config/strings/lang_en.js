@@ -77,6 +77,7 @@ angular
     log_in: 'Log in',
     log_in_first: 'You must login first',
     log_out: 'Log out',
+    message: 'Message from {{sender}}',
     messages: 'Messages',
     more_messages: 'Load More',
     new_course: 'New course',
