@@ -143,7 +143,7 @@ angular
 
     this.getMessages = ({course, org, repo, student, eid}) => {
       return $http
-        .get(`${API}/courses/${course}/guides/${org}/${repo}/${student}/${eid}/messages`)
+        .get(`${API()}/courses/${course}/guides/${org}/${repo}/${student}/${eid}/messages`)
         .then((res) => res.data)
     }
 
@@ -189,11 +189,10 @@ angular
 
     this.getNotifications = () => {
       return $http
-        .get(`${API}/notifications`)
+        .get(`${API()}/notifications`)
         .then((res) => res.data);
     };
 
-    this.origin = () => `?origin=${encodeURIComponent(document.location.href)}`;
     this.getLoginUrl = () => Domain.loginURL();
     this.getLogoutUrl = () => Domain.logoutURL();
 
