@@ -5,12 +5,13 @@ angular
 
     Preferences($scope, 'options');
 
+
     const SPLIT = { type: 'side-by-side', name: 'split' };
     const UNIFIED = { type: 'line-by-line', name: 'unified' };
 
     const LAST_SOLUTION = { type: 'only-last', name: 'last_solution', showMarkdown: true };
     const MESSAGES = { type: 'messages', name: 'messages', showMessages: true };
-    const DIFF = { type: 'diff', name: 'diff', showDiff: true }
+    const DIFF = { type: 'diff', name: 'diff', showDiff: true };
 
     const isUnified = () => _.isEqual($scope.options.diffMode, UNIFIED);
 
@@ -69,6 +70,9 @@ angular
     };
 
     $scope.options = _.defaultsDeep($scope.options, { viewMode: LAST_SOLUTION, diffMode: UNIFIED });
+    if($stateParams.tab === 'messages') {
+      $scope.options.viewMode =  MESSAGES;
+    }
 
     DIFF.isUnified = isUnified();
 

@@ -20,6 +20,6 @@ angular
       session: '_mumuki_classroom_session'
     },
 
-    organizationMappingMode: 'path'
+    organizationMappingMode: 'subdomain'
 
   });

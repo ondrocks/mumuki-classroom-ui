@@ -14,12 +14,15 @@ angular
     $scope.Breadcrumb = Breadcrumb;
 
     $scope.goToAssignment = (notification) => {
+      const [org, repo] = notification.assignment.guide.slug.split('/');
+      const [__, course] = notification.assignment.course.split('/');
       $state.go('classroom.courses.course.guides.guide.students', {
-        course: notification.assignment.course,
-        org: notification.assignment.guide.slug.split('/')[0],
-        repo: notification.assignment.guide.slug.split('/')[1],
+        course: course,
+        org: org,
+        repo: repo,
         student: notification.sender,
-        eid: notification.assignment.exercise.eid
+        eid: notification.assignment.exercise.eid,
+        tab: 'messages'
       });
     };
 
