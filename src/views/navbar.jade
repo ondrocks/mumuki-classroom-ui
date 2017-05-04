@@ -33,11 +33,10 @@
     div.mu-navbar-avatar
       a(ng-if='!isLoggedIn()' href='', ng-click='signin()') {{ 'log_in' | translate }}
 
-      .dropdown(ng-if='Notification.hasMessages()')
-        span
-          a.notifications-box(ng-class='{ "notifications-box-empty": Notification.hasNotifications() }', data-toggle='dropdown' href='')
-            i.fa.fa-fw.fa-lg.fa-bell
-            span.badge.badge-notifications {{ Notification.count() }}
+      .dropdown
+        a.notifications-box(ng-class='{ "notifications-box-empty": !Notification.hasNotifications() }', data-toggle='dropdown' href='')
+          i.fa.fa-fw.fa-lg.fa-bell
+          span.badge.badge-notifications {{ Notification.count() }}
         ul.dropdown-menu.dropdown-menu-right
           li(ng-repeat='notification in Notification.get()')
             a(href='' ng-click='goToAssignment(notification)') {{ notification.type | lowercase | translate:notification }}
