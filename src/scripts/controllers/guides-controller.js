@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('GuidesController', function ($scope, $state, $stateParams, guides, Preferences, Breadcrumb) {
+  .controller('GuidesController', function ($scope, $state, $stateParams, guides, Preferences, Breadcrumb, Notification) {
     Preferences($scope, 'lastChapter');
     if (_.isNil($scope.lastChapter)) $scope.lastChapter = { name: ''};
     $scope.setLastChapterOpened = (chapter) => { $scope.lastChapter = { name: chapter }};
@@ -26,5 +26,15 @@ angular
       const [ org, repo ] = guide.slug.split('/');
       $state.go('classroom.courses.course.guides.guide', _.defaults({ org, repo }, $stateParams));
     }
+
+    $scope.hasNotifications = (item) => {
+      return Notification.hasNotificationsBy({
+        organization: item.organization,
+        course: item.course,
+        assignment: {
+          guide: { slug: item.slug }
+        }
+      })
+    };
 
   });
