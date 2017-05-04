@@ -41,6 +41,7 @@ gulp.task('release', (done) => {
 
 gulp.task('config', () => {
   return gulp.src(`${configFile()}`)
+    .pipe(replaceEnvVar('MUMUKI_LABORATORY_URL'))
     .pipe(replaceEnvVar('MUMUKI_COOKIES_DOMAIN'))
     .pipe(replaceEnvVar('MUMUKI_LABORATORY_URL'))
     .pipe(replaceEnvVar('MUMUKI_CLASSROOM_API_URL'))
