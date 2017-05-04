@@ -22,5 +22,7 @@ angular
 
     this.get = () => this.notifications;
 
+    this.hasNotificationsBy = (filter = {}) => _.some(this.notifications, filter);
+
 
   });

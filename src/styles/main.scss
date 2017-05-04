@@ -19,3 +19,13 @@
 @import 'new-student';
 @import 'cfp-hotkeys';
 @import 'markdown-preview';
+
+
+.mu-has-notification {
+  @extend .fa;
+  @extend .fa-fw;
+  @extend .fa-fw;
+  @extend .fa-commenting; // TODO: Find nice message logo
+  margin-top: 5px;
+  color: $mu-color-primary;
+}

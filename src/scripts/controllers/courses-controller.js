@@ -1,11 +1,13 @@
 
 angular
   .module('classroom')
-  .controller('CoursesController', function ($scope, $state, $stateParams, courses, Permissions) {
+  .controller('CoursesController', function ($scope, $state, $stateParams, courses, Permissions, Notification) {
 
     $scope.list = courses;
     $scope.noItemsToShow = 'no_courses_to_show';
     $scope.inputPlaceholder = 'filter_available_courses';
+
+    $scope.hasNotifications = (item) => Notification.hasNotificationsBy({course: item.slug});
 
     $scope.isJanitor = Permissions.isJanitor;
     $scope.isCourse = true;
