@@ -237,6 +237,7 @@ span.active-exercise {
 
   .exercise-detail-area-text {
     @include display-flex(column, flex-start, flex-start);
+    text-align: justify;
   }
   .exercise-detail-area-editor {
   }
