@@ -33,10 +33,10 @@
     div.mu-navbar-avatar
       a(ng-if='!isLoggedIn()' href='', ng-click='signin()') {{ 'log_in' | translate }}
 
-      .dropdown
+      .dropdown(ng-if='Notification.hasMessages()')
         span
-          i.fa.fa-fw.fa-lg.fa-bell
           a.notifications-box(ng-class='{ "notifications-box-empty": Notification.hasNotifications() }', data-toggle='dropdown' href='')
+            i.fa.fa-fw.fa-lg.fa-bell
             span.badge.badge-notifications {{ Notification.count() }}
         ul.dropdown-menu.dropdown-menu-right
           li(ng-repeat='notification in Notification.get()')
