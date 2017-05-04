@@ -34,8 +34,10 @@
       a(ng-if='!isLoggedIn()' href='', ng-click='signin()') {{ 'log_in' | translate }}
 
       .dropdown
-        a.messages-box(ng-if='Notification.hasNotifications()', data-toggle='dropdown' href='')
-          span.badge.badge-messages {{ Notification.count() }}
+        span
+          i.fa.fa-fw.fa-lg.fa-bell
+          a.notifications-box(ng-class='{ "notifications-box-empty": Notification.hasNotifications() }', data-toggle='dropdown' href='')
+            span.badge.badge-notifications {{ Notification.count() }}
         ul.dropdown-menu.dropdown-menu-right
           li(ng-repeat='notification in Notification.get()')
             a(href='' ng-click='goToAssignment(notification)') {{ notification.type | lowercase | translate:notification }}
