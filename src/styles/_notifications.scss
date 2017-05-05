@@ -40,3 +40,25 @@
     }
   }
 }
+
+.notification-dropdown {
+  padding: 0;
+  width: 320px;
+  .notification-item {
+    @include display-flex();
+    display: flex !important;
+    padding: 5px;
+    justify-content: flex-start;
+    .notification-image {
+      margin: 5px;
+      margin-right: 10px;
+    }
+    .notification-body {
+      @include display-flex(column);
+      font-size: 0.8em;
+    }
+    .notification-text {
+      white-space: pre-wrap;
+    }
+  }
+}

@@ -28,6 +28,7 @@ angular
     confirm: 'Confirm',
     copied: 'Copied',
     correct_permissions: 'Permissions granted correctly',
+    course: 'Course',
     courses: 'Courses',
     date_format: 'MM/dd/yyyy',
     day_friday: 'Friday',

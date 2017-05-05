@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('NavbarController', function ($scope, $state, hotkeys, notifications, Auth, Breadcrumb, Permissions, Notification, Api) {
+  .controller('NavbarController', function ($scope, $state, $sce, $filter, hotkeys, notifications, Auth, Breadcrumb, Permissions, Notification, Api) {
 
     Notification.set(notifications);
     $scope.Notification = Notification;
@@ -12,6 +12,7 @@ angular
     $scope.isTeacher = Permissions.isTeacher;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.Breadcrumb = Breadcrumb;
+    $scope.trust = (notification) => $sce.trustAsHtml($filter('translate')(notification.type.toLowerCase(), notification));
 
     $scope.goToAssignment = (notification) => {
       const [org, repo] = notification.assignment.guide.slug.split('/');

@@ -37,9 +37,9 @@
         a.notifications-box(ng-class='{ "notifications-box-empty": !Notification.hasNotifications() }', data-toggle='dropdown' href='')
           i.fa.fa-fw.fa-lg.fa-bell
           span.badge.badge-notifications {{ Notification.count() }}
-        ul.dropdown-menu.dropdown-menu-right
+        ul.dropdown-menu.dropdown-menu-right.notification-dropdown
           li(ng-repeat='notification in Notification.get()')
-            a(href='' ng-click='goToAssignment(notification)') {{ notification.type | lowercase | translate:notification }}
+            div(ng-include='"views/templates/notification.html"' include-replace)
 
       .dropdown(ng-if='isLoggedIn()')
 
