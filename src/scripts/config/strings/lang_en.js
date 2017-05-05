@@ -14,6 +14,7 @@ angular
     available_courses: 'Available Courses',
     bulk: 'Bulk',
     by_last_submission_date: 'By last submission date',
+    by_messages: 'By messages count',
     by_name: 'By name',
     by_progress: 'By progress',
     by_signup_date: 'By signup date',

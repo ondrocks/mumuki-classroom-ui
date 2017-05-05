@@ -26,19 +26,6 @@ angular
 
     $scope.Humanizer = Humanizer;
 
-    $scope.availableSortingCriterias = [
-      { type: 'name', properties: ['student.last_name', 'student.first_name']},
-      { type: 'progress', properties: ['stats.total', 'passedAverage()', 'student.last_name', 'student.first_name']},
-      { type: 'last_submission_date', properties: ['-lastSubmission().created_at', 'student.last_name', 'student.first_name']}
-    ];
-
-    setGuideProgress(data.guideProgress);
-
-    $scope.guide = guide;
-    $scope.withDetachedStudents = false;
-
-    $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
-
     const notifications = _.chain(Notification.get())
                            .filter({
                               organization: Domain.tenant(),
@@ -54,5 +41,18 @@ angular
       return _.get(notifications, guideProgress.student.uid, []);
     }
 
+    $scope.availableSortingCriterias = [
+      { type: 'messages', properties: [$scope.notifications, 'student.last_name', 'student.first_name']},
+      { type: 'name', properties: ['student.last_name', 'student.first_name']},
+      { type: 'progress', properties: ['stats.total', 'passedAverage()', 'student.last_name', 'student.first_name']},
+      { type: 'last_submission_date', properties: ['-lastSubmission().created_at', 'student.last_name', 'student.first_name']}
+    ];
+
+    setGuideProgress(data.guideProgress);
+
+    $scope.guide = guide;
+    $scope.withDetachedStudents = false;
+
+    $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
 
   });

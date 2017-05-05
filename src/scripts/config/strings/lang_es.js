@@ -14,6 +14,7 @@ angular
     available_courses: 'Cursos disponibles',
     bulk: 'Masivo',
     by_last_submission_date: 'Por fecha de ultima solución',
+    by_messages: 'Por cantidad de mensajes',
     by_name: 'Por nombre',
     by_progress: 'Por progreso',
     by_signup_date: 'Por fecha de registración',
