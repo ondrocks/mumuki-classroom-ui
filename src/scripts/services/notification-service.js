@@ -8,15 +8,9 @@ angular
       this.notifications = notifications;
     };
 
-    this.hasNotifications = () => {
-      return !_.isEmpty(this.notifications);
-    };
+    this.hasNotifications = () => !_.isEmpty(this.notifications);
 
-    this.remove = (id) => {
-      console.log(1, this.notifications);
-      _.remove(this.notifications, {id: id});
-      console.log(2, this.notifications);
-    };
+    this.remove = (id) => _.remove(this.notifications, {id: id});
 
     this.count = () => this.notifications.length;
 

@@ -1,0 +1,42 @@
+.mu-has-notification {
+  $border-style: solid #FFF;
+  i {
+    @extend .fa;
+    @extend .fa-fw;
+    @extend .fa-lg;
+    @extend .fa-comment; // TODO: Find nice message logo
+    margin-top: 5px;
+    color: $mu-color-primary;
+  }
+  span {
+    position: absolute;
+    width: inherit;
+    padding: 2px 4px;
+    background-color: $mu-color-complementary;
+    border: 1px $border-style;
+  }
+  &:not(.avatar) {
+    span {
+      right: 30px;
+      font-size: .55em;
+      text-align: right;
+      top: 10px;
+    }
+  }
+  &.avatar {
+    position: absolute;
+    top: 10px;
+    left: 60px;
+    width: 60px;
+    span {
+      position: relative;
+      text-align: left;
+      font-size: 0.75em;
+      width: auto;
+      left: -42px;
+      top: 10px;
+      padding: 3px 6px 4px 6px;
+      border: 2px $border-style;
+    }
+  }
+}

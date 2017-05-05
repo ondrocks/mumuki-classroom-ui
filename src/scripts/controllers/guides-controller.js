@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('GuidesController', function ($scope, $state, $stateParams, guides, Preferences, Breadcrumb, Notification) {
+  .controller('GuidesController', function ($scope, $state, $stateParams, guides, Preferences, Breadcrumb, Notification, Domain) {
     Preferences($scope, 'lastChapter');
     if (_.isNil($scope.lastChapter)) $scope.lastChapter = { name: ''};
     $scope.setLastChapterOpened = (chapter) => { $scope.lastChapter = { name: chapter }};
@@ -27,14 +27,13 @@ angular
       $state.go('classroom.courses.course.guides.guide', _.defaults({ org, repo }, $stateParams));
     }
 
-    $scope.hasNotifications = (item) => {
-      return Notification.hasNotificationsBy({
-        organization: item.organization,
-        course: item.course,
-        assignment: {
-          guide: { slug: item.slug }
-        }
-      })
-    };
+    const notifications = _.chain(Notification.get())
+                           .filter({organization: Domain.tenant(), course: `${Domain.tenant()}/${$stateParams.course}` })
+                           .groupBy('assignment.guide.slug')
+                           .value();
+
+    $scope.notifications = (guide) => {
+      return _.get(notifications, guide.slug, []);
+    }
 
   });

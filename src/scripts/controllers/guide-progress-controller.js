@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, data, Api, Guide, Breadcrumb, Humanizer, Notification) {
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, data, Api, Guide, Breadcrumb, Humanizer, Notification, Domain) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -39,16 +39,20 @@ angular
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
 
-    $scope.hasNotifications = (guideProgress) => {
-      return Notification.hasNotificationsBy({
-        organization: guideProgress.organization,
-        course: `${guideProgress.organization}/${$stateParams.course}`,
-        assignment: {
-          guide: { slug: guideProgress.guide.slug },
-          student: { uid: guideProgress.student.uid }
-        }
-      })
-    };
+    const notifications = _.chain(Notification.get())
+                           .filter({
+                              organization: Domain.tenant(),
+                              course: `${Domain.tenant()}/${$stateParams.course}`,
+                              assignment: {
+                                guide: {slug: guide.slug }
+                              }
+                           })
+                           .groupBy('assignment.student.uid')
+                           .value();
+
+    $scope.notifications = (guideProgress) => {
+      return _.get(notifications, guideProgress.student.uid, []);
+    }
 
 
   });
