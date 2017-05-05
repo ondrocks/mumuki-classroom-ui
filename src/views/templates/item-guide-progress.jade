@@ -4,6 +4,7 @@ div
     .student-card-profile(ng-class='{ "detached-student": item.student.detached }')
 
       .student-card-profile-image
+        i.pull-right.mu-has-notification.avatar.fa-lg(ng-if='hasNotifications(item)')
         img.img-circle.pointer(
           with-default='{{ item.student.image_url }}',
           ui-sref='classroom.courses.course.guides.guide.students({ \

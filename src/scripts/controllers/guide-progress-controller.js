@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, data, Api, Guide, Breadcrumb, Humanizer) {
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, data, Api, Guide, Breadcrumb, Humanizer, Notification) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -38,4 +38,17 @@ angular
     $scope.withDetachedStudents = false;
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
+
+    $scope.hasNotifications = (guideProgress) => {
+      return Notification.hasNotificationsBy({
+        organization: guideProgress.organization,
+        course: `${guideProgress.organization}/${$stateParams.course}`,
+        assignment: {
+          guide: { slug: guideProgress.guide.slug },
+          student: { uid: guideProgress.student.uid }
+        }
+      })
+    };
+
+
   });

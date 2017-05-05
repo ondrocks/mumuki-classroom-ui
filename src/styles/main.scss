@@ -24,8 +24,46 @@
 .mu-has-notification {
   @extend .fa;
   @extend .fa-fw;
-  @extend .fa-fw;
-  @extend .fa-commenting; // TODO: Find nice message logo
+  @extend .fa-lg;
+  @extend .fa-comment; // TODO: Find nice message logo
   margin-top: 5px;
   color: $mu-color-primary;
+  &.avatar {
+    position: absolute;
+    top: 10px;
+    left: 60px;
+  }
+}
+
+$statuses: (
+  errored: $mu-color-danger,
+  failed: $mu-color-danger,
+  passed: $mu-color-success,
+  passed_with_warnings: $mu-color-warning
+);
+
+.exercises-list {
+
+  @extend .fa;
+  @extend .fa-fw;
+  @extend .fa-fw;
+  @extend .fa-commenting;
+  margin-top: 5px;
+  color: $mu-color-complementary;
+
+
+  @each $status, $color in $statuses {
+    @keyframes has-comments-#{$status} {
+      from { background: $color }
+      to { background: $mu-color-complementary }
+    }
+    .has-comments {
+      &.#{$status} {
+        animation-name: has-comments-#{$status};
+        animation-duration: 2s;
+        animation-direction: alternate;
+        animation-iteration-count: infinite;
+      }
+    }
+  }
 }
