@@ -14,7 +14,7 @@
           a.dropdown-toggle(href='' ng-if='item.student' data-toggle='dropdown') {{ item.name() | translate }}
             span &nbsp;
             i.fa.fa-caret-down
-          ul.dropdown-menu
+          ul.dropdown-menu.dropdown-menu-right
             input.form-control.student-dropdown-search(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch', autofocus, autocomplete='off')
             script(type='text/javascript').
               $('.dropdown-menu input').on('click', function (e) {
@@ -38,8 +38,10 @@
           i.fa.fa-fw.fa-lg.fa-bell
           span.badge.badge-notifications {{ Notification.count() }}
         ul.dropdown-menu.dropdown-menu-right.notification-dropdown
-          li(ng-repeat='notification in Notification.get()')
+          li(ng-repeat='notification in Notification.get() | limitTo:5')
             div(ng-include='"views/templates/notification.html"' include-replace)
+          li
+            a(ui-sref='classroom.notifications', ng-if="Notification.get().length > 5") {{ 'more_notifications' | translate }}
 
       .dropdown(ng-if='isLoggedIn()')
 

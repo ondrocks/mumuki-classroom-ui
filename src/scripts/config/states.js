@@ -34,6 +34,16 @@ angular
           }
         }
       })
+      .state('classroom.notifications', {
+        url: '/notifications',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/notifications.html',
+            controller: 'NotificationsController'
+          }
+        }
+      })
       .state('classroom.students', {
         url: '/students/:course',
         authenticated: true,

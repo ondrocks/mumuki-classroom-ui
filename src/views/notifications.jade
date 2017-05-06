@@ -1,0 +1,16 @@
+.container
+  br
+  div.list-group.notifications-list
+    button.list-group-item(ng-repeat='notification in Notification.get()')
+      .notification-item(href='', ng-click='Notification.goToAssignment(notification)')
+        .notification-image
+          img.img-circle.profile.adjust-position(with-default='{{ notification.assignment.student.image_url }}')
+        .notification-body
+          .notification-text(ng-bind-html='"message" | translate:notification | trustHtml')
+          .notification-hour
+            small
+              i.fa.fa-fw.fa-comment-o
+              span {{ notification.created_at | humanizeDate }}
+    label(ng-if='Notification.get().length === 0')
+      | {{ 'no_notifications_to_show' | translate }}
+

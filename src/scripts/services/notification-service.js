@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Notification', function () {
+  .service('Notification', function ($state, Api) {
     this.notifications = [];
 
     this.set = (notifications) => {
@@ -18,5 +18,21 @@ angular
 
     this.hasNotificationsBy = (filter = {}) => _.some(this.notifications, filter);
 
+    this.goToAssignment = (notification) => {
+      const [org, repo] = notification.assignment.guide.slug.split('/');
+      const [__, course] = notification.assignment.course.split('/');
+      Api.readNotification(notification.id)
+        .then(() => this.remove(notification.id))
+        .finally(() => {
+          $state.go('classroom.courses.course.guides.guide.students', {
+            course: course,
+            org: org,
+            repo: repo,
+            student: notification.sender,
+            eid: notification.assignment.exercise.eid,
+            tab: 'messages'
+          });
+        });
+    };
 
   });

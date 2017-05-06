@@ -14,22 +14,7 @@ angular
     $scope.Breadcrumb = Breadcrumb;
     $scope.trust = (notification) => $sce.trustAsHtml($filter('translate')(notification.type.toLowerCase(), notification));
 
-    $scope.goToAssignment = (notification) => {
-      const [org, repo] = notification.assignment.guide.slug.split('/');
-      const [__, course] = notification.assignment.course.split('/');
-      Api.readNotification(notification.id)
-        .then(() => Notification.remove(notification.id))
-        .finally(() => {
-          $state.go('classroom.courses.course.guides.guide.students', {
-            course: course,
-            org: org,
-            repo: repo,
-            student: notification.sender,
-            eid: notification.assignment.exercise.eid,
-            tab: 'messages'
-          });
-        });
-    };
+    $scope.goToAssignment = Notification.goToAssignment;
 
     hotkeys
       .bindTo($scope)

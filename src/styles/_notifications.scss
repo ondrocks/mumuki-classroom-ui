@@ -62,3 +62,32 @@
     }
   }
 }
+
+.notifications-list {
+  padding: 0;
+  .list-group-item {
+    padding: 0px;
+    .notification-item {
+      @include display-flex(row, flex-start, center);
+      display: flex !important;
+      padding: 5px;
+      justify-content: flex-start;
+      .notification-image {
+        img {
+          width: 60px;
+          margin: 10px;
+          margin-right: 15px;
+        }
+      }
+      .notification-body {
+        @include display-flex(column, center, flex-start);
+        font-size: 1em;
+      }
+      .notification-text {
+        text-align: justify;
+        white-space: initial;
+        padding: 0 10px 0 0;
+      }
+    }
+  }
+}
