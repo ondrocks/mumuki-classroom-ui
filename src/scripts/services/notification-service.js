@@ -24,7 +24,6 @@ angular
       const [org, repo] = notification.assignment.guide.slug.split('/');
       const [__, course] = notification.assignment.course.split('/');
       this.read(notification)
-        .then(() => this.remove(notification.id))
         .finally(() => {
           $state.go('classroom.courses.course.guides.guide.students', {
             course: course,
@@ -44,12 +43,14 @@ angular
 
     this.read = (notification) => {
       return Api.readNotification(notification.id)
-                .then(() => notification.read = true);
+                .then(() => notification.read = true)
+                .then(() => this.remove(notification.id));
     }
 
     this.unread = (notification) => {
       return Api.unreadNotification(notification.id)
-                .then(() => notification.read = false);
+                .then(() => notification.read = false)
+                .then(() => this.notifications.push(notification));
     }
 
   });
