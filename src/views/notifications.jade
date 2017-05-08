@@ -1,7 +1,15 @@
 .container
   br
   div.list-group.notifications-list.text-center
-    button.list-group-item(ng-repeat='notification in notifications.notifications')
+    button.list-group-item(ng-repeat='notification in notifications.notifications', ng-class='{ "unread": !notification.read }')
+      i.notification-mark-as-read(
+        ng-if='!notification.read',
+        ng-click='Notification.read(notification)',
+        title='{{ "mark_as_read" | translate }}')
+      i.notification-mark-as-unread(
+        ng-if='notification.read',
+        ng-click='Notification.unread(notification)',
+        title='{{ "mark_as_unread" | translate }}')
       .notification-item(href='', ng-click='Notification.goToAssignment(notification)')
         .notification-image
           img.img-circle.profile.adjust-position(with-default='{{ notification.assignment.student.image_url }}')

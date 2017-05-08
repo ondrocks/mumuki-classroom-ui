@@ -27,7 +27,7 @@ angular
     $scope.pad = (page) => _.padStart(page.toString(), 2, '0');
     $scope.pages = () => _.range(1, $scope.totalPages() + 1);
 
-    $scope.prevPage = () => Math.max($scope.actualPage() - 1, 1);
+    $scope.prevPage = () => Math.min(Math.max($scope.actualPage() - 1, 1), $scope.totalPages());
     $scope.nextPage = () => Math.min($scope.actualPage() + 1, $scope.totalPages());
 
   });

@@ -67,6 +67,24 @@
   padding: 0;
   .list-group-item {
     padding: 0px;
+    &:hover {
+      .notification-mark-as-read {
+        @extend .fa;
+        @extend .fa-fw;
+        @extend .fa-envelope-open-o;
+        position: absolute;
+        right: 10px;
+        bottom: 20px;
+      }
+      .notification-mark-as-unread {
+        @extend .fa;
+        @extend .fa-fw;
+        @extend .fa-envelope-o;
+        position: absolute;
+        right: 10px;
+        bottom: 20px;
+      }
+    }
     .notification-item {
       @include display-flex(row, flex-start, center);
       display: flex !important;
@@ -89,5 +107,8 @@
         padding: 0 10px 0 0;
       }
     }
+  }
+  .unread {
+    background-color: lighten($mu-color-info-light, 7.5%);
   }
 }

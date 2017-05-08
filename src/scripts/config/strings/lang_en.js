@@ -80,6 +80,8 @@ angular
     log_in: 'Log in',
     log_in_first: 'You must login first',
     log_out: 'Log out',
+    mark_as_read: 'Mark as read',
+    mark_as_unread: 'Mark as unread',
     message: 'Message from {{sender}}',
     messages: 'Messages',
     more_messages: 'Load More',

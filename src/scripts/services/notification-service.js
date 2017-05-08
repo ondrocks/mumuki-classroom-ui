@@ -4,7 +4,7 @@ angular
   .service('Notification', function ($state, Api) {
     this.notifications = [];
 
-    this.perPage = 5;
+    this.perPage = 15;
 
     this.set = (notifications) => {
       this.notifications = notifications;
@@ -23,7 +23,7 @@ angular
     this.goToAssignment = (notification) => {
       const [org, repo] = notification.assignment.guide.slug.split('/');
       const [__, course] = notification.assignment.course.split('/');
-      Api.readNotification(notification.id)
+      this.read(notification)
         .then(() => this.remove(notification.id))
         .finally(() => {
           $state.go('classroom.courses.course.guides.guide.students', {
@@ -41,5 +41,15 @@ angular
       if (page <= 0) page = 1;
       return Api.getNotificationsPage(page, this.perPage)
     };
+
+    this.read = (notification) => {
+      return Api.readNotification(notification.id)
+                .then(() => notification.read = true);
+    }
+
+    this.unread = (notification) => {
+      return Api.unreadNotification(notification.id)
+                .then(() => notification.read = false);
+    }
 
   });
