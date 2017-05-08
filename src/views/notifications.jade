@@ -1,6 +1,6 @@
 .container
   br
-  div.list-group.notifications-list
+  div.list-group.notifications-list.text-center
     button.list-group-item(ng-repeat='notification in notifications.notifications')
       .notification-item(href='', ng-click='Notification.goToAssignment(notification)')
         .notification-image
@@ -14,21 +14,23 @@
     label(ng-if='Notification.count() === 0')
       | {{ 'no_notifications_to_show' | translate }}
 
-  ul.pagination
-    li
-      a(ui-sref='classroom.notifications({page: 1})')
-        span(aria-hidden='true') «
-    li
-      a(ui-sref='classroom.notifications({page: prevPage()})')
-        span(aria-hidden='true') &lt;
+    br
 
-    li(ng-repeat='page in pages() | limitTo:5:offset()', ng-class='{ active: notifications.page === page }')
-      a(ui-sref='classroom.notifications({page: page})')
-        span {{ pad(page) }}
+    ul.pagination
+      li
+        a(ui-sref='classroom.notifications({page: 1})')
+          span(aria-hidden='true') «
+      li
+        a(ui-sref='classroom.notifications({page: prevPage()})')
+          span(aria-hidden='true') &lt;
 
-    li
-      a(ui-sref='classroom.notifications({page: nextPage()})')
-        span(aria-hidden='true') &gt;
-    li
-      a(ui-sref='classroom.notifications({page: totalPages()})')
-        span(aria-hidden='true') »
+      li(ng-repeat='page in pages() | limitTo:5:offset()', ng-class='{ active: notifications.page === page }')
+        a(ui-sref='classroom.notifications({page: page})')
+          span {{ pad(page) }}
+
+      li
+        a(ui-sref='classroom.notifications({page: nextPage()})')
+          span(aria-hidden='true') &gt;
+      li
+        a(ui-sref='classroom.notifications({page: totalPages()})')
+          span(aria-hidden='true') »
