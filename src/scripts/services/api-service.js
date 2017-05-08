@@ -190,7 +190,8 @@ angular
     this.getNotifications = () => {
       return $http
         .get(`${API()}/notifications`)
-        .then((res) => res.data);
+        .then((res) => res.data)
+        .catch(() => []);
     };
 
     this.readNotification = (notificationId) => {
