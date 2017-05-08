@@ -194,6 +194,13 @@ angular
         .catch(() => []);
     };
 
+    this.getNotificationsPage = (page, perPage) => {
+      return $http
+        .get(`${API()}/notifications/all?page=${page}&per_page=${perPage}`)
+        .then((res) => res.data)
+        .catch(() => ({total: 0, page: 1, notifications: []}));
+    }
+
     this.readNotification = (notificationId) => {
       return $http
         .put(`${API()}/notifications/${notificationId}/read`);

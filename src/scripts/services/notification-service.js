@@ -4,6 +4,8 @@ angular
   .service('Notification', function ($state, Api) {
     this.notifications = [];
 
+    this.perPage = 5;
+
     this.set = (notifications) => {
       this.notifications = notifications;
     };
@@ -33,6 +35,11 @@ angular
             tab: 'messages'
           });
         });
+    };
+
+    this.getPage = (page = 0) => {
+      if (page <= 0) page = 1;
+      return Api.getNotificationsPage(page, this.perPage)
     };
 
   });

@@ -35,12 +35,17 @@ angular
         }
       })
       .state('classroom.notifications', {
-        url: '/notifications',
+        url: '/notifications?page',
         authenticated: true,
         views: {
           'content@classroom': {
             templateUrl: 'views/notifications.html',
-            controller: 'NotificationsController'
+            controller: 'NotificationsController',
+            resolve: {
+              notifications: ($stateParams, Notification) => {
+                return Notification.getPage($stateParams.page || 0);
+              }
+            }
           }
         }
       })

@@ -40,8 +40,8 @@
         ul.dropdown-menu.dropdown-menu-right.notification-dropdown
           li(ng-repeat='notification in Notification.get() | limitTo:5')
             div(ng-include='"views/templates/notification.html"' include-replace)
-          li
-            a(ui-sref='classroom.notifications', ng-if="Notification.get().length > 5") {{ 'more_notifications' | translate }}
+          li.text-center
+            a(ui-sref='classroom.notifications', ng-if="Notification.count() > 5") {{ 'more_notifications' | translate }}
 
       .dropdown(ng-if='isLoggedIn()')
 

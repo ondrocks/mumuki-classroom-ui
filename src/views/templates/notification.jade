@@ -1,5 +1,5 @@
 a.notification-item(href='', ng-click='goToAssignment(notification)')
   .notification-image
-    img.profile.adjust-position(with-default='{{ notification.assignment.student.image_url }}', width='35px')
+    img.img-circle.profile.adjust-position(with-default='{{ notification.assignment.student.image_url }}', width='40px')
   .notification-body
     .notification-text(ng-bind-html='trust(notification)')
