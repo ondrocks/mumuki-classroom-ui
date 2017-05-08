@@ -189,14 +189,14 @@ angular
 
     this.getNotifications = () => {
       return $http
-        .get(`${API()}/notifications`)
+        .get(`${API()}/notifications/unread`)
         .then((res) => res.data)
         .catch(() => []);
     };
 
     this.getNotificationsPage = (page, perPage) => {
       return $http
-        .get(`${API()}/notifications/all?page=${page}&per_page=${perPage}`)
+        .get(`${API()}/notifications?page=${page}&per_page=${perPage}`)
         .then((res) => res.data)
         .catch(() => ({total: 0, page: 1, notifications: []}));
     }
