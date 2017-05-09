@@ -1,38 +1,38 @@
 angular
   .module('classroom')
-  .directive('paginator', function ($state, $stateParams) {
+  .directive('paginator', function () {
 
     return {
 
       restrict: 'E',
       template: `
-        <ul class='pagination'>
+        <ul class='pagination {{pgClass}}'>
           <li>
-            <a href='' ng-click='goToPage(1)'>
+            <a href='' ng-click='pgClick(1)'>
               <span aria-hidden='true'> « </span>
             </a>
           </li>
 
           <li>
-            <a href='' ng-click='goToPage(prevPage())'>
+            <a href='' ng-click='pgClick(prevPage())'>
               <span aria-hidden='true'> &lt; </span>
             </a>
           </li>
 
           <li ng-repeat='page in pages() | limitTo:limit():begin()' ng-class='{ "active": pgActualPage === page }'>
-            <a href='' ng-click='goToPage(page)'>
+            <a href='' ng-click='pgClick(page)'>
               <span> {{ pad(page) }} </span>
             </a>
           </li>
 
           <li>
-            <a href='' ng-click='goToPage(nextPage())'>
+            <a href='' ng-click='pgClick(nextPage())'>
               <span aria-hidden='true'> &gt; </span>
             </a>
           </li>
 
           <li>
-            <a href='' ng-click='goToPage(totalPages())'>
+            <a href='' ng-click='pgClick(totalPages())'>
               <span aria-hidden='true'> » </span>
             </a>
           </li>
@@ -43,7 +43,8 @@ angular
         pgTotalItems: '=',
         pgActualPage: '=',
         pgOffset: '=',
-        pgState: '@'
+        pgClick: '=',
+        pgClass: '@'
       },
       controller: ($scope) => {
 
@@ -72,8 +73,6 @@ angular
 
         $scope.prevPage = () => Math.max($scope.actualPage() - 1, 1);
         $scope.nextPage = () => Math.min($scope.actualPage() + 1, $scope.totalPages());
-
-        $scope.goToPage = (page) => $state.go($scope.pgState, { page });
 
       }
 

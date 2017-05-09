@@ -93,12 +93,13 @@ angular
 
       $scope.trust = (html) => $sce.trustAsHtml(html);
       $scope.selectDiff = (diff) => assignment.diffs.selected = diff;
-      $scope.isSelectedDiff = (diff) => assignment.diffs.isSelected(diff);
       $scope.assignmentSelected = (assignment) => assignment.exercise.eid === $scope.assignment.exercise.eid;
 
       $scope.time = (message) => moment(message.created_at).fromNow();
       $scope.isLastSolutionActivated = () => _.isEqual($scope.options.viewMode, LAST_SOLUTION);
       $scope.getViewMode = () => $scope.options.viewMode;
+
+      $scope.selectDiffByPage = (pageNumber) => $scope.selectDiff($scope.assignment.diffs.get(pageNumber - 1))
 
       $scope.diff = () => {
         $scope.options.viewMode = DIFF;

@@ -28,6 +28,10 @@ angular
         return this._diffs.length;
       }
 
+      get(index) {
+        return this._diffs[index];
+      }
+
       indexOf(diff) {
         return _.findIndex(this._diffs, ['id', _.get(diff, 'id')]);
       }
@@ -44,48 +48,12 @@ angular
         return _.get(diff, 'id') === _.get(this.selected, 'id');
       }
 
-      selectPrev() {
-        this.selected = this.prev();
-      }
-
-      selectNext() {
-        this.selected = this.next();
-      }
-
       selectLast() {
         this.selected = this.last();
       }
 
-      selectFirst() {
-        this.selected = this.first();
-      }
-
-      prev() {
-        return this._diffs[Math.max(this.selectedIndex() - 1, this._MIN)];
-      }
-
-      next() {
-        return this._diffs[Math.min(this.selectedIndex() + 1, this._MAX)];
-      }
-
       last() {
         return this._diffs[this._MAX];
-      }
-
-      first() {
-        return this._diffs[this._MIN];
-      }
-
-      pageStartNumber() {
-        const number = _.floor(this.selectedIndex() / this.pages) * this.pages;
-        const diffLengthBiggerThanLimit = this.length >= this.pages;
-        const numberBiggerThanDiffLength = number + this.pages >= this.length;
-
-        return diffLengthBiggerThanLimit && numberBiggerThanDiffLength ? (this.length - this.pages) : number;
-      };
-
-      pageNumber(index) {
-        return _.padStart(this.pageStartNumber() + index + 1, 2, '0');
       }
 
       static from(submissions) {

@@ -58,24 +58,12 @@
                         switch-off-text="{{ 'split' | translate }}",
                         switch-size='mini')
 
-                  ul.pagination.pagination-sm(ng-if='!assignment.diffs.isEmpty()')
-
-                    li
-                      a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectFirst()')
-                        span(aria-hidden='true') &laquo;
-                    li
-                      a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectPrev()')
-                        span(aria-hidden='true') &lt;
-
-                    li(ng-repeat='diff in assignment.diffs._diffs | limitTo:assignment.diffs.pages:assignment.diffs.pageStartNumber()', ng-class='{ active: isSelectedDiff(diff) }')
-                      a(href='', ng-click='selectDiff(diff)') {{ assignment.diffs.pageNumber($index) }}
-
-                    li
-                      a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectNext()')
-                        span(aria-hidden='true') &gt;
-                    li
-                      a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectLast()')
-                        span(aria-hidden='true') &raquo;
+                  paginator(
+                    pg-items-per-page='1',
+                    pg-total-items='assignment.diffs.length',
+                    pg-actual-page='assignment.diffs.selectedIndex() + 1',
+                    pg-offset='1',
+                    pg-click='selectDiffByPage')
 
                 .tab-pane(ng-class='{ "active": getViewMode().showMarkdown }')
                   markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
