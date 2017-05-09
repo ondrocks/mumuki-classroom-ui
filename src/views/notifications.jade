@@ -24,21 +24,9 @@
 
     br
 
-    ul.pagination
-      li
-        a(ui-sref='classroom.notifications({page: 1})')
-          span(aria-hidden='true') «
-      li
-        a(ui-sref='classroom.notifications({page: prevPage()})')
-          span(aria-hidden='true') &lt;
-
-      li(ng-repeat='page in pages() | limitTo:limit():begin()', ng-class='{ active: notifications.page === page }')
-        a(ui-sref='classroom.notifications({page: page})')
-          span {{ pad(page) }}
-
-      li
-        a(ui-sref='classroom.notifications({page: nextPage()})')
-          span(aria-hidden='true') &gt;
-      li
-        a(ui-sref='classroom.notifications({page: totalPages()})')
-          span(aria-hidden='true') »
+    paginator(
+        pg-items-per-page='{{ Notification.perPage }}',
+        pg-total-items='notifications.total',
+        pg-actual-page='notifications.page',
+        pg-offset='2',
+        pg-state='classroom.notifications')
