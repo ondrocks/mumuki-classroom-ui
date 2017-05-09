@@ -19,7 +19,7 @@
             small
               i.fa.fa-fw.fa-comment-o
               span {{ notification.created_at | humanizeDate }}
-    label(ng-if='Notification.count() === 0')
+    label(ng-if='notifications.notifications.length === 0')
       | {{ 'no_notifications_to_show' | translate }}
 
     br
@@ -32,7 +32,7 @@
         a(ui-sref='classroom.notifications({page: prevPage()})')
           span(aria-hidden='true') &lt;
 
-      li(ng-repeat='page in pages() | limitTo:5:offset()', ng-class='{ active: notifications.page === page }')
+      li(ng-repeat='page in pages() | limitTo:limit():begin()', ng-class='{ active: notifications.page === page }')
         a(ui-sref='classroom.notifications({page: page})')
           span {{ pad(page) }}
 
