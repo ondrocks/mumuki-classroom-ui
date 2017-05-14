@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .service('Notification', function ($state, Api) {
+  .service('Notification', function ($state, $stateParams, Domain, Api) {
     this.notifications = [];
 
     this.perPage = 15;
@@ -23,17 +23,14 @@ angular
     this.goToAssignment = (notification) => {
       const [org, repo] = notification.assignment.guide.slug.split('/');
       const [__, course] = notification.assignment.course.split('/');
-      this.read(notification)
-        .finally(() => {
-          $state.go('classroom.courses.course.guides.guide.students', {
-            course: course,
-            org: org,
-            repo: repo,
-            student: notification.sender,
-            eid: notification.assignment.exercise.eid,
-            tab: 'messages'
-          });
-        });
+      $state.go('classroom.courses.course.guides.guide.students', {
+        course: course,
+        org: org,
+        repo: repo,
+        student: notification.sender,
+        eid: notification.assignment.exercise.eid,
+        tab: 'messages'
+      });
     };
 
     this.getPage = (page = 0) => {
@@ -51,6 +48,18 @@ angular
       return Api.unreadNotification(notification.id)
                 .then(() => notification.read = false)
                 .then(() => this.notifications.push(notification));
+    }
+
+    this.readAssignment = (assignment) => {
+      const filter = {
+        assignment: {
+          course: `${Domain.tenant()}/${$stateParams.course}`,
+          guide: { slug: assignment.guide.slug },
+          exercise: {eid: assignment.exercise.eid },
+          student: {uid: assignment.student.uid }
+        }
+      }
+      _(this.notifications).filter(filter).forEach(this.read);
     }
 
   });

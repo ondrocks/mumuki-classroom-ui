@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $filter, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student, Modal, Scroll) {
+  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $filter, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student, Modal, Scroll, Notification) {
 
     Preferences($scope, 'options');
 
@@ -157,6 +157,7 @@ angular
           assignment.lastSubmission().messages.push(message);
           $scope.allMessages = false;
           scrollChatToBottom();
+          Notification.readAssignment(assignment);
         });
       };
 
