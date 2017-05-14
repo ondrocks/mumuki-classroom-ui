@@ -51,7 +51,7 @@ angular
       return _.findIndex($scope.assignments, (p) => p.exercise.eid === currentExercise.eid);
     };
     const scrollChatToBottom = () => {
-      Scroll.bottom('.chat');
+      Scroll.bottom('.mu-chat');
     };
 
     $scope.lastSolutionMarkdown = {};
@@ -81,6 +81,8 @@ angular
     });
 
     $scope.selectAssignment = (assignment) => {
+
+      $scope.allMessages = false;
 
       currentExercise = assignment.exercise;
 
@@ -153,14 +155,20 @@ angular
       $scope.newMessage = () => {
         Modal.newMessage(getMessageToPost(assignment.lastSubmission()), Breadcrumb.getStudent(), course, getLastSubmissionMarkdown(), (message) => {
           assignment.lastSubmission().messages.push(message);
+          $scope.allMessages = false;
           scrollChatToBottom();
         });
       };
 
       $scope.viewMessages = () => {
+        $scope.spin = true;
         Api
           .getMessages(_.merge($stateParams, {eid: Breadcrumb.getExerciseId()}))
-          .then((html) => Modal.viewMessages(html, () => $scope.newMessage()));
+          .then((html) => Scroll.holdContent('.mu-chat', () => {
+            $scope.html = html;
+            $scope.spin = false;
+            $scope.allMessages = true;
+          }));
       };
 
       if (!$scope.lastSolutionMarkdown[currentExercise.eid]) {

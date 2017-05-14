@@ -69,18 +69,20 @@
                   markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
 
                 .tab-pane(ng-class='{ "active": getViewMode().showMessages }')
-                  .mu-messages
+                  span.mu-view-messages(ng-bind-html='(html | trustHtml)', ng-if='allMessages')
+                  .mu-messages(ng-if='!allMessages')
                     ol.mu-chat
                       li(ng-click='viewMessages()')
-                        a(href='') {{ 'more_messages' | translate }}
+                        a(href='', ng-if='!spin') {{ 'more_messages' | translate }}
+                        i.fa.fa-fw.fa-spinner.fa-spin(ng-if='spin', style='margin: 6px auto')
                       li(class='{{messageSenderClass(message)}}' ng-repeat='message in assignment.lastSubmission().messages')
                         div.message
                           p(ng-bind-html='trust(message.content)')
                           .sender {{message.sender}}
                           time {{Humanizer.date(message.created_at)}}
-                    btn.btn.btn-success.btn-block(ng-click='newMessage()')
-                      i.fa.fa-paper-plane &nbsp;
-                      span {{'new_message' | translate}}
+                  btn.btn.btn-success.btn-block(ng-click='newMessage()')
+                    i.fa.fa-paper-plane &nbsp;
+                    span {{'new_message' | translate}}
 
 
       .row

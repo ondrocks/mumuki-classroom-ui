@@ -13,6 +13,6 @@ angular
       $uibModalInstance.close();
     }
 
-    Scroll.bottom('.view-messages .chat');
+    Scroll.bottom('.mu-view-messages .chat');
 
   });
