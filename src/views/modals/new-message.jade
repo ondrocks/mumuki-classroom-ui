@@ -1,25 +1,19 @@
 .modal-content
-  .modal-header
-    p.modal-title.text-center.title-font {{ 'new_message' | translate }}
-
-  .modal-body
+  .mu-modal-header
+    div
+      i.fa.fa-fw.fa-envelope-open-o.mu-modal-close-button
+    div
+      small
+        i.fa.fa-fw.fa-minus.pointer(ng-click='expanded ? expand() : collapse()', style='color: white')
+      span &nbsp;
+      button.mu-modal-close-button(type='button', ng-click='cancel()', data-dismiss='modal', aria-label='Close')
+        i.fa.fa-fw.fa-times(aria-hidden='true')
+  .modal-body.mu-view-messages
     .container-fluid
-
-      #new-message-modal.row
-        .col-md-12
-          span(ng-bind-html='currentCode')
-
       .row
-        .col-md-12
-
-          ace-with-markdown(content='message.message.content', header='new_message')
-
+        ace-with-markdown(content='message.message.content', header='new_message')
   .modal-footer
-    .row
-      .col-md-12.pull-right
-        button.btn.btn-default(type='button', ng-click='cancel()', data-dismiss='modal')
-          span {{ 'cancel' | translate }}
-        button.btn.btn-success(type='button', spin-on-click='send()')
-          i.fa.fa-send
-          span &nbsp;
-          span {{ 'send' | translate }}
+    button.btn.btn-success.btn-block
+      i.fa.fa-send
+      span &nbsp;
+      span {{ 'send' | translate }}

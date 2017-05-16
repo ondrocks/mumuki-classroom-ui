@@ -54,15 +54,18 @@ angular
       }
     });
 
-    this.newMessage = (message, student, course, currentCode, callback) => $uibModal.open({
+    this.newMessage = (message, student, course, callback) => $uibModal.open({
       templateUrl: 'views/modals/new-message.html',
       controller: 'NewMessageController',
+      windowClass: 'new-message-modal mu-new-message-modal',
+      openedClass: 'mu-modal-open',
+      backdrop: false,
+      keyboard: false,
       resolve: {
         course: () => course,
         student: () => student,
         message: () => message,
-        callback: () => callback,
-        currentCode: () => Api.renderMarkdown(currentCode)
+        callback: () => callback
       }
     });
 

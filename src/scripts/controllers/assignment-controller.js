@@ -153,7 +153,7 @@ angular
       }
 
       $scope.newMessage = () => {
-        Modal.newMessage(getMessageToPost(assignment.lastSubmission()), Breadcrumb.getStudent(), course, getLastSubmissionMarkdown(), (message) => {
+        Modal.newMessage(getMessageToPost(assignment.lastSubmission()), Breadcrumb.getStudent(), course, (message) => {
           assignment.lastSubmission().messages.push(message);
           $scope.allMessages = false;
           scrollChatToBottom();

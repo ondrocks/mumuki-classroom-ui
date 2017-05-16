@@ -22,7 +22,6 @@ angular
       }
 
       static from(guide = {}) {
-        guide.exercises = _.filter(guide.exercises || [], (ex) => ex.type !== 'playground');
         return new Guide(guide);
       }
 
