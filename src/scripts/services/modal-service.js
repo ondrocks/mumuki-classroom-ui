@@ -1,6 +1,6 @@
 angular
   .module('classroom')
-  .service('Modal', function ($uibModal, $translate, Api) {
+  .service('Modal', function ($uibModal, $uibModalStack, $translate, Api) {
 
     this.exportCourseDataToJson = (course, onYesPromise) => {
       return this.confirmDialog(
@@ -77,5 +77,7 @@ angular
         callback: () => callback
       }
     });
+
+    this.close = () => $uibModalStack.dismissAll();
 
   });

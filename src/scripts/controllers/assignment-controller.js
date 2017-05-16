@@ -82,6 +82,8 @@ angular
 
     $scope.selectAssignment = (assignment) => {
 
+      Modal.close();
+
       $scope.allMessages = false;
 
       currentExercise = assignment.exercise;
