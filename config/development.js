@@ -4,7 +4,7 @@ angular
   .constant('CONFIG', {
 
     classroom: {
-      url: 'http://classroom.localmumuki.io:4000'
+      url: 'http://classroom.localmumuki.io:3002'
     },
 
     laboratory: {
@@ -12,7 +12,7 @@ angular
     },
 
     bibliotheca: {
-      url: 'http://bibliotheca-api.localmumuki.io:9292'
+      url: 'http://bibliotheca-api.localmumuki.io:3004'
     },
 
     cookie: {
