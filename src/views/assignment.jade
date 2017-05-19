@@ -18,6 +18,8 @@
           class='{{assignmentStatus(assignment)}}'
           title='{{ assignment.exercise.getName() }}',
           ng-click='selectAssignment(assignment)')
+          span.badge.badge-notifications(ng-if='notifications(assignment).length')
+            | {{ notifications(assignment).length }}
 
       .exercise-detail-area(class='{{ assignment.exercise.layout }}')
         .exercise-detail-area-text

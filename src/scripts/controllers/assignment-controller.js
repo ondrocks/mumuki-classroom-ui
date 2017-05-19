@@ -19,6 +19,22 @@ angular
     const viewModeIsMessages = () => $scope.getViewMode().showMessages;
     const viewModeIsLastSolution = () => $scope.getViewMode().showMarkdown;
 
+    const notifications = _.chain(Notification.get())
+                           .filter({
+                              organization: Domain.tenant(),
+                              course: `${Domain.tenant()}/${$stateParams.course}`,
+                              assignment: {
+                                guide: {slug: guide.slug },
+                                student: {uid: $stateParams.student }
+                              }
+                           })
+                           .groupBy('assignment.exercise.eid')
+                           .value();
+
+    $scope.notifications = (assignment) => {
+      return _.get(notifications, assignment.exercise.eid, []);
+    }
+
     const toAssignment = (exercise, index) => {
       const currentAssignment = _.find(assignments, (assignment) => assignment.exercise.eid === exercise.id);
       exercise = _.merge(exercise, {
@@ -185,6 +201,7 @@ angular
     };
 
     $scope.selectAssignment(assignment);
+    $scope.$on('$destroy', () => Modal.close());
 
     hotkeys
       .bindTo($scope)

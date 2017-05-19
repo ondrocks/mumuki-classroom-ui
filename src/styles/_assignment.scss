@@ -347,3 +347,24 @@ span.active-exercise {
 .mu-chat {
   height: 253px !important;
 }
+
+.exercises-list {
+  margin-top: 5px;
+  a {
+    @include display-flex(row, center, center)
+    &:after {
+      position: absolute;
+      margin-top: 13px;
+    }
+    span {
+      @include display-flex(row, center, center)
+      position: relative;
+      padding: 1px 6px 2px 6px;
+      top: -10px;
+      width: auto;
+      background-color: $mu-color-complementary;
+      border: 2px solid white;
+      left: 0;
+    }
+  }
+}
