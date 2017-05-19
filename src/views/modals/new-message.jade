@@ -13,7 +13,7 @@
       .row
         ace-with-markdown(content='message.message.content', header='new_message')
   .modal-footer
-    button.btn.btn-success.btn-block
+    button.btn.btn-success.btn-block(ng-click='send()')
       i.fa.fa-send
       span &nbsp;
       span {{ 'send' | translate }}
