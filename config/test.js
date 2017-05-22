@@ -4,19 +4,19 @@ angular
   .constant('CONFIG', {
 
     classroom: {
-      url: 'http://classroom.localmumuki.io:4000'
+      url: 'http://localhost:3002'
     },
 
     laboratory: {
-      url: 'http://localmumuki.io:3000'
+      url: 'http://localhost:3000'
     },
 
     bibliotheca: {
-      url: 'http://bibliotheca-api.localmumuki.io:9292'
+      url: 'http://localhost:3004'
     },
 
     cookie: {
-      domain: '.localmumuki.io',
+      domain: 'localhost',
       session: '_mumuki_classroom_session'
     },
 

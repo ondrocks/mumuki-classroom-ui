@@ -1,0 +1,17 @@
+#!/bin/bash
+set -e
+
+echo ''
+echo '_________ .__                                                      '
+echo '\_   ___ \|  | _____    ______ _____________  ____   ____   _____  '
+echo '/    \  \/|  | \__  \  /  ___//  ___/\_  __ \/  _ \ /  _ \ /     \ '
+echo '\     \___|  |__/ __ \_\___ \ \___ \  |  | \(  <_> |  <_> )  Y Y  \'
+echo ' \______  /____(____  /____  >____  > |__|   \____/ \____/|__|_|  /'
+echo '        \/          \/     \/     \/                            \/ '
+echo ''
+
+echo "[MumukiDevstart::Classroom] Installing dependencies...."
+npm install
+
+echo "[MumukiDevstart::Classroom] Starting server...."
+npm start
