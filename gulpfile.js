@@ -132,7 +132,7 @@ gulp.task('dev:serve', ['dev:build'], () => {
     .pipe($.webserver({
       open: `/#/${process.env.TENANT}/home`,
       port: process.env.PORT,
-      host: 'classroom.localmumuki.io',
+      host: 'localhost',
       livereload: true
     }));
 });
