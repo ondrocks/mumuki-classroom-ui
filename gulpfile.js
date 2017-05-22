@@ -130,9 +130,9 @@ gulp.task('prod:build', (done) => {
 gulp.task('dev:serve', ['dev:build'], () => {
   return gulp.src(`${outFolder}`)
     .pipe($.webserver({
-      open: true,
+      open: `/#/${process.env.TENANT}/home`,
       port: process.env.PORT,
-      host: `${process.env.TENANT}.classroom.localmumuki.io`,
+      host: 'classroom.localmumuki.io',
       livereload: true
     }));
 });
