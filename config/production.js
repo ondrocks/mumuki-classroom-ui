@@ -8,7 +8,7 @@ angular
     },
 
     laboratory: {
-      url: '<MUMUKI_ATHENEUM_URL>'
+      url: '<MUMUKI_LABORATORY_URL>'
     },
 
     bibliotheca: {
