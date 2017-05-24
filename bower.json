@@ -29,7 +29,7 @@
     "jsdiff": "2.2.1",
     "diff2html": "rtfpessoa/diff2html#6abfbdb6a82dcc29deb5eec6672857343809459e",
     "moment": "2.11.2",
-    "mumuki-styles": "1.4.5",
+    "mumuki-styles": "mumuki/mumuki-styles#feature-conversation",
     "ace-builds": "1.2.3",
     "angular": "1.4.9",
     "angular-ui-ace": "0.2.3",

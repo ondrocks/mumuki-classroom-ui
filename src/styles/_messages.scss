@@ -1,35 +1,8 @@
 .new-message-modal {
-  width: 0px;
-  pre {
-    max-height: 300px;
-    overflow: auto;
-  }
   .modal-dialog {
-    position: fixed;
     right: 30px;
-    bottom: -30px;
-  }
-  .mu-modal-header {
-    @include display-flex(row nowrap, space-between);
-    height: 40px;
-    background-color: $brand-primary;
-    padding: 0 15px 0 15px;
-    .mu-modal-close-button {
-      background-color: transparent;
-      color: white;
-      -moz-appearance: none;
-      -webkit-appearance: none;
-      border: none;
-      padding: 0;
+    .modal-content {
+      width: 600px;
     }
-  }
-  .mu-message-textarea {
-    &:focus {
-      outline: -webkit-focus-ring-color none 0;
-    }
-    resize: none;
-    border: none;
-    height: 250px;
-    width: 100%;
   }
 }
