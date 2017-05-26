@@ -109,6 +109,7 @@ angular
     no_exams_to_show: 'There is no exams to show',
     no_guides_to_show: 'There is no guides to show',
     no_notifications_to_show: 'There is no notifications to show',
+    no_solutions_sent: 'No solutions sent',
     no_students_to_show: 'There is no students to show',
     notifications: 'Notifications',
     only_followers: 'Only following',

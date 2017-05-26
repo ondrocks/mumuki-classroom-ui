@@ -110,6 +110,7 @@ angular
     no_exams_to_show: 'No hay exámenes para mostrar',
     no_guides_to_show: 'No hay guías para mostrar',
     no_notifications_to_show: 'No hay notificaciones para mostrar',
+    no_solutions_sent: 'No hay soluciones enviadas',
     no_students_to_show: 'No hay estudiantes para mostrar',
     notifications: 'Notificaciones',
     only_followers: 'Seguidos',

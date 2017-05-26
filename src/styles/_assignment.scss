@@ -368,3 +368,7 @@ span.active-exercise {
     }
   }
 }
+
+.no-solutions-sent {
+  @include display-flex(row, center, center)
+}

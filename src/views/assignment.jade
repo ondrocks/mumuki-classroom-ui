@@ -33,23 +33,30 @@
                   a(href='', ng-click='lastSolution()')
                     i.fa.fa-code
                     span &nbsp;{{ 'last_solution' | translate }}
-                li(ng-class='{ "active": getViewMode().showDiff }')
+                li(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length")
                   a(href='', ng-click='diff()')
                     i.fa.fa-columns
                     span &nbsp;{{ 'diff' | translate }}
-                li(ng-class='{ "active": getViewMode().showMessages }')
+                li(ng-class='{ "active": getViewMode().showMessages }', ng-if="assignment.submissions.length")
                   a(href='', ng-click='messages()')
                     i.fa.fa-comments-o
                     span &nbsp;{{ 'messages' | translate }}
 
               .tab-content
-                .tab-pane(ng-class='{ "active": getViewMode().showDiff }')
+                .tab-pane(ng-class='{ "active": getViewMode().showMarkdown }')
+                  markdown-preview.markdown-preview(
+                      content='lastSolutionMarkdown[assignment.exercise.id]',
+                      ng-if="assignment.submissions.length")
+
+                  span.no-solutions-sent(ng-if="!assignment.submissions.length") {{ 'no_solutions_sent' | translate }}
+
+                .tab-pane(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length")
 
                   diff-side(
-                    language='{{ assignment.guide.language.name }}',
-                    left='assignment.diffs.selected.left',
-                    right='assignment.diffs.selected.right',
-                    view-mode='getViewMode().current.type')
+                      language='{{ assignment.guide.language.name }}',
+                      left='assignment.diffs.selected.left',
+                      right='assignment.diffs.selected.right',
+                      view-mode='getViewMode().current.type')
 
                   .pull-right
                     input(
@@ -67,10 +74,7 @@
                     pg-offset='1',
                     pg-click='selectDiffByPage')
 
-                .tab-pane(ng-class='{ "active": getViewMode().showMarkdown }')
-                  markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
-
-                .tab-pane(ng-class='{ "active": getViewMode().showMessages }')
+                .tab-pane(ng-class='{ "active": getViewMode().showMessages }', ng-if="assignment.submissions.length")
                   span.mu-view-messages(ng-bind-html='(html | trustHtml)', ng-if='allMessages')
                   .mu-messages(ng-if='!allMessages')
                     ol.mu-chat

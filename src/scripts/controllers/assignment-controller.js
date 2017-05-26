@@ -172,7 +172,7 @@ angular
 
       $scope.newMessage = () => {
         Modal.newMessage(getMessageToPost(assignment.lastSubmission()), Breadcrumb.getStudent(), course, (message) => {
-          assignment.lastSubmission().messages.push(message);
+          assignment.lastSubmission().messages.push(_.defaults(message, {is_me: true}));
           $scope.allMessages = false;
           scrollChatToBottom();
           Notification.readAssignment(assignment);
