@@ -151,7 +151,7 @@ angular
         return !$scope.showMessagesIcon(assignment) && $scope.hasMessages(assignment);
       };
 
-      $scope.messageSenderClass = (message) => message.sender === Auth.profile().user_uid ? 'self' : 'other';
+      $scope.messageSenderClass = (message) => message.is_me ? 'self' : 'other';
 
       const getMessageToPost = (submission) => {
         return {
