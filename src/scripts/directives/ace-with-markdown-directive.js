@@ -11,7 +11,7 @@ angular
       templateUrl: 'views/directives/ace-with-markdown.html',
       scope: {
         header: '@',
-        content: '=',
+        content: '='
       },
       controller: ($scope) => {
 

@@ -201,15 +201,13 @@ angular
         .catch(() => ({total: 0, page: 1, notifications: []}));
     }
 
-    this.readNotification = (notificationId) => {
+    this.putNotification = (notificationId, action) => {
       return $http
-        .put(`${API()}/notifications/${notificationId}/read`);
+        .put(`${API()}/notifications/${notificationId}/${action}`);
     };
 
-    this.unreadNotification = (notificationId) => {
-      return $http
-        .put(`${API()}/notifications/${notificationId}/unread`);
-    };
+    this.readNotification = (notificationId) => putNotification(notificationId, 'read');
+    this.unreadNotification = (notificationId) => putNotification(notificationId, 'unread');
 
     this.getLoginUrl = () => Domain.loginURL();
     this.getLogoutUrl = () => Domain.logoutURL();

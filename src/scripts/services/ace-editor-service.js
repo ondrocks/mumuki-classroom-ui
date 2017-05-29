@@ -19,7 +19,7 @@ angular
     };
 
     this.onLoadDefault = (editor) => {
-      editor.$blockScrolling = 'Infinity',
+      editor.$blockScrolling = 'Infinity';
       editor.setFontSize(17);
       editor.setShowPrintMargin(false);
       editor.session.setTabSize(2);

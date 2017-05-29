@@ -18,14 +18,9 @@ angular
       $uibModalInstance.close();
     }
 
-    $scope.collapse = () => {
-      angular.element('.modal-body, .modal-footer').hide();
-      $scope.expanded = true;
-    }
-
-    $scope.expand = () => {
-      angular.element('.modal-body, .modal-footer').show();
-      $scope.expanded = false;
+    $scope.toggle = () => {
+      angular.element('.modal-body, .modal-footer')[$scope.expanded ? 'show' : 'hide']();
+      $scope.expanded = !$scope.expanded;
     }
 
   });

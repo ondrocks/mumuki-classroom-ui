@@ -102,7 +102,7 @@ angular
         const command = (letter, callback) => {
           return {
             bindKey: bindCtrl(letter),
-            exec: callback,
+            exec: callback
           }
         };
 
@@ -110,7 +110,7 @@ angular
           command('B', $scope.bold),
           command('K', $scope.link),
           command('I', $scope.italic),
-          command('M', $scope.mumuki),
+          command('M', $scope.mumuki)
         ]);
 
       }
