@@ -19,4 +19,12 @@ classroomTest('Domain Service', (mocks) => {
     Domain.openExamInLaboratory(1234);
   }));
 
+  it('#tosURL', inject((Domain) => {
+    Domain.tosURL().should.be.eql('http://pdep-utn.localhost:3000/static/tos/tos-en.txt');
+  }));
+
+  it('#guideURL', inject((Domain) => {
+    Domain.guideURL('foo/bar').should.be.eql('http://pdep-utn.localhost:3000/guides/foo/bar');
+  }));
+
 });
