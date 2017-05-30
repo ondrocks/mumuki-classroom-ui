@@ -10,21 +10,21 @@ classroomTest('Domain Service', (mocks) => {
   }));
 
   it('#openLaboratory', inject((Domain) => {
-    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.localhost:3000', '_self');
+    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.laboratory.localmumuki.io', '_self');
     Domain.openLaboratory();
   }));
 
   it('#openExamInLaboratory', inject((Domain) => {
-    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.localhost:3000/exams/1234', '_blank');
+    mocks.window.expects('open').once().withExactArgs('http://pdep-utn.laboratory.localmumuki.io/exams/1234', '_blank');
     Domain.openExamInLaboratory(1234);
   }));
 
   it('#tosURL', inject((Domain) => {
-    Domain.tosURL().should.be.eql('http://pdep-utn.localhost:3000/static/tos/tos-en.txt');
+    Domain.tosURL().should.be.eql('http://pdep-utn.laboratory.localmumuki.io/static/tos/tos-en.txt');
   }));
 
   it('#guideURL', inject((Domain) => {
-    Domain.guideURL('foo/bar').should.be.eql('http://pdep-utn.localhost:3000/guides/foo/bar');
+    Domain.guideURL('foo/bar').should.be.eql('http://pdep-utn.laboratory.localmumuki.io/guides/foo/bar');
   }));
 
 });
