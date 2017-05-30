@@ -1,19 +1,21 @@
 
 angular
   .module('classroom')
-  .service('Domain', function ($location, $stateParams, $window, OrganizationMapper) {
+  .service('Domain', function ($translate, $window, OrganizationMapper) {
 
     const openAth = (mode, path='') => {
       $window.open(`${this.laboratoryURL()}${path}`, mode);
       return true;
     }
 
+    this.currentLocale = () => $translate.use();
+
     this.openLaboratory = () => openAth('_self');
     this.openExamInLaboratory = (exam) => openAth('_blank', `/exams/${exam}`);
 
-    this.tosURL = () => `${laboratoryURL()}/static/tos/tos-${this.currentLocale()}.txt`
+    this.tosURL = () => `${this.laboratoryURL()}/static/tos/tos-${this.currentLocale()}.txt`
 
-    this.guideURL = (slug) => `${laboratoryURL()}/guides/${slug}`
+    this.guideURL = (slug) => `${this.laboratoryURL()}/guides/${slug}`
 
     this.exerciseURL = (exerciseId) => `${this.laboratoryURL()}/exercises/${exerciseId}`;
     this.exerciseURLByBibliotheca = (guideSlug, exerciseId) => `${this.laboratoryURL()}/exercises/${guideSlug}/${exerciseId}`;
