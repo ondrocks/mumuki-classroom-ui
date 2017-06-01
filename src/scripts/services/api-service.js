@@ -206,8 +206,8 @@ angular
         .put(`${API()}/notifications/${notificationId}/${action}`);
     };
 
-    this.readNotification = (notificationId) => putNotification(notificationId, 'read');
-    this.unreadNotification = (notificationId) => putNotification(notificationId, 'unread');
+    this.readNotification = (notificationId) => this.putNotification(notificationId, 'read');
+    this.unreadNotification = (notificationId) => this.putNotification(notificationId, 'unread');
 
     this.getLoginUrl = () => Domain.loginURL();
     this.getLogoutUrl = () => Domain.logoutURL();
