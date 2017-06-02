@@ -11,7 +11,7 @@ echo '        \/          \/     \/     \/                            \/ '
 echo ''
 
 echo "[MumukiDevstart::Classroom] Installing dependencies...."
-npm install
+npm install --unsafe-perm
 
 echo "[MumukiDevstart::Classroom] Starting server...."
 npm start
