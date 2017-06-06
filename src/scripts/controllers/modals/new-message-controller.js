@@ -8,9 +8,9 @@ angular
     $scope.send = () => {
       return Api
         .newMessage($scope.message, course)
-        .then(() => {
+        .then((res) => {
           $scope.cancel();
-          return callback($scope.message.message);
+          return callback(res.data.message || $scope.message.message);
         });
     }
 

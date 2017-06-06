@@ -159,7 +159,6 @@ angular
           exercise_id: assignment.exercise.eid,
           submission_id: submission.sid,
           message: {
-            sender: Auth.profile().user_uid,
             content: submission.message,
             created_at: new Date()
           }
