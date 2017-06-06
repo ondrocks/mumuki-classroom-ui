@@ -181,7 +181,7 @@ angular
       $scope.viewMessages = () => {
         $scope.spin = true;
         Api
-          .getMessages(_.merge($stateParams, {eid: Breadcrumb.getExerciseId()}))
+          .getMessages(_.merge($stateParams, {exercise: Breadcrumb.getExercise()}))
           .then((html) => Scroll.holdContent('.mu-chat', () => {
             $scope.html = html;
             $scope.spin = false;

@@ -141,9 +141,11 @@ angular
         .post(`${API()}/courses/${course}/messages`, data);
     }
 
-    this.getMessages = ({course, org, repo, student, eid}) => {
+    this.getMessages = ({course, org, repo, student, exercise}) => {
+      const eid = exercise.eid;
+      const language = exercise.language;
       return $http
-        .get(`${API()}/courses/${course}/guides/${org}/${repo}/${student}/${eid}/messages`)
+        .get(`${API()}/courses/${course}/guides/${org}/${repo}/${student}/${eid}/messages?language=#{language}`)
         .then((res) => res.data)
     }
 

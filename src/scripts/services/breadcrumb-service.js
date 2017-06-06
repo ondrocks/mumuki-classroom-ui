@@ -31,8 +31,8 @@ angular
       return this._exam && this._exam.getName();
     }
 
-    this.getExerciseId = () => {
-      return this._exercise && this._exercise.eid;
+    this.getExercise = () => {
+      return this._exercise;
     }
 
     this.setCourse = (course) => {
