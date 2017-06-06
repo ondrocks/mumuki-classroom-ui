@@ -35,7 +35,7 @@ angular
     $scope.courseSlug = () => `${Domain.tenant()}/${$scope.course()}`;
 
     Api
-      .getFollowers(Auth.profile().email, $scope.course())
+      .getFollowers($scope.course())
       .then((data) => Followers.setFollowUps(data))
       .then(() => $scope.followUpsCount = Followers.count($scope.courseSlug()));
 

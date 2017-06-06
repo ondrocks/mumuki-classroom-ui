@@ -147,19 +147,19 @@ angular
         .then((res) => res.data)
     }
 
-    this.follow = (uid, email, course) => {
+    this.follow = (uid, course) => {
       return $http
-        .post(`${API()}/courses/${course}/followers`, { uid, email, course })
+        .post(`${API()}/courses/${course}/followers`, { uid })
     }
 
-    this.unfollow = (uid, email, course) => {
+    this.unfollow = (uid, course) => {
       return $http
-        .delete(`${API()}/courses/${course}/followers/${email}/${uid}`)
+        .delete(`${API()}/courses/${course}/followers/${uid}`)
     }
 
-    this.getFollowers = (email, course) => {
+    this.getFollowers = (course) => {
       return $http
-        .get(`${API()}/courses/${course}/followers/${email}`)
+        .get(`${API()}/courses/${course}/followers`)
         .then((data) => {
           const groupedData = _.groupBy(data.data.followers, "course");
           return _.forEach(groupedData, (v, k) => groupedData[k] = _.head(groupedData[k]));

@@ -33,14 +33,14 @@ angular
     $scope.followAction = (uid) => $scope.isFollowing(uid) ? $scope.unfollow(uid) : $scope.follow(uid);
 
     $scope.follow = (uid) =>  {
-      return Api.follow(uid, Auth.profile().email, $scope.course())
+      return Api.follow(uid, $scope.course())
         .then(() => Followers.addFollower($scope.courseSlug(), uid))
         .then(() => toastr.success($filter('translate')('do_follow')))
         .catch((e) => toastr.error(e));
     }
 
     $scope.unfollow = (uid) =>  {
-      return Api.unfollow(uid, Auth.profile().email, $scope.course())
+      return Api.unfollow(uid, $scope.course())
         .then(() => Followers.removeFollower($scope.courseSlug(), uid))
         .then(() => toastr.success($filter('translate')('unfollowing')))
         .catch((e) => toastr.error(e));
