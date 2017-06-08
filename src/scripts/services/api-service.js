@@ -145,7 +145,7 @@ angular
       const eid = exercise.eid;
       const language = exercise.language;
       return $http
-        .get(`${API()}/courses/${course}/guides/${org}/${repo}/${student}/${eid}/messages?language=#{language}`)
+        .get(`${API()}/courses/${course}/guides/${org}/${repo}/${eid}/student/${student}/messages?language=#{language}`)
         .then((res) => res.data)
     }
 
