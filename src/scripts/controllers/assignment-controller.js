@@ -121,6 +121,8 @@ angular
 
       $scope.selectDiffByPage = (pageNumber) => $scope.selectDiff($scope.assignment.diffs.get(pageNumber - 1))
 
+      $scope.hasSubmissions = () => !_.isEmpty($scope.assignment.submissions)
+
       $scope.diff = () => {
         $scope.options.viewMode = DIFF;
       }

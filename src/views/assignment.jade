@@ -46,9 +46,9 @@
                 .tab-pane(ng-class='{ "active": getViewMode().showMarkdown }')
                   markdown-preview.markdown-preview(
                       content='lastSolutionMarkdown[assignment.exercise.id]',
-                      ng-if="assignment.submissions.length")
+                      ng-if="hasSubmissions()")
 
-                  span.no-solutions-sent(ng-if="!assignment.submissions.length") {{ 'no_solutions_sent' | translate }}
+                  span.no-solutions-sent(ng-if="!hasSubmissions()") {{ 'no_solutions_sent' | translate }}
 
                 .tab-pane(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length")
 
