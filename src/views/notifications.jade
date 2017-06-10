@@ -20,7 +20,7 @@
               i.fa.fa-fw.fa-comment-o
               span {{ notification.created_at | humanizeDate }}
     label(ng-if='notifications.notifications.length === 0')
-      | {{ 'no_notifications_to_show' | translate }}
+      | {{ 'empty_notifications' | translate }}
 
     br
 
