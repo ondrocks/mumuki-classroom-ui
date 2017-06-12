@@ -5,8 +5,12 @@ angular
     $scope.title = title;
     $scope.text = text;
 
-    const spinnerOn = () => $scope.spin = true;
-    const spinnerOff = () => $scope.spin = false;
+    const spinnerOn = () => {
+      $scope.spin = true;
+    }
+    const spinnerOff = () => {
+      $scope.spin = false;
+    }
 
     $scope.yes = () => {
       spinnerOn();

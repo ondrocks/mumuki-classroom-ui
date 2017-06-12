@@ -17,6 +17,9 @@ angular
           },
           'navbar@classroom': {
             templateUrl: 'views/navbar.html',
+            resolve: {
+              notifications: (Api) => Api.getNotifications()
+            },
             controller: 'NavbarController'
           }
         }
@@ -28,6 +31,21 @@ angular
           'content@classroom': {
             templateUrl: 'views/home.html',
             controller: 'HomeController'
+          }
+        }
+      })
+      .state('classroom.notifications', {
+        url: '/notifications?page',
+        authenticated: true,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/notifications.html',
+            controller: 'NotificationsController',
+            resolve: {
+              notifications: ($stateParams, Notification) => {
+                return Notification.getPage($stateParams.page || 0);
+              }
+            }
           }
         }
       })
@@ -138,7 +156,7 @@ angular
         }
       })
       .state('classroom.courses.course.guides.guide.students', {
-        url: '/:student/:eid',
+        url: '/:student/:eid?:tab',
         authenticated: true,
         views: {
           'content@classroom': {

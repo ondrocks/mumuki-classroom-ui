@@ -1,0 +1,114 @@
+.mu-has-notification {
+  $border-style: solid #FFF;
+  i {
+    @extend .fa;
+    @extend .fa-fw;
+    @extend .fa-lg;
+    @extend .fa-comment; // TODO: Find nice message logo
+    margin-top: 5px;
+    color: $mu-color-primary;
+  }
+  span {
+    position: absolute;
+    width: inherit;
+    padding: 2px 4px;
+    background-color: $mu-color-complementary;
+    border: 1px $border-style;
+  }
+  &:not(.avatar) {
+    span {
+      right: 30px;
+      font-size: .55em;
+      text-align: right;
+      top: 10px;
+    }
+  }
+  &.avatar {
+    position: absolute;
+    top: 10px;
+    left: 60px;
+    width: 60px;
+    span {
+      position: relative;
+      text-align: left;
+      font-size: 0.75em;
+      width: auto;
+      left: -42px;
+      top: 10px;
+      padding: 3px 6px 4px 6px;
+      border: 2px $border-style;
+    }
+  }
+}
+
+.notification-dropdown {
+  padding: 0;
+  width: 320px;
+  .notification-item {
+    @include display-flex();
+    display: flex !important;
+    padding: 5px;
+    justify-content: flex-start;
+    .notification-image {
+      margin: 5px;
+      margin-right: 10px;
+    }
+    .notification-body {
+      @include display-flex(column);
+      font-size: 0.8em;
+    }
+    .notification-text {
+      white-space: pre-wrap;
+    }
+  }
+}
+
+.notifications-list {
+  padding: 0;
+  .list-group-item {
+    padding: 0px;
+    &:hover {
+      .notification-mark-as-read {
+        @extend .fa;
+        @extend .fa-fw;
+        @extend .fa-envelope-open-o;
+        position: absolute;
+        right: 10px;
+        bottom: 20px;
+      }
+      .notification-mark-as-unread {
+        @extend .fa;
+        @extend .fa-fw;
+        @extend .fa-envelope-o;
+        position: absolute;
+        right: 10px;
+        bottom: 20px;
+      }
+    }
+    .notification-item {
+      @include display-flex(row, flex-start, center);
+      display: flex !important;
+      padding: 5px;
+      justify-content: flex-start;
+      .notification-image {
+        img {
+          width: 60px;
+          margin: 10px;
+          margin-right: 15px;
+        }
+      }
+      .notification-body {
+        @include display-flex(column, center, flex-start);
+        font-size: 1em;
+      }
+      .notification-text {
+        text-align: justify;
+        white-space: initial;
+        padding: 0 10px 0 0;
+      }
+    }
+  }
+  .unread {
+    background-color: lighten($mu-color-info-light, 7.5%);
+  }
+}

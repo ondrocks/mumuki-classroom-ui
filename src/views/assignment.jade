@@ -18,6 +18,8 @@
           class='{{assignmentStatus(assignment)}}'
           title='{{ assignment.exercise.getName() }}',
           ng-click='selectAssignment(assignment)')
+          span.badge.badge-notifications(ng-if='notifications(assignment).length')
+            | {{ notifications(assignment).length }}
 
       .exercise-detail-area(class='{{ assignment.exercise.layout }}')
         .exercise-detail-area-text
@@ -27,56 +29,70 @@
             .col-sm-12.solutions-preview
 
               ul.nav.nav-tabs.bottom-10
-                li(ng-class='{ "active": getViewMode().name === "unified" }')
-                  a(href='', ng-click='unified()')
-                    i.fa.fa-window-maximize
-                    span &nbsp;{{ 'unified' | translate }}
-                li(ng-class='{ "active": getViewMode().name === "split" }')
-                  a(href='', ng-click='split()')
-                    i.fa.fa-columns
-                    span &nbsp;{{ 'split' | translate }}
-                li(ng-class='{ "active": getViewMode().name === "last_solution" }')
+                li(ng-class='{ "active": getViewMode().showMarkdown }')
                   a(href='', ng-click='lastSolution()')
                     i.fa.fa-code
                     span &nbsp;{{ 'last_solution' | translate }}
+                li(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length")
+                  a(href='', ng-click='diff()')
+                    i.fa.fa-columns
+                    span &nbsp;{{ 'diff' | translate }}
+                li(ng-class='{ "active": getViewMode().showMessages }', ng-if="assignment.submissions.length")
+                  a(href='', ng-click='messages()')
+                    i.fa.fa-comments-o
+                    span &nbsp;{{ 'messages' | translate }}
 
-              diff-side(
-                ng-if='!isLastSolutionActivated()',
-                language='{{ assignment.guide.language.name }}',
-                left='assignment.diffs.selected.left',
-                right='assignment.diffs.selected.right',
-                view-mode='getViewMode().type')
+              .tab-content
+                .tab-pane(ng-class='{ "active": getViewMode().showMarkdown }')
+                  markdown-preview.markdown-preview(
+                      content='lastSolutionMarkdown[assignment.exercise.id]',
+                      ng-if="hasSubmissions()")
 
-              markdown-preview.markdown-preview(
-                  ng-if='isLastSolutionActivated()',
-                  content='lastSolutionMarkdown[assignment.exercise.id]')
+                  span.no-solutions-sent(ng-if="!hasSubmissions()") {{ 'no_solutions_sent' | translate }}
 
-              ul.pagination.pagination-sm.flex-center(ng-if='!isLastSolutionActivated() && !assignment.diffs.isEmpty()')
+                .tab-pane(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length")
 
-                li
-                  a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectFirst()')
-                    span(aria-hidden='true') &laquo;
-                li
-                  a(href='', aria-label='Anterior', ng-click='assignment.diffs.selectPrev()')
-                    span(aria-hidden='true') &lt;
+                  diff-side(
+                      language='{{ assignment.guide.language.name }}',
+                      left='assignment.diffs.selected.left',
+                      right='assignment.diffs.selected.right',
+                      view-mode='getViewMode().current.type')
 
-                li(ng-repeat='diff in assignment.diffs._diffs | limitTo:assignment.diffs.pages:assignment.diffs.pageStartNumber()', ng-class='{ active: isSelectedDiff(diff) }')
-                  a(href='', ng-click='selectDiff(diff)') {{ assignment.diffs.pageNumber($index) }}
+                  .pull-right
+                    input(
+                        bs-switch,
+                        ng-model='getViewMode().isUnified',
+                        type='checkbox',
+                        switch-on-text="{{ 'unified' | translate }}",
+                        switch-off-text="{{ 'split' | translate }}",
+                        switch-size='mini')
 
-                li
-                  a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectNext()')
-                    span(aria-hidden='true') &gt;
-                li
-                  a(href='', aria-label='Siguiente', ng-click='assignment.diffs.selectLast()')
-                    span(aria-hidden='true') &raquo;
+                  paginator(
+                    pg-items-per-page='1',
+                    pg-total-items='assignment.diffs.length',
+                    pg-actual-page='assignment.diffs.selectedIndex() + 1',
+                    pg-offset='1',
+                    pg-click='selectDiffByPage')
+
+                .tab-pane(ng-class='{ "active": getViewMode().showMessages }', ng-if="assignment.submissions.length")
+                  span.mu-view-messages(ng-bind-html='(html | trustHtml)', ng-if='allMessages')
+                  .mu-messages(ng-if='!allMessages')
+                    ol.mu-chat
+                      li(ng-click='viewMessages()')
+                        a(href='', ng-if='!spin') {{ 'more_messages' | translate }}
+                        i.fa.fa-fw.fa-spinner.fa-spin(ng-if='spin', style='margin: 6px auto')
+                      li(class='{{messageSenderClass(message)}}' ng-repeat='message in assignment.lastSubmission().messages')
+                        div.message
+                          p(ng-bind-html='trust(message.content)')
+                          .sender {{message.sender}}
+                          time {{Humanizer.date(message.created_at)}}
+                  btn.btn.btn-success.btn-block(ng-click='newMessage()')
+                    i.fa.fa-paper-plane &nbsp;
+                    span {{'new_message' | translate}}
+
 
       .row
         .col-sm-12(ng-repeat='submission in [ assignment.diffs.selected.right ]')
-
-          .bs-callout(ng-repeat='comment in submission.comments | orderBy:$index:true', class='bs-callout-{{ comment.type }}')
-            h4 {{ 'comment' | translate  }}
-              small &nbsp;- {{ comment.email }} - {{ time(comment) }}
-            div(ng-bind-html='trust((comment.content | markdown))')
 
           .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.test_results.length')
             h4 {{ 'tests' | translate }}

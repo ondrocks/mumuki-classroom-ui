@@ -7,14 +7,14 @@
             i.da.da-mumuki
         li.mu-breadcrumb-list-item(ng-class='{ "last": Breadcrumb.list().length === 0 }')
           a(ui-sref='classroom.home') {{ 'courses' | translate}}
-        li.mu-breadcrumb-list-item(ng-repeat='item in Breadcrumb.list()', ng-class='{"dropdown": item.student}')
+        li.mu-breadcrumb-list-item(ng-repeat='item in Breadcrumb.list()', ng-class='{"dropdown": item.student, "last": $last && !item.student }')
           a(ng-if='!item.student', href='', ng-click='Breadcrumb.goTo(item)') {{ item.name() | translate }}
           img.rounded-x.profile.adjust-position(ng-if='item.student', with-default='{{ item.image() }}', width='20px')
           span &nbsp;
           a.dropdown-toggle(href='' ng-if='item.student' data-toggle='dropdown') {{ item.name() | translate }}
             span &nbsp;
             i.fa.fa-caret-down
-          ul.dropdown-menu
+          ul.dropdown-menu.dropdown-menu-right
             input.form-control.student-dropdown-search(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch', autofocus, autocomplete='off')
             script(type='text/javascript').
               $('.dropdown-menu input').on('click', function (e) {
@@ -22,15 +22,26 @@
               });
             li.scrollable-menu
               a.list-group-item.list-group-item-action(ng-repeat='student in item.students() | filter:listSearch'
-              ui-sref='classroom.courses.course.guides.guide.students({ \
-                      student: student.uid                                    \
-                    })')
+                  ui-sref='classroom.courses.course.guides.guide.students({ \
+                    student: student.uid,                                   \
+                    eid: Breadcrumb.getExercise().eid                       \
+                  })')
                 img.rounded-x.profile.adjust-position(ng-if='item.student', with-default='{{ student.image_url }}', width='20px')
                 span &nbsp;
                 span {{ student.fullName() }}
 
     div.mu-navbar-avatar
       a(ng-if='!isLoggedIn()' href='', ng-click='signin()') {{ 'log_in' | translate }}
+
+      .dropdown
+        a.notifications-box(ng-class='{ "notifications-box-empty": !Notification.hasNotifications() }', data-toggle='dropdown' href='')
+          i.fa.fa-fw.fa-lg.fa-bell
+          span.badge.badge-notifications {{ Notification.count() }}
+        ul.dropdown-menu.dropdown-menu-right.notification-dropdown
+          li(ng-repeat='notification in Notification.get() | limitTo:5')
+            div(ng-include='"views/templates/notification.html"' include-replace)
+          li.text-center
+            a(ui-sref='classroom.notifications', ng-if="Notification.count() > 5") {{ 'more_notifications' | translate }}
 
       .dropdown(ng-if='isLoggedIn()')
 

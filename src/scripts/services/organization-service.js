@@ -21,7 +21,7 @@ angular
 
     this.currentLocale = () => $translate.use();
 
-    this.tosUrl = () => Domain.tosURL();
+    this.tosUrl = () => Domain.tosURL(this.currentLocale());
 
     this.getLockJson = () => {
       const promise = this.organization ?

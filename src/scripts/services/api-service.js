@@ -136,24 +136,32 @@ angular
         .post(`${API()}/courses/${course}/students/${uid}/transfer`, { destination })
     }
 
-    this.comment = (data, course) => {
+    this.newMessage = (data, course) => {
       return $http
-        .post(`${API()}/courses/${course}/comments`, data)
+        .post(`${API()}/courses/${course}/messages`, data);
     }
 
-    this.follow = (uid, email, course) => {
+    this.getMessages = ({course, org, repo, student, exercise}) => {
+      const eid = exercise.eid;
+      const language = exercise.language;
       return $http
-        .post(`${API()}/courses/${course}/followers`, { uid, email, course })
+        .get(`${API()}/courses/${course}/guides/${org}/${repo}/${eid}/student/${student}/messages?language=#{language}`)
+        .then((res) => res.data)
     }
 
-    this.unfollow = (uid, email, course) => {
+    this.follow = (uid, course) => {
       return $http
-        .delete(`${API()}/courses/${course}/followers/${email}/${uid}`)
+        .post(`${API()}/courses/${course}/followers`, { uid })
     }
 
-    this.getFollowers = (email, course) => {
+    this.unfollow = (uid, course) => {
       return $http
-        .get(`${API()}/courses/${course}/followers/${email}`)
+        .delete(`${API()}/courses/${course}/followers/${uid}`)
+    }
+
+    this.getFollowers = (course) => {
+      return $http
+        .get(`${API()}/courses/${course}/followers`)
         .then((data) => {
           const groupedData = _.groupBy(data.data.followers, "course");
           return _.forEach(groupedData, (v, k) => groupedData[k] = _.head(groupedData[k]));
@@ -180,6 +188,28 @@ angular
       return $http
         .post(`${API()}/courses/${course}/students`, student)
     }
+
+    this.getNotifications = () => {
+      return $http
+        .get(`${API()}/notifications/unread`)
+        .then((res) => res.data)
+        .catch(() => []);
+    };
+
+    this.getNotificationsPage = (page, perPage) => {
+      return $http
+        .get(`${API()}/notifications?page=${page}&per_page=${perPage}`)
+        .then((res) => res.data)
+        .catch(() => ({total: 0, page: 1, notifications: []}));
+    }
+
+    this.putNotification = (notificationId, action) => {
+      return $http
+        .put(`${API()}/notifications/${notificationId}/${action}`);
+    };
+
+    this.readNotification = (notificationId) => this.putNotification(notificationId, 'read');
+    this.unreadNotification = (notificationId) => this.putNotification(notificationId, 'unread');
 
     this.getLoginUrl = () => Domain.loginURL();
     this.getLogoutUrl = () => Domain.logoutURL();

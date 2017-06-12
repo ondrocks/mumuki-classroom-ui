@@ -20,6 +20,9 @@ div
                 i(class='{{ guide.iconClass() }}')
                 span.divider-vertical
                 span.item-name {{ guide.getName() | uppercase }}
+                a.pull-right.mu-has-notification(ng-if='notifications(guide).length')
+                  i
+                  span.badge.badge-notifications {{ notifications(guide).length }}
                 label(ng-if='!(guides | orderBy: sortCriteria() | filter:listSearch).length')
                   | {{ noItemsToShow | translate }}
     .panel.panel-default(ng-if='present(complements)')
@@ -33,6 +36,9 @@ div
             i(class='{{ complement.iconClass() }}')
             span.divider-vertical
             span.item-name {{ complement.getName() | uppercase }}
+            a.pull-right.mu-has-notification(ng-if='notifications(complement).length')
+              i
+              span.badge.badge-notifications {{ notifications(complement).length }}
             label(ng-if='!(complements | orderBy: sortCriteria() | filter:listSearch).length')
               | {{ noItemsToShow | translate }}
     .panel.panel-default(ng-if='present(exams)')
@@ -46,6 +52,9 @@ div
             i(class='{{ exam.iconClass() }}')
             span.divider-vertical
             span.item-name {{ exam.getName() | uppercase }}
+            a.pull-right.mu-has-notification(ng-if='notifications(exam).length')
+              i
+              span.badge.badge-notifications {{ notifications(exam).length }}
             label(ng-if='!(exams | orderBy: sortCriteria() | filter:listSearch).length')
               | {{ noItemsToShow | translate }}
     .panel.panel-default(ng-if='present(others)')
@@ -59,6 +68,9 @@ div
             i(class='{{ guide.iconClass() }}')
             span.divider-vertical
             span.item-name {{ guide.getName() | uppercase }}
+            a.pull-right.mu-has-notification(ng-if='notifications(guide).length')
+              i
+              span.badge.badge-notifications {{ notifications(guide).length }}
             label(ng-if='!(others | orderBy: sortCriteria() | filter:listSearch).length')
               | {{ noItemsToShow | translate }}
   button.btn.btn-success.pull-right(ng-if='isJanitor()', ui-sref='classroom.courses.new')

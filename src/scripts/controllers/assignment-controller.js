@@ -1,13 +1,39 @@
 
 angular
   .module('classroom')
-  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $timeout, $filter, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student) {
+  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $filter, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student, Modal, Scroll, Notification) {
 
     Preferences($scope, 'options');
 
+
     const SPLIT = { type: 'side-by-side', name: 'split' };
     const UNIFIED = { type: 'line-by-line', name: 'unified' };
-    const LAST_SOLUTION = { type: 'only-last', name: 'last_solution' };
+
+    const LAST_SOLUTION = { type: 'only-last', name: 'last_solution', showMarkdown: true };
+    const MESSAGES = { type: 'messages', name: 'messages', showMessages: true };
+    const DIFF = { type: 'diff', name: 'diff', showDiff: true };
+
+    const isUnified = () => _.isEqual($scope.options.diffMode, UNIFIED);
+
+    const viewModeIsDiff = () => $scope.getViewMode().showDiff;
+    const viewModeIsMessages = () => $scope.getViewMode().showMessages;
+    const viewModeIsLastSolution = () => $scope.getViewMode().showMarkdown;
+
+    const notifications = _.chain(Notification.get())
+                           .filter({
+                              organization: Domain.tenant(),
+                              course: `${Domain.tenant()}/${$stateParams.course}`,
+                              assignment: {
+                                guide: {slug: guide.slug },
+                                student: {uid: $stateParams.student }
+                              }
+                           })
+                           .groupBy('assignment.exercise.eid')
+                           .value();
+
+    $scope.notifications = (assignment) => {
+      return _.get(notifications, assignment.exercise.eid, []);
+    }
 
     const toAssignment = (exercise, index) => {
       const currentAssignment = _.find(assignments, (assignment) => assignment.exercise.eid === exercise.id);
@@ -28,7 +54,7 @@ angular
 
     $scope.guide = guide;
     $scope.assignments = _.map(guide.exercises, toAssignment);
-
+    $scope.Humanizer = Humanizer;
     const assignment = _.find($scope.assignments, (assignment) => assignment.exercise.eid === Number($stateParams.eid)) || $scope.assignments[0]
     const course = $stateParams.course;
 
@@ -39,6 +65,9 @@ angular
 
     const currentAssignmentIndex = () => {
       return _.findIndex($scope.assignments, (p) => p.exercise.eid === currentExercise.eid);
+    };
+    const scrollChatToBottom = () => {
+      Scroll.bottom('.mu-chat');
     };
 
     $scope.lastSolutionMarkdown = {};
@@ -56,71 +85,110 @@ angular
       return $scope.assignments[Math.max(assignmentsIndex - 1, 0)]
     };
 
+    $scope.options = _.defaultsDeep($scope.options, { viewMode: LAST_SOLUTION, diffMode: UNIFIED });
+    if($stateParams.tab === 'messages') {
+      $scope.options.viewMode =  MESSAGES;
+    }
+
+    DIFF.isUnified = isUnified();
+
+    $scope.$watch(() => DIFF.isUnified, (bool) => {
+      DIFF.current = $scope.options.diffMode = bool ? UNIFIED : SPLIT;
+    });
+
     $scope.selectAssignment = (assignment) => {
 
-      if (_.isEmpty($scope.options)) $scope.options = { viewMode: UNIFIED };
+      Modal.close();
+
+      $scope.allMessages = false;
 
       currentExercise = assignment.exercise;
 
       $stateParams.eid = currentExercise.eid;
+      Breadcrumb.setExercise(currentExercise);
 
       $scope.assignment = assignment;
       $scope.containsHtml = containsHtml;
       $scope.lastSubmissionDate = Humanizer.date(_.get($scope, 'lastSubmission.created_at'));
 
-
       $scope.trust = (html) => $sce.trustAsHtml(html);
       $scope.selectDiff = (diff) => assignment.diffs.selected = diff;
-      $scope.isSelectedDiff = (diff) => assignment.diffs.isSelected(diff);
       $scope.assignmentSelected = (assignment) => assignment.exercise.eid === $scope.assignment.exercise.eid;
 
-      $scope.time = (comment) => moment(comment.date).fromNow();
+      $scope.time = (message) => moment(message.created_at).fromNow();
       $scope.isLastSolutionActivated = () => _.isEqual($scope.options.viewMode, LAST_SOLUTION);
       $scope.getViewMode = () => $scope.options.viewMode;
 
-      $scope.split = () => $scope.options.viewMode = SPLIT;
-      $scope.unified = () => $scope.options.viewMode = UNIFIED;
+      $scope.selectDiffByPage = (pageNumber) => $scope.selectDiff($scope.assignment.diffs.get(pageNumber - 1))
+
+      $scope.hasSubmissions = () => !_.isEmpty($scope.assignment.submissions)
+
+      $scope.diff = () => {
+        $scope.options.viewMode = DIFF;
+      }
       $scope.lastSolution = () => {
         assignment.diffs.selectLast();
         $scope.options.viewMode = LAST_SOLUTION;
       };
-
-      $scope.submissionHasComments = (submission) => {
-        return !_.isEmpty(submission.comments);
+      $scope.messages = () => {
+        assignment.diffs.selectLast();
+        $scope.options.viewMode = MESSAGES;
+        scrollChatToBottom();
       }
-      $scope.hasComments = (assignment) => {
-        return _.some(assignment.submissions, (submission) => $scope.submissionHasComments(submission));
+
+      if (viewModeIsDiff()) $scope.diff();
+      if (viewModeIsMessages()) $scope.messages();
+      if (viewModeIsLastSolution()) $scope.lastSolution();
+
+      $scope.submissionHasMessages = (submission) => {
+        return !_.isEmpty(submission.messages);
       }
-      $scope.showCommentsIcon = (assignment) => {
-        return $scope.submissionHasComments(assignment.lastSubmission());
+      $scope.hasMessages = (assignment) => {
+        return _.some(assignment.submissions, (submission) => $scope.submissionHasMessages(submission));
+      }
+      $scope.showMessagesIcon = (assignment) => {
+        return $scope.submissionHasMessages(assignment.lastSubmission());
       };
-      $scope.showNewCommentsIcon = (assignment) => {
-        return !$scope.showCommentsIcon(assignment) && $scope.hasComments(assignment);
+      $scope.showNewMessagesIcon = (assignment) => {
+        return !$scope.showMessagesIcon(assignment) && $scope.hasMessages(assignment);
       };
 
-      const getCommentToPost = (submission) => {
+      $scope.messageSenderClass = (message) => message.is_me ? 'self' : 'other';
+
+      const getMessageToPost = (submission) => {
         return {
           uid: $stateParams.student,
           exercise_id: assignment.exercise.eid,
           submission_id: submission.sid,
-          comment: {
-            content: submission.comment,
-            type: submission.commentType,
-            date: new Date(),
-            email: Auth.profile().email
+          message: {
+            content: submission.message,
+            created_at: new Date()
           }
         }
       }
 
-      $scope.addComment = (submission) => {
-        if (submission.comment) {
-          const data = getCommentToPost(submission);
-          submission.comments.push(data.comment);
-          Api
-            .comment(data, course)
-            .then(() => submission.restartComment())
-            .then(() => toastr.success($filter('translate')('do_comment')))
-        }
+      const getLastSubmissionMarkdown = () => {
+        return `\`\`\`${assignment.guide.language}\n${assignment.lastSubmission().content}\n\`\`\``;
+      }
+
+      $scope.newMessage = () => {
+        Modal.newMessage(getMessageToPost(assignment.lastSubmission()), Breadcrumb.getStudent(), course, (message) => {
+          assignment.lastSubmission().messages.push(_.defaults(message, {is_me: true}));
+          $scope.allMessages = false;
+          scrollChatToBottom();
+          Notification.readAssignment(assignment);
+        });
+      };
+
+      $scope.viewMessages = () => {
+        $scope.spin = true;
+        Api
+          .getMessages(_.merge($stateParams, {exercise: Breadcrumb.getExercise()}))
+          .then((html) => Scroll.holdContent('.mu-chat', () => {
+            $scope.html = html;
+            $scope.spin = false;
+            $scope.allMessages = true;
+          }));
       };
 
       if (!$scope.lastSolutionMarkdown[currentExercise.eid]) {
@@ -129,9 +197,12 @@ angular
           .then((markdown) => $scope.lastSolutionMarkdown[currentExercise.eid] = markdown);
       }
 
+      scrollChatToBottom();
+
     };
 
     $scope.selectAssignment(assignment);
+    $scope.$on('$destroy', () => Modal.close());
 
     hotkeys
       .bindTo($scope)
@@ -149,7 +220,7 @@ angular
         combo: ['left'],
         description: $filter('translate')('next_solution_description'),
         callback: () => {
-          if (!_.isEqual($scope.options.viewMode, LAST_SOLUTION)) {
+          if (viewModeIsDiff()) {
             $scope.assignment.diffs.selectPrev();
           }
         }
@@ -158,7 +229,7 @@ angular
         combo: ['right'],
         description: $filter('translate')('prev_solution_description'),
         callback: () => {
-          if (!_.isEqual($scope.options.viewMode, LAST_SOLUTION)) {
+          if (viewModeIsDiff()) {
             $scope.assignment.diffs.selectNext();
           }
         },

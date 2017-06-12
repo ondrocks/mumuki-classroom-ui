@@ -15,6 +15,10 @@ angular
       return this._guide && this._guide.getName();
     }
 
+    this.getStudent = () => {
+      return this._student;
+    }
+
     this.getStudentName = () => {
       return this._student && this._student.getName();
     }
@@ -25,6 +29,10 @@ angular
 
     this.getExamName = () => {
       return this._exam && this._exam.getName();
+    }
+
+    this.getExercise = () => {
+      return this._exercise;
     }
 
     this.setCourse = (course) => {
@@ -47,6 +55,10 @@ angular
       this._students = students;
     }
 
+    this.setExercise = (exercise) => {
+      this._exercise = exercise;
+    }
+
     this.getStudents = () => {
       return this._students;
     }
@@ -55,6 +67,7 @@ angular
     this._guide = null;
     this._student = null;
     this._list = [
+      { name: () => 'notifications', state: 'classroom.notifications' },
       { name: () => this._course, state: 'classroom.courses.course.guides' },
       { name: () => this._course, state: 'classroom.courses.course.exams' },
       { name: () => this._course, state: 'classroom.courses.course.students' },

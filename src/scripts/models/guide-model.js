@@ -21,7 +21,7 @@ angular
         return `da da-${_.get(this, 'language.name') || _.get(this, 'language')}`;;
       }
 
-      static from(guide) {
+      static from(guide = {}) {
         return new Guide(guide);
       }
 

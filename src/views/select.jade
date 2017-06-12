@@ -11,6 +11,9 @@
       i(class='{{ item.iconClass() }}')
       span.divider-vertical
       span.item-name {{ item.getName() | uppercase }}
+      a.pull-right.mu-has-notification(ng-if='notifications(item).length')
+        i
+        span.badge.badge-notifications {{ notifications(item).length }}
     label(ng-if='!(list | orderBy: sortCriteria() | filter:listSearch).length')
       | {{ noItemsToShow | translate }}
 

@@ -7,13 +7,13 @@ angular
 
       constructor(submission = {}) {
         submission.content = submission.content || '';
-        submission.comments = submission.comments || [];
+        submission.messages = submission.messages || [];
 
         if (submission.status === 'errored') submission.status = 'failed';
 
         _.defaults(this, submission);
 
-        this.restartComment();
+        this.restartMessage();
       }
 
       colorClass() {
@@ -25,17 +25,16 @@ angular
         }
       }
 
-      restartComment() {
-        this.comment = '';
-        this.commentType = 'success';
+      restartMessage() {
+        this.message = '';
+        this.messageType = 'success';
       }
 
-      addComment(comment, commentType) {
-        this.comments.push({
-          content: comment,
-          type: commentType,
-          date: new Date(),
-          email: Auth.profile().email
+      addMessage(message) {
+        this.messages.push({
+          content: message,
+          created_at: new Date(),
+          sender: Auth.profile().email
         });
       }
 

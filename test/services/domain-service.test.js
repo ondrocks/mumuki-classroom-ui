@@ -20,7 +20,7 @@ classroomTest('Domain Service', (mocks) => {
   }));
 
   it('#tosURL', inject((Domain) => {
-    Domain.tosURL().should.be.eql('http://pdep-utn.laboratory.localmumuki.io/static/tos/tos-en.txt');
+    Domain.tosURL('en').should.be.eql('http://pdep-utn.laboratory.localmumuki.io/static/tos/tos-en.txt');
   }));
 
   it('#guideURL', inject((Domain) => {

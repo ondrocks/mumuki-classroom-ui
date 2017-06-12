@@ -1,0 +1,19 @@
+.modal-content
+  .mu-modal-header
+    div
+      i.fa.fa-fw.fa-envelope-open.mu-modal-close-button
+    div
+      small
+        i.fa.fa-fw.fa-minus.pointer(ng-click='toggle()', style='color: white')
+      span &nbsp;
+      button.mu-modal-close-button(type='button', ng-click='cancel()', data-dismiss='modal', aria-label='Close')
+        i.fa.fa-fw.fa-times(aria-hidden='true')
+  .modal-body.mu-view-messages
+    .container-fluid
+      .row
+        ace-with-markdown(content='message.message.content', header='new_message')
+  .modal-footer
+    button.btn.btn-success.btn-block(ng-click='send()')
+      i.fa.fa-send
+      span &nbsp;
+      span {{ 'send' | translate }}

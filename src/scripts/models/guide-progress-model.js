@@ -66,7 +66,6 @@ angular
       };
 
       static from(guideProgress) {
-        guideProgress.course = Course.from(guideProgress.course);
         guideProgress.student = Student.from(guideProgress.student);
         guideProgress.last_assignment.exercise = Exercise.from(guideProgress.last_assignment.exercise);
         guideProgress.last_assignment.submission = Submission.from(guideProgress.last_assignment.submission);
