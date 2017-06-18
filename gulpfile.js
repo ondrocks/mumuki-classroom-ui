@@ -12,18 +12,21 @@ const $ = gulpLoadPlugins();
 
 const srcFolder = 'src';
 const outFolder = 'build';
+
+$.protocol = $.stringReplace(/https?:\/\//g, '//');
+
 const useminOptions = () => {
   return {
     development: {
       scss: [],
       es6: [],
-      css: [$.minifyCss, $.rev],
+      css: [$.minifyCss, $.protocol, $.rev],
       js: [$.rev]
     },
     production: {
       scss: [$.rev],
       es6: [$.rev],
-      css: [$.minifyCss, $.rev],
+      css: [$.minifyCss, $.protocol, $.rev],
       js: [$.uglify, $.rev]
     }
   }[process.env.NODE_ENV];
