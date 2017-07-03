@@ -20,11 +20,11 @@ classroomTest('Domain Service', (mocks) => {
   }));
 
   it('#tosURL', inject((Domain) => {
-      Domain.tosURL('en').should.be.eql('http://pdep-utn.laboratory.localmumuki.io/static/tos/tos-en.txt');
+      Domain.tosURL('en').should.be.eql('http://pdep-utn.localmumuki.io:3000/static/tos/tos-en.txt');
   }));
 
   it('#guideURL', inject((Domain) => {
-    Domain.guideURL('foo/bar').should.be.eql('http://pdep-utn.localhost:3000/guides/foo/bar');
+    Domain.guideURL('foo/bar').should.be.eql('http://pdep-utn.localmumuki.io:3000/guides/foo/bar');
   }));
 
 });
