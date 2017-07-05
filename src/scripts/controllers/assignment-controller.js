@@ -159,6 +159,7 @@ angular
         return {
           uid: $stateParams.student,
           exercise_id: assignment.exercise.eid,
+          guide_slug: assignment.guide.slug,
           submission_id: submission.sid,
           message: {
             content: submission.message,
