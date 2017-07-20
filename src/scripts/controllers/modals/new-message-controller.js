@@ -14,6 +14,8 @@ angular
         });
     }
 
+    $scope.isSelected = (suggestion) => $scope.message.suggestion_id == suggestion.id;
+
     $scope.useSuggestion = (suggestion) => {
       $scope.message.suggestion_id = suggestion.id;
       $scope.message.message.content = suggestion.content;
