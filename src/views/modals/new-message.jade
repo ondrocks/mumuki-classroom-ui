@@ -12,6 +12,11 @@
     .container-fluid
       .row
         ace-with-markdown(content='message.message.content', header='new_message')
+
+    div
+      div(ng-repeat='suggestion in suggestions | limitTo: 3')
+        a.suggestion-item(href="", ng-bind-html='suggestion.content | trustHtml')
+
   .modal-footer
     button.btn.btn-success.btn-block(ng-click='send()')
       i.fa.fa-send

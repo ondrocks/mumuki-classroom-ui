@@ -5,6 +5,14 @@ angular
     $scope.student = student;
     $scope.message = message;
 
+    const loadSuggestions = () => {
+      return Api
+        .getSuggestions(message)
+        .then((res) => {
+          $scope.suggestions = res.data;
+        });
+    }
+
     $scope.send = () => {
       return Api
         .newMessage($scope.message, course)
@@ -23,4 +31,5 @@ angular
       $scope.expanded = !$scope.expanded;
     }
 
+    loadSuggestions();
   });
