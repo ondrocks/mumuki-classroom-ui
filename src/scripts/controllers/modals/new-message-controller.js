@@ -14,6 +14,11 @@ angular
         });
     }
 
+    $scope.useSuggestion = (suggestion) => {
+      $scope.message.suggestion_id = suggestion.id;
+      $scope.message.message.content = suggestion.content;
+    }
+
     $scope.send = () => {
       return Api
         .newMessage($scope.message, course)

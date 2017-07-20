@@ -16,8 +16,10 @@
     .suggestions-panel
       h5 {{ 'suggestions' | translate }}
       .suggestion-item(ng-repeat='suggestion in suggestions | limitTo: 3')
-        a(href="", ng-bind-html='suggestion.content | trustHtml')
-        small {{ Humanizer.date(suggestion.updated_at) }}
+        a(href="", ng-bind-html='suggestion.content_html | trustHtml', ng-click="useSuggestion(suggestion)")
+        span
+          i.fa.fa-fw.fa-clock-o
+          small {{ Humanizer.shortDate(suggestion.updated_at) }}
 
   .modal-footer
     button.btn.btn-success.btn-block(ng-click='send()')
