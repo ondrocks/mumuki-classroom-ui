@@ -136,7 +136,7 @@ gulp.task('dev:serve', ['dev:build'], () => {
     .pipe($.webserver({
       open: `/#/${process.env.TENANT}/home`,
       port: process.env.PORT,
-      host: 'localhost',
+      host: '0.0.0.0',
       livereload: true
     }));
 });
