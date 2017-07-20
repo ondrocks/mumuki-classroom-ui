@@ -13,9 +13,11 @@
       .row
         ace-with-markdown(content='message.message.content', header='new_message')
 
-    div
-      div(ng-repeat='suggestion in suggestions | limitTo: 3')
-        a.suggestion-item(href="", ng-bind-html='suggestion.content | trustHtml')
+    .suggestions-panel
+      h5 {{ 'suggestions' | translate }}
+      .suggestion-item(ng-repeat='suggestion in suggestions | limitTo: 3')
+        a(href="", ng-bind-html='suggestion.content | trustHtml')
+        small {{ Humanizer.date(suggestion.updated_at) }}
 
   .modal-footer
     button.btn.btn-success.btn-block(ng-click='send()')

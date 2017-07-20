@@ -1,9 +1,10 @@
 angular
   .module('classroom')
-  .controller('NewMessageController', function ($scope, $sce, $stateParams, $uibModalInstance, student, message, course, callback, Api) {
+  .controller('NewMessageController', function ($scope, $sce, $stateParams, $uibModalInstance, student, message, course, callback, Api, Humanizer) {
 
     $scope.student = student;
     $scope.message = message;
+    $scope.Humanizer = Humanizer;
 
     const loadSuggestions = () => {
       return Api

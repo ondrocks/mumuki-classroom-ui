@@ -1,7 +1,21 @@
+.suggestions-panel {
+  margin-top: 10px;
+}
+
 .suggestion-item {
   font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    width: 80%;
+  }
 
   p {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin: 0;
   }
 }

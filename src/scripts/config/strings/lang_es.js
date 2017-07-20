@@ -142,6 +142,7 @@ angular
     students_subscription_address: 'Dirección de suscripción de estudiantes',
     submissions_count: '{{submissionsCount}} soluciones enviadas. Última solución: {{lastSubmissionDate}}',
     submit: 'Enviar',
+    suggestions: 'Últimos mensajes enviados para este ejercicio:',
     teachers: 'Docentes',
     term_and_conditions: 'Al registrarte estas aceptando las <a target="_blank" href="{{url}}"> condiciones de uso.</a>',
     tests: 'Pruebas',
