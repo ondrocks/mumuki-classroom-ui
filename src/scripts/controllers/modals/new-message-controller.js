@@ -39,5 +39,11 @@ angular
       $scope.expanded = !$scope.expanded;
     }
 
+    $scope.$watch('message.message.content', (newValue) => {
+      if (_.isEmpty(newValue)) {
+        $scope.message.suggestion_id = undefined;
+      }
+    });
+
     loadSuggestions();
   });
