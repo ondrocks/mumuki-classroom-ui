@@ -110,7 +110,15 @@ angular
         views: {
           'content@classroom': {
             templateUrl: 'views/course.html',
-            controller: 'CourseController'
+            controller: 'CourseController',
+            resolve: {
+              course: ($state, $stateParams, Api, CurrentCourse) => {
+                return Api
+                  .getCourse($stateParams)
+                  .then((course) => CurrentCourse.set(course))
+                  .catch(() => $state.go('classroom.courses', $stateParams, { location: 'replace' }));
+              }
+            }
           }
         }
       })

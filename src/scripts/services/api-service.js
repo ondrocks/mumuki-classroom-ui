@@ -18,6 +18,12 @@ angular
         .then((res) => _.map(res.data.courses, Course.from))
     };
 
+    this.getCourse = ({course}) => {
+      return $http
+        .get(`${API()}/courses/${course}`)
+        .then((res) => Course.from(res.data.course))
+    };
+
     this.getCourseProgress = (course) => {
       return $http
         .get(`${API()}/courses/${course}/progress`)
