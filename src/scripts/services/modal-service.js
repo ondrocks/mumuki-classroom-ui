@@ -78,6 +78,15 @@ angular
       }
     });
 
+    this.inviteStudents = (course, callback) => $uibModal.open({
+      templateUrl: 'views/modals/invite-students.html',
+      controller: 'InviteStudentsController',
+      resolve: {
+        course: () => course,
+        callback: () => callback
+      }
+    });
+
     this.close = () => $uibModalStack.dismissAll();
 
   });

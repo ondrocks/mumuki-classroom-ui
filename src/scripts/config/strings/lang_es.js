@@ -74,6 +74,8 @@ angular
     guide: 'Guía',
     guides: 'Guías',
     hide: 'Ocultar',
+    invitation_link: 'Link de inscripción al curso',
+    invite_students: 'Invitar estudiantes',
     last_lesson: 'Ultima lección',
     last_name: 'Apellido',
     last_name_error: 'El campo apellido es obligatorio',

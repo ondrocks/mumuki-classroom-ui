@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('CourseController', function ($scope, $state, $stateParams, toastr, Api, Download, Modal) {
+  .controller('CourseController', function ($scope, $state, $stateParams, $timeout, clipboard, toastr, Api, Download, Modal, CurrentCourse) {
 
     const tabs = {
       guides: 'classroom.courses.course.guides',
@@ -9,6 +9,21 @@ angular
       teachers: 'classroom.courses.course.teachers',
       exams: 'classroom.courses.course.exams'
     }
+
+    $scope.course = CurrentCourse.get();
+
+    $scope.inviteStudents = () => {
+      Modal.inviteStudents($scope.course, (expirationDate) => {
+        return Api
+          .postInvitation($stateParams.course, expirationDate)
+          .then((invitation) => {
+            $scope.course.invitation = invitation;
+            CurrentCourse.set($scope.course);
+          })
+          .catch((e) => toastr.error(e));
+      });
+    }
+
     $scope.tabs = _.keys(tabs);
     $scope.open = (tab) => $state.go(tabs[tab], $stateParams, { location: 'replace' });
     $scope.is = (tab) => $state.is(tabs[tab], $stateParams);
@@ -24,6 +39,12 @@ angular
           .then((data) => Download.json($stateParams.course, data.exercise_student_progress))
           .catch((e) => toastr.error(e));
       });
+    }
+
+    $scope.copy = (link) => {
+      clipboard.copyText(link);
+      $scope.isCopied = true;
+      $timeout(() => $scope.isCopied = false, 2500);
     }
 
   });

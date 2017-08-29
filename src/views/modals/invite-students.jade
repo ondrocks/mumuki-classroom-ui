@@ -1,0 +1,26 @@
+.modal-content
+  .modal-header
+    p.modal-title.text-center.title-font {{ course.slug }}
+  .modal-body
+    .container-fluid
+      .row
+        .col-md-12
+          label {{ 'end_time' | translate }}
+          .dropdown.form-group
+            #start_time_id.dropdown-toggle.input-group.date.start_time_class(
+                role='button',
+                data-toggle='dropdown')
+              span.input-group-addon
+                i.fa.fa-calendar
+              input.form-control(type='text', data-ng-model='date.expiration', readonly)
+            ul.dropdown-menu(role='menu', aria-labelledby='start_time_id')
+              datetimepicker(
+                  data-ng-model='date.expiration',
+                  data-datetimepicker-config='{             \
+                    dropdownSelector: ".start_time_class"   \
+                  }')
+
+  .modal-footer
+    .row
+      .col-md-12.pull-right
+        button.btn.btn-success.pull-right(spin-on-click='send()') {{ 'save' | translate }}
