@@ -73,6 +73,7 @@ angular
     guide: 'Guide',
     guides: 'Guides',
     hide: 'Hide',
+    invite_students: 'Invite students',
     last_lesson: 'Last lesson',
     last_name: 'Last name',
     last_name_error: 'Last name is mandatory',

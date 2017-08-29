@@ -8,13 +8,15 @@
   br
 
   div.row
-    div.col-md-12
-      div.pull-right
-        a.btn.btn-link(href='', ng-click='export()')
-          span.view-mode {{ 'export_solutions_button' | translate }}
-          i.fa.fa-download
-        a#downloadAnchor(style='display:none')
-      button.btn.btn-success.pull-left(ng-click='goToAddStudents()') {{ 'new_student' | translate }}
+    .col-md-2
+      button.btn.btn-success(ng-click='goToAddStudents()') {{ 'new_student' | translate }}
+    .col-md-7
+      button.btn.btn-success(ng-click='inviteStudents()') {{ 'invite_students' | translate }}
+    .col-md-3(style='text-align: right')
+      a.btn.btn-link(href='', ng-click='export()')
+        span.view-mode {{ 'export_solutions_button' | translate }}
+        i.fa.fa-download
+      a#downloadAnchor(style='display:none')
   br
 
   div(ui-view='main')

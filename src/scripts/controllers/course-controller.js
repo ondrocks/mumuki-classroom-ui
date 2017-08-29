@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('CourseController', function ($scope, $state, $stateParams, toastr, Api, Download, Modal) {
+  .controller('CourseController', function ($scope, $state, $stateParams, toastr, Api, Download, Modal, CurrentCourse) {
 
     const tabs = {
       guides: 'classroom.courses.course.guides',
@@ -9,6 +9,13 @@ angular
       teachers: 'classroom.courses.course.teachers',
       exams: 'classroom.courses.course.exams'
     }
+
+    $scope.course = CurrentCourse.get();
+
+    $scope.inviteStudents = () => {
+      alert('click');
+    }
+
     $scope.tabs = _.keys(tabs);
     $scope.open = (tab) => $state.go(tabs[tab], $stateParams, { location: 'replace' });
     $scope.is = (tab) => $state.is(tabs[tab], $stateParams);
