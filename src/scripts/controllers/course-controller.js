@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('CourseController', function ($scope, $state, $stateParams, toastr, Api, Download, Modal, CurrentCourse) {
+  .controller('CourseController', function ($scope, $state, $stateParams, $timeout, clipboard, toastr, Api, Download, Modal, CurrentCourse) {
 
     const tabs = {
       guides: 'classroom.courses.course.guides',
@@ -39,6 +39,12 @@ angular
           .then((data) => Download.json($stateParams.course, data.exercise_student_progress))
           .catch((e) => toastr.error(e));
       });
+    }
+
+    $scope.copy = (link) => {
+      clipboard.copyText(link);
+      $scope.isCopied = true;
+      $timeout(() => $scope.isCopied = false, 2500);
     }
 
   });

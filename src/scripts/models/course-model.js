@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .factory('Course', function () {
+  .factory('Course', function (Domain) {
 
     class Course {
 
@@ -41,6 +41,16 @@ angular
 
       getShiftsString() {
         return this.shifts.join(', ');
+      }
+
+      invitationExpired() {
+        const now = moment();
+        const expiration = moment(_.get(this, 'invitation.expiration_date', Date.now()));
+        return now >= expiration;
+      }
+
+      invitationLink() {
+        return `${Domain.laboratoryURL()}/join/${this.invitation.code}`;
       }
 
     }

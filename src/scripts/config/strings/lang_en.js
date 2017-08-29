@@ -73,6 +73,7 @@ angular
     guide: 'Guide',
     guides: 'Guides',
     hide: 'Hide',
+    invitation_link: 'Course join us link',
     invite_students: 'Invite students',
     last_lesson: 'Last lesson',
     last_name: 'Last name',
