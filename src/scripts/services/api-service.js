@@ -226,4 +226,10 @@ angular
         .then((res) => _.get(res, 'data.markdown'));
     };
 
+    this.postInvitation = (course, expiration) => {
+      return $http
+        .post(`${API()}/courses/${course}/invitation`, {expiration_date: expiration})
+        .then((res) => _.get(res, 'data.invitation'));
+    };
+
   });

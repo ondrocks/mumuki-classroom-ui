@@ -13,7 +13,15 @@ angular
     $scope.course = CurrentCourse.get();
 
     $scope.inviteStudents = () => {
-      alert('click');
+      Modal.inviteStudents($scope.course, (expirationDate) => {
+        return Api
+          .postInvitation($stateParams.course, expirationDate)
+          .then((invitation) => {
+            $scope.course.invitation = invitation;
+            CurrentCourse.set($scope.course);
+          })
+          .catch((e) => toastr.error(e));
+      });
     }
 
     $scope.tabs = _.keys(tabs);
