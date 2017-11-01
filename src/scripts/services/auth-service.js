@@ -16,7 +16,6 @@ angular
     };
 
     this.signout = () => {
-      $cookies.remove(CONFIG.cookie.session, { domain: CONFIG.cookie.session });
       profile = null;
       document.location.href = $injector.get('Api').getLogoutUrl();
     };

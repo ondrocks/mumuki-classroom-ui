@@ -17,7 +17,6 @@ angular
 
     cookie: {
       domain: 'localmumuki',
-      session: '_mumuki_classroom_session'
     },
 
     organizationMappingMode: 'subdomain'

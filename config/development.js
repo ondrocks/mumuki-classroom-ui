@@ -17,7 +17,6 @@ angular
 
     cookie: {
       domain: 'localhost',
-      session: '_mumuki_classroom_session'
     },
 
     organizationMappingMode: 'path'
