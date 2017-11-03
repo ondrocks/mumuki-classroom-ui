@@ -75,6 +75,11 @@ angular
         .then((res) => Exam.from(res.data))
     };
 
+    this.getSuggestions = ({ guide_slug, exercise_id }) => {
+      return $http
+        .get(`${API()}/suggestions/${guide_slug}/${exercise_id}`);
+    };
+
     this.createCourse = (course) => {
       return $http
         .post(`${API()}/courses`, course)

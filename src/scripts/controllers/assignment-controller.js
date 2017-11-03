@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $filter, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student, Modal, Scroll, Notification) {
+  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $filter, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student, Modal, Scroll, Notification, Organization) {
 
     Preferences($scope, 'options');
 
@@ -30,6 +30,8 @@ angular
                            })
                            .groupBy('assignment.exercise.eid')
                            .value();
+
+    $scope.raiseHandEnabled = Organization.raiseHandEnabled();
 
     $scope.notifications = (assignment) => {
       return _.get(notifications, assignment.exercise.eid, []);

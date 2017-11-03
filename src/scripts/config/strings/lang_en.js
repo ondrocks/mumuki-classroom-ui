@@ -141,6 +141,7 @@ angular
     students_subscription_address: 'Students subscription address',
     submissions_count: '{{submissionsCount}} solutions sent. Last solution: {{lastSubmissionDate}}',
     submit: 'Submit',
+    suggestions: 'Latest messages sent for this exercise:',
     teachers: 'Teachers',
     term_and_conditions: 'Agree with mumuki <a target="_blank" href="{{url}}"> terms and conditions.</a>',
     tests: 'Tests',

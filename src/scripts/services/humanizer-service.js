@@ -6,4 +6,8 @@ angular
     this.date = (date) => {
       return moment(date).fromNow();
     }
+
+    this.shortDate = (date) => {
+      return moment(date).fromNow(true);
+    }
   });

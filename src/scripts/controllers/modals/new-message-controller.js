@@ -1,9 +1,25 @@
 angular
   .module('classroom')
-  .controller('NewMessageController', function ($scope, $sce, $stateParams, $uibModalInstance, student, message, course, callback, Api) {
+  .controller('NewMessageController', function ($scope, $sce, $stateParams, $uibModalInstance, student, message, course, callback, Api, Humanizer) {
 
     $scope.student = student;
     $scope.message = message;
+    $scope.Humanizer = Humanizer;
+
+    const loadSuggestions = () => {
+      return Api
+        .getSuggestions(message)
+        .then((res) => {
+          $scope.suggestions = res.data;
+        });
+    }
+
+    $scope.isSelected = (suggestion) => $scope.message.suggestion_id === suggestion.id;
+
+    $scope.useSuggestion = (suggestion) => {
+      $scope.message.suggestion_id = suggestion.id;
+      $scope.message.message.content = suggestion.content;
+    }
 
     $scope.send = () => {
       return Api
@@ -23,4 +39,11 @@ angular
       $scope.expanded = !$scope.expanded;
     }
 
+    $scope.$watch('message.message.content', (newValue) => {
+      if (_.isEmpty(newValue)) {
+        $scope.message.suggestion_id = undefined;
+      }
+    });
+
+    loadSuggestions();
   });
