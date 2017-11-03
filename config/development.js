@@ -4,19 +4,19 @@ angular
   .constant('CONFIG', {
 
     classroom: {
-      url: 'http://localhost:3002'
+      url: 'http://0.0.0.0:3002'
     },
 
     laboratory: {
-      url: 'http://localhost:3000'
+      url: 'http://0.0.0.0:3000'
     },
 
     bibliotheca: {
-      url: 'http://localhost:3004'
+      url: 'http://0.0.0.0:3004'
     },
 
     cookie: {
-      domain: 'localhost',
+      domain: '0.0.0.0',
     },
 
     organizationMappingMode: 'path'
