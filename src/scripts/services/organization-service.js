@@ -19,6 +19,10 @@ angular
       $rootScope.customCssUrl = org.theme_stylesheet_url;
     };
 
+    this.raiseHandEnabled = () => {
+      return this.organization.raise_hand_enabled;
+    }
+
     this.currentLocale = () => $translate.use();
 
     this.tosUrl = () => Domain.tosURL(this.currentLocale());

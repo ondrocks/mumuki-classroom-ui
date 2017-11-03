@@ -37,7 +37,7 @@
                   a(href='', ng-click='diff()')
                     i.fa.fa-columns
                     span &nbsp;{{ 'diff' | translate }}
-                li(ng-class='{ "active": getViewMode().showMessages }', ng-if="assignment.submissions.length")
+                li(ng-class='{ "active": getViewMode().showMessages }', ng-if="raiseHandEnabled && assignment.submissions.length")
                   a(href='', ng-click='messages()')
                     i.fa.fa-comments-o
                     span &nbsp;{{ 'messages' | translate }}
@@ -74,7 +74,7 @@
                     pg-offset='1',
                     pg-click='selectDiffByPage')
 
-                .tab-pane(ng-class='{ "active": getViewMode().showMessages }', ng-if="assignment.submissions.length")
+                .tab-pane(ng-class='{ "active": getViewMode().showMessages }', ng-if="raiseHandEnabled && assignment.submissions.length")
                   span.mu-view-messages(ng-bind-html='(html | trustHtml)', ng-if='allMessages')
                   .mu-messages(ng-if='!allMessages')
                     ol.mu-chat
