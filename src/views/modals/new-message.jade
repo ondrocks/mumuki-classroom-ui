@@ -13,7 +13,7 @@
       .row
         ace-with-markdown(content='message.message.content', header='new_message')
 
-    .suggestions-panel
+    .suggestions-panel(ng-if="suggestions.length")
       h5 {{ 'suggestions' | translate }}
       .suggestion-item(ng-repeat='suggestion in suggestions | limitTo: 3')
         a(href="", ng-bind-html='suggestion.content_html | trustHtml', ng-click="useSuggestion(suggestion)")
