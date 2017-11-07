@@ -69,7 +69,7 @@ angular
       }
     });
 
-    this.manualCorrection = (assignment, callback) => $uibModal.open({
+    this.manualCorrection = (callback) => $uibModal.open({
       templateUrl: 'views/modals/manual-correction.html',
       controller: 'ManualCorrectionController',
       windowClass: 'new-message-modal mu-new-message-modal',
@@ -77,7 +77,6 @@ angular
       backdrop: false,
       keyboard: false,
       resolve: {
-        assignment: () => assignment,
         callback: () => callback
       }
     });

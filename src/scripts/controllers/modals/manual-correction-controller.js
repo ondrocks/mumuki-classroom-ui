@@ -4,7 +4,6 @@ angular
                                                       $sce,
                                                       $stateParams,
                                                       $uibModalInstance,
-                                                      assignment,
                                                       callback) {
 
     const SELECT_STATUS = {
@@ -14,8 +13,6 @@ angular
 
     let _currentStatus = SELECT_STATUS;
 
-    $scope.assigment = assignment;
-    $scope.lastSubmission = assignment.lastSubmission();
     $scope.correction = '';
 
     $scope.currentStatus = () => _currentStatus;
@@ -40,7 +37,8 @@ angular
     ]
 
     $scope.send = () => {
-      console.log($scope.correction);
+      return callback({content: $scope.correction, status: _currentStatus.status})
+        .then(() => $scope.cancel());
     }
 
     $scope.cancel = () => {

@@ -123,3 +123,8 @@
                   div(ng-bind-html="trust(expectationResult.html)")
                 .col-sm-1
                   status-icon(status='expectationResult.result')
+
+          .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.manual_correction')
+            h4 {{ 'manual_correction' | translate }}
+            p
+              div(ng-bind-html="trust(submission.manual_correction)")

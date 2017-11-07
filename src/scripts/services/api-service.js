@@ -237,4 +237,9 @@ angular
         .then((res) => _.get(res, 'data.invitation'));
     };
 
+    this.postManualCorrection = ({course, slug, uid, eid, sid, content, status}) => {
+      return $http
+        .post(`${API()}/courses/${course}/guides/${slug}/${eid}/student/${uid}/correction`, {sid, content, status})
+    }
+
   });

@@ -184,8 +184,21 @@ angular
       };
 
       $scope.manualCorrection = () => {
-        Modal.manualCorrection(assignment, (correction) => {
+        Modal.manualCorrection(({content, status}) => {
+          const lastSubmission = assignment.lastSubmission();
+          const sid = lastSubmission.sid;
+          const eid = assignment.exercise.eid;
+          const uid = assignment.student.uid
+          const slug = assignment.guide.slug;
+          const course = $stateParams.course
+          return Api.postManualCorrection({course, slug, uid, eid, sid, content, status})
+            .then(() => {
+              lastSubmission.status = status;
+              lastSubmission.manual_correction = content;
 
+              assignment.diffs.selected.right.status = status;
+              assignment.diffs.selected.right.manual_correction = content;
+            });
         });
       };
 

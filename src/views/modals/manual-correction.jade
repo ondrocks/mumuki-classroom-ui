@@ -28,7 +28,7 @@
               a.pointer #[status-icon(status='it.status')] {{ it.name | translate }}
 
       .col-md-6.pull-right
-        button.btn.btn-success.btn-block(ng-click='send()', ng-disabled='sendCorrectionDisabled()')
+        button.btn.btn-success.btn-block(spin-on-click='send()', ng-disabled='sendCorrectionDisabled()')
           i.fa.fa-send
           span &nbsp;
           span {{ 'send' | translate }}
