@@ -372,3 +372,38 @@ span.active-exercise {
 .no-solutions-sent {
   @include display-flex(row, center, center)
 }
+
+$btn-select: $mu-color-primary;
+$btn-select-bg: white;
+
+.btn-select {
+  background-color: $btn-select-bg;
+  color: $btn-select;
+  border: 1px solid $btn-select;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  &:hover, &:focus {
+    background-color: $btn-select;
+    color: $btn-select-bg;
+    border: 1px solid $btn-select;
+  }
+  &:focus {
+    background-color: darken($btn-select, 5%);
+  }
+}
+
+ace-with-markdown {
+  &.passed {
+    .ace-tm { background-color: lighten($mu-color-success, 42.5%) }
+  }
+  &.passed_with_warnings {
+    .ace-tm { background-color: lighten($mu-color-warning, 42.5%) }
+  }
+  &.failed {
+    .ace-tm { background-color: lighten($mu-color-danger, 37.5%) }
+  }
+  &.errored {
+    .ace-tm { background-color: lighten($mu-color-danger, 37.5%) }
+  }
+}

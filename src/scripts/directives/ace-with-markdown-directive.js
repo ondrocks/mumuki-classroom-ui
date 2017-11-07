@@ -63,7 +63,7 @@ angular
 
         $scope.$watch(() => _selectedTab, (newVal) => {
           if (newVal === PREVIEW) {
-           renderMarkdown().then(() => $scope.$apply());
+           renderMarkdown();
           }
         });
 

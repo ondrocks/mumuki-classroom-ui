@@ -11,10 +11,24 @@
   .modal-body.mu-view-messages
     .container-fluid
       .row
-        ace-with-markdown(content='correction', header='manual_correction')
+        ace-with-markdown(content='correction', header='manual_correction', class='{{currentStatus().status}}')
 
   .modal-footer
-    button.btn.btn-success.btn-block(ng-click='send()', ng-disabled='!correction.length')
-      i.fa.fa-send
-      span &nbsp;
-      span {{ 'send' | translate }}
+
+    .row
+      .col-md-6.pull-left
+        .dropup
+          button.btn.btn-block.btn-select.dropdown-toggle(
+              data-toggle='dropdown',
+              aria-haspopup='true',
+              aria-expanded='false')
+            span #[status-icon(status='currentStatus().status')] {{ currentStatus().name | translate }}  #[i.fa.fa-fw.fa-caret-up]
+          ul.dropdown-menu
+            li(ng-repeat='it in status', ng-click='selectStatus(it)')
+              a.pointer #[status-icon(status='it.status')] {{ it.name | translate }}
+
+      .col-md-6.pull-right
+        button.btn.btn-success.btn-block(ng-click='send()', ng-disabled='sendCorrectionDisabled()')
+          i.fa.fa-send
+          span &nbsp;
+          span {{ 'send' | translate }}
