@@ -44,9 +44,13 @@
 
               .tab-content
                 .tab-pane(ng-class='{ "active": getViewMode().showMarkdown }')
-                  markdown-preview.markdown-preview(
-                      content='lastSolutionMarkdown[assignment.exercise.id]',
-                      ng-if="hasSubmissions()")
+
+                  div(ng-if="hasSubmissions()")
+                    markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
+
+                    btn.btn.btn-success.btn-block(ng-click='manualCorrection()')
+                      i.fa.fa-fw.fa-pencil
+                      span {{ 'manual_correction' | translate }}
 
                   span.no-solutions-sent(ng-if="!hasSubmissions()") {{ 'no_solutions_sent' | translate }}
 

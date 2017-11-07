@@ -183,6 +183,10 @@ angular
         });
       };
 
+      $scope.manualCorrection = () => {
+        console.log('Manual Correction');
+      };
+
       $scope.viewMessages = () => {
         $scope.spin = true;
         Api
