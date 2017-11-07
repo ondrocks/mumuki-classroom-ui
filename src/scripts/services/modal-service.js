@@ -69,6 +69,19 @@ angular
       }
     });
 
+    this.manualCorrection = (assignment, callback) => $uibModal.open({
+      templateUrl: 'views/modals/manual-correction.html',
+      controller: 'ManualCorrectionController',
+      windowClass: 'new-message-modal mu-new-message-modal',
+      openedClass: 'mu-modal-open',
+      backdrop: false,
+      keyboard: false,
+      resolve: {
+        assignment: () => assignment,
+        callback: () => callback
+      }
+    });
+
     this.viewMessages = (html, callback) => $uibModal.open({
       templateUrl: 'views/modals/view-messages.html',
       controller: 'ViewMessagesController',

@@ -48,7 +48,7 @@
                   div(ng-if="hasSubmissions()")
                     markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
 
-                    btn.btn.btn-success.btn-block(ng-click='manualCorrection()')
+                    button.btn.btn-success.btn-block(ng-click='manualCorrection()')
                       i.fa.fa-fw.fa-pencil
                       span {{ 'manual_correction' | translate }}
 
@@ -90,7 +90,7 @@
                           p(ng-bind-html='trust(message.content)')
                           .sender {{message.sender}}
                           time {{Humanizer.date(message.created_at)}}
-                  btn.btn.btn-success.btn-block(ng-click='newMessage()')
+                  button.btn.btn-success.btn-block(ng-click='newMessage()')
                     i.fa.fa-paper-plane &nbsp;
                     span {{'new_message' | translate}}
 

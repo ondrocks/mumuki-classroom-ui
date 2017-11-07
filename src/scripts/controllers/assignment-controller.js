@@ -184,7 +184,9 @@ angular
       };
 
       $scope.manualCorrection = () => {
-        console.log('Manual Correction');
+        Modal.manualCorrection(assignment, (correction) => {
+
+        });
       };
 
       $scope.viewMessages = () => {
