@@ -1,6 +1,6 @@
 angular
   .module('classroom')
-  .controller('ManualCorrectionController', function ($scope,
+  .controller('ManualEvaluationController', function ($scope,
                                                       $sce,
                                                       $stateParams,
                                                       $uibModalInstance,
@@ -13,7 +13,7 @@ angular
 
     let _currentStatus = SELECT_STATUS;
 
-    $scope.correction = '';
+    $scope.comment = '';
 
     $scope.currentStatus = () => _currentStatus;
 
@@ -37,7 +37,7 @@ angular
     ]
 
     $scope.send = () => {
-      return callback({content: $scope.correction, status: _currentStatus.status})
+      return callback({comment: $scope.comment, status: _currentStatus.status})
         .then(() => $scope.cancel());
     }
 
@@ -46,12 +46,12 @@ angular
     }
 
     $scope.toggle = () => {
-      angular.element('.modal-body, .modal-footer')[$scope.expanded ? 'show' : 'hide']();
       $scope.expanded = !$scope.expanded;
+      angular.element('.modal-footer, .modal-body')[$scope.expanded ? 'hide' : 'show']();
     }
 
-    $scope.sendCorrectionDisabled = () => {
-      return _.isEmpty($scope.correction) || _currentStatus === SELECT_STATUS;
+    $scope.sendManualEvaluationDisabled = () => {
+      return _.isEmpty($scope.comment) || _currentStatus === SELECT_STATUS;
     }
 
     $scope.selectStatus = (status) => {

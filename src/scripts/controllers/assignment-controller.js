@@ -183,21 +183,25 @@ angular
         });
       };
 
-      $scope.manualCorrection = () => {
-        Modal.manualCorrection(({content, status}) => {
+      $scope.manualEvaluation = () => {
+        Modal.manualEvaluation(({comment, status}) => {
           const lastSubmission = assignment.lastSubmission();
-          const sid = lastSubmission.sid;
-          const eid = assignment.exercise.eid;
-          const uid = assignment.student.uid
-          const slug = assignment.guide.slug;
-          const course = $stateParams.course
-          return Api.postManualCorrection({course, slug, uid, eid, sid, content, status})
+          const params = {
+            sid: lastSubmission.sid,
+            eid: assignment.exercise.eid,
+            uid: assignment.student.uid,
+            slug: assignment.guide.slug,
+            course: $stateParams.course,
+            status: status,
+            comment: comment,
+          }
+          return Api.postManualEvaluation(params)
             .then(() => {
               lastSubmission.status = status;
-              lastSubmission.manual_correction = content;
+              lastSubmission.manual_evaluation = comment;
 
               assignment.diffs.selected.right.status = status;
-              assignment.diffs.selected.right.manual_correction = content;
+              assignment.diffs.selected.right.manual_evaluation = comment;
             });
         });
       };

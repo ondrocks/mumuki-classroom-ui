@@ -48,9 +48,9 @@
                   div(ng-if="hasSubmissions()")
                     markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
 
-                    button.btn.btn-success.btn-block(ng-click='manualCorrection()')
+                    button.btn.btn-success.btn-block(ng-click='manualEvaluation()')
                       i.fa.fa-fw.fa-pencil
-                      span {{ 'manual_correction' | translate }}
+                      span {{ 'manual_evaluation' | translate }}
 
                   span.no-solutions-sent(ng-if="!hasSubmissions()") {{ 'no_solutions_sent' | translate }}
 
@@ -124,7 +124,7 @@
                 .col-sm-1
                   status-icon(status='expectationResult.result')
 
-          .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.manual_correction')
-            h4 {{ 'manual_correction' | translate }}
+          .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.manual_evaluation')
+            h4 {{ 'manual_evaluation' | translate }}
             p
-              div(ng-bind-html="trust(submission.manual_correction)")
+              div(ng-bind-html="trust(submission.manual_evaluation)")

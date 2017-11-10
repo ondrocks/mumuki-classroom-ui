@@ -69,9 +69,9 @@ angular
       }
     });
 
-    this.manualCorrection = (callback) => $uibModal.open({
-      templateUrl: 'views/modals/manual-correction.html',
-      controller: 'ManualCorrectionController',
+    this.manualEvaluation = (callback) => $uibModal.open({
+      templateUrl: 'views/modals/manual-evaluation.html',
+      controller: 'ManualEvaluationController',
       windowClass: 'new-message-modal mu-new-message-modal',
       openedClass: 'mu-modal-open',
       backdrop: false,

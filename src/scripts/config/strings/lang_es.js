@@ -89,7 +89,7 @@ angular
     log_in: 'Iniciar sesión',
     log_in_first: 'Tenés que iniciar sesión primero',
     log_out: 'Cerrar sesión',
-    manual_correction: 'Corregir',
+    manual_evaluation: 'Evaluación manual',
     mark_as_read: 'Marcar como leído',
     mark_as_unread: 'Marcar como no leído',
     message: '{{assignment.student.first_name}} {{assignment.student.last_name}} te hizo una pregunta en <strong> "{{assignment.exercise.name}}" </strong>',

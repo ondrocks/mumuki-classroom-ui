@@ -11,7 +11,7 @@
   .modal-body.mu-view-messages
     .container-fluid
       .row
-        ace-with-markdown(content='correction', header='manual_correction', class='{{currentStatus().status}}')
+        ace-with-markdown(content='comment', header='manual_evaluation', class='{{currentStatus().status}}')
 
   .modal-footer
 
@@ -28,7 +28,7 @@
               a.pointer #[status-icon(status='it.status')] {{ it.name | translate }}
 
       .col-md-6.pull-right
-        button.btn.btn-success.btn-block(spin-on-click='send()', ng-disabled='sendCorrectionDisabled()')
+        button.btn.btn-success.btn-block(spin-on-click='send()', ng-disabled='sendManualEvaluationDisabled()')
           i.fa.fa-send
           span &nbsp;
           span {{ 'send' | translate }}
