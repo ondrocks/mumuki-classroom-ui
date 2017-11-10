@@ -183,6 +183,29 @@ angular
         });
       };
 
+      $scope.manualEvaluation = () => {
+        Modal.manualEvaluation(({comment, status}) => {
+          const lastSubmission = assignment.lastSubmission();
+          const params = {
+            sid: lastSubmission.sid,
+            eid: assignment.exercise.eid,
+            uid: assignment.student.uid,
+            slug: assignment.guide.slug,
+            course: $stateParams.course,
+            status: status,
+            comment: comment,
+          }
+          return Api.postManualEvaluation(params)
+            .then(() => {
+              lastSubmission.status = status;
+              lastSubmission.manual_evaluation = comment;
+
+              assignment.diffs.selected.right.status = status;
+              assignment.diffs.selected.right.manual_evaluation = comment;
+            });
+        });
+      };
+
       $scope.viewMessages = () => {
         $scope.spin = true;
         Api

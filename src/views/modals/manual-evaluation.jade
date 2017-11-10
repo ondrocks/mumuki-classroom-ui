@@ -1,0 +1,34 @@
+.modal-content
+  .mu-modal-header
+    div
+      i.fa.fa-fw.fa-envelope-open.mu-modal-close-button
+    div
+      small
+        i.fa.fa-fw.fa-minus.pointer(ng-click='toggle()', style='color: white')
+      span &nbsp;
+      button.mu-modal-close-button(type='button', ng-click='cancel()', data-dismiss='modal', aria-label='Close')
+        i.fa.fa-fw.fa-times(aria-hidden='true')
+  .modal-body.mu-view-messages
+    .container-fluid
+      .row
+        ace-with-markdown(content='comment', header='manual_evaluation', class='{{currentStatus().status}}')
+
+  .modal-footer
+
+    .row
+      .col-md-6.pull-left
+        .dropup
+          button.btn.btn-block.btn-select.dropdown-toggle(
+              data-toggle='dropdown',
+              aria-haspopup='true',
+              aria-expanded='false')
+            span #[status-icon(status='currentStatus().status')] {{ currentStatus().name | translate }}  #[i.fa.fa-fw.fa-caret-up]
+          ul.dropdown-menu
+            li(ng-repeat='it in status', ng-click='selectStatus(it)')
+              a.pointer #[status-icon(status='it.status')] {{ it.name | translate }}
+
+      .col-md-6.pull-right
+        button.btn.btn-success.btn-block(spin-on-click='send()', ng-disabled='sendManualEvaluationDisabled()')
+          i.fa.fa-send
+          span &nbsp;
+          span {{ 'send' | translate }}

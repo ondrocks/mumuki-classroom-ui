@@ -69,6 +69,18 @@ angular
       }
     });
 
+    this.manualEvaluation = (callback) => $uibModal.open({
+      templateUrl: 'views/modals/manual-evaluation.html',
+      controller: 'ManualEvaluationController',
+      windowClass: 'new-message-modal mu-new-message-modal',
+      openedClass: 'mu-modal-open',
+      backdrop: false,
+      keyboard: false,
+      resolve: {
+        callback: () => callback
+      }
+    });
+
     this.viewMessages = (html, callback) => $uibModal.open({
       templateUrl: 'views/modals/view-messages.html',
       controller: 'ViewMessagesController',

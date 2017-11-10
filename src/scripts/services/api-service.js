@@ -237,4 +237,9 @@ angular
         .then((res) => _.get(res, 'data.invitation'));
     };
 
+    this.postManualEvaluation = ({course, slug, uid, eid, sid, comment, status}) => {
+      return $http
+        .post(`${API()}/courses/${course}/guides/${slug}/${eid}/student/${uid}/manual_evaluation`, {sid, comment, status})
+    }
+
   });

@@ -44,9 +44,13 @@
 
               .tab-content
                 .tab-pane(ng-class='{ "active": getViewMode().showMarkdown }')
-                  markdown-preview.markdown-preview(
-                      content='lastSolutionMarkdown[assignment.exercise.id]',
-                      ng-if="hasSubmissions()")
+
+                  div(ng-if="hasSubmissions()")
+                    markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
+
+                    button.btn.btn-success.btn-block(ng-click='manualEvaluation()')
+                      i.fa.fa-fw.fa-pencil
+                      span {{ 'manual_evaluation' | translate }}
 
                   span.no-solutions-sent(ng-if="!hasSubmissions()") {{ 'no_solutions_sent' | translate }}
 
@@ -86,7 +90,7 @@
                           p(ng-bind-html='trust(message.content)')
                           .sender {{message.sender}}
                           time {{Humanizer.date(message.created_at)}}
-                  btn.btn.btn-success.btn-block(ng-click='newMessage()')
+                  button.btn.btn-success.btn-block(ng-click='newMessage()')
                     i.fa.fa-paper-plane &nbsp;
                     span {{'new_message' | translate}}
 
@@ -119,3 +123,8 @@
                   div(ng-bind-html="trust(expectationResult.html)")
                 .col-sm-1
                   status-icon(status='expectationResult.result')
+
+          .bs-callout(ng-class='"bs-callout-" + submission.colorClass()', ng-if='submission.manual_evaluation')
+            h4 {{ 'manual_evaluation' | translate }}
+            p
+              div(ng-bind-html="trust(submission.manual_evaluation)")
