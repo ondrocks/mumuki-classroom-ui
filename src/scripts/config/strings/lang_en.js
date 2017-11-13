@@ -52,6 +52,7 @@ angular
     email_not_provided: 'Email not provided',
     empty_notifications: 'There is no notifications to show',
     end_time: 'End time',
+    evaluate: 'Evaluate',
     exam: 'Exam',
     exam_link: 'Exam link',
     exam_updated: 'Exam updated successfully',
