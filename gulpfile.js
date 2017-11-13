@@ -17,19 +17,11 @@ $.protocol = $.stringReplace(/https?:\/\//g, '//');
 
 const useminOptions = () => {
   return {
-    development: {
-      scss: [],
-      es6: [],
-      css: [$.minifyCss, $.protocol, $.rev],
-      js: [$.rev]
-    },
-    production: {
-      scss: [$.rev],
-      es6: [$.rev],
-      css: [$.minifyCss, $.protocol, $.rev],
-      js: [$.uglify, $.rev]
-    }
-  }[process.env.NODE_ENV];
+    scss: [$.minifyCss, $.rev],
+    es6: [$.ngAnnotate, $.uglify, $.rev],
+    css: [$.minifyCss, $.protocol, $.rev],
+    js: [$.uglify, $.rev]
+  }
 }
 
 const configFile = () => `config/${process.env.NODE_ENV}.js`;
@@ -123,12 +115,19 @@ gulp.task('assets', () => {
 
 gulp.task('jade', ['jade:index', 'jade:views']);
 
+gulp.task('gzip', () => {
+  const toGzip = ['css', 'html', 'js', 'svg'].map((ext) => `${outFolder}/**/*.${ext}`);
+  return gulp.src(toGzip)
+    .pipe($.gzip())
+    .pipe(gulp.dest(outFolder));
+});
+
 gulp.task('dev:build', (done) => {
-  runSequence('clean', 'dev:js', 'scss', 'jade', 'fonts', 'images', 'assets', done);
+  runSequence('clean', 'dev:js', 'scss', 'jade', 'fonts', 'images', 'assets', 'gzip', done);
 });
 
 gulp.task('prod:build', (done) => {
-  runSequence('clean', 'prod:js', 'scss', 'jade', 'fonts', 'images', 'assets', 'release', done);
+  runSequence('clean', 'prod:js', 'scss', 'jade', 'fonts', 'images', 'assets', 'release', 'gzip', done);
 });
 
 gulp.task('dev:serve', ['dev:build'], () => {
