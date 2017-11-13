@@ -18,8 +18,8 @@ html.no-js(lang='es')
     // endbuild
 
   body(ng-app='classroom')
+
     link(rel='stylesheet', ng-href='{{ customCssUrl }}')
-    script(ng-src='{{ customJsUrl | trusted }}', defer='')
 
     //if lt IE 10
       p.browserupgrade
@@ -36,6 +36,8 @@ html.no-js(lang='es')
     //- javascript bower dependencies, generated automatically
     // endbower
     // endbuild
+
+    script(ng-src='{{ customJsUrl | trusted }}', defer='')
 
     // build:es6(build) scripts/main.js
     script(type='text/javascript', src='scripts/main.js')
