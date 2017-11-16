@@ -2,9 +2,30 @@
 angular
   .module('classroom')
   .service('Permissions', function ($injector, store, Domain) {
-    const regex = () => new RegExp(`^(\\\*|\\\*\\\/\\\*|${Domain.tenant()}\\\/\\\*)$`);
+
     const PERMISSIONS_KEY = 'permissions';
     const availableScopes = ['teacher', 'headmaster', 'janitor', 'owner'];
+
+    class PermissionSlug {
+      constructor(slug = '') {
+        var [org, course] = slug.split('/');
+        this.organization = org;
+        this.course = course;
+      }
+
+      toString() {
+        return `${this.organization}/${this.course}`;
+      }
+
+      hasPermission() {
+        return this.organization === Domain.tenant() || this.organization === '*';
+      }
+
+      static from(slug) {
+        return new PermissionSlug(slug);
+      }
+    }
+
 
     this.set = (permissions = {}) => {
       store.set(PERMISSIONS_KEY, _.pick(permissions, availableScopes));
@@ -15,7 +36,7 @@ angular
     };
 
     this.get = (role) => {
-      return _.get(store.get(PERMISSIONS_KEY), role, '');
+      return _.get(store.get(PERMISSIONS_KEY), role, '').split(':');
     };
 
     this.ownerPermissions = () => {
@@ -35,19 +56,23 @@ angular
     };
 
     this.isOwner = () => {
-      return _.some(this.ownerPermissions(), (p) => regex().test(p));
+      return this.is('owner');
     };
 
     this.isJanitor = () => {
-      return _.some(this.janitorPermissions(), (p) => regex().test(p)) || this.isOwner();
+      return this.is('janitor') || this.isOwner();
     };
 
     this.isHeadmaster = () => {
-      return _.some(this.headmasterPermissions(), (p) => regex().test(p)) || this.isJanitor();
+      return this.is('headmaster') || this.isJanitor();
     };
 
     this.isTeacher = () => {
-      return _.some(this.teacherPermissions(), (p) => regex().test(p.split('/')[0])) || this.isHeadmaster();
+      return this.is('teacher') || this.isHeadmaster();
     };
+
+    this.is = (type) => {
+      return _.some(this[`${type}Permissions`](), (p) => PermissionSlug.from(p).hasPermission());
+    }
 
   });
