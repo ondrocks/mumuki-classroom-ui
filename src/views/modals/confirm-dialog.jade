@@ -5,7 +5,7 @@
     .container-fluid
       .row
         .col-md-12
-          p {{ trust(text) }}
+          p(ng-bind-html="text | trustHtml")
   .modal-footer
     .row
       .col-md-12.pull-right

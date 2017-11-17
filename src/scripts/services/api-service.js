@@ -90,6 +90,12 @@ angular
         .post(`${API()}/courses/${course}/exams`, exam)
     }
 
+    this.isExamInUsage = (exam) => {
+      return $http
+        .get(`${API()}/guides/${exam.slug}`)
+        .then(() => true, () => false)
+    }
+
     this.createStudent = (course, student) => {
       return $http
         .post(`${API()}/courses/${course}/students`, student)

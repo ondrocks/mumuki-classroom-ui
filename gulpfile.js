@@ -17,11 +17,19 @@ $.protocol = $.stringReplace(/https?:\/\//g, '//');
 
 const useminOptions = () => {
   return {
-    scss: [$.minifyCss, $.rev],
-    es6: [$.ngAnnotate, $.uglify, $.rev],
-    css: [$.minifyCss, $.protocol, $.rev],
-    js: [$.uglify, $.rev]
-  }
+    development: {
+      scss: [],
+      es6: [],
+      css: [$.minifyCss, $.protocol, $.rev],
+      js: [$.uglify, $.rev]
+    },
+    production: {
+      scss: [$.minifyCss, $.rev],
+      es6: [$.ngAnnotate, $.uglify, $.rev],
+      css: [$.minifyCss, $.protocol, $.rev],
+      js: [$.uglify, $.rev]
+    }
+  }[process.env.NODE_ENV];
 }
 
 const configFile = () => `config/${process.env.NODE_ENV}.js`;
