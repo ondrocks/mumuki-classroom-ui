@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ExamController', function ($scope, $state, $stateParams, $filter, toastr) {
+  .controller('ExamController', function ($scope, $state, $stateParams, $filter, toastr, Api, Modal) {
 
     const isBefore = () =>
       !!$scope.exam &&
@@ -30,14 +30,33 @@ angular
       return localExam;
     }
 
-    $scope.create = () => {
-      const exam = $scope.getExam($scope.exam);
-      if (!$scope.hasDuration) exam.duration = null;
+    const checkExistenceAndSave = (exam) => {
+      return Api.isExamInUsage(exam)
+        .then((hasUsage) => {
+          if (hasUsage) {
+            Modal.newExam(() => doCreate(exam));
+          } else {
+            doCreate(exam);
+          }
+        });
+    }
+
+    const doCreate = (exam) => {
       return $scope
         .submit($stateParams.course, exam)
         .then(() => $state.go('classroom.courses.course.exams', $stateParams, { reload: true }))
         .then(() => toastr.success($filter('translate')('exam_updated')))
         .catch((res) => toastr.error(res.data.message));
+    }
+
+    $scope.create = () => {
+      const exam = $scope.getExam($scope.exam);
+      if (!$scope.hasDuration) exam.duration = null;
+      if ($scope.isNew) {
+        checkExistenceAndSave(exam);
+      } else {
+        doCreate(exam);
+      }
     }
 
   });

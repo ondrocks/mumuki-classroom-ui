@@ -110,6 +110,7 @@ angular
     new_course_shift: 'Turno',
     new_course_shift_error: 'Seleccioná al menos un turno',
     new_exam: 'Nuevo examen',
+    new_exam_warning: 'Esta guía esta siendo usada actualmente por tu organización. Al crear un nuevo examen inhabilitará el acceso para su uso actual.<br><br>¿Realmente querés crear el examen?',
     new_message: 'Nuevo mensaje',
     new_student: 'Nuevo estudiante',
     new_teacher: 'Nuevo docente',

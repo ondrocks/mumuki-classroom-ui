@@ -1,6 +1,8 @@
 angular
   .module('classroom')
-  .service('Modal', function ($uibModal, $uibModalStack, $translate, Api) {
+  .service('Modal', function ($uibModal, $uibModalStack, $filter, Api) {
+
+    const $translate = $filter('translate');
 
     this.exportCourseDataToJson = (course, onYesPromise) => {
       return this.confirmDialog(
@@ -30,6 +32,14 @@ angular
       return this.confirmDialog(
         student.fullName(),
         $translate('are_you_sure_attach_student_from_course'),
+        onYesPromise
+      );
+    };
+
+    this.newExam = (onYesPromise) => {
+      return this.confirmDialog(
+        $translate('new_exam'),
+        $translate('new_exam_warning'),
         onYesPromise
       );
     };
