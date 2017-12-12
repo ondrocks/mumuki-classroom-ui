@@ -36,9 +36,17 @@
         .input-group(ng-if='withFilter')
           span.input-group-addon
             i.fa.fa-search.fa-fw
-          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listOptions.search')
+          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listOptions.search', ng-change="selectPage(1)")
 
   .panel-content
-    div.col-md-4.col-sm-6.floating-card(
-        ng-repeat='item in list | filter:byDetachedStudents | orderBy:sortingCriteria():!options.isAscending | filter:listOptions.search | filter:byFollowers')
+    div.col-md-4.col-sm-6.floating-card(ng-repeat='item in filteredList() | orderBy:sortingCriteria():!options.isAscending | limitTo:itemsPerPage:offset()')
       div(ng-include='itemTemplate')
+
+    paginator.text-center.col-xs-12.col-sm-12.col-md-12.col-lg-12(
+      ng-if='filteredList().length > 0',
+      pg-items-per-page='{{ itemsPerPage }}',
+      pg-total-items='filteredList().length',
+      pg-actual-page='actualPage',
+      pg-offset='2',
+      pg-click='selectPage')
+

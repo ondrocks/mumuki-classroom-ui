@@ -1,7 +1,9 @@
 
 angular
   .module('classroom')
-  .controller('ListHeaderController', function ($scope, $stateParams, list, uidField, itemTemplate, Api, Auth, Preferences, Followers, Domain, Permissions) {
+  .controller('ListHeaderController', function ($scope, $stateParams, $filter, list, uidField, itemTemplate, Api, Auth, Preferences, Followers, Domain, Permissions) {
+
+    const filter = $filter('filter');
 
     $scope.listOptions = {
       search: ''
@@ -10,6 +12,9 @@ angular
     Preferences($scope, 'options');
 
     _.defaultsDeep($scope, { options: { sortingType: 'progress', isAscending: true }});
+
+    $scope.actualPage = 1;
+    $scope.itemsPerPage = 30;
 
     $scope.withSortBy = true;
     $scope.withFilter = true;
@@ -39,10 +44,19 @@ angular
       .then((data) => Followers.setFollowUps(data))
       .then(() => $scope.followUpsCount = Followers.count($scope.courseSlug()));
 
+
+    $scope.offset = () => $scope.itemsPerPage * ($scope.actualPage - 1);
+
     $scope.sortingCriteria = () => _.find($scope.availableSortingCriterias, {type: $scope.options.sortingType}).properties;
 
     $scope.isFollowing = (uid) => Followers.isFollowing($scope.courseSlug(), uid);
     $scope.byFollowers = (item) => !$scope.onlyFollowers() || Followers.isFollowing($scope.courseSlug(), _.get(item, uidField));
     $scope.byDetachedStudents = (item) => !item.detached || ($scope.withDetachedStudents && $scope.showDetachedStudents());
+
+    $scope.selectPage = (n) => $scope.actualPage = n;
+
+    $scope.filteredList = () => filter(filter($scope.list, $scope.listOptions.search), (item) => {
+      return $scope.byDetachedStudents(item) && $scope.byFollowers(item);
+    });
 
   });
