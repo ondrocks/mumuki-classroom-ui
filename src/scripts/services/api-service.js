@@ -125,7 +125,7 @@ angular
       return $http
         .get(`${API()}/courses/${course}/students`, { params })
         .then((res) => {
-          res.data.list = _.map(res.data.list, Student.from);
+          res.data.students = _.map(res.data.students, Student.from);
           return res.data;
         })
     }

@@ -5,7 +5,7 @@ angular
 
     $controller('ListHeaderController', {
       $scope: $scope,
-      list: students.list,
+      list: students.students,
       itemTemplate: 'views/templates/item-student.html',
       uidField: 'uid',
     });
@@ -92,7 +92,7 @@ angular
       $timeout.cancel(delayChange);
       delayChange = $timeout(() => {
         Api.getStudents($stateParams, $scope.params).then((response) => {
-          $scope.list = response.list;
+          $scope.list = response.students;
           $scope.actualPage = response.page;
           $scope.totalCount = response.total;
         });

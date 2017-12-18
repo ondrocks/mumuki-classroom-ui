@@ -43,7 +43,7 @@
       div(ng-include='itemTemplate')
 
     paginator.text-center.col-xs-12.col-sm-12.col-md-12.col-lg-12(
-      ng-if='list.length > 0',
+      ng-if='totalCount > itemsPerPage',
       pg-items-per-page='{{ itemsPerPage }}',
       pg-total-items='totalCount',
       pg-actual-page='actualPage',

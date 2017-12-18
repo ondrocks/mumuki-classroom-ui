@@ -31,6 +31,7 @@ angular
     $scope.showDetachedStudents = Preferences.showDetachedStudents;
     $scope.toggleShowDetachedStudents = () => {
       Preferences.toggleShowDetachedStudents();
+      $scope.params.page = 1;
       $scope.params.with_detached = $scope.showDetachedStudents();
     }
 
