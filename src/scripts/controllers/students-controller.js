@@ -8,14 +8,10 @@ angular
       list: students.students,
       itemTemplate: 'views/templates/item-student.html',
       uidField: 'uid',
+      responseField: 'students'
     });
 
-    $scope.availableSortingCriterias = [
-      { type: 'name', properties: ['last_name', 'first_name']},
-      { type: 'progress', properties: ['totalStats()', '-stats.failed', '-stats.passed_with_warnings', '-stats.passed', 'last_name', 'first_name']},
-      { type: 'signup_date', properties: ['created_at', 'last_name', 'first_name']},
-      { type: 'last_submission_date', properties: ['lastSubmissionTime()', 'last_name', 'first_name']}
-    ];
+    $scope.availableSortingCriterias = [ 'name', 'progress', 'signup_date', 'last_submission_date' ];
 
     Breadcrumb.setCourse($stateParams.course);
     $scope.Humanizer = Humanizer;
@@ -82,21 +78,5 @@ angular
     $scope.transfer = (student) => {
       Modal.transfer(student, () => $state.reload());
     }
-
-    $scope.selectPage = (n) => {
-      $scope.params.page = n;
-    }
-
-    let delayChange;
-    $scope.$watch('params', () => {
-      $timeout.cancel(delayChange);
-      delayChange = $timeout(() => {
-        Api.getStudents($stateParams, $scope.params).then((response) => {
-          $scope.list = response.students;
-          $scope.actualPage = response.page;
-          $scope.totalCount = response.total;
-        });
-      }, 50);
-    }, true);
 
   });

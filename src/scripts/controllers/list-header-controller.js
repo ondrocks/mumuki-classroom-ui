@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ListHeaderController', function ($scope, $stateParams, $filter, $timeout, list, uidField, itemTemplate, Api, Auth, Preferences, Followers, Domain, Permissions) {
+  .controller('ListHeaderController', function ($scope, $stateParams, $filter, $timeout, list, responseField, uidField, itemTemplate, Api, Auth, Preferences, Followers, Domain, Permissions) {
 
     const filter = $filter('filter');
 
@@ -49,6 +49,10 @@ angular
       order_by: mapOrderBy()
     }
 
+    $scope.selectPage = (n) => {
+      $scope.params.page = n;
+    }
+
     $scope.toggleIsAscending = () => {
       $scope.options.isAscending = !$scope.options.isAscending;
       $scope.params.order_by = mapOrderBy();
@@ -81,13 +85,29 @@ angular
       $scope.params.sort_by = newValue;
     })
 
-    let delayChange
+    let delayQueryChange;
     $scope.queryChange = () => {
-      $timeout.cancel(delayChange);
-      delayChange = $timeout(() => {
+      $timeout.cancel(delayQueryChange);
+      delayQueryChange = $timeout(() => {
         $scope.params.page = 1;
         $scope.params.q = $scope.listOptions.search;
       }, 750);
     }
+
+    const camel = (string) => {
+      return string.replace(/^(.)/g, (char) => char.toUpperCase());
+    }
+
+    let delayParamsChange;
+    $scope.$watch('params', () => {
+      $timeout.cancel(delayParamsChange);
+      delayParamsChange = $timeout(() => {
+        Api[`get${camel(responseField)}`]($stateParams, $scope.params).then((response) => {
+          $scope.list = response[responseField];
+          $scope.actualPage = response.page;
+          $scope.totalCount = response.total;
+        });
+      }, 50);
+    }, true);
 
   });

@@ -32,7 +32,7 @@
                 "fa-sort-amount-desc": !options.isAscending \
               }')
           select.form-control(ng-model='options.sortingType')
-            option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
+            option(ng-repeat='x in availableSortingCriterias', value='{{x}}') {{ 'by_' + x | translate }}
         .input-group(ng-if='withFilter')
           span.input-group-addon
             i.fa.fa-search.fa-fw
