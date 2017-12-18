@@ -1,7 +1,9 @@
 
 angular
   .module('classroom')
-  .controller('NavbarController', function ($scope, $state, $sce, $filter, hotkeys, notifications, Auth, Breadcrumb, Permissions, Notification, Api) {
+  .controller('NavbarController', function ($scope, $state, $timeout, $sce, $filter, hotkeys, notifications, Student, Auth, Breadcrumb, Permissions, Notification, Api) {
+
+    $scope.filter = { search: '' };
 
     Notification.set(notifications);
     $scope.Notification = Notification;
@@ -15,6 +17,22 @@ angular
     $scope.trust = (notification) => $sce.trustAsHtml($filter('translate')(notification.type.toLowerCase(), notification));
 
     $scope.goToAssignment = Notification.goToAssignment;
+
+    let delaySearch;
+    $scope.search = () => {
+      $timeout.cancel(delaySearch);
+      delaySearch = $timeout(() => {
+        console.log($state.params);
+        Api
+          .getGuideProgress($state.params, { q: $scope.filter.search })
+          .then((response) => {
+            const students = _.map(response.guideProgress, (gp) => Student.from(gp.student));
+            Breadcrumb.setStudents(students);
+          })
+      }, 750);
+    }
+
+
 
     hotkeys
       .bindTo($scope)

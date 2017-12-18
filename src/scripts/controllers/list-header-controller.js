@@ -69,8 +69,6 @@ angular
 
     $scope.offset = () => $scope.itemsPerPage * ($scope.actualPage - 1);
 
-    $scope.sortingCriteria = () => _.find($scope.availableSortingCriterias, {type: $scope.options.sortingType}).properties;
-
     $scope.isFollowing = (uid) => Followers.isFollowing($scope.courseSlug(), uid);
     $scope.byFollowers = (item) => !$scope.onlyFollowers() || Followers.isFollowing($scope.courseSlug(), _.get(item, uidField));
     $scope.byDetachedStudents = (item) => !item.detached || ($scope.withDetachedStudents && $scope.showDetachedStudents());

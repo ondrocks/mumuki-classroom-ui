@@ -47,7 +47,7 @@ angular
       return _.get(notifications, guideProgress.student.uid, []);
     }
 
-    $scope.availableSortingCriterias = [ 'messages', 'name', 'progress', 'last_submission_date' ];
+    $scope.availableSortingCriteria = [ 'messages', 'name', 'progress', 'last_submission_date' ];
 
     setGuideProgress(data.guideProgress);
 

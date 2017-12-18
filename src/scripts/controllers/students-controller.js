@@ -11,7 +11,7 @@ angular
       responseField: 'students'
     });
 
-    $scope.availableSortingCriterias = [ 'name', 'progress', 'signup_date', 'last_submission_date' ];
+    $scope.availableSortingCriteria = [ 'name', 'progress', 'signup_date', 'last_submission_date' ];
 
     Breadcrumb.setCourse($stateParams.course);
     $scope.Humanizer = Humanizer;

@@ -54,7 +54,7 @@ angular
         .then((res) => ({
           page: res.data.page,
           total: res.data.total,
-          guide: Guide.from(res.data.guide_students_progress[0].guide),
+          guide: Guide.from(_.get(res.data, 'guide_students_progress[0].guide')),
           guideProgress: _.map(res.data.guide_students_progress, GuideProgress.from)
         }))
     };
