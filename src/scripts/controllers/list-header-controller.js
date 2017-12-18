@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ListHeaderController', function ($scope, $stateParams, $filter, list, uidField, itemTemplate, Api, Auth, Preferences, Followers, Domain, Permissions) {
+  .controller('ListHeaderController', function ($scope, $stateParams, $filter, $timeout, list, uidField, itemTemplate, Api, Auth, Preferences, Followers, Domain, Permissions) {
 
     const filter = $filter('filter');
 
@@ -80,9 +80,13 @@ angular
       $scope.params.sort_by = newValue;
     })
 
+    let delayChange
     $scope.queryChange = () => {
-      $scope.params.page = 1;
-      $scope.params.q = $scope.listOptions.search;
+      $timeout.cancel(delayChange);
+      delayChange = $timeout(() => {
+        $scope.params.page = 1;
+        $scope.params.q = $scope.listOptions.search;
+      }, 750);
     }
 
   });

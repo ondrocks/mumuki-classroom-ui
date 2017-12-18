@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $controller, $stateParams, toastr, $filter, students, Auth, Followers, Api, Modal, Domain, Breadcrumb, Humanizer, Permissions) {
+  .controller('StudentsController', function ($scope, $state, $controller, $stateParams, $timeout, toastr, $filter, students, Auth, Followers, Api, Modal, Domain, Breadcrumb, Humanizer, Permissions) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -87,17 +87,16 @@ angular
       $scope.params.page = n;
     }
 
-    let destroyTimeout = null;
+    let delayChange;
     $scope.$watch('params', () => {
-      if (destroyTimeout) clearTimeout(destroyTimeout);
-      destroyTimeout = setTimeout(() => {
+      $timeout.cancel(delayChange);
+      delayChange = $timeout(() => {
         Api.getStudents($stateParams, $scope.params).then((response) => {
           $scope.list = response.list;
           $scope.actualPage = response.page;
           $scope.totalCount = response.total;
         });
-      }, 250);
+      }, 50);
     }, true);
-
 
   });
