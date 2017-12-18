@@ -5,7 +5,7 @@ angular
 
     $controller('ListHeaderController', {
       $scope: $scope,
-      list: students,
+      list: students.list,
       itemTemplate: 'views/templates/item-student.html',
       uidField: 'uid',
     });
@@ -22,12 +22,13 @@ angular
 
     $scope.withDetails = false;
 
+    $scope.totalCount = students.total;
     $scope.isOwner = Permissions.isOwner();
     $scope.canTransfer = Permissions.isJanitor();
     $scope.canDetach = Permissions.isJanitor();
     $scope.canAddStudent = Permissions.isJanitor();
 
-    $scope.setCount(students.length);
+    $scope.setCount(students.total);
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();
 
     $scope.followAction = (uid) => $scope.isFollowing(uid) ? $scope.unfollow(uid) : $scope.follow(uid);
@@ -81,5 +82,22 @@ angular
     $scope.transfer = (student) => {
       Modal.transfer(student, () => $state.reload());
     }
+
+    $scope.selectPage = (n) => {
+      $scope.params.page = n;
+    }
+
+    let destroyTimeout = null;
+    $scope.$watch('params', () => {
+      if (destroyTimeout) clearTimeout(destroyTimeout);
+      destroyTimeout = setTimeout(() => {
+        Api.getStudents($stateParams, $scope.params).then((response) => {
+          $scope.list = response.list;
+          $scope.actualPage = response.page;
+          $scope.totalCount = response.total;
+        });
+      }, 250);
+    }, true);
+
 
   });

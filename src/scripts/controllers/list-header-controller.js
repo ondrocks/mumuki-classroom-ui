@@ -29,12 +29,29 @@ angular
     $scope.toggleShowDetails = Preferences.toggleShowDetails;
 
     $scope.showDetachedStudents = Preferences.showDetachedStudents;
-    $scope.toggleShowDetachedStudents = Preferences.toggleShowDetachedStudents;
+    $scope.toggleShowDetachedStudents = () => {
+      Preferences.toggleShowDetachedStudents();
+      $scope.params.with_detached = $scope.showDetachedStudents();
+    }
 
     $scope.onlyFollowers = Preferences.onlyFollowers;
     $scope.toggleOnlyFollowers = Preferences.toggleOnlyFollowers;
 
-    $scope.toggleIsAscending = () => $scope.options.isAscending = !$scope.options.isAscending;
+    const mapOrderBy = () => $scope.options.isAscending ? 'asc' : 'desc';
+
+    $scope.params = {
+      q: '',
+      page: $scope.actualPage,
+      per_page: $scope.itemsPerPage,
+      sort_by: $scope.options.sortingType,
+      with_detached: $scope.showDetachedStudents(),
+      order_by: mapOrderBy()
+    }
+
+    $scope.toggleIsAscending = () => {
+      $scope.options.isAscending = !$scope.options.isAscending;
+      $scope.params.order_by = mapOrderBy();
+    }
 
     $scope.course = () => $stateParams.course;
     $scope.courseSlug = () => `${Domain.tenant()}/${$scope.course()}`;
@@ -58,5 +75,14 @@ angular
     $scope.filteredList = () => filter(filter($scope.list, $scope.listOptions.search), (item) => {
       return $scope.byDetachedStudents(item) && $scope.byFollowers(item);
     });
+
+    $scope.$watch('options.sortingType', (newValue) => {
+      $scope.params.sort_by = newValue;
+    })
+
+    $scope.queryChange = () => {
+      $scope.params.page = 1;
+      $scope.params.q = $scope.listOptions.search;
+    }
 
   });

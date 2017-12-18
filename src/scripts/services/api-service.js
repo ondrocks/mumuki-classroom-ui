@@ -121,10 +121,13 @@ angular
         .put(`${API()}/courses/${course}/exams/${exam.eid}`, exam)
     }
 
-    this.getStudents = ({ course }) => {
+    this.getStudents = ({ course }, params) => {
       return $http
-        .get(`${API()}/courses/${course}/students`)
-        .then((res) => _.map(res.data.students, Student.from));
+        .get(`${API()}/courses/${course}/students`, { params })
+        .then((res) => {
+          res.data.list = _.map(res.data.list, Student.from);
+          return res.data;
+        })
     }
 
     this.getTeachers = ({ course }) => {

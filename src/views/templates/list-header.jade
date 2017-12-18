@@ -19,7 +19,7 @@
           span -
           button.btn.btn-link(
               ng-click='toggleOnlyFollowers()',
-              ng-disabled='!onlyFollowers()') {{ 'all' | translate }} ({{ list.length }})
+              ng-disabled='!onlyFollowers()') {{ 'all' | translate }} ({{ totalCount }})
 
 
       .col-md-4.col-sm-6.pull-right
@@ -36,16 +36,16 @@
         .input-group(ng-if='withFilter')
           span.input-group-addon
             i.fa.fa-search.fa-fw
-          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listOptions.search', ng-change="selectPage(1)")
+          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listOptions.search', ng-change="queryChange()")
 
   .panel-content
-    div.col-md-4.col-sm-6.floating-card(ng-repeat='item in filteredList() | orderBy:sortingCriteria():!options.isAscending | limitTo:itemsPerPage:offset()')
+    div.col-md-4.col-sm-6.floating-card(ng-repeat='item in list')
       div(ng-include='itemTemplate')
 
     paginator.text-center.col-xs-12.col-sm-12.col-md-12.col-lg-12(
-      ng-if='filteredList().length > 0',
+      ng-if='list.length > 0',
       pg-items-per-page='{{ itemsPerPage }}',
-      pg-total-items='filteredList().length',
+      pg-total-items='totalCount',
       pg-actual-page='actualPage',
       pg-offset='2',
       pg-click='selectPage')
