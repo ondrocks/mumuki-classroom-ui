@@ -48,11 +48,13 @@ angular
         .then((res) => _.map(res.data.guides, Guide.from))
     };
 
-    this.getGuideProgress = ({ org, course, repo }) => {
+    this.getGuideProgress = ({ org, course, repo }, params = {}) => {
       return $http
-        .get(`${API()}/courses/${course}/guides/${org}/${repo}`)
+        .get(`${API()}/courses/${course}/guides/${org}/${repo}`, {params})
         .then((res) => ({
-          guide: Guide.from(res.data.guide_students_progress[0].guide),
+          page: res.data.page,
+          total: res.data.total,
+          guide: Guide.from(_.get(res.data, 'guide_students_progress[0].guide')),
           guideProgress: _.map(res.data.guide_students_progress, GuideProgress.from)
         }))
     };
@@ -121,10 +123,13 @@ angular
         .put(`${API()}/courses/${course}/exams/${exam.eid}`, exam)
     }
 
-    this.getStudents = ({ course }) => {
+    this.getStudents = ({ course }, params = {}) => {
       return $http
-        .get(`${API()}/courses/${course}/students`)
-        .then((res) => _.map(res.data.students, Student.from));
+        .get(`${API()}/courses/${course}/students`, { params })
+        .then((res) => {
+          res.data.students = _.map(res.data.students, Student.from);
+          return res.data;
+        })
     }
 
     this.getTeachers = ({ course }) => {

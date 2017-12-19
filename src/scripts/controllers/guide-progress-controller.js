@@ -1,17 +1,22 @@
 
 angular
   .module('classroom')
-  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, data, Api, Guide, Breadcrumb, Humanizer, Notification, Domain) {
+  .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, $timeout, data, Api, Guide, Breadcrumb, Humanizer, Notification, Domain) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
       list: data.guideProgress,
       itemTemplate: 'views/templates/item-guide-progress.html',
-      uidField: 'student.uid'
+      uidField: 'student.uid',
+      responseField: 'guideProgress'
     });
 
     const guide = Guide.from(data.guide);
-    const guideProgressFetcher = $interval(() => Api.getGuideProgress($stateParams).then((data) => setGuideProgress(data.guideProgress)), 5000);
+    const guideProgressFetcher = $interval(() => {
+      Api
+        .getGuideProgress($stateParams, $scope.params)
+        .then((data) => setGuideProgress(data.guideProgress))
+    }, 5000);
 
     Breadcrumb.setCourse($stateParams.course);
     Breadcrumb.setGuide(guide);
@@ -25,6 +30,7 @@ angular
     }
 
     $scope.Humanizer = Humanizer;
+    $scope.totalCount = data.total;
 
     const notifications = _.chain(Notification.get())
                            .filter({
@@ -41,12 +47,7 @@ angular
       return _.get(notifications, guideProgress.student.uid, []);
     }
 
-    $scope.availableSortingCriterias = [
-      { type: 'messages', properties: [$scope.notifications, 'student.last_name', 'student.first_name']},
-      { type: 'name', properties: ['student.last_name', 'student.first_name']},
-      { type: 'progress', properties: ['stats.total', 'passedAverage()', 'student.last_name', 'student.first_name']},
-      { type: 'last_submission_date', properties: ['-lastSubmission().created_at', 'student.last_name', 'student.first_name']}
-    ];
+    $scope.availableSortingCriteria = [ 'messages', 'name', 'progress', 'last_submission_date' ];
 
     setGuideProgress(data.guideProgress);
 

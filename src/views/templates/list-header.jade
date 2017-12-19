@@ -19,7 +19,7 @@
           span -
           button.btn.btn-link(
               ng-click='toggleOnlyFollowers()',
-              ng-disabled='!onlyFollowers()') {{ 'all' | translate }} ({{ list.length }})
+              ng-disabled='!onlyFollowers()') {{ 'all' | translate }} ({{ totalCount }})
 
 
       .col-md-4.col-sm-6.pull-right
@@ -32,13 +32,21 @@
                 "fa-sort-amount-desc": !options.isAscending \
               }')
           select.form-control(ng-model='options.sortingType')
-            option(ng-repeat='x in availableSortingCriterias', value='{{x.type}}') {{ 'by_' + x.type | translate }}
+            option(ng-repeat='x in availableSortingCriterias', value='{{x}}') {{ 'by_' + x | translate }}
         .input-group(ng-if='withFilter')
           span.input-group-addon
             i.fa.fa-search.fa-fw
-          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listOptions.search')
+          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listOptions.search', ng-change="queryChange()")
 
   .panel-content
-    div.col-md-4.col-sm-6.floating-card(
-        ng-repeat='item in list | filter:byDetachedStudents | orderBy:sortingCriteria():!options.isAscending | filter:listOptions.search | filter:byFollowers')
+    div.col-md-4.col-sm-6.floating-card(ng-repeat='item in list')
       div(ng-include='itemTemplate')
+
+    paginator.text-center.col-xs-12.col-sm-12.col-md-12.col-lg-12(
+      ng-if='totalCount > itemsPerPage',
+      pg-items-per-page='{{ itemsPerPage }}',
+      pg-total-items='totalCount',
+      pg-actual-page='actualPage',
+      pg-offset='2',
+      pg-click='selectPage')
+

@@ -21,11 +21,21 @@ $avatar-size: 5.75rem;
   box-shadow: none;
 }
 
-.floating-card { padding: $floating-card-padding; }
-.panel-content { padding-top: $floating-card-padding; }
+.floating-card {
+  padding: $floating-card-padding;
+  position: relative;
+}
+.panel-content {
+  padding-top: $floating-card-padding;
+  position: relative;
+}
 .panel-heading {
   padding: 15px;
   border: none;
+}
+
+paginator {
+  margin-top: 15px;
 }
 
 .student-card {
@@ -94,13 +104,13 @@ $avatar-size: 5.75rem;
 }
 
 .student-card-recent {
-  @include display-flex
+  @include display-flex;
   width: 100%;
   background-color: lighten($color-default, 4%);
   border: solid 1px $color-default;
   border-top: none;
   .student-card-recent-column {
-    @include display-flex(column, center, center)
+    @include display-flex(column, center, center);
     width: 50%;
     padding: 5px 0;
     overflow: hidden;
@@ -116,7 +126,7 @@ $avatar-size: 5.75rem;
 }
 
 .student-guide-details {
-  @include display-flex(column, flex-start, flex-start)
+  @include display-flex(column, flex-start, flex-start);
   width: 100%;
   overflow: hidden;
   white-space: nowrap;

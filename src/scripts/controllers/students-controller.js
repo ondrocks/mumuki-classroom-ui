@@ -1,33 +1,30 @@
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $controller, $stateParams, toastr, $filter, students, Auth, Followers, Api, Modal, Domain, Breadcrumb, Humanizer, Permissions) {
+  .controller('StudentsController', function ($scope, $state, $controller, $stateParams, $timeout, toastr, $filter, students, Auth, Followers, Api, Modal, Domain, Breadcrumb, Humanizer, Permissions) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
-      list: students,
+      list: students.students,
       itemTemplate: 'views/templates/item-student.html',
       uidField: 'uid',
+      responseField: 'students'
     });
 
-    $scope.availableSortingCriterias = [
-      { type: 'name', properties: ['last_name', 'first_name']},
-      { type: 'progress', properties: ['totalStats()', '-stats.failed', '-stats.passed_with_warnings', '-stats.passed', 'last_name', 'first_name']},
-      { type: 'signup_date', properties: ['created_at', 'last_name', 'first_name']},
-      { type: 'last_submission_date', properties: ['lastSubmissionTime()', 'last_name', 'first_name']}
-    ];
+    $scope.availableSortingCriteria = [ 'name', 'progress', 'signup_date', 'last_submission_date' ];
 
     Breadcrumb.setCourse($stateParams.course);
     $scope.Humanizer = Humanizer;
 
     $scope.withDetails = false;
 
+    $scope.totalCount = students.total;
     $scope.isOwner = Permissions.isOwner();
     $scope.canTransfer = Permissions.isJanitor();
     $scope.canDetach = Permissions.isJanitor();
     $scope.canAddStudent = Permissions.isJanitor();
 
-    $scope.setCount(students.length);
+    $scope.setCount(students.total);
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();
 
     $scope.followAction = (uid) => $scope.isFollowing(uid) ? $scope.unfollow(uid) : $scope.follow(uid);
