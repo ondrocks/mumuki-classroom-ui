@@ -64,6 +64,7 @@ angular
     exercise_status_passed: '¡Muy bien! Tu solución pasó todas las pruebas',
     exercise_status_passed_with_warnings: 'Tu solución funcionó, pero hay cosas que mejorar',
     expectations: 'Expectativas',
+    export_course_report: 'Generar reporte del curso',
     export_solutions_disclaimer: '¡Cuidado! Estos datos son sensibles. No los utilices ni distribuyas sin el consentimiento de tus estudiantes.<br><br>¿Deseas continuar de todos modos?',
     export_solutions_button: 'Exportar soluciones',
     export_solutions_title: 'Exportar soluciones de {{courseName}}',
