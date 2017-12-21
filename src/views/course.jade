@@ -21,10 +21,15 @@
         span &nbsp;
         span.mu-disabled(ng-if='isCopied') {{ 'copied' | translate }}
     .col-md-3.pull-right(style='text-align: right; margin-top: 10px')
-      a(ng-click='export()')
-        span.view-mode {{ 'export_solutions_button' | translate }}
-        i.fa.fa-download
-      a#downloadAnchor(style='display:none')
+      div
+        a(ng-click='export()')
+          span.view-mode {{ 'export_solutions_button' | translate }}
+          i.fa.fa-download
+        a#downloadAnchor(style='display:none')
+      div
+        a(href='{{ reportUrl() }}' download)
+          span.view-mode {{ 'export_course_report' | translate }}
+          i.fa.fa-download
 
   br
 

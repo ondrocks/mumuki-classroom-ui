@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('CourseController', function ($scope, $state, $stateParams, $timeout, clipboard, toastr, Api, Download, Modal, CurrentCourse) {
+  .controller('CourseController', function ($scope, $state, $stateParams, $timeout, clipboard, toastr, Api, Download, Modal, CurrentCourse, Domain) {
 
     const tabs = {
       guides: 'classroom.courses.course.guides',
@@ -39,6 +39,10 @@ angular
           .then((data) => Download.json($stateParams.course, data.exercise_student_progress))
           .catch((e) => toastr.error(e));
       });
+    }
+
+    $scope.reportUrl = () => {
+      return `${Domain.classroomApiURL()}/courses/${$stateParams.course}/report`;
     }
 
     $scope.copy = (link) => {

@@ -24,11 +24,14 @@ angular
         .then((res) => Course.from(res.data.course))
     };
 
-    this.getCourseProgress = (course) => {
+    this.courseExport = (type) => (course) => {
       return $http
-        .get(`${API()}/courses/${course}/progress`)
+        .get(`${API()}/courses/${course}/${type}`)
         .then((res) => res.data)
-    };
+    }
+
+    this.getCourseReport = this.courseExport('report');
+    this.getCourseProgress = this.courseExport('progress');
 
     this.getBibliothecaGuides = () => {
       return $http
