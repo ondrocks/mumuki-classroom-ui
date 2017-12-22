@@ -73,8 +73,6 @@ angular
     $scope.byFollowers = (item) => !$scope.onlyFollowers() || Followers.isFollowing($scope.courseSlug(), _.get(item, uidField));
     $scope.byDetachedStudents = (item) => !item.detached || ($scope.withDetachedStudents && $scope.showDetachedStudents());
 
-    $scope.selectPage = (n) => $scope.actualPage = n;
-
     $scope.filteredList = () => filter(filter($scope.list, $scope.listOptions.search), (item) => {
       return $scope.byDetachedStudents(item) && $scope.byFollowers(item);
     });
