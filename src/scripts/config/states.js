@@ -284,7 +284,7 @@ angular
               },
               students: ($state, $stateParams, Api) => {
                 return Api
-                  .getStudents($stateParams)
+                  .getStudents($stateParams, {page: 1, per_page: 100000})
                   .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
             }

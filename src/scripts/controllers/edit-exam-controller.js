@@ -5,7 +5,9 @@ angular
 
     angular.extend(this, $controller('ExamController', { $scope: $scope }));
 
-    students
+    $scope.students = students.students;
+
+    $scope.students
       .filter((student) => _(exam.uids).includes(student.uid))
       .forEach((student) => student.isSelected = true)
 
@@ -25,7 +27,6 @@ angular
     }
 
     $scope.exam = $scope.getExamInLocalTime(exam);
-    $scope.students = students;
     $scope.exam_type = 'edit_exam';
 
     $scope.submit = (course, exam) => Api.updateExam(course, exam);

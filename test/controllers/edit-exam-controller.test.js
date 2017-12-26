@@ -19,7 +19,7 @@ classroomTest('Edit Exam Controller', () => {
       language: 'haskell',
       uids: [1]
     };
-    _$controller_('EditExamController', { $scope, students, exam });
+    _$controller_('EditExamController', { $scope, students: {students}, exam });
   }));
 
   describe('#getExam', () => {
