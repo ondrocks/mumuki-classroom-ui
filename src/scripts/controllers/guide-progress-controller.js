@@ -32,21 +32,6 @@ angular
     $scope.Humanizer = Humanizer;
     $scope.totalCount = data.total;
 
-    const notifications = _.chain(Notification.get())
-                           .filter({
-                              organization: Domain.tenant(),
-                              course: `${Domain.tenant()}/${$stateParams.course}`,
-                              assignment: {
-                                guide: {slug: guide.slug }
-                              }
-                           })
-                           .groupBy('assignment.student.uid')
-                           .value();
-
-    $scope.notifications = (guideProgress) => {
-      return _.get(notifications, guideProgress.student.uid, []);
-    }
-
     $scope.availableSortingCriteria = [ 'messages', 'name', 'progress', 'last_submission_date' ];
 
     setGuideProgress(data.guideProgress);
