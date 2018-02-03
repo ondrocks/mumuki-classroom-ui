@@ -10,7 +10,7 @@
     fieldset.form-group
       input.form-control.lower(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}')
     fieldset.form-group
-      input.form-control.lower(ng-model='student.email', type='text', placeholder='{{ "national_id" | translate }}')
+      input.form-control.lower(ng-model='student.email', type='text', placeholder='{{ "national_id_placeholder" | translate }}')
     .row
       button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudent()') {{ 'confirm' | translate }}
   .multiple-student(ng-if='isMultiple')
@@ -31,6 +31,6 @@
         td
           input.form-control(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}')
         td
-          input.form-control(ng-model='student.national_id', type='text', placeholder='{{ "national_id" | translate }}')
+          input.form-control(ng-model='student.national_id', type='text', placeholder='{{ "national_id_placeholder" | translate }}')
     .row(ng-if='csv.result')
       button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudents()') {{ 'confirm' | translate }}

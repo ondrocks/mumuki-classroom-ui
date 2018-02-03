@@ -98,6 +98,8 @@ angular
     messages: 'Mensajes',
     more_messages: 'Ver más',
     more_notifications: 'Ver todas las notificaciones',
+    national_id: 'Documento Nacional de Identidad',
+    national_id_placeholder: 'Documento Nacional de Identidad (opcional)',
     new_course: 'Nuevo curso',
     new_course_code: 'Código del curso - Ej: K2000 o ABC-123',
     new_course_code_error: 'El código del curso es obligatorio',

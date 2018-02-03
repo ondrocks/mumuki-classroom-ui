@@ -97,6 +97,8 @@ angular
     messages: 'Messages',
     more_messages: 'Load More',
     more_notifications: 'View all notifications',
+    national_id: 'National ID',
+    national_id_placeholder: 'National ID (optional)',
     new_course_code_error: 'Course code is mandatory',
     new_course_code: 'Course code - i.e. K2000 or ABC-123',
     new_course_days_error: 'Select at least one day',
