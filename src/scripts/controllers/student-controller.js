@@ -15,6 +15,10 @@ angular
 
     Breadcrumb.setCourse($stateParams.course);
     $scope.student = {};
+    $scope.exampleStudents = [
+      { first_name: 'example_student_1_first_name', last_name: 'example_student_1_last_name', email: 'example_student_1_email', personal_id: '12345678' },
+      { first_name: 'example_student_2_first_name', last_name: 'example_student_2_last_name', email: 'example_student_2_email', personal_id: '23456789' },
+    ]
 
     $scope.isTextValid = (text) => {
       return !_.isEmpty((text || '').trim())

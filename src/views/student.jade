@@ -10,19 +10,30 @@
     fieldset.form-group
       input.form-control(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}')
     fieldset.form-group
-      input.form-control(ng-model='student.national_id', type='text', placeholder='{{ "national_id_placeholder" | translate }}')
+      input.form-control(ng-model='student.personal_id', type='text', placeholder='{{ "personal_id_placeholder" | translate }}')
     .row
       button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudent()') {{ 'confirm' | translate }}
   .multiple-student(ng-if='isMultiple')
     h3 {{ 'add_multiple_students' | translate }}
     ng-csv-import.import(content='csv.content', callback='applyCsv', header='csv.header', header-visible='csv.headerVisible', separator='csv.separator', result='csv.result', upload-button-label='csv.uploadButtonLabel')
     button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudents()') {{ 'confirm' | translate }}
+    table.table
+      tr
+        th first_name
+        th last_name
+        th email
+        th personal_id
+      tr(ng-repeat='student in exampleStudents')
+        td {{ student.first_name | translate }}
+        td {{ student.last_name | translate }}
+        td {{ student.email | translate }}
+        td student.personal_id_placeholder
     table.table(ng-if='csv.result')
       tr
         th {{ 'first_name' | translate}}
         th {{ 'last_name' | translate}}
         th {{ 'email' | translate }}
-        th {{ 'national_id' | translate }}
+        th {{ 'personal_id' | translate }}
       tr(ng-repeat='student in csv.result')
         td
           input.form-control(ng-model='student.first_name', type='text', placeholder='{{ "first_name" | translate }}', autofocus)
@@ -31,6 +42,6 @@
         td
           input.form-control(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}')
         td
-          input.form-control(ng-model='student.national_id', type='text', placeholder='{{ "national_id_placeholder" | translate }}')
+          input.form-control(ng-model='student.personal_id', type='text', placeholder='{{ "personal_id_placeholder" | translate }}')
     .row(ng-if='csv.result')
       button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudents()') {{ 'confirm' | translate }}
