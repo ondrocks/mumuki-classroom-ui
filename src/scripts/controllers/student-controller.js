@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('StudentController', function ($scope, $state, $filter, $stateParams, $sce, toastr, Auth, Api, Domain, Organization, Breadcrumb) {
+  .controller('StudentController', function ($scope, $state, $filter, $location, $stateParams, $sce, toastr, Auth, Api, Domain, Organization, Breadcrumb) {
     $scope.isMultiple = false;
     $scope.csv = {
       content: null,
@@ -11,9 +11,12 @@ angular
       result: null,
       uploadButtonLabel: "Seleccionar"
     };
+
+    const $translate = $filter('translate');
     const EMAIL_REGEX = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
 
     Breadcrumb.setCourse($stateParams.course);
+
     $scope.student = {};
 
     $scope.isTextValid = (text) => {
@@ -52,6 +55,6 @@ angular
     };
 
     $scope.trust = (html) => $sce.trustAsHtml(html);
-    $scope.termAndConditions = $scope.trust($filter('translate')('term_and_conditions', { url: Organization.tosUrl() }));
+    $scope.termAndConditions = $scope.trust($translate('term_and_conditions', { url: Organization.tosUrl() }));
 
   });
