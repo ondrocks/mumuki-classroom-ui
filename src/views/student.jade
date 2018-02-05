@@ -3,7 +3,6 @@
     input(bs-switch, ng-model='isMultiple', type='checkbox', switch-on-text="{{ 'bulk' | translate }}", switch-off-text="{{ 'single' | translate }}", switch-size='mini')
   .single-student(ng-if='!isMultiple')
     h3 {{ 'new_student' | translate }}
-    h4: small También podes subir múltiples estudiantes cargando un archivo CSV
     fieldset.form-group
       input.form-control(ng-model='student.first_name', type='text', placeholder='{{ "first_name" | translate }}', autofocus)
     fieldset.form-group
@@ -16,9 +15,8 @@
       button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudent()') {{ 'confirm' | translate }}
   .multiple-student(ng-if='isMultiple')
     h3 {{ 'add_multiple_students' | translate }}
+    h4: small(ng-bind-html='"example_csv_link" | translate | trustHtml')
     ng-csv-import.import(content='csv.content', callback='applyCsv', header='csv.header', header-visible='csv.headerVisible', separator='csv.separator', result='csv.result', upload-button-label='csv.uploadButtonLabel')
-    h4: small Descargate un CSV de ejemplo haciendo click #[a(href='' ng-click='getExampleCSVFile()') acá]
-    button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudents()', ng-if='csv.result') {{ 'confirm' | translate }}
     table.table(ng-if='csv.result')
       tr
         th {{ 'first_name' | translate}}
