@@ -17,7 +17,8 @@
     h3 {{ 'add_multiple_students' | translate }}
     ng-csv-import.import(content='csv.content', callback='applyCsv', header='csv.header', header-visible='csv.headerVisible', separator='csv.separator', result='csv.result', upload-button-label='csv.uploadButtonLabel')
     button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudents()') {{ 'confirm' | translate }}
-    table.table
+    table.table(ng-if='!csv.result')
+      caption: span(ng-bind-html='"example_csv_title" | translate | trustHtml')
       tr
         th first_name
         th last_name
@@ -27,7 +28,7 @@
         td {{ student.first_name | translate }}
         td {{ student.last_name | translate }}
         td {{ student.email | translate }}
-        td student.personal_id_placeholder
+        td {{ student.personal_id }}
     table.table(ng-if='csv.result')
       tr
         th {{ 'first_name' | translate}}

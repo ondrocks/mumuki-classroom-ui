@@ -57,6 +57,7 @@ angular
     exam_updated: 'Exam updated successfully',
     exam: 'Exam',
     exams: 'Exams',
+    example_csv_title: 'Example of <a href="https://en.wikipedia.org/wiki/Comma-separated_values" target="_blank">CSV</a> file',
     example_student_1_first_name: 'Jane',
     example_student_1_last_name: 'Doe',
     example_student_1_email: 'jane.doe@gmail.com',

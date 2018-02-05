@@ -39,3 +39,16 @@
 .bootstrap-switch-primary {
   background: $btn-primary-bg !important;
 }
+
+.table {
+  caption {
+    a:focus,
+    a:hover,
+    a:active,
+    a:visited,
+    a {
+      text-decoration: none;
+      color: darken($mu-color-disabled, 5%);
+    }
+  }
+}

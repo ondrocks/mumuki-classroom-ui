@@ -57,6 +57,7 @@ angular
     exam_link: 'Link al examen',
     exam_updated: 'Examen guardado satisfactoriamente',
     exams: 'Exámenes',
+    example_csv_title: 'Ejemplo de un archivo <a href="https://es.wikipedia.org/wiki/Valores_separados_por_comas" target="_blank">CSV</a>',
     example_student_1_first_name: 'Juana',
     example_student_1_last_name: 'García',
     example_student_1_email: 'juana.garcia@gmail.com',
