@@ -8,13 +8,13 @@ classroomTest('Organization Mapper', () => {
   describe('#tenant', () => {
 
     it('accepts simple tenants', inject((Domain) => {
-      host = 'pdep-utn.classroom.mumuki.io';
+      host = 'pdep-utn.classroom.localmumuki.io';
 
       Domain.tenant().should.eq('pdep-utn')
     }));
 
     it('accepts tenants with subdomains', inject((Domain) => {
-      host = 'pdep.utn.classroom.mumuki.io';
+      host = 'pdep.utn.classroom.localmumuki.io';
 
       Domain.tenant().should.eq('pdep.utn')
     }));

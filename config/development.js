@@ -4,7 +4,8 @@ angular
   .constant('CONFIG', {
 
     classroom: {
-      url: 'http://0.0.0.0:3002'
+      api_url: 'http://0.0.0.0:3002',
+      url: 'http://0.0.0.0:3001'
     },
 
     laboratory: {

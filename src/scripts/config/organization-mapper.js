@@ -30,7 +30,9 @@ angular
       subdomain: {
 
         tenant() {
-          return location.host().split('.')[0];
+          var domain = CONFIG.classroom.url.replace(`${location.protocol()}://`, '');
+
+          return location.host().split(`.${domain}`)[0].replace(`${location.protocol()}://`, '');
         },
 
         laboratoryURL() {
@@ -38,7 +40,7 @@ angular
         },
 
         classroomApiURL() {
-          return tenantizedURL(CONFIG.classroom.url, this.tenant());
+          return tenantizedURL(CONFIG.classroom.api_url, this.tenant());
         },
 
         bibliothecaApiURL() {
@@ -70,7 +72,7 @@ angular
         },
 
         classroomApiURL() {
-          return `${CONFIG.classroom.url}/${this.tenant()}`;
+          return `${CONFIG.classroom.api_url}/${this.tenant()}`;
         },
 
         bibliothecaApiURL() {
@@ -78,11 +80,11 @@ angular
         },
 
         loginURL() {
-          return `${CONFIG.classroom.url}/login${withOrigin(location.absUrl())}`
+          return `${CONFIG.classroom.api_url}/login${withOrigin(location.absUrl())}`
         },
 
         logoutURL() {
-          return `${CONFIG.classroom.url}/logout${withOrigin(redirectURL(this.tenant()))}`
+          return `${CONFIG.classroom.api_url}/logout${withOrigin(redirectURL(this.tenant()))}`
         },
 
         stateUrl() {
