@@ -25,14 +25,15 @@ angular
       return `${protocol}://${host}${portString}/#${path}/home`;
     }
 
+    const withoutProtocol = (url) => url.replace(`${location.protocol()}://`, '');
+
     this.organizationMappers = {
 
       subdomain: {
 
         tenant() {
-          var domain = CONFIG.classroom.url.replace(`${location.protocol()}://`, '');
-
-          return location.host().split(`.${domain}`)[0].replace(`${location.protocol()}://`, '');
+          var domain = withoutProtocol(CONFIG.classroom.url);
+          return withoutProtocol(location.host().split(`.${domain}`)[0]);
         },
 
         laboratoryURL() {
