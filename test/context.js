@@ -13,7 +13,7 @@ function classroomTest(message, callback) {
   describe(message, function () {
 
     beforeEach(module('classroom'));
-    beforeEach(inject((_$location_) => _$location_.host = () => 'pdep-utn.classroom.mumuki.io'));
+    beforeEach(inject((_$location_) => _$location_.host = () => 'http://pdep-utn.classroom.localmumuki.io'));
 
     callback.bind(this)(mocks);
 

@@ -25,12 +25,15 @@ angular
       return `${protocol}://${host}${portString}/#${path}/home`;
     }
 
+    const withoutProtocol = (url) => url.replace(`${location.protocol()}://`, '');
+
     this.organizationMappers = {
 
       subdomain: {
 
         tenant() {
-          return location.host().split('.')[0];
+          var domain = withoutProtocol(CONFIG.classroom.url);
+          return withoutProtocol(location.host().split(`.${domain}`)[0]);
         },
 
         laboratoryURL() {
@@ -38,11 +41,11 @@ angular
         },
 
         classroomApiURL() {
-          return tenantizedURL(CONFIG.classroom.url, this.tenant());
+          return tenantizedURL(CONFIG.classroom.api_url, this.tenant());
         },
 
         bibliothecaApiURL() {
-          return CONFIG.bibliotheca.url;
+          return CONFIG.bibliotheca.api_url;
         },
 
         loginURL() {
@@ -70,19 +73,19 @@ angular
         },
 
         classroomApiURL() {
-          return `${CONFIG.classroom.url}/${this.tenant()}`;
+          return `${CONFIG.classroom.api_url}/${this.tenant()}`;
         },
 
         bibliothecaApiURL() {
-          return CONFIG.bibliotheca.url;
+          return CONFIG.bibliotheca.api_url;
         },
 
         loginURL() {
-          return `${CONFIG.classroom.url}/login${withOrigin(location.absUrl())}`
+          return `${CONFIG.classroom.api_url}/login${withOrigin(location.absUrl())}`
         },
 
         logoutURL() {
-          return `${CONFIG.classroom.url}/logout${withOrigin(redirectURL(this.tenant()))}`
+          return `${CONFIG.classroom.api_url}/logout${withOrigin(redirectURL(this.tenant()))}`
         },
 
         stateUrl() {
