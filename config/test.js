@@ -13,7 +13,7 @@ angular
     },
 
     bibliotheca: {
-      url: 'http://bibliotheca.localmumuki.io'
+      api_url: 'http://bibliotheca-api.localmumuki.io'
     },
 
     cookie: {

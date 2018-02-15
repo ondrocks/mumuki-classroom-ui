@@ -13,7 +13,7 @@ angular
     },
 
     bibliotheca: {
-      url: 'http://0.0.0.0:3004'
+      api_url: 'http://0.0.0.0:3004'
     },
 
     cookie: {

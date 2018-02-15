@@ -45,7 +45,7 @@ angular
         },
 
         bibliothecaApiURL() {
-          return CONFIG.bibliotheca.url;
+          return CONFIG.bibliotheca.api_url;
         },
 
         loginURL() {
@@ -77,7 +77,7 @@ angular
         },
 
         bibliothecaApiURL() {
-          return CONFIG.bibliotheca.url;
+          return CONFIG.bibliotheca.api_url;
         },
 
         loginURL() {

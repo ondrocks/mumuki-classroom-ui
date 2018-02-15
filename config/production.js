@@ -13,7 +13,7 @@ angular
     },
 
     bibliotheca: {
-      url: '<MUMUKI_BIBLIOTHECA_API_URL>'
+      api_url: '<MUMUKI_BIBLIOTHECA_API_URL>'
     },
 
     cookie: {
