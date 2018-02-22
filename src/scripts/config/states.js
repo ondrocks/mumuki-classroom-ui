@@ -12,7 +12,10 @@ angular
           '@': {
             templateUrl: 'views/layout.html',
             resolve: {
-              organization: (Organization) => Organization.getLockJson()
+              organization: (Organization) => {Organization.getLockJson()},
+              languages: (Api, Languages) => {
+                Api.getLanguages().then(Languages.set);
+              }
             }
           },
           'navbar@classroom': {
@@ -147,15 +150,20 @@ angular
             templateUrl: 'views/guide-progress.html',
             controller: 'GuideProgressController',
             resolve: {
-              data: ($state, $stateParams, Api) => {
+              data: ($state, $stateParams, Api, Languages) => {
                 return Api
                   .getGuideProgress($stateParams)
                   .then((data) => {
                     return Api.getBibliothecaGuide($stateParams)
-                      .then((guide) => ({
-                        guide: guide,
-                        guideProgress: data.guideProgress
-                      }));
+                      .then((guide) => {
+                        if(guide.language){
+                          Languages.fromName(guide.language).setLayoutAssets();
+                        }
+                        return {
+                          guide: guide,
+                          guideProgress: data.guideProgress
+                        }
+                      });
                   })
                   .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
               }
