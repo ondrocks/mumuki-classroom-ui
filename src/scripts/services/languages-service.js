@@ -9,7 +9,7 @@ angular
     }
 
     this.set = (languages = []) => {
-      _languages = [..._(languages).map(Language.from).sortBy('name').value()];
+      _languages = _(languages).map(Language.from).sortBy('name').value();
     }
 
     this.fromName = (name) => {
