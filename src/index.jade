@@ -38,6 +38,9 @@ html.no-js(lang='es')
     // endbuild
 
     script(ng-src='{{ customJsUrl | trusted }}', defer='')
+    script(src='assets/javascripts/webcomponents-lite.js')
+    div(ng-include="'views/language_assets.html'")
+
 
     // build:es6(build) scripts/main.js
     script(type='text/javascript', src='scripts/main.js')

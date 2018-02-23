@@ -256,4 +256,10 @@ angular
         .post(`${API()}/courses/${course}/guides/${slug}/${eid}/student/${uid}/manual_evaluation`, {sid, comment, status})
     }
 
+    this.getLanguages = () => {
+      return $http
+        .get(`${BIBLIOTHECA()}/languages`)
+        .then((res) => res.data.languages);
+    };
+
   });
