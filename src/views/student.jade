@@ -1,14 +1,14 @@
 .container
-  .student-switch.pull-right
+  .student-switch.pull-right(ng-if="!isEdit")
     input(bs-switch, ng-model='isMultiple', type='checkbox', switch-on-text="{{ 'bulk' | translate }}", switch-off-text="{{ 'single' | translate }}", switch-size='mini')
   .single-student(ng-if='!isMultiple')
-    h3 {{ 'new_student' | translate }}
+    h3 {{ titleKey | translate }}
     fieldset.form-group
       input.form-control(ng-model='student.first_name', type='text', placeholder='{{ "first_name" | translate }}', autofocus)
     fieldset.form-group
       input.form-control(ng-model='student.last_name', type='text', placeholder='{{ "last_name" | translate }}')
     fieldset.form-group
-      input.form-control(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}')
+      input.form-control(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}', ng-disabled="isEdit")
     fieldset.form-group
       input.form-control(ng-model='student.personal_id', type='text', placeholder='{{ "personal_id_placeholder" | translate }}')
     .row

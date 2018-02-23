@@ -9,10 +9,12 @@ angular
     };
 
     $scope.isEdit = true;
+    $scope.titleKey = 'edit_student';
 
     $scope.isValid = () =>
       $scope.isTextValid($scope.student.first_name) &&
-      $scope.isTextValid($scope.student.last_name);
+      $scope.isTextValid($scope.student.last_name) &&
+      $scope.isTextValid($scope.student.personal_id);
 
     $scope.submit = () => {
       return Api

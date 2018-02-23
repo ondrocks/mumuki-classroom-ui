@@ -18,6 +18,7 @@ angular
     Breadcrumb.setCourse($stateParams.course);
 
     $scope.student = {};
+    $scope.titleKey = 'new_student';
 
     $scope.isTextValid = (text) => {
       return !_.isEmpty((text || '').trim())

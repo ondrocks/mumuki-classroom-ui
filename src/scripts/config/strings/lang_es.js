@@ -47,6 +47,7 @@ angular
     duration_placeholder: 'Minutos',
     edit: 'Editar',
     edit_exam: 'Editar examen',
+    edit_student: 'Editar estudiante',
     email: 'Email',
     email_error: 'El campo email es obligatorio, y debe ser válido',
     email_not_provided: 'No hay email asociado',
