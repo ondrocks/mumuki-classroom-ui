@@ -35,7 +35,7 @@ angular
       $scope.isTextValid($scope.student.last_name) &&
       $scope.isEmailValid($scope.student.email);
 
-    $scope.addStudent = () => {
+    $scope.submitStudent = () => {
       return Api
         .addStudent($stateParams.course, $scope.student)
         .then(() => $state.go('classroom.courses.course.guides', $stateParams))
