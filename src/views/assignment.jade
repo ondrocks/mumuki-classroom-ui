@@ -33,7 +33,7 @@
                   a(href='', ng-click='lastSolution()')
                     i.fa.fa-code
                     span &nbsp;{{ 'last_solution' | translate }}
-                li(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length")
+                li(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length && !assignment.exercise.usesCustomEditor()")
                   a(href='', ng-click='diff()')
                     i.fa.fa-columns
                     span &nbsp;{{ 'diff' | translate }}
