@@ -13,6 +13,17 @@ angular
         $rootScope.language_layout_js_urls = this.layout_js_urls;
       }
 
+      setEditorAssets(){
+        $rootScope.language_editor_css_urls = this.editor_css_urls;
+        $rootScope.language_editor_html_urls = this.editor_html_urls;
+        $rootScope.language_editor_js_urls = this.editor_js_urls;
+      }
+
+      setAssets(){
+        this.setLayoutAssets();
+        this.setEditorAssets();
+      }
+
       static from(language = {}) {
         return new Language(language);
       }
