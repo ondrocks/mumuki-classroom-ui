@@ -25,6 +25,10 @@ angular
         return _.sortBy(submissions, 'created_at')[submissions.length - 2];
       }
 
+      usesCustomEditor(){
+        return this.editor == "custom";
+      }
+
       static from(exercise) {
         exercise.submissions = _.map(exercise.submissions, Submission.from);
         return new Exercise(exercise);

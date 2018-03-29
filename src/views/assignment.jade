@@ -33,7 +33,7 @@
                   a(href='', ng-click='lastSolution()')
                     i.fa.fa-code
                     span &nbsp;{{ 'last_solution' | translate }}
-                li(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length")
+                li(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length && !assignment.exercise.usesCustomEditor()")
                   a(href='', ng-click='diff()')
                     i.fa.fa-columns
                     span &nbsp;{{ 'diff' | translate }}
@@ -46,7 +46,10 @@
                 .tab-pane(ng-class='{ "active": getViewMode().showMarkdown }')
 
                   div(ng-if="hasSubmissions()")
-                    markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
+                    div(ng-if='assignment.exercise.usesCustomEditor()')
+                      custom-editor(language="assignment.guide.language", content='assignment.content')
+                    div(ng-if='!assignment.exercise.usesCustomEditor()')
+                      markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
 
                     button.btn.btn-success.btn-block(ng-click='manualEvaluation()')
                       i.fa.fa-fw.fa-pencil

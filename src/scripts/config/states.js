@@ -157,7 +157,7 @@ angular
                     return Api.getBibliothecaGuide($stateParams)
                       .then((guide) => {
                         if(guide.language){
-                          Languages.fromName(guide.language).setLayoutAssets();
+                          Languages.fromName(guide.language).setAssets();
                         }
                         return {
                           guide: guide,
