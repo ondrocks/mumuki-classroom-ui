@@ -12,10 +12,8 @@ angular
           '@': {
             templateUrl: 'views/layout.html',
             resolve: {
-              organization: (Organization) => {Organization.getLockJson()},
-              languages: (Api, Languages) => {
-                Api.getLanguages().then(Languages.set);
-              }
+              organization: (Organization) => Organization.fetchFromServer(),
+              languages: (Api, Languages) => Api.getLanguages().then(Languages.set)
             }
           },
           'navbar@classroom': {

@@ -19,8 +19,6 @@ html.no-js(lang='es')
 
   body(ng-app='classroom')
 
-    link(rel='stylesheet', ng-href='{{ customCssUrl }}')
-
     //if lt IE 10
       p.browserupgrade
         | You are using an
@@ -37,7 +35,6 @@ html.no-js(lang='es')
     // endbower
     // endbuild
 
-    script(ng-src='{{ customJsUrl | trusted }}', defer='')
     script(src='assets/javascripts/webcomponents-lite.js')
     div(ng-include="'views/language_assets.html'")
 
