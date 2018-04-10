@@ -101,7 +101,7 @@
                   small(ng-if='student.email')
                     a(href='mailto:{{ student.email }}') {{ student.email }}
               .col-xs-2
-                input.pull-right(type='checkbox', ng-checked='student.isSelected')
+                input.pull-right(type='checkbox', ng-checked='student.isSelected', ng-click='toggle(student)')
 
 
 
