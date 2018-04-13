@@ -12,8 +12,12 @@ angular
           '@': {
             templateUrl: 'views/layout.html',
             resolve: {
-              organization: (Organization) => Organization.fetchFromServer(),
-              languages: (Api, Languages) => Api.getLanguages().then(Languages.set)
+              organization: (Organization) => {
+                Organization.fetchFromServer()
+              },
+              languages: (Api, Languages) => {
+                Api.getLanguages().then(Languages.set)
+              }
             }
           },
           'navbar@classroom': {
