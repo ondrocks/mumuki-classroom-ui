@@ -255,7 +255,7 @@ span.active-exercise {
     }
   }
 
-  &.input_bottom {
+  &.input_bottom, &.input_kids {
     @include input-bottom;
     width: 100%;
 
@@ -406,4 +406,8 @@ ace-with-markdown {
   &.errored {
     .ace-tm { background-color: lighten($mu-color-danger, 37.5%) }
   }
+}
+
+#blocklyDiv {
+  width: 100% !important;
 }
