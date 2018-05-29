@@ -47,7 +47,7 @@
 
                   div(ng-if="hasSubmissions()")
                     div(ng-if='assignment.exercise.usesCustomEditor()')
-                      custom-editor(language="assignment.guide.language", content='assignment.content')
+                      custom-editor(ng-if="renderCustomEditor", language="assignment.guide.language", content='lastSolutionContent')
                     div(ng-if='!assignment.exercise.usesCustomEditor()')
                       markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
 

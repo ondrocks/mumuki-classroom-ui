@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $filter, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student, Modal, Scroll, Notification, Organization) {
+  .controller('AssignmentController', function ($scope, $state, $sce, $stateParams, $filter, $timeout, toastr, hotkeys, guide, guideProgress, assignments, containsHtml, Assignment, Auth, Api, Breadcrumb, Preferences, Humanizer, Domain, Student, Modal, Scroll, Notification, Organization) {
 
     Preferences($scope, 'options');
 
@@ -217,9 +217,13 @@ angular
           }));
       };
 
+      $scope.renderCustomEditor = false;
+      $scope.lastSolutionContent = _.get(assignment.diffs.last(), 'right.content', '');
+      $timeout(() => $scope.renderCustomEditor = true);
+
       if (!$scope.lastSolutionMarkdown[currentExercise.eid]) {
         Api
-          .renderMarkdown(`\`\`\`${guide.language}\n${_.get(assignment.diffs.last(), 'right.content', '').trim()}\n\`\`\``)
+          .renderMarkdown(`\`\`\`${guide.language}\n${$scope.lastSolutionContent.trim()}\n\`\`\``)
           .then((markdown) => $scope.lastSolutionMarkdown[currentExercise.eid] = markdown);
       }
 
