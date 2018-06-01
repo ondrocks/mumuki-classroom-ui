@@ -2,7 +2,9 @@
 angular
   .module('classroom')
   .controller('StudentController', function ($scope, $state, $filter, $location, $stateParams, $sce, toastr, Auth, Api, Domain, Organization, Breadcrumb) {
-    $scope.isMultiple = false;
+    $scope.inputType = {
+      isMultiple: false
+    };
     $scope.csv = {
       content: null,
       header: true,
@@ -28,7 +30,7 @@ angular
       return $scope.isTextValid(text) && EMAIL_REGEX.test(text);
     };
 
-    $scope.toggleMultiple = () => $scope.isMultiple = !$scope.isMultiple;
+    $scope.toggleMultiple = () => $scope.inputType.isMultiple = !$scope.inputType.isMultiple;
 
     $scope.isValid = () =>
       $scope.isTextValid($scope.student.first_name) &&
