@@ -7,14 +7,14 @@
   br
 
   div.list-group
-    button.list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch', ng-click='open(item)')
+    button.list-group-item(ng-repeat='item in list | orderBy: sortCriteria() | filter:listSearch:searchComparator', ng-click='open(item)')
       i(class='{{ item.iconClass() }}')
       span.divider-vertical
       span.item-name {{ item.getName() | uppercase }}
       a.pull-right.mu-has-notification(ng-if='notifications(item).length')
         i
         span.badge.badge-notifications {{ notifications(item).length }}
-    label(ng-if='!(list | orderBy: sortCriteria() | filter:listSearch).length')
+    label(ng-if='!(list | orderBy: sortCriteria() | filter:listSearch:searchComparator).length')
       | {{ noItemsToShow | translate }}
 
   button.btn.btn-success.pull-right(ng-if='isJanitor()', ui-sref='classroom.courses.new')
