@@ -90,7 +90,7 @@
         br
 
         .row
-          .col-sm-12(ng-repeat='student in students | orderBy:sortCriteria | filter:listSearch')
+          .col-sm-12(ng-repeat='student in students | orderBy:sortCriteria | filter:listSearch:searchComparator')
             .row.guide-progress-blog
               .col-xs-10
                 img.rounded-x(ng-src='{{ student.image_url }}')

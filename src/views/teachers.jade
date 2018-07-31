@@ -7,7 +7,7 @@ div
   br
 
   .teacher-card.row
-    .col-md-4.col-sm-6.floating-card(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch')
+    .col-md-4.col-sm-6.floating-card(ng-repeat='item in list | orderBy:sortCriteria | filter:listSearch:searchComparator')
       .student-card
         .student-card-profile
 
