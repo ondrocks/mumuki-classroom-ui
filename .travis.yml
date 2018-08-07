@@ -1,17 +1,5 @@
 language: node_js
 node_js:
-- 4.2.4
-git:
-  depth: 100
-cache:
-  directories:
-    - node_modules
-    - src/bower_components
-env:
-  - CXX=g++-4.8
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
+- 7.4.0
+script:
+- npm test
