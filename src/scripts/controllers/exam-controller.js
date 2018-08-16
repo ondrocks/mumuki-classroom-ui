@@ -73,11 +73,16 @@ angular
 
     $scope.passingCriteria = PASSING_CRITERIA;
 
-    _.defaults($scope, { passing_criterion: { type: PASSING_CRITERIA[0] } });
-
     $scope.$watch('passing_criterion', () => {
       $scope.exam.passing_criterion = { type: $scope.passing_criterion.type.key, value: $scope.passing_criterion.value};
     }, true);
 
     $scope.isNone = (type) => type === 'none';
+
+    $scope.toCriterion = (examCriterion) => {
+      const key = examCriterion.type;
+      const value = examCriterion.value;
+      const type = _.find(PASSING_CRITERIA, {key})
+      return { type, value }
+    }
   });
