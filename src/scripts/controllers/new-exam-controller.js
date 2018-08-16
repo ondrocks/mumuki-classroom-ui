@@ -3,13 +3,6 @@ angular
   .module('classroom')
   .controller('NewExamController', function ($scope, $controller, guides, Auth, Api, Permissions) {
 
-    angular.extend(this, $controller('ExamController', { $scope: $scope }));
-
-    $scope.exam_type = 'new_exam';
-    $scope.isTeacher = Permissions.isTeacher;
-    $scope.guides = guides;
-    $scope.isNew = true;
-
     const roundedMinutes = (n) => now.minutes() - (now.minutes() % 5);
     const now = moment();
     const date = now.seconds(0).minutes(roundedMinutes(now)).toDate();
@@ -24,6 +17,13 @@ angular
       language: '',
       uids: []
     };
+
+    angular.extend(this, $controller('ExamController', { $scope: $scope }));
+
+    $scope.exam_type = 'new_exam';
+    $scope.isTeacher = Permissions.isTeacher;
+    $scope.guides = guides;
+    $scope.isNew = true;
 
     $scope.isValid = () => $scope.isValidMandatoryFields() && $scope.isValidGuide();
     $scope.isValidGuide = () => isValid('name') && isValid('slug') && isValid('language');

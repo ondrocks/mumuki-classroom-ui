@@ -1,0 +1,12 @@
+.ui-select-toggle.btn.btn-default {
+  color: $mu-color-primary;
+  background-color: #FFF;
+  border: 1px solid $mu-color-separator;
+  max-width: 100%;
+  &:focus, &:active {
+    outline: -webkit-focus-ring-color auto 5px;
+    outline-color: -webkit-focus-ring-color;
+    outline-style: auto;
+    outline-width: 5px;
+  }
+}

@@ -14,13 +14,15 @@ angular
     $scope.isValidDuration = () => !$scope.hasDuration || $scope.exam.duration > 0;
     $scope.isValidMaxProblemSubmissions = () => !!$scope.exam.max_problem_submissions && $scope.exam.max_problem_submissions > 0;
     $scope.isValidMaxChoiceSubmissions = () => !!$scope.exam.max_choice_submissions && $scope.exam.max_choice_submissions > 0;
+    $scope.isValidPassingCriterion = () => !!$scope.passing_criterion && $scope.passing_criterion.type && $scope.passing_criterion.type.isValid($scope.passing_criterion.value);
 
     $scope.isValidMandatoryFields = () =>
       $scope.isValidEndTime() &&
       $scope.isValidDuration() &&
       $scope.isValidStartTime() &&
       $scope.isValidMaxProblemSubmissions() &&
-      $scope.isValidMaxChoiceSubmissions();
+      $scope.isValidMaxChoiceSubmissions() &&
+      $scope.isValidPassingCriterion();
 
     $scope.isValid = () => $scope.isValidMandatoryFields();
 
@@ -63,4 +65,19 @@ angular
       }
     }
 
+    const PASSING_CRITERIA = [
+      { key: 'none', isValid: (value) => true },
+      { key: 'passed_exercises', isValid: (value) => value && value >= 0 },
+      { key: 'percentage', isValid: (value) => value && value >= 0 && value <= 100 }
+    ]
+
+    $scope.passingCriteria = PASSING_CRITERIA;
+
+    _.defaults($scope, { passing_criterion: { type: PASSING_CRITERIA[0] } });
+
+    $scope.$watch('passing_criterion', () => {
+      $scope.exam.passing_criterion = { type: $scope.passing_criterion.type.key, value: $scope.passing_criterion.value};
+    }, true);
+
+    $scope.isNone = (type) => type === 'none';
   });
