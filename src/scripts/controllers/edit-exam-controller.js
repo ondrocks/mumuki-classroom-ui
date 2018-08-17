@@ -29,7 +29,7 @@ angular
     $scope.exam = $scope.getExamInLocalTime(exam);
     $scope.exam_type = 'edit_exam';
 
-    $scope.passing_criterion = $scope.exam.passing_criterion ? $scope.toCriterion($scope.exam.passing_criterion) : { type: $scope.passingCriteria[0] };
+    $scope.passing_criterion = $scope.fromExamCriterion($scope.exam.passing_criterion);
 
     $scope.submit = (course, exam) => Api.updateExam(course, exam);
 

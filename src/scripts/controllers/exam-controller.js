@@ -69,20 +69,31 @@ angular
       { key: 'none', isValid: (value) => true },
       { key: 'passed_exercises', isValid: (value) => value && value >= 0 },
       { key: 'percentage', isValid: (value) => value && value >= 0 && value <= 100 }
-    ]
+    ];
 
     $scope.passingCriteria = PASSING_CRITERIA;
 
     $scope.$watch('passing_criterion', () => {
-      $scope.exam.passing_criterion = { type: $scope.passing_criterion.type.key, value: $scope.passing_criterion.value};
+      $scope.exam.passing_criterion = $scope.toExamCriterion($scope.passing_criterion);
     }, true);
 
     $scope.isNone = (type) => type === 'none';
 
-    $scope.toCriterion = (examCriterion) => {
+    $scope.fromExamCriterion = (examCriterion) => {
+      if (!examCriterion) return { type: $scope.passingCriteria[0] };
+
       const key = examCriterion.type;
       const value = examCriterion.value;
-      const type = _.find(PASSING_CRITERIA, {key})
+      const type = _.find(PASSING_CRITERIA, {key});
+
       return { type, value }
+    }
+
+    $scope.toExamCriterion = (scopeCriterion) => {
+      var criterion = { type: scopeCriterion.type.key, value: scopeCriterion.value };
+
+      if ($scope.isNone(criterion.type)) delete criterion.value;
+
+      return criterion;
     }
   });
