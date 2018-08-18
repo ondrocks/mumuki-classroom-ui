@@ -91,6 +91,25 @@
             ng-model='exam.max_choice_submissions',
             placeholder='1')
 
+      .col-sm-6
+        label {{ 'passing_criterion' | translate }}
+        .form-group
+          .input-group.block
+            ui-select(ng-model='passing_criterion.type' theme='bootstrap')
+              ui-select-match {{ "passing_criterion_" + $select.selected.key | translate }}
+              ui-select-choices(repeat='passingCriterion in passingCriteria | filter:$select.search')
+                small(ng-bind-html=' "passing_criterion_" + passingCriterion.key | translate | highlight: $select.search')
+
+      .col-sm-6
+        label {{ 'passing_grade' | translate }}
+        .form-group
+          .input-group.block
+            input.form-control(
+            type='number',
+            ng-model='passing_criterion.value',
+            ng-disabled='isNone(passing_criterion.type.key)',
+            placeholder='1')
+
       .col-sm-12
         button.btn.btn-success.pull-right(ng-disabled='!isValid()')
           | {{ 'save' | translate }}

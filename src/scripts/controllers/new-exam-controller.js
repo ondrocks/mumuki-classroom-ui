@@ -22,8 +22,10 @@ angular
       name: '',
       slug: '',
       language: '',
-      uids: []
+      uids: [],
     };
+
+    _.defaults($scope, { passing_criterion: { type: $scope.passingCriteria[0] } });
 
     $scope.isValid = () => $scope.isValidMandatoryFields() && $scope.isValidGuide();
     $scope.isValidGuide = () => isValid('name') && isValid('slug') && isValid('language');

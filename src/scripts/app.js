@@ -16,5 +16,7 @@ angular.module('classroom', [
   'cfp.hotkeys',
   'ngCsvImport',
   'frapontillo.bootstrap-switch',
-  'ui.ace'
+  'ui.ace',
+  'ngSanitize',
+  'ui.select'
 ]);
