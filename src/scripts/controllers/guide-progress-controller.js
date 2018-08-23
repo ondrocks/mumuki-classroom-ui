@@ -3,9 +3,16 @@ angular
   .module('classroom')
   .controller('GuideProgressController', function ($scope, $stateParams, $interval, $controller, $timeout, $httpParamSerializer, data, Api, Guide, Breadcrumb, Humanizer, Notification, Domain) {
 
-    $scope.extraFilters = [{
-      queryCriteria: 'passed_assignments', icon: 'fa fa-graduation-cap', text: 'filter_passed_assignments'
-    }];
+    let queryOperands = [
+      {text: 'more_than', symbol: '≥'},
+      {text: 'less_than', symbol: '≤'},
+      {text: 'close_to', symbol: '≈'}
+    ];
+
+    $scope.extraFilters = [
+      { queryCriteria: 'passed_assignments', icon: 'fa fa-check-circle default-color', text: 'filter_passed_assignments', type: 'numeric', queryOperands: queryOperands},
+      { queryCriteria: 'not_failed_assignments', icon: 'fa fa-exclamation-circle default-color', text: 'filter_not_failed_assignments', type: 'numeric', queryOperands: queryOperands}
+    ];
 
     $controller('ListHeaderController', {
       $scope: $scope,

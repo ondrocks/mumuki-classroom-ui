@@ -16,14 +16,23 @@ angular
     $scope.actualPage = 1;
     $scope.itemsPerPage = 30;
 
-    $scope.filters = [{ icon: 'fa fa-search', text: 'filter_students' }];
+    $scope.filters = [{ icon: 'fa fa-search', text: 'filter_students', type: 'string', queryOperands: [] }];
     if($scope.extraFilters) $scope.filters.push.apply($scope.filters, $scope.extraFilters);
 
     $scope.withFilter = true;
     $scope.withMultipleFilters = $scope.filters.length > 1;
     $scope.currentFilter = $scope.filters[0];
+
     $scope.setCurrentFilter = function (filter) {
+      if(!($scope.currentFilter.type === filter.type)) $scope.listOptions.search = '';
+      $scope.currentQueryOperand = filter.queryOperands[0];
       $scope.currentFilter = filter;
+      $scope.queryChange();
+    };
+
+    $scope.setcurrentQueryOperand = function (queryOperand) {
+      $scope.currentQueryOperand = queryOperand;
+      $scope.queryChange();
     };
 
     $scope.withSortBy = true;
@@ -98,6 +107,7 @@ angular
         $scope.params.page = 1;
         $scope.params.q = $scope.listOptions.search;
         $scope.params.query_criteria = $scope.currentFilter.queryCriteria;
+        $scope.params.query_operand = _.get($scope.currentQueryOperand, 'text');
       }, 750);
     }
 
