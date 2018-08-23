@@ -42,6 +42,14 @@
               li(ng-repeat='filter in filters')
                 a(href='', ng-click='setCurrentFilter(filter)') {{ filter.text | translate }}
 
+          .input-group-btn(ng-if='currentFilter.queryOperands.length')
+            button.btn.btn-filter.group-span.dropdown-toggle(type="button", data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+              span.span-icon {{ currentQueryOperand.symbol }}
+              span.caret
+            ul.dropdown-menu
+              li(ng-repeat='queryOperand in currentFilter.queryOperands')
+                a(href='', ng-click='setcurrentQueryOperand(queryOperand)') {{ queryOperand.text | translate }}
+
           span.input-group-addon(ng-if='!withMultipleFilters')
             i.fa.fa-search.fa-fw
 

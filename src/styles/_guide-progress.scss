@@ -104,6 +104,17 @@ input.form-control[disable="disable"] {
   border: 1px solid $input-border;
   padding: 10px 11px;
   color: $brand-primary;
+  &.group-span {
+    padding: 3px 11px;
+    .span-icon {
+      font-weight: bold;
+      font-size: 25px;
+      padding: 0px 3px;
+    }
+    span.caret {
+      padding-bottom: 4px;
+    }
+  }
 }
 
 .report {
