@@ -5,24 +5,33 @@ angular
 
     angular.extend(this, $controller('ExamController', { $scope: $scope }));
 
-    $scope.students = students.students;
+    $scope.totalCount = students.total;
 
-    $scope.students
-      .filter((student) => _(exam.uids).includes(student.uid))
-      .forEach((student) => student.isSelected = true)
+    $scope.params = {
+      q: '',
+      page: 1,
+      per_page: 30,
+      sort_by: 'name',
+      with_detached: false,
+      order_by: 'asc'
+    }
+
+    $scope.selectPage = (n) => {
+      $scope.params.page = n;
+    }
+
+    $scope.submit = Api.updateExam;
 
     Breadcrumb.setExam(exam);
 
     const isSelected = (student, newVal) => {
-      student.isSelected = newVal
-    };
-
-    const allStudents = (selected) => {
-      _.forEach($scope.students, (st) => isSelected(st, selected))
+      student.isProcessing = true;
+      return Api[`${newVal ? 'add' : 'remove'}StudentToExam`]($state.params.course, $scope.getExam(), student)
+        .then(() => student.isSelected = newVal)
+        .then(() => student.isProcessing = false);
     };
 
     $scope.getExam = () => {
-      $scope.exam.uids = _($scope.students).filter('isSelected').map('uid').value();
       return $scope.getExamInLocalTime($scope.exam);
     }
 
@@ -31,24 +40,35 @@ angular
 
     $scope.passing_criterion = $scope.fromExamCriterion($scope.exam.passing_criterion);
 
-    $scope.submit = (course, exam) => Api.updateExam(course, exam);
-
     $scope.sortCriteria = (student) => student.fullName();
 
     $scope.toggle = (student) => isSelected(student, !student.isSelected);
-    $scope.selectAll = () => allStudents(true);
-    $scope.unselectAll = () => allStudents(false);
-
-    $scope.allSelected = () => _.every($scope.students, 'isSelected');
 
     $scope.openExamInLaboratory = () => Domain.openExamInLaboratory($state.params.exam);
 
-    $scope.url = () => Domain.examURL($scope.exam.id);
+    $scope.url = () => Domain.examURL($scope.exam.eid);
 
     $scope.copy = () => {
       clipboard.copyText($scope.url());
       $scope.isCopied = true;
       $timeout(() => $scope.isCopied = false, 5000);
     };
+
+    let delayParamsChange;
+
+    const withSelectedStudents = (students) => {
+      students.forEach((student) => student.isSelected = _.includes(exam.uids, student.uid));
+      return students;
+    }
+
+    $scope.$watch('params', () => {
+      $timeout.cancel(delayParamsChange);
+      delayParamsChange = $timeout(() => {
+        Api.getStudents($state.params, $scope.params).then((response) => {
+          $scope.students = withSelectedStudents(response.students);
+          $scope.totalCount = response.total;
+        });
+      }, 250);
+    }, true);
 
   });

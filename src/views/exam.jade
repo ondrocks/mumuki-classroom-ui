@@ -114,36 +114,40 @@
         button.btn.btn-success.pull-right(ng-disabled='!isValid()')
           | {{ 'save' | translate }}
 
-      .col-sm-12(ng-if='!isNew')
+  .col-sm-12(ng-if='!isNew')
 
-        label {{ 'students' | translate }}
-        .input-group
-          i.input-group-addon.fa.fa-search
-          input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='listSearch')
-          span.input-group-addon
-            i.pointer.fa.fa-square-o(ng-if='!allSelected()', ng-click='selectAll()')
-            i.pointer.fa.fa-check-square-o(ng-if='allSelected()', ng-click='unselectAll()')
+    .row
+      label {{ 'students' | translate }}
+      .input-group
+        input.form-control(id='filter', placeholder='{{ "filter_students" | translate }}', ng-model='params.q')
+        i.input-group-addon.fa.fa-search
 
-        br
+    br
 
-        .row
-          .col-sm-12(ng-repeat='student in students | orderBy:sortCriteria | filter:listSearch:searchComparator')
-            .row.guide-progress-blog
-              .col-xs-10
-                img.rounded-x(ng-src='{{ student.image_url }}')
-                .name-location
-                  strong {{ student.fullName() }}
-                .name-location
-                  small(ng-if='!student.email') {{ 'email_not_provided' | translate }}
-                  small(ng-if='student.email')
-                    a(href='mailto:{{ student.email }}') {{ student.email }}
-              .col-xs-2
-                input.pull-right(type='checkbox', ng-checked='student.isSelected', ng-click='toggle(student)')
+    .row
+      small Haciendo click en #[i.fa.fa-check-square-o] se dará de alta al alumno sin la necesidad de guardar el examen.
+      .col-sm-12(ng-repeat='student in students')
+        .row.guide-progress-blog
+          .col-xs-10
+            img.rounded-x(ng-src='{{ student.image_url }}')
+            .name-location
+              strong {{ student.fullName() }}
+            .name-location
+              small(ng-if='!student.email') {{ 'email_not_provided' | translate }}
+              small(ng-if='student.email')
+                a(href='mailto:{{ student.email }}') {{ student.email }}
+          .col-xs-2
+            label.mu-checkbox.pull-right
+              input(type='checkbox', ng-checked='student.isSelected', ng-click='toggle(student)', ng-disabled='student.isProcessing')
+              span
+    br
 
+    paginator.text-center.col-xs-12.col-sm-12.col-md-12.col-lg-12(
+      ng-if='totalCount > params.per_page',
+      pg-items-per-page='{{ params.per_page }}',
+      pg-total-items='totalCount',
+      pg-actual-page='params.page',
+      pg-offset='2',
+      pg-click='selectPage')
 
-
-      br
-
-      button.btn.btn-success.pull-right(ng-disabled='!isValid()', ng-if='!isNew')
-        | {{ 'save' | translate }}
-
+  br
