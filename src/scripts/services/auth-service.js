@@ -11,7 +11,7 @@ angular
         .then((data) => Permissions.set(data.permissions))
     };
 
-    this.signin = (callback) => {
+    this.signin = () => {
       document.location.href = $injector.get('Api').getLoginUrl();
     };
 

@@ -6,8 +6,8 @@ angular
 
     $stateProvider
       .state('classroom', {
-        abstract: true,
         url: OrganizationMapperProvider.current().stateUrl(),
+        authenticated: false,
         views: {
           '@': {
             templateUrl: 'views/layout.html',
@@ -26,11 +26,25 @@ angular
               notifications: (Api) => Api.getNotifications()
             },
             controller: 'NavbarController'
+          },
+          'content@classroom': {
+            templateUrl: 'views/home.html',
+            controller: 'HomeController'
           }
         }
       })
       .state('classroom.home', {
         url: '/home',
+        authenticated: false,
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/home.html',
+            controller: 'HomeController'
+          }
+        }
+      })
+      .state('classroom.main', {
+        url: '/',
         authenticated: false,
         views: {
           'content@classroom': {
@@ -313,6 +327,12 @@ angular
 
     $rootScope.$on('$stateChangeStart', function(ev, toState, toParams) {
 
+      const AUTH_STATES = ['classroom', 'classroom.home', 'classroom.main'];
+
+      const isAuthState = (state) => {
+        return AUTH_STATES.includes(state.name);
+      };
+
       Auth.authenticateIfPossible();
 
       if(toState.authenticated && !Auth.isLoggedIn()) {
@@ -320,7 +340,7 @@ angular
         ev.preventDefault();
       }
 
-      if(toState.name === 'classroom.home' && Auth.isLoggedIn()) {
+      if(isAuthState(toState) && Auth.isLoggedIn()) {
         $state.go('classroom.courses', toParams, { location: 'replace' });
         ev.preventDefault();
       }
