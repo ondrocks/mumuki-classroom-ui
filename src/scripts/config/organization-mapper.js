@@ -14,7 +14,7 @@ angular
       return `${protocol}://${tenant}.${host}`;
     }
 
-    const withOrigin = (callback_uri) => `?origin=${encodeURIComponent(callback_uri)}`
+    const withParams = (callback_uri, tenant) => `?origin=${encodeURIComponent(callback_uri)}&organization=${tenant}`;
 
     const redirectURL = (tenant = '') => {
       const protocol = location.protocol();
@@ -49,11 +49,11 @@ angular
         },
 
         loginURL() {
-          return `${this.classroomApiURL()}/login${withOrigin(location.absUrl())}`
+          return `${this.laboratoryURL()}/login${withParams(location.absUrl(), this.tenant())}`
         },
 
         logoutURL() {
-          return `${this.classroomApiURL()}/logout${withOrigin(redirectURL())}`
+          return `${this.laboratoryURL()}/logout${withParams(redirectURL())}`
         },
 
         stateUrl() {
@@ -81,11 +81,11 @@ angular
         },
 
         loginURL() {
-          return `${CONFIG.classroom.api_url}/login${withOrigin(location.absUrl())}`
+          return `${CONFIG.laboratory.url}/login${withParams(location.absUrl(), this.tenant())}`
         },
 
         logoutURL() {
-          return `${CONFIG.classroom.api_url}/logout${withOrigin(redirectURL(this.tenant()))}`
+          return `${CONFIG.laboratory.url}/logout${withParams(redirectURL(this.tenant()))}`
         },
 
         stateUrl() {
