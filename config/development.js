@@ -4,20 +4,20 @@ angular
   .constant('CONFIG', {
 
     classroom: {
-      api_url: 'http://0.0.0.0:3002',
-      url: 'http://0.0.0.0:3001'
+      api_url: 'http://localhost:3002',
+      url: 'http://localhost:3001'
     },
 
     laboratory: {
-      url: 'http://0.0.0.0:3000'
+      url: 'http://localhost:3000'
     },
 
     bibliotheca: {
-      api_url: 'http://0.0.0.0:3004'
+      api_url: 'http://localhost:3004'
     },
 
     cookie: {
-      domain: '0.0.0.0',
+      domain: 'localhost',
     },
 
     organizationMappingMode: 'path'
