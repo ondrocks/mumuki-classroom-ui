@@ -262,4 +262,19 @@ angular
         .then((res) => res.data.languages);
     };
 
+    this.generateGuideReport = ({ org, course, repo }, reportParams, queryParams) => {
+      return $http
+        .post(`${API()}/courses/${course}/guides/${org}/${repo}/report?${queryParams}`, reportParams)
+        .then((res) => this.downloadCsv('guide_report.csv', res.data));
+    }
+
+    this.downloadCsv = (filename, data) => {
+      var link = document.createElement("a");
+      link.download = filename;
+      var uri = 'data:application/csv;charset=utf-8;,' + encodeURI(data);
+      link.href = uri;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   });

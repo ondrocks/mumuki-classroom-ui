@@ -45,10 +45,14 @@ angular
 
     $scope.availableSortingCriteria = [ 'messages', 'name', 'progress', 'last_submission_date' ];
 
-    $scope.reportUrl = () => {
+    const exercisesReportParams = _.map(guide.exercises, (exercise) => {
+      return _.pick(exercise, ['id', 'tag_list', 'language']);
+    });
+
+    $scope.generateReport = () => {
+      let reportParams = {exercises: exercisesReportParams, language: guide.language};
       let queryParams = $httpParamSerializer($scope.params);
-      let { org, course, repo } = $stateParams;
-      return `${Domain.classroomApiURL()}/courses/${course}/guides/${org}/${repo}/report?${queryParams}`;
+      return Api.generateGuideReport($stateParams, reportParams, queryParams);
     }
 
     setGuideProgress(data.guideProgress);
