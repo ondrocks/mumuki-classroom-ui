@@ -12,7 +12,7 @@
   .row
     .col-md-3.pull-right.report
       div
-        a(href='{{ reportUrl() }}' download)
+        a(ng-click='generateReport()' download)
           span.view-mode {{ 'export_guide_report' | translate }}
           i.fa.fa-download
 
