@@ -1,6 +1,9 @@
-// Bower
-@import '../bower_components/mumuki-styles/dist/scss/mumuki-styles';
-@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+$icon-font-path: '~@bower_components/mumuki-styles/dist/fonts/bootstrap/';
+$fa-font-path: '~@bower_components/mumuki-styles/dist/fonts/';
+$da-font-path: '~@bower_components/mumuki-styles/dist/fonts/';
+
+@import '~@bower_components/mumuki-styles/dist/scss/mumuki-styles';
+@import '~@bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
 
 // Font
 @import 'home';

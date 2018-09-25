@@ -7,6 +7,8 @@ const del = require('del');
 const gulp = require('gulp');
 const runSequence = require('run-sequence');
 const gulpLoadPlugins = require('gulp-load-plugins');
+const webpack = require('webpack-stream');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const $ = gulpLoadPlugins();
 
@@ -30,7 +32,7 @@ const useminOptions = () => {
       js: [$.uglify, $.rev]
     }
   }[process.env.NODE_ENV];
-}
+};
 
 const configFile = () => `config/${process.env.NODE_ENV}.js`;
 const replaceEnvVar = (variable) => $.stringReplace(`<${variable}>`, process.env[variable]);
@@ -56,20 +58,54 @@ gulp.task('config', () => {
 
 gulp.task('dev:js', ['config'], () => {
   return gulp.src([`${srcFolder}/scripts/**/*.js`])
-    .pipe($.sourcemaps.init())
-      .pipe($.babel({ presets: ['es2015'] }))
-      .pipe($.concat('main.js'))
-    .pipe($.sourcemaps.write('.'))
+    .pipe(webpack({
+      mode: process.env.NODE_ENV,
+      output: { filename: "main.js" },
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env'],
+                plugins: ["angularjs-annotate"]
+              }
+            }
+          }
+        ]
+      },
+      devtool: 'source-map'
+    }))
     .pipe(gulp.dest(`${outFolder}/scripts`))
     .pipe($.livereload());
 });
 
 gulp.task('prod:js', ['config'], () => {
   return gulp.src([`${srcFolder}/scripts/**/*.js`])
-    .pipe($.babel({ presets: ['es2015'] }))
-    .pipe($.concat('main.js'))
-    .pipe($.ngAnnotate())
-    .pipe($.uglify())
+    .pipe(webpack({
+      mode: process.env.NODE_ENV,
+      output: { filename: "main.js" },
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env'],
+                plugins: ["angularjs-annotate"]
+              }
+            }
+          }
+        ]
+      },
+      devtool: 'source-map'
+    }))
+    //TODO: uglify
+    // .pipe($.uglify())
     .pipe(gulp.dest(`${outFolder}/scripts`))
     .pipe($.livereload());
 });
@@ -83,7 +119,6 @@ gulp.task('jade:views', () => {
 
 gulp.task('jade:index', () => {
   return gulp.src([`${srcFolder}/index.jade`])
-    .pipe($.wiredep({ includeSelf: true }))
     .pipe($.jade({ pretty: true }))
     .pipe($.usemin(useminOptions()))
     .pipe(gulp.dest(`${outFolder}`))
@@ -92,21 +127,34 @@ gulp.task('jade:index', () => {
 
 gulp.task('scss', () => {
   return gulp.src([`${srcFolder}/styles/main.scss`])
-    .pipe($.sass.sync())
+    .pipe(webpack({
+      mode: process.env.NODE_ENV,
+      module: {
+        rules: [{
+          test: /\.scss$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            "css-loader", // translates CSS into CommonJS
+            "sass-loader" // compiles Sass to CSS, using Node Sass by default
+          ]
+        }, {
+          test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
+          use: [{
+            loader: "file-loader",
+            options: {
+              name: '[name].[ext]',
+              outputPath: "../fonts/"
+            }
+          }]
+        }]
+      },
+      plugins: [
+        new MiniCssExtractPlugin({
+          filename: "main.css"
+        })
+      ]
+    }))
     .pipe(gulp.dest(`${outFolder}/styles`))
-    .pipe($.livereload());
-});
-
-const bower = `${srcFolder}/bower_components`;
-const fontPaths = [
-  `${bower}/font-awesome/fonts/**/*`,
-  `${bower}/dev-awesome/dist/fonts/**/*`,
-  `${bower}/bootstrap-sass/assets/fonts/**/*`
-];
-
-gulp.task('fonts', () => {
-  return gulp.src(fontPaths)
-    .pipe(gulp.dest(`${outFolder}/fonts`))
     .pipe($.livereload());
 });
 
@@ -132,11 +180,11 @@ gulp.task('gzip', () => {
 });
 
 gulp.task('dev:build', (done) => {
-  runSequence('clean', 'dev:js', 'scss', 'jade', 'fonts', 'images', 'assets', 'gzip', done);
+  runSequence('clean', 'dev:js', 'scss', 'jade', 'images', 'assets', 'gzip', done);
 });
 
 gulp.task('prod:build', (done) => {
-  runSequence('clean', 'prod:js', 'scss', 'jade', 'fonts', 'images', 'assets', 'release', 'gzip', done);
+  runSequence('clean', 'prod:js', 'scss', 'jade', 'images', 'assets', 'release', 'gzip', done);
 });
 
 gulp.task('dev:serve', ['dev:build'], () => {
@@ -152,7 +200,6 @@ gulp.task('dev:serve', ['dev:build'], () => {
 gulp.task('dev:watch', () => {
   gulp.watch(`${configFile()}`, ['dev:js']);
   gulp.watch(`${srcFolder}/index.jade`, ['jade:index']);
-  gulp.watch(`${fontPaths}`, ['fonts']);
   gulp.watch(`${srcFolder}/assets/**/*`, ['assets']);
   gulp.watch(`${srcFolder}/images/**/*`, ['images']);
   gulp.watch(`${srcFolder}/scripts/**/*.js`, ['dev:js']);
@@ -161,12 +208,12 @@ gulp.task('dev:watch', () => {
 });
 
 gulp.task('prod:serve', () => {
- return gulp.src(`${outFolder}`)
-   .pipe($.webserver({
-     port: process.env.PORT,
-     host: '0.0.0.0',
-     path: '/central/home'
-   }));
+  return gulp.src(`${outFolder}`)
+    .pipe($.webserver({
+      port: process.env.PORT,
+      host: '0.0.0.0',
+      path: '/central/home'
+    }));
 });
 
 gulp.task('dev', (done) => {
@@ -179,24 +226,24 @@ gulp.task('prod', (done) => {
   runSequence('prod:serve', done);
 });
 
+
 gulp.task('test', (done) => {
   process.env.NODE_ENV = 'test';
 
-  const wiredep = require('wiredep');
-  const bower = require('./bower.json').main;
   const Server = require('karma').Server;
 
   new Server({
     configFile: `${__dirname}/karma.conf.js`,
     action: 'run',
-    files: wiredep({ devDependencies: true }).js
-      .concat(bower.filter((dep) => /\.js$/.test(dep)))
-      .concat([
-        'test/context.js',
-        'src/scripts/app.js',
-        'config/test.js',
-        'src/scripts/**/*.js',
-        'test/**/*.test.js'
-      ])
+    files: [
+      { pattern: `${srcFolder}/scripts/**/*.js`, watched: false },
+      "node_modules/angular-mocks/angular-mocks.js",
+      'test/context.js',
+      'src/scripts/app.js',
+      'config/test.js',
+      'test/**/*.test.js'
+      // { pattern: `${specFolder}/context.js`, watched: false },
+      // { pattern: `${specFolder}/**/*.spec.js`, watched: false }
+    ]
   }, done).start();
 });
