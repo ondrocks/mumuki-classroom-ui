@@ -10,8 +10,20 @@ echo ' \______  /____(____  /____  >____  > |__|   \____/ \____/|__|_|  /'
 echo '        \/          \/     \/     \/                            \/ '
 echo ''
 
+echo "[MumukiDevstart::Classroom] Ensuring node version..."
+if [ $(cat .nvmrc) != $(node -v) ]; then
+  echo "Unsupported node version. Please run nvm install first. Aborting"
+  exit 1
+fi
+
+echo "[MumukiDevstart::Classroom] Ensuring yarn version..."
+if ! [ -x "$(command -v yarn)" ]; then
+  echo 'Error: yarn was not found. Please install it first. Aborting' >&2
+  exit 1
+fi
+
 echo "[MumukiDevstart::Classroom] Installing dependencies...."
-npm install --unsafe-perm
+yarn install
 
 echo "[MumukiDevstart::Classroom] Starting server...."
-npm start
+yarn start

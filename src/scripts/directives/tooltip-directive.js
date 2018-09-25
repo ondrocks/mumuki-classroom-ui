@@ -1,4 +1,3 @@
-
 angular
   .module('classroom')
   .directive('tooltip', () => {

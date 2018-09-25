@@ -24,9 +24,13 @@ module.exports = (config) => {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: [
-      'PhantomJS'
-    ],
+    browsers: ['HeadlessChrome'],
+    customLaunchers:{
+      HeadlessChrome:{
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
 
     preprocessors: {
       'test/context.js ': ['babel'],
