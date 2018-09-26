@@ -1,7 +1,5 @@
 function classroomTest(message, callback) {
-
   let mocks = {};
-
 
   afterEach(() => {
     _.forIn(mocks, (mock) => {
@@ -19,7 +17,5 @@ function classroomTest(message, callback) {
     beforeEach(inject((_$location_) => _$location_.host = () => 'http://pdep-utn.classroom.localmumuki.io'));
 
     callback.bind(this)(mocks);
-
   });
-
 }
