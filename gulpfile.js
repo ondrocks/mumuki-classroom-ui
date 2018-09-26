@@ -229,6 +229,7 @@ gulp.task('prod', (done) => {
 
 gulp.task('test', (done) => {
   process.env.NODE_ENV = 'test';
+  runSequence('config');
 
   const Server = require('karma').Server;
 
