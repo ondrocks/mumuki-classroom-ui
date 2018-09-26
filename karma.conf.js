@@ -1,3 +1,4 @@
+process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 module.exports = (config) => {
   config.set({
@@ -25,8 +26,8 @@ module.exports = (config) => {
     // - PhantomJS
     // - IE (only Windows)
     browsers: ['HeadlessChrome'],
-    customLaunchers:{
-      HeadlessChrome:{
+    customLaunchers: {
+      HeadlessChrome: {
         base: 'ChromeHeadless',
         flags: ['--no-sandbox']
       }
@@ -35,12 +36,30 @@ module.exports = (config) => {
     preprocessors: {
       'test/context.js ': ['babel'],
       'test/**/*.test.js ': ['babel'],
-      'src/scripts/**/*.js ': ['babel']
+      'src/scripts/**/*.js ': ['webpack']
+    },
+
+    webpack: {
+      mode: "development",
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env']
+              }
+            }
+          }
+        ]
+      }
     },
 
     babelPreprocessor: {
       options: {
-        presets: ['es2015'],
+        presets: ['latest'],
         sourceMap: 'inline'
       },
       filename: function (file) {

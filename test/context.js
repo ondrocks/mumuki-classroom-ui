@@ -15,6 +15,7 @@ function classroomTest(message, callback) {
     beforeEach(module('classroom', function ($translateProvider) {
       $translateProvider.preferredLanguage("en");
     }));
+
     beforeEach(inject((_$location_) => _$location_.host = () => 'http://pdep-utn.classroom.localmumuki.io'));
 
     callback.bind(this)(mocks);

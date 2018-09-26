@@ -37,9 +37,9 @@ const useminOptions = () => {
 const configFile = () => `config/${process.env.NODE_ENV}.js`;
 const replaceEnvVar = (variable) => $.stringReplace(`<${variable}>`, process.env[variable]);
 
-gulp.task('clean', () => del(`${outFolder}`, { force: true }));
+gulp.task('clean', () => del(`${outFolder}`, {force: true}));
 gulp.task('release', (done) => {
-  del('release', { force: true })
+  del('release', {force: true})
     .then(() => fs.renameSync(`${outFolder}`, 'release'))
     .then(done, done)
 });
@@ -60,7 +60,7 @@ gulp.task('dev:js', ['config'], () => {
   return gulp.src([`${srcFolder}/scripts/**/*.js`])
     .pipe(webpack({
       mode: process.env.NODE_ENV,
-      output: { filename: "main.js" },
+      output: {filename: "main.js"},
       module: {
         rules: [
           {
@@ -86,7 +86,7 @@ gulp.task('prod:js', ['config'], () => {
   return gulp.src([`${srcFolder}/scripts/**/*.js`])
     .pipe(webpack({
       mode: process.env.NODE_ENV,
-      output: { filename: "main.js" },
+      output: {filename: "main.js"},
       module: {
         rules: [
           {
@@ -119,7 +119,7 @@ gulp.task('jade:views', () => {
 
 gulp.task('jade:index', () => {
   return gulp.src([`${srcFolder}/index.jade`])
-    .pipe($.jade({ pretty: true }))
+    .pipe($.jade({pretty: true}))
     .pipe($.usemin(useminOptions()))
     .pipe(gulp.dest(`${outFolder}`))
     .pipe($.livereload());
@@ -236,14 +236,11 @@ gulp.task('test', (done) => {
     configFile: `${__dirname}/karma.conf.js`,
     action: 'run',
     files: [
-      { pattern: `${srcFolder}/scripts/**/*.js`, watched: false },
+      {pattern: `${srcFolder}/scripts/**/*.js`, watched: false},
       "node_modules/angular-mocks/angular-mocks.js",
-      'test/context.js',
-      'src/scripts/app.js',
       'config/test.js',
-      'test/**/*.test.js'
-      // { pattern: `${specFolder}/context.js`, watched: false },
-      // { pattern: `${specFolder}/**/*.spec.js`, watched: false }
+      'test/context.js',
+      {pattern: `test/**/*.js`, watched: false},
     ]
   }, done).start();
 });
