@@ -14,7 +14,8 @@ angular
       return `${protocol}://${tenant}.${host}`;
     }
 
-    const withParams = (callback_uri, tenant) => `?origin=${encodeURIComponent(callback_uri)}&organization=${tenant}`;
+    const withOrigin = (callback_uri) => `origin=${encodeURIComponent(callback_uri)}`;
+    const withTenant = (tenant) => `organization=${tenant}`;
 
     const redirectURL = (tenant = '') => {
       const protocol = location.protocol();
@@ -49,11 +50,11 @@ angular
         },
 
         loginURL() {
-          return `${this.laboratoryURL()}/login${withParams(location.absUrl(), this.tenant())}`
+          return `${this.laboratoryURL()}/login?${withOrigin(location.absUrl())}&${withTenant(this.tenant())}`
         },
 
         logoutURL() {
-          return `${this.laboratoryURL()}/logout${withParams(redirectURL())}`
+          return `${this.laboratoryURL()}/logout?${withOrigin(redirectURL())}`
         },
 
         stateUrl() {
@@ -81,11 +82,11 @@ angular
         },
 
         loginURL() {
-          return `${CONFIG.laboratory.url}/login${withParams(location.absUrl(), this.tenant())}`
+          return `${CONFIG.laboratory.url}/login?${withOrigin(location.absUrl())}&${withTenant(this.tenant())}`
         },
 
         logoutURL() {
-          return `${CONFIG.laboratory.url}/logout${withParams(redirectURL(this.tenant()))}`
+          return `${CONFIG.laboratory.url}/logout?${withOrigin(redirectURL(this.tenant()))}`
         },
 
         stateUrl() {
