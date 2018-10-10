@@ -7,12 +7,12 @@ angular
 
     this.current = () => {
       return this.organizationMappers[CONFIG.organizationMappingMode];
-    }
+    };
 
     const tenantizedURL = (URL, tenant) => {
       const [protocol, host] = URL.split('://');
       return `${protocol}://${tenant}.${host}`;
-    }
+    };
 
     const withOrigin = (callback_uri) => `origin=${encodeURIComponent(callback_uri)}`;
     const withTenant = (tenant) => `organization=${tenant}`;
@@ -24,7 +24,7 @@ angular
       const portString = port ? `:${port}` : '';
       const path = _.isEmpty(tenant) ? '' : `/${tenant}`;
       return `${protocol}://${host}${portString}/#${path}/home`;
-    }
+    };
 
     const withoutProtocol = (url) => url.replace(`${location.protocol()}://`, '');
 
@@ -94,7 +94,7 @@ angular
         }
 
       }
-    }
+    };
 
     this.$get = ($location) => {
       location = $location;

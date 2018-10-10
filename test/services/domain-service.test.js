@@ -1,4 +1,3 @@
-
 classroomTest('Domain Service', (mocks) => {
 
   beforeEach(inject((_$window_) => {

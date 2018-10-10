@@ -6,7 +6,7 @@ angular
     const openAth = (mode, path='') => {
       $window.open(`${this.laboratoryURL()}${path}`, mode);
       return true;
-    }
+    };
 
     this.openLaboratory = () => openAth('_self');
     this.openExamInLaboratory = (exam) => openAth('_blank', `/exams/${exam}`);
