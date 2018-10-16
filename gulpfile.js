@@ -9,6 +9,7 @@ const runSequence = require('run-sequence');
 const gulpLoadPlugins = require('gulp-load-plugins');
 const webpack = require('webpack-stream');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const $ = gulpLoadPlugins();
 
@@ -16,23 +17,6 @@ const srcFolder = 'src';
 const outFolder = 'build';
 
 $.protocol = $.stringReplace(/https?:\/\//g, '//');
-
-const useminOptions = () => {
-  return {
-    development: {
-      scss: [],
-      es6: [],
-      css: [$.minifyCss, $.protocol, $.rev],
-      js: [$.uglify, $.rev]
-    },
-    production: {
-      scss: [$.minifyCss, $.rev],
-      es6: [$.ngAnnotate, $.uglify, $.rev],
-      css: [$.minifyCss, $.protocol, $.rev],
-      js: [$.uglify, $.rev]
-    }
-  }[process.env.NODE_ENV];
-};
 
 const configFile = () => `config/${process.env.NODE_ENV}.js`;
 const replaceEnvVar = (variable) => $.stringReplace(`<${variable}>`, process.env[variable]);
@@ -102,12 +86,12 @@ gulp.task('prod:js', ['config'], () => {
           }
         ]
       },
-      devtool: 'source-map'
+      devtool: 'source-map',
+      optimization: {
+        minimizer: [new UglifyJsPlugin()]
+      }
     }))
-    //TODO: uglify
-    // .pipe($.uglify())
     .pipe(gulp.dest(`${outFolder}/scripts`))
-    .pipe($.livereload());
 });
 
 gulp.task('jade:views', () => {
@@ -120,7 +104,6 @@ gulp.task('jade:views', () => {
 gulp.task('jade:index', () => {
   return gulp.src([`${srcFolder}/index.jade`])
     .pipe($.jade({pretty: true}))
-    .pipe($.usemin(useminOptions()))
     .pipe(gulp.dest(`${outFolder}`))
     .pipe($.livereload());
 });
@@ -143,7 +126,7 @@ gulp.task('scss', () => {
             loader: "file-loader",
             options: {
               name: '[name].[ext]',
-              outputPath: "../fonts/"
+              outputPath: "fonts/"
             }
           }]
         }]
@@ -208,11 +191,12 @@ gulp.task('dev:watch', () => {
 });
 
 gulp.task('prod:serve', () => {
-  return gulp.src(`${outFolder}`)
+  return gulp.src(`release`)
     .pipe($.webserver({
+      open: `/#/${process.env.TENANT}/home`,
       port: process.env.PORT,
-      host: '0.0.0.0',
-      path: '/central/home'
+      host: 'localhost'
+      //path: '/central/home'
     }));
 });
 
@@ -223,7 +207,7 @@ gulp.task('dev', (done) => {
 
 gulp.task('prod', (done) => {
   process.env.NODE_ENV = 'production';
-  runSequence('prod:serve', done);
+  runSequence('prod:build', 'prod:serve', done);
 });
 
 
