@@ -21,9 +21,9 @@ $.protocol = $.stringReplace(/https?:\/\//g, '//');
 const configFile = () => `config/${process.env.NODE_ENV}.js`;
 const replaceEnvVar = (variable) => $.stringReplace(`<${variable}>`, process.env[variable]);
 
-gulp.task('clean', () => del(`${outFolder}`, {force: true}));
+gulp.task('clean', () => del(`${outFolder}`, { force: true }));
 gulp.task('release', (done) => {
-  del('release', {force: true})
+  del('release', { force: true })
     .then(() => fs.renameSync(`${outFolder}`, 'release'))
     .then(done, done)
 });
@@ -40,57 +40,39 @@ gulp.task('config', () => {
     .pipe(gulp.dest(`${srcFolder}/scripts/config`))
 });
 
+let webpackConfig = webpack({
+  mode: process.env.NODE_ENV,
+  output: { filename: "main.js" },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            plugins: ["angularjs-annotate"]
+          }
+        }
+      }
+    ]
+  },
+  devtool: 'source-map'
+});
+
 gulp.task('dev:js', ['config'], () => {
   return gulp.src([`${srcFolder}/scripts/**/*.js`])
-    .pipe(webpack({
-      mode: process.env.NODE_ENV,
-      output: {filename: "main.js"},
-      module: {
-        rules: [
-          {
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-              loader: 'babel-loader',
-              options: {
-                presets: ['@babel/preset-env'],
-                plugins: ["angularjs-annotate"]
-              }
-            }
-          }
-        ]
-      },
-      devtool: 'source-map'
-    }))
+    .pipe(webpackConfig)
     .pipe(gulp.dest(`${outFolder}/scripts`))
     .pipe($.livereload());
 });
 
 gulp.task('prod:js', ['config'], () => {
+  webpackConfig.optimization = { minimizer: [new UglifyJsPlugin()] };
+
   return gulp.src([`${srcFolder}/scripts/**/*.js`])
-    .pipe(webpack({
-      mode: process.env.NODE_ENV,
-      output: {filename: "main.js"},
-      module: {
-        rules: [
-          {
-            test: /\.js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-              loader: 'babel-loader',
-              options: {
-                presets: ['@babel/preset-env'],
-                plugins: ["angularjs-annotate"]
-              }
-            }
-          }
-        ]
-      },
-      devtool: 'source-map',
-      optimization: {
-        minimizer: [new UglifyJsPlugin()]
-      }
-    }))
+    .pipe(webpackConfig)
     .pipe(gulp.dest(`${outFolder}/scripts`))
 });
 
@@ -103,7 +85,7 @@ gulp.task('jade:views', () => {
 
 gulp.task('jade:index', () => {
   return gulp.src([`${srcFolder}/index.jade`])
-    .pipe($.jade({pretty: true}))
+    .pipe($.jade({ pretty: true }))
     .pipe(gulp.dest(`${outFolder}`))
     .pipe($.livereload());
 });
@@ -221,11 +203,11 @@ gulp.task('test', (done) => {
     configFile: `${__dirname}/karma.conf.js`,
     action: 'run',
     files: [
-      {pattern: `${srcFolder}/scripts/**/*.js`, watched: false},
+      { pattern: `${srcFolder}/scripts/**/*.js`, watched: false },
       "node_modules/angular-mocks/angular-mocks.js",
       'config/test.js',
       'test/context.js',
-      {pattern: `test/**/*.js`, watched: false},
+      { pattern: `test/**/*.js`, watched: false },
     ]
   }, done).start();
 });
