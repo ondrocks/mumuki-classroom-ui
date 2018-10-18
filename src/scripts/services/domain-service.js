@@ -6,14 +6,14 @@ angular
     const openAth = (mode, path='') => {
       $window.open(`${this.laboratoryURL()}${path}`, mode);
       return true;
-    }
+    };
 
     this.openLaboratory = () => openAth('_self');
     this.openExamInLaboratory = (exam) => openAth('_blank', `/exams/${exam}`);
 
-    this.tosURL = (locale) => `${this.laboratoryURL()}/static/tos/tos-${locale}.txt`
+    this.tosURL = (locale) => `${this.laboratoryURL()}/static/tos/tos-${locale}.txt`;
 
-    this.guideURL = (slug) => `${this.laboratoryURL()}/guides/${slug}`
+    this.guideURL = (slug) => `${this.laboratoryURL()}/guides/${slug}`;
 
     this.exerciseURL = (exerciseId) => `${this.laboratoryURL()}/exercises/${exerciseId}`;
     this.exerciseURLByBibliotheca = (guideSlug, exerciseId) => `${this.laboratoryURL()}/exercises/${guideSlug}/${exerciseId}`;

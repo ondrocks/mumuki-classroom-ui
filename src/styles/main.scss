@@ -1,6 +1,20 @@
-// Bower
-@import '../bower_components/mumuki-styles/dist/scss/mumuki-styles';
-@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+$icon-font-path: '~@bower_components/mumuki-styles/dist/fonts/bootstrap/';
+$fa-font-path: '~@bower_components/mumuki-styles/dist/fonts';
+$da-font-path: '~@bower_components/dev-awesome/dist/fonts';
+
+@import '~diff2html/dist/diff2html.min.css';
+@import '~@bower_components/mumuki-styles/dist/scss/mumuki-styles';
+@import '~ui-select/dist/select.min.css';
+@import '~angular-toastr/dist/angular-toastr.min.css';
+@import '~angular-loading-bar/build/loading-bar.min.css';
+@import '~@bower_components/angular-fancy-modal/dist/angular-fancy-modal.min.css';
+@import '~angularjs-bootstrap-datetimepicker/src/css/datetimepicker';
+@import '~angular-ui-bootstrap/dist/ui-bootstrap-csp.css';
+@import '~angular-hotkeys/build/hotkeys.min.css';
+@import '~bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css';
+@import '~awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import '~@bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
 
 // Font
 @import 'home';

@@ -1,3 +1,4 @@
+process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 module.exports = (config) => {
   config.set({
@@ -24,19 +25,41 @@ module.exports = (config) => {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: [
-      'PhantomJS'
-    ],
+    browsers: ['HeadlessChrome'],
+    customLaunchers: {
+      HeadlessChrome: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
 
     preprocessors: {
       'test/context.js ': ['babel'],
       'test/**/*.test.js ': ['babel'],
-      'src/scripts/**/*.js ': ['babel']
+      'src/scripts/**/*.js ': ['webpack']
+    },
+
+    webpack: {
+      mode: "development",
+      module: {
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env']
+              }
+            }
+          }
+        ]
+      }
     },
 
     babelPreprocessor: {
       options: {
-        presets: ['es2015'],
+        presets: ['latest'],
         sourceMap: 'inline'
       },
       filename: function (file) {
@@ -57,7 +80,11 @@ module.exports = (config) => {
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-    logLevel: config.LOG_INFO
+    logLevel: config.LOG_INFO,
+
+    webpackMiddleware: {
+      noInfo: true
+    },
 
     // Uncomment the following lines if you are using grunt's server to run the tests
     // proxies: {

@@ -1,4 +1,3 @@
-
 angular
   .module('classroom')
   .factory('Course', function (Domain) {
@@ -50,6 +49,7 @@ angular
       }
 
       invitationLink() {
+        if (!this.invitation) return "";
         return `${Domain.laboratoryURL()}/join/${this.invitation.code}`;
       }
 
@@ -57,4 +57,4 @@ angular
 
     return Course;
 
-  })
+  });

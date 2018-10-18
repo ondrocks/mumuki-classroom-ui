@@ -1,6 +1,4 @@
-
 function classroomTest(message, callback) {
-
   let mocks = {};
 
   afterEach(() => {
@@ -12,11 +10,12 @@ function classroomTest(message, callback) {
 
   describe(message, function () {
 
-    beforeEach(module('classroom'));
+    beforeEach(module('classroom', function ($translateProvider) {
+      $translateProvider.preferredLanguage("en");
+    }));
+
     beforeEach(inject((_$location_) => _$location_.host = () => 'http://pdep-utn.classroom.localmumuki.io'));
 
     callback.bind(this)(mocks);
-
   });
-
 }
