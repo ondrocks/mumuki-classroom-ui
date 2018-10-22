@@ -69,8 +69,11 @@ angular
         .then(() => $state.go('classroom.courses', $stateParams, { reload: true }))
         .then(() => toastr.success(translate('course_created')))
         .catch((res) => {
-          if (res.status === 422) res.data.message = translate('course_already_exists');
-          toastr.error(res.data.message)
+          toastr.error(
+            res.status === 422
+              ? translate('course_already_exists')
+              : res.data.message
+          );
         });
     }
 
