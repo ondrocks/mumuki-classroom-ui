@@ -30,6 +30,8 @@ angular
     copied: 'Copiado',
     correct_permissions: 'Permisos otorgados satisfactoriamente',
     course: 'Curso',
+    course_already_exists: 'El curso ya existe',
+    course_created: 'Curso creado satisfactoriamente',
     courses: 'Cursos',
     date_format: 'dd/MM/yyyy',
     day_friday: 'Viernes',

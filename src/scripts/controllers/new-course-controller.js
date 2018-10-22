@@ -2,6 +2,7 @@
 angular
   .module('classroom')
   .controller('NewCourseController', function ($scope, $state, $filter, $stateParams, toastr, Auth, Api, Permissions) {
+    const translate = $filter('translate');
 
     $scope.isJanitor = Permissions.isJanitor;
     $scope.course = {
@@ -47,7 +48,7 @@ angular
       _(checkables)
         .filter((checkable) => checkable.checked)
         .map((checkable) => checkable.name)
-        .map((name) => $filter('translate')(name))
+        .map((name) => translate(name))
         .value()
 
     $scope.getShiftsString = (course) => course.shifts.join('-');
@@ -66,8 +67,11 @@ angular
       return Api
         .createCourse(course)
         .then(() => $state.go('classroom.courses', $stateParams, { reload: true }))
-        .then(() => toastr.success('Curso creado satisfactoriamente'))
-        .catch((res) => toastr.error(res.data.message));
+        .then(() => toastr.success(translate('course_created')))
+        .catch((res) => {
+          if (res.status === 422) res.data.message = translate('course_already_exists');
+          toastr.error(res.data.message)
+        });
     }
 
   });
