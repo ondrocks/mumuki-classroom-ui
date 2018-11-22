@@ -33,7 +33,7 @@
                   a(href='', ng-click='lastSolution()')
                     i.fa.fa-code
                     span &nbsp;{{ 'last_solution' | translate }}
-                li(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length && !assignment.exercise.usesCustomEditor()")
+                li(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length && !assignment.exercise.usesCustomEditor() && !assignment.exercise.usesFreeFormEditor()")
                   a(href='', ng-click='diff()')
                     i.fa.fa-columns
                     span &nbsp;{{ 'diff' | translate }}
@@ -48,7 +48,9 @@
                   div(ng-if="hasSubmissions()")
                     div(ng-if='assignment.exercise.usesCustomEditor()')
                       custom-editor(ng-if="renderCustomEditor", language="assignment.guide.language", content='lastSolutionContent', extra-attributes="'read-only=true'")
-                    div(ng-if='!assignment.exercise.usesCustomEditor()')
+                    div(ng-if='assignment.exercise.usesFreeFormEditor()')
+                      div(ng-bind-html='assignment.exercise.trustedFreeFormEditorSource()')
+                    div(ng-if='!assignment.exercise.usesCustomEditor() && !assignment.exercise.usesFreeFormEditor()')
                       markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
 
                     button.btn.btn-success.btn-block(ng-click='manualEvaluation()')

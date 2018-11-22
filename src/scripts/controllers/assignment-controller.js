@@ -234,6 +234,29 @@ angular
     $scope.selectAssignment(assignment);
     $scope.$on('$destroy', () => Modal.close());
 
+    function loadInput(values, element) {
+      element.val(values[element.attr('name')]);
+    }
+
+    function loadForm() {
+      let json = $scope.assignment.submissions[0].content;
+      if (!json) return;
+
+      let solutions = JSON.parse(json);
+
+      Object.keys(solutions).forEach(function (id) {
+        $('.mu-free-form-input').each(function () {
+          loadInput(solutions, $(this));
+        });
+      });
+    }
+
+    angular.element(document).ready(() => {
+      if ($('.mu-free-form-input').length === 0) return;
+
+      loadForm(event);
+    });
+
     hotkeys
       .bindTo($scope)
       .add({
