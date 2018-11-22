@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .factory('Exercise', function (Submission) {
+  .factory('Exercise', function (Submission, $sce) {
 
     class Exercise {
 
@@ -27,6 +27,14 @@ angular
 
       usesCustomEditor(){
         return this.editor == "custom";
+      }
+
+      usesFreeFormEditor(){
+        return this.editor == "free_form";
+      }
+
+      trustedFreeFormEditorSource(){
+        return $sce.trustAsHtml(this.free_form_editor_source);
       }
 
       static from(exercise) {
