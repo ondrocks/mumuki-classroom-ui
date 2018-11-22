@@ -244,10 +244,8 @@ angular
 
       let solutions = JSON.parse(json);
 
-      Object.keys(solutions).forEach(function (id) {
-        $('.mu-free-form-input').each(function () {
-          loadInput(solutions, $(this));
-        });
+      $('.mu-free-form-input').each(function () {
+        loadInput(solutions, $(this));
       });
     }
 
