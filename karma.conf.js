@@ -24,7 +24,7 @@ module.exports = (config) => {
     },
 
     files: [
-      { pattern: `${srcFolder}/scripts/app.js`, watched: false },
+      { pattern: `src/scripts/app.js`, watched: false },
       "node_modules/angular-mocks/angular-mocks.js",
       'config/test.js',
       'test/context.js',
