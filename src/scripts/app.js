@@ -1,3 +1,6 @@
+import "../styles/main.scss"
+import "../index.jade"
+
 import 'expose-loader?$!jquery';
 import 'expose-loader?jQuery!jquery';
 import "lodash"
@@ -28,6 +31,9 @@ import "bootstrap-sass/assets/javascripts/bootstrap/dropdown"
 import "ace-builds/src-min-noconflict/ace"
 import "./config/ace-mode-imports"
 
+function requireAll(r) { r.keys().forEach(r); }
+requireAll(require.context('../views', true, /\.jade$/));
+
 angular.module('classroom', [
   'ui.router',
   'angular-storage',
@@ -49,3 +55,5 @@ angular.module('classroom', [
   'ngSanitize',
   'ui.select'
 ]);
+
+requireAll(require.context('./', true, /\.js$/));

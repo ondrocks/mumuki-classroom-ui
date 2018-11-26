@@ -1,25 +1,24 @@
-
 angular
   .module('classroom')
   .constant('CONFIG', {
 
     classroom: {
-      api_url: '<MUMUKI_CLASSROOM_API_URL>',
-      url: '<MUMUKI_CLASSROOM_URL>'
+      api_url: process.env.MUMUKI_CLASSROOM_API_URL,
+      url: process.env.MUMUKI_CLASSROOM_URL
     },
 
     laboratory: {
-      url: '<MUMUKI_LABORATORY_URL>'
+      url: process.env.MUMUKI_LABORATORY_URL
     },
 
     bibliotheca: {
-      api_url: '<MUMUKI_BIBLIOTHECA_API_URL>'
+      api_url: process.env.MUMUKI_BIBLIOTHECA_API_URL
     },
 
     cookie: {
-      domain: '<MUMUKI_COOKIES_DOMAIN>',
+      domain: process.env.MUMUKI_COOKIES_DOMAIN,
     },
 
-    organizationMappingMode: '<MUMUKI_ORGANIZATION_MAPPING>'
+    organizationMappingMode: process.env.MUMUKI_ORGANIZATION_MAPPING
 
   });
