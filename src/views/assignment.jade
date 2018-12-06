@@ -67,8 +67,6 @@
 
                   div(ng-if='assignment.diffs.selected.right.hasFiles()')
                     multiple-files(tabs='assignment.diffs.selected.right.files()')
-                      strong {{ $parent.key }}
-                      strong {{ assignment.diffs.selected.left.files()[$parent.key] }}
                       diff-side(
                         language='{{ assignment.guide.language.name }}',
                         left='{\
