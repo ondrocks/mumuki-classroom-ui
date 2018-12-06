@@ -51,7 +51,10 @@
                     div(ng-if='assignment.exercise.usesFreeFormEditor()')
                       div(ng-bind-html='assignment.exercise.trustedFreeFormEditorSource()')
                     div(ng-if='!assignment.exercise.usesCustomEditor() && !assignment.exercise.usesFreeFormEditor()')
-                      markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
+                      div(ng-if='assignment.lastSubmission().hasFiles()')
+                        multiple-files(tabs='assignment.lastSubmission().files()')
+                      div(ng-if='!assignment.lastSubmission().hasFiles()')
+                        markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
 
                     button.btn.btn-success.btn-block(ng-click='manualEvaluation()')
                       i.fa.fa-fw.fa-pencil
