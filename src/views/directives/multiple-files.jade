@@ -6,4 +6,4 @@
 
   .tab-content.margin-top
     .tab-pane(ng-repeat='(key, value) in data track by key', ng-class="{ 'active': isActive(key) }")
-      markdown-preview.markdown-preview(content='data[key]')
+      ng-transclude
