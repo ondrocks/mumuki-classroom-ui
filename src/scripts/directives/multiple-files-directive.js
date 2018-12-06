@@ -21,14 +21,14 @@ angular
       controller: ($scope) => {
         let activeTab;
         const selectFirstTab = () => activeTab = _.chain($scope.data).keys().first().value();
-        const extension = (key) => _.chain(key).split('.').last().value();
+        $scope.extension = (key) => _.chain(key).split('.').last().value();
         $scope.select = (key) => { activeTab = key }
         $scope.isActive = (key) => activeTab === key;
 
         $scope.rawData = $scope.tabs();
 
         const $files = _.mapValues($scope.rawData, (v, k) => {
-          return Api.renderCode(extension(k), v);
+          return Api.renderCode($scope.extension(k), v);
         });
 
         makePromiseFromObject($files).then((files) => {
