@@ -65,11 +65,28 @@
 
                 .tab-pane(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length")
 
-                  diff-side(
+                  div(ng-if='assignment.diffs.selected.right.hasFiles()')
+                    multiple-files(tabs='assignment.diffs.selected.right.files()')
+                      strong {{ $parent.key }}
+                      strong {{ assignment.diffs.selected.left.files()[$parent.key] }}
+                      diff-side(
+                        language='{{ assignment.guide.language.name }}',
+                        left='{\
+                          "content": assignment.diffs.selected.left.files()[$parent.key]\
+                        }',
+                        right='{\
+                          "content": assignment.diffs.selected.right.files()[$parent.key],\
+                          "created_at": assignment.diffs.selected.right.created_at\
+                        }',
+                        view-mode='getViewMode().current.type'
+                      )
+                  div(ng-if='!assignment.diffs.selected.right.hasFiles()')
+                    diff-side(
                       language='{{ assignment.guide.language.name }}',
                       left='assignment.diffs.selected.left',
                       right='assignment.diffs.selected.right',
-                      view-mode='getViewMode().current.type')
+                      view-mode='getViewMode().current.type'
+                    )
 
                   .pull-right
                     input(
