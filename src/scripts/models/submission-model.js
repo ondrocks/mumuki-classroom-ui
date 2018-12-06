@@ -1,11 +1,13 @@
 
 angular
   .module('classroom')
-  .factory('Submission', function (Auth, Humanizer) {
+  .factory('Submission', function (Auth, Humanizer, WithMultifileSupport) {
 
     class Submission {
 
       constructor(submission = {}) {
+        _.assign(this, WithMultifileSupport);
+
         submission.content = submission.content || '';
         submission.messages = submission.messages || [];
 
