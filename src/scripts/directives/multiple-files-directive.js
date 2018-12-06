@@ -13,6 +13,7 @@ angular
 
     return {
       restrict: 'E',
+      transclude: true,
       templateUrl: 'views/directives/multiple-files.html',
       scope: {
         tabs: '&'
@@ -24,7 +25,9 @@ angular
         $scope.select = (key) => { activeTab = key }
         $scope.isActive = (key) => activeTab === key;
 
-        const $files = _.mapValues($scope.tabs(), (v, k) => {
+        $scope.rawData = $scope.tabs();
+
+        const $files = _.mapValues($scope.rawData, (v, k) => {
           return Api.renderCode(extension(k), v);
         });
 

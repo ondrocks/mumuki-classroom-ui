@@ -53,6 +53,7 @@
                     div(ng-if='!assignment.exercise.usesCustomEditor() && !assignment.exercise.usesFreeFormEditor()')
                       div(ng-if='assignment.lastSubmission().hasFiles()')
                         multiple-files(tabs='assignment.lastSubmission().files()')
+                          markdown-preview.markdown-preview(content='$parent.data[$parent.key]')
                       div(ng-if='!assignment.lastSubmission().hasFiles()')
                         markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
 
