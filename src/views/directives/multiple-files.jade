@@ -6,7 +6,4 @@
 
   .tab-content.margin-top
     .tab-pane(ng-repeat='(key, value) in data track by key', ng-class="{ 'active': isActive(key) }")
-      pre
-        | {{ data[key] }}
-      span
-        | (esto debería estar formateado en {{ getAceModeFromExtension(key) }} // TODO: Format
+      markdown-preview.markdown-preview(content='data[key]')

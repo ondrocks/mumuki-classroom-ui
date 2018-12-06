@@ -249,6 +249,12 @@ angular
     this.getLoginUrl = () => Domain.loginURL();
     this.getLogoutUrl = () => Domain.logoutURL();
 
+    this.renderCode = (language, code) => {
+      return this.renderMarkdown(
+        `\`\`\`${language}\n${code.trim()}\n\`\`\``
+      );
+    };
+
     this.renderMarkdown = (markdown) => {
       return $http
         .post(`${BIBLIOTHECA()}/markdown`, { markdown })
