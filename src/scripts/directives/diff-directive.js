@@ -13,6 +13,11 @@ angular
         viewMode: '='
       },
       templateUrl: 'views/diff.html',
+
+      link: (scope, element) => {
+        scope.element = element;
+      },
+
       controller: ($scope, Humanizer) => {
         $scope.$watchGroup(['left', 'right', 'viewMode'], () => {
 
@@ -43,7 +48,7 @@ angular
 
           const diffJson = Diff2Html.getJsonFromDiff(diffText);
 
-          angular.element('#diff').html(Diff2Html.getPrettyHtml(diffJson, {
+          $scope.element.children("#diff").html(Diff2Html.getPrettyHtml(diffJson, {
             inputFormat: 'json',
             outputFormat: $scope.viewMode,
             showFiles: false,
