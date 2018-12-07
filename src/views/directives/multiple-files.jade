@@ -1,0 +1,9 @@
+.tabbable
+  ul.nav.nav-tabs.nav-tabs-inline
+    li.file(ng-repeat='(key, value) in data track by key', ng-click='select(key)', ng-class="{ 'active': isActive(key) }")
+      a.pointer(data-toggle='tab')
+        span {{ key }}
+
+  .tab-content.margin-top
+    .tab-pane(ng-repeat='(key, value) in data track by key', ng-class="{ 'active': isActive(key) }")
+      ng-transclude

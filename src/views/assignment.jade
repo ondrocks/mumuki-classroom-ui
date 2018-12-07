@@ -51,7 +51,11 @@
                     div(ng-if='assignment.exercise.usesFreeFormEditor()')
                       div(ng-bind-html='assignment.exercise.trustedFreeFormEditorSource()')
                     div(ng-if='!assignment.exercise.usesCustomEditor() && !assignment.exercise.usesFreeFormEditor()')
-                      markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
+                      div(ng-if='assignment.lastSubmission().hasFiles()')
+                        multiple-files(tabs='assignment.lastSubmission().files()')
+                          markdown-preview.markdown-preview(content='$parent.data[$parent.key]')
+                      div(ng-if='!assignment.lastSubmission().hasFiles()')
+                        markdown-preview.markdown-preview(content='lastSolutionMarkdown[assignment.exercise.id]')
 
                     button.btn.btn-success.btn-block(ng-click='manualEvaluation()')
                       i.fa.fa-fw.fa-pencil
@@ -61,11 +65,26 @@
 
                 .tab-pane(ng-class='{ "active": getViewMode().showDiff }', ng-if="assignment.submissions.length")
 
-                  diff-side(
+                  div(ng-if='assignment.diffs.selected.right.hasFiles()')
+                    multiple-files(tabs='assignment.diffs.selected.right.files()')
+                      diff-side(
+                        language='{{ assignment.guide.language.name }}',
+                        left='{\
+                          "content": assignment.diffs.selected.left.files()[$parent.key]\
+                        }',
+                        right='{\
+                          "content": assignment.diffs.selected.right.files()[$parent.key],\
+                          "created_at": assignment.diffs.selected.right.created_at\
+                        }',
+                        view-mode='getViewMode().current.type'
+                      )
+                  div(ng-if='!assignment.diffs.selected.right.hasFiles()')
+                    diff-side(
                       language='{{ assignment.guide.language.name }}',
                       left='assignment.diffs.selected.left',
                       right='assignment.diffs.selected.right',
-                      view-mode='getViewMode().current.type')
+                      view-mode='getViewMode().current.type'
+                    )
 
                   .pull-right
                     input(

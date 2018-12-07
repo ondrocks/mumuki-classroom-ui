@@ -223,7 +223,7 @@ angular
 
       if (!$scope.lastSolutionMarkdown[currentExercise.eid]) {
         Api
-          .renderMarkdown(`\`\`\`${guide.language}\n${$scope.lastSolutionContent.trim()}\n\`\`\``)
+          .renderCode(guide.language, $scope.lastSolutionContent)
           .then((markdown) => $scope.lastSolutionMarkdown[currentExercise.eid] = markdown);
       }
 
