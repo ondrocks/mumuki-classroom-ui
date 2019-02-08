@@ -171,8 +171,6 @@ paginator {
 
   @include display-flex(column, space-around, flex-start);
 
-  height: 88px;
-
   .list-header-option {
     @include display-flex(row, flex-start, center);
     button {
