@@ -28,7 +28,7 @@ angular
       return $http
         .get(`${API()}/courses/${course}/${type}`)
         .then((res) => res.data)
-    }
+    };
 
     this.getCourseReport = this.courseExport('report');
     this.getCourseProgress = this.courseExport('progress');
@@ -37,7 +37,7 @@ angular
       return $http
         .get(`${BIBLIOTHECA()}/guides`)
         .then((res) => res.data.guides)
-    }
+    };
 
     this.getBibliothecaGuide = ({org, repo}) => {
       return $http
@@ -88,53 +88,53 @@ angular
     this.createCourse = (course) => {
       return $http
         .post(`${API()}/courses`, course)
-    }
+    };
 
     this.createExam = (course, exam) => {
       return $http
         .post(`${API()}/courses/${course}/exams`, exam)
-    }
+    };
 
     this.isExamInUsage = (exam) => {
       return $http
         .get(`${API()}/guides/${exam.slug}`)
         .then(() => true, () => false)
-    }
+    };
 
     this.createStudent = (course, student) => {
       return $http
         .post(`${API()}/courses/${course}/students`, student)
-    }
+    };
 
     this.updateStudent = (course, student) => {
       return $http
         .put(`${API()}/courses/${course}/students/${student.uid}`, student)
-    }
+    };
 
     this.getStudent = (course, uid) => {
       return $http
         .get(`${API()}/courses/${course}/student/${uid}`)
-      }
+      };
 
     this.updateTeacher = (course, teacher) => {
       return $http
         .post(`${API()}/courses/${course}/teachers`, teacher)
-    }
+    };
 
     this.updateExam = (course, exam) => {
       return $http
         .put(`${API()}/courses/${course}/exams/${exam.eid}`, exam)
-    }
+    };
 
     this.addStudentToExam = (course, exam, student) => {
       return $http
         .post(`${API()}/courses/${course}/exams/${exam.eid}/students/${student.uid}`, {});
-    }
+    };
 
     this.removeStudentToExam = (course, exam, student) => {
       return $http
         .delete(`${API()}/courses/${course}/exams/${exam.eid}/students/${student.uid}`);
-    }
+    };
 
     this.getStudents = ({ course }, params = {}) => {
       return $http
@@ -143,38 +143,38 @@ angular
           res.data.students = _.map(res.data.students, Student.from);
           return res.data;
         })
-    }
+    };
 
     this.getTeachers = ({ course }) => {
       return $http
         .get(`${API()}/courses/${course}/teachers`)
         .then((res) => _.map(res.data.teachers, Teacher.from));
-    }
+    };
 
     this.removeStudent = (uid, course) => {
       return $http
         .delete(`${API()}/courses/${course}/students/${uid}`)
-    }
+    };
 
     this.detachStudent = (uid, course) => {
       return $http
         .post(`${API()}/courses/${course}/students/${uid}/detach`, {})
-    }
+    };
 
     this.attachStudent = (uid, course) => {
       return $http
         .post(`${API()}/courses/${course}/students/${uid}/attach`, {})
-    }
+    };
 
     this.transfer = (uid, course, destination) => {
       return $http
         .post(`${API()}/courses/${course}/students/${uid}/transfer`, { destination })
-    }
+    };
 
     this.newMessage = (data, course) => {
       return $http
         .post(`${API()}/courses/${course}/messages`, data);
-    }
+    };
 
     this.getMessages = ({course, org, repo, student, exercise}) => {
       const eid = exercise.eid;
@@ -182,17 +182,17 @@ angular
       return $http
         .get(`${API()}/courses/${course}/guides/${org}/${repo}/${eid}/student/${student}/messages?language=#{language}`)
         .then((res) => res.data)
-    }
+    };
 
     this.follow = (uid, course) => {
       return $http
         .post(`${API()}/courses/${course}/followers`, { uid })
-    }
+    };
 
     this.unfollow = (uid, course) => {
       return $http
         .delete(`${API()}/courses/${course}/followers/${uid}`)
-    }
+    };
 
     this.getFollowers = (course) => {
       return $http
@@ -201,28 +201,28 @@ angular
           const groupedData = _.groupBy(data.data.followers, "course");
           return _.forEach(groupedData, (v, k) => groupedData[k] = _.head(groupedData[k]));
         });
-    }
+    };
 
     this.addPermission = (slug, email) => {
       return $http
         .post(`${API()}/courses/${slug}/permissions`, { email })
-    }
+    };
 
     this.getOrganization = () => {
       return $http
         .get(`${API()}/organization`)
-    }
+    };
 
     this.getPermissions = () => {
       return $http
         .get(`${API()}/permissions`)
         .then((res) => res.data);
-    }
+    };
 
     this.addStudent = (course, student) => {
       return $http
         .post(`${API()}/courses/${course}/students`, student)
-    }
+    };
 
     this.getNotifications = () => {
       return $http
@@ -236,7 +236,7 @@ angular
         .get(`${API()}/notifications?page=${page}&per_page=${perPage}`)
         .then((res) => res.data)
         .catch(() => ({total: 0, page: 1, notifications: []}));
-    }
+    };
 
     this.putNotification = (notificationId, action) => {
       return $http
@@ -270,7 +270,7 @@ angular
     this.postManualEvaluation = ({course, slug, uid, eid, sid, comment, status}) => {
       return $http
         .post(`${API()}/courses/${course}/guides/${slug}/${eid}/student/${uid}/manual_evaluation`, {sid, comment, status})
-    }
+    };
 
     this.getLanguages = () => {
       return $http
@@ -282,7 +282,7 @@ angular
       return $http
         .post(`${API()}/courses/${course}/guides/${org}/${repo}/report?${queryParams}`, reportParams)
         .then((res) => this.downloadCsv('guide_report.csv', res.data));
-    }
+    };
 
     this.downloadCsv = (filename, data) => {
       var link = document.createElement("a");

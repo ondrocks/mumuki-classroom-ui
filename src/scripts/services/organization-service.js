@@ -8,8 +8,7 @@ angular
       $translate.use(this.locale());
     };
 
-    this.locale = () => this.organization.profile.locale;;
-
+    this.locale = () => this.organization.profile.locale;
     this.raiseHandEnabled = () => this.organization.settings.raise_hand_enabled;
 
     this.currentLocale = () => $translate.use();
