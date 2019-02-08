@@ -1,4 +1,3 @@
-
 angular
   .module('classroom')
   .controller('EditExamController', function ($scope, $state, $timeout, $controller, clipboard, exam, students, Api, Breadcrumb, Domain) {
@@ -14,11 +13,11 @@ angular
       sort_by: 'name',
       with_detached: false,
       order_by: 'asc'
-    }
+    };
 
     $scope.selectPage = (n) => {
       $scope.params.page = n;
-    }
+    };
 
     $scope.submit = Api.updateExam;
 
@@ -27,13 +26,22 @@ angular
     const isSelected = (student, newVal) => {
       student.isProcessing = true;
       return Api[`${newVal ? 'add' : 'remove'}StudentToExam`]($state.params.course, $scope.getExam(), student)
-        .then(() => student.isSelected = newVal)
+        .then(() => {
+            if (newVal) {
+              exam.uids.push(student.uid);
+            } else {
+              _.remove(exam.uids, it => it === student.uid);
+            }
+
+            student.isSelected = newVal;
+          }
+        )
         .then(() => student.isProcessing = false);
     };
 
     $scope.getExam = () => {
       return $scope.getExamInLocalTime($scope.exam);
-    }
+    };
 
     $scope.exam = $scope.getExamInLocalTime(exam);
     $scope.exam_type = 'edit_exam';
@@ -59,7 +67,7 @@ angular
     const withSelectedStudents = (students) => {
       students.forEach((student) => student.isSelected = _.includes(exam.uids, student.uid));
       return students;
-    }
+    };
 
     $scope.$watch('params', () => {
       $timeout.cancel(delayParamsChange);
