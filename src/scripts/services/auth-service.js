@@ -32,7 +32,7 @@ angular
     this.imageUrl = () => {
       const image = this.profile().user_image_url;
       return _.startsWith(image, 'http') ? image : 'images/user_shape.png';
-    }
+    };
 
     this.isLoggedIn = () => {
       if (profile === null) {
