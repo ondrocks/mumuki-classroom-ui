@@ -20,7 +20,7 @@ div
                 i(class='{{ guide.iconClass() }}')
                 span.divider-vertical
                 span.item-name
-                  span(ng-if='guide.parent && guide.parent.position') {{ guide.parent.position }} -
+                  span(ng-if='guide.parent && guide.parent.position')= '{{ guide.parent.position }} - '
                   span {{ guide.getName() | uppercase }}
                 a.pull-right.mu-has-notification(ng-if='notifications(guide).length')
                   i
