@@ -34,11 +34,11 @@ angular
 
     const setGuideProgress = (guideProgresses) => {
       guideProgresses.forEach((guideProgress) => {
-        const item = _.find($scope.list, (item) => item.student.uid === guideProgress.student.uid)
+        const item = _.find($scope.list, (item) => item.student.uid === guideProgress.student.uid);
         if (item) _.merge(item, guideProgress);
         else $scope.list.push(guideProgress);
       });
-    }
+    };
 
     $scope.Humanizer = Humanizer;
     $scope.totalCount = data.total;
@@ -53,12 +53,12 @@ angular
       let reportParams = {exercises: exercisesReportParams, language: guide.language};
       let queryParams = $httpParamSerializer($scope.params);
       return Api.generateGuideReport($stateParams, reportParams, queryParams);
-    }
+    };
 
     setGuideProgress(data.guideProgress);
 
     $scope.guide = guide;
-    $scope.withDetachedStudents = false;
+    $scope.withDetachedStudents = true;
 
     $scope.$on('$destroy', () => $interval.cancel(guideProgressFetcher));
 

@@ -34,19 +34,19 @@ angular
         .then(() => Followers.addFollower($scope.courseSlug(), uid))
         .then(() => toastr.success($filter('translate')('do_follow')))
         .catch((e) => toastr.error(e));
-    }
+    };
 
     $scope.unfollow = (uid) =>  {
       return Api.unfollow(uid, $scope.course())
         .then(() => Followers.removeFollower($scope.courseSlug(), uid))
         .then(() => toastr.success($filter('translate')('unfollowing')))
         .catch((e) => toastr.error(e));
-    }
+    };
 
     $scope.edit = (uid) => {
       const course = $scope.course();
       $state.go('classroom.students.edit', _.defaults({ uid, course }, $stateParams))
-    }
+    };
 
     $scope.remove = (student) => {
       Modal.removeStudent(student, () => {
@@ -55,7 +55,7 @@ angular
           .then(() => $state.reload())
           .catch((e) => toastr.error(e));
       });
-    }
+    };
 
     $scope.attach = (student) => {
       Modal.attachStudent(student, () => {
