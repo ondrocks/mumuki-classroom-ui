@@ -14,7 +14,7 @@ angular
 
     $scope.notifications = (course) => {
       return _.get(notifications, course.slug, []);
-    }
+    };
 
     $scope.isJanitor = Permissions.isJanitor;
     $scope.isCourse = true;

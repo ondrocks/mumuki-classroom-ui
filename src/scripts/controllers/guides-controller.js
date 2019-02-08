@@ -25,7 +25,7 @@ angular
     $scope.open = (guide) => {
       const [ org, repo ] = guide.slug.split('/');
       $state.go('classroom.courses.course.guides.guide', _.defaults({ org, repo }, $stateParams));
-    }
+    };
 
     const notifications = _.chain(Notification.get())
                            .filter({organization: Domain.tenant(), course: `${Domain.tenant()}/${$stateParams.course}` })
