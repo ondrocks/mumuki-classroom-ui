@@ -17,8 +17,6 @@ angular
 
     if ($stateParams.course) {
       Breadcrumb.setCourse($stateParams.course);
-    } else {
-      //TODO: Students
     }
 
     $scope.Humanizer = Humanizer;
