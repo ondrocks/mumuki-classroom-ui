@@ -144,7 +144,7 @@ angular
         })
     };
 
-    this.getAllStudents = (params = {}) => {
+    this.getAllStudents = ({}, params = {}) => {
       return $http
         .get(`${API()}/students`, { params })
         .then((res) => {

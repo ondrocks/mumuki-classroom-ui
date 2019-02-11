@@ -75,6 +75,9 @@ angular
       .state('classroom.students.list', {
         authenticated: true,
         url: '/students',
+        params: {
+          withStudentExport: true
+        },
         views: {
           'content@classroom': {
             templateUrl: 'views/students.html',

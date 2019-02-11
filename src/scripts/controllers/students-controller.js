@@ -2,7 +2,7 @@ import * as _ from "lodash";
 
 angular
   .module('classroom')
-  .controller('StudentsController', function ($scope, $state, $controller, $stateParams, $timeout, toastr, $filter, students, Auth, Followers, Api, Modal, Domain, Breadcrumb, Humanizer, Permissions) {
+  .controller('StudentsController', function ($scope, $state, $controller, $stateParams, $timeout, toastr, $filter, students, Auth, Followers, Api, Modal, Domain, Breadcrumb, Humanizer, Permissions, Download) {
 
     $controller('ListHeaderController', {
       $scope: $scope,
@@ -86,6 +86,13 @@ angular
 
     $scope.transfer = (student) => {
       Modal.transfer(student, () => $state.reload());
-    }
+    };
+
+    $scope.exportStudents = () => {
+      return Api
+        .getAllStudents({})
+        .then((data) => Download.json("students", data.students))
+        .catch((e) => toastr.error(e));
+    };
 
   });

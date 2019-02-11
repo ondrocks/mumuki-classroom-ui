@@ -68,6 +68,7 @@ angular
     this._student = null;
     this._list = [
       { name: () => 'notifications', state: 'classroom.notifications' },
+      { name: () => 'students', state: 'classroom.students.list' },
       { name: () => this._course, state: 'classroom.courses.course.guides' },
       { name: () => this._course, state: 'classroom.courses.course.exams' },
       { name: () => this._course, state: 'classroom.courses.course.students' },

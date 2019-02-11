@@ -39,6 +39,7 @@ angular
     $scope.withDetails = true;
     $scope.withFollowers = true;
     $scope.withDetachedStudents = Permissions.isTeacher();
+    $scope.withStudentExport = $stateParams.withStudentExport;
 
     $scope.list = list;
     $scope.itemTemplate = itemTemplate;
@@ -119,7 +120,7 @@ angular
     $scope.$watch('params', () => {
       $timeout.cancel(delayParamsChange);
       delayParamsChange = $timeout(() => {
-        let apiEndpoint = apiEndpoint ? apiEndpoint : `get${camel(responseField)}`;
+        apiEndpoint = apiEndpoint ? apiEndpoint : `get${camel(responseField)}`;
         Api[apiEndpoint]($stateParams, $scope.params).then((response) => {
           $scope.list = response[responseField];
           $scope.actualPage = response.page;

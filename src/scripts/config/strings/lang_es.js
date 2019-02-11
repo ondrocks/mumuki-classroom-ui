@@ -76,6 +76,7 @@ angular
     export_solutions_disclaimer: '¡Cuidado! Estos datos son sensibles. No los utilices ni distribuyas sin el consentimiento de tus estudiantes.<br><br>¿Deseas continuar de todos modos?',
     export_solutions_button: 'Exportar soluciones',
     export_solutions_title: 'Exportar soluciones de {{courseName}}',
+    export_students: 'Exportar datos de estudiantes',
     failed: "Con errores",
     filter_available_courses: 'Filtrar cursos disponibles',
     filter_available_exams: 'Filtrar exámenes disponibles',
