@@ -1,3 +1,23 @@
+mixin accordionPanel(parentId, type, headingId, dataTarget, items)
+  .panel-group.no-margin-bottom(role='tablist', aria-multiselectable='true', id=parentId)
+    .panel.panel-default(ng-if='present(' + items + ')')
+      .panel-heading(id=headingId, role='tab')
+        h4.panel-title
+          a(ng-click='setLastChapterOpened(chapter)', role='button', data-toggle='collapse', data-parent='#' + dataParent, data-target='#' + dataTarget, aria-controls='#' + dataTarget)
+            |  {{ #{type} | translate | uppercase }}
+      .panel-collapse.collapse(id='#' + dataTarget, role='tabpanel', aria-labelledby='#' + headingId, , ng-class='{ in: actualChapter(chapter) }')
+        .guide-chapter-list
+          button.list-group-item.noborder-radius(ng-repeat='item in ' + items + '| orderBy: sortCriteria() | filter:listSearch:searchComparator', ng-click='open(item)')
+            i(class='{{ item.iconClass() }}')
+            span.divider-vertical
+            span.item-name {{ item.getName() | uppercase }}
+            a.pull-right.mu-has-notification(ng-if='notifications(item).length')
+              i
+              span.badge.badge-notifications {{ notifications(item).length }}
+            label(ng-if='!(' + items + ' | orderBy: sortCriteria() | filter:listSearch:searchComparator).length')
+              | {{ noItemsToShow | translate }}
+
+
 div
 
   .input-group
@@ -8,73 +28,11 @@ div
 
   div.list-group
     .list-group.no-margin-bottom(ng-repeat='(chapter, guides) in chaptersAndLessons')
-      #accordion.panel-group.no-margin-bottom(role='tablist', aria-multiselectable='true')
-        .panel.panel-default
-          .panel-heading(id='heading{{$index}}', role='tab')
-            h4.panel-title
-              a(ng-click='setLastChapterOpened(chapter)', role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapse{{$index}}', aria-controls='collapse{{$index}}')
-                |  {{ chapter | translate | uppercase }}
-          .panel-collapse.collapse(id='collapse{{$index}}', role='tabpanel', aria-labelledby='heading{{$index}}', ng-class="{ in: actualChapter(chapter) }")
-            .guide-chapter-list
-              button.list-group-item.noborder-radius(ng-repeat='guide in guides | orderBy: sortCriteria() | filter:listSearch:searchComparator', ng-click='open(guide)')
-                i(class='{{ guide.iconClass() }}')
-                span.divider-vertical
-                span.item-name
-                  span(ng-if='guide.parent && guide.parent.position')= '{{ guide.parent.position }} - '
-                  span {{ guide.getName() | uppercase }}
-                a.pull-right.mu-has-notification(ng-if='notifications(guide).length')
-                  i
-                  span.badge.badge-notifications {{ notifications(guide).length }}
-                label(ng-if='!(guides | orderBy: sortCriteria() | filter:listSearch:searchComparator).length')
-                  | {{ noItemsToShow | translate }}
-    .panel.panel-default(ng-if='present(complements)')
-      .panel-heading(id='headingComplements', role='tab')
-        h4.panel-title
-          a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapseComplemets', aria-controls='collapseComplemets')
-            |  {{ 'complements' | translate | uppercase }}
-      .panel-collapse.collapse(id='collapseComplemets', role='tabpanel', aria-labelledby='headingComplemets')
-        .guide-chapter-list
-          button.list-group-item.noborder-radius(ng-repeat='complement in complements | orderBy: sortCriteria() | filter:listSearch:searchComparator', ng-click='open(complement)')
-            i(class='{{ complement.iconClass() }}')
-            span.divider-vertical
-            span.item-name {{ complement.getName() | uppercase }}
-            a.pull-right.mu-has-notification(ng-if='notifications(complement).length')
-              i
-              span.badge.badge-notifications {{ notifications(complement).length }}
-            label(ng-if='!(complements | orderBy: sortCriteria() | filter:listSearch:searchComparator).length')
-              | {{ noItemsToShow | translate }}
-    .panel.panel-default(ng-if='present(exams)')
-      .panel-heading(id='headingExams', role='tab')
-        h4.panel-title
-          a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapseExams', aria-controls='collapseExams')
-            |  {{ 'exams' | translate | uppercase }}
-      .panel-collapse.collapse(id='collapseExams', role='tabpanel', aria-labelledby='headingExams')
-        .guide-chapter-list
-          button.list-group-item.noborder-radius(ng-repeat='exam in exams | orderBy: sortCriteria() | filter:listSearch:searchComparator', ng-click='open(exam)')
-            i(class='{{ exam.iconClass() }}')
-            span.divider-vertical
-            span.item-name {{ exam.getName() | uppercase }}
-            a.pull-right.mu-has-notification(ng-if='notifications(exam).length')
-              i
-              span.badge.badge-notifications {{ notifications(exam).length }}
-            label(ng-if='!(exams | orderBy: sortCriteria() | filter:listSearch:searchComparator).length')
-              | {{ noItemsToShow | translate }}
-    .panel.panel-default(ng-if='present(others)')
-      .panel-heading(id='headingOthers', role='tab')
-        h4.panel-title
-          a(role='button', data-toggle='collapse', data-parent='#accordion', data-target='#collapseOthers', aria-controls='collapseOthers')
-            |  {{ 'others' | translate | uppercase }}
-      .panel-collapse.collapse(id='collapseOthers', role='tabpanel', aria-labelledby='headingOthers')
-        .guide-chapter-list
-          button.list-group-item.noborder-radius(ng-repeat='guide in others | orderBy: sortCriteria() | filter:listSearch:searchComparator', ng-click='open(guide)')
-            i(class='{{ guide.iconClass() }}')
-            span.divider-vertical
-            span.item-name {{ guide.getName() | uppercase }}
-            a.pull-right.mu-has-notification(ng-if='notifications(guide).length')
-              i
-              span.badge.badge-notifications {{ notifications(guide).length }}
-            label(ng-if='!(others | orderBy: sortCriteria() | filter:listSearch:searchComparator).length')
-              | {{ noItemsToShow | translate }}
+      +accordionPanel('accordionChapters', 'chapter', 'heading{{$index}}', 'collapse{{$index}}', 'guides')
+    +accordionPanel('accordionExams', '"exams"', 'headingExams', 'collapseExams', 'exams')
+    +accordionPanel('accordionComplements', '"complements"', 'headingComplements', 'collapseComplements', 'complements')
+    +accordionPanel('accordionOthers', '"others"', 'headingOthers', 'collapseOthers', 'others')
+
   button.btn.btn-success.pull-right(ng-if='isJanitor()', ui-sref='classroom.courses.new')
     | {{ 'new_course' | translate }}
 
