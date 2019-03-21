@@ -87,6 +87,7 @@ angular
     first_name_error: 'First name is mandatory',
     first_name: 'First name',
     follow: 'Follow',
+    general_stats: 'General stats',
     guide: 'Guide',
     guides: 'Guides',
     hide: 'Hide',

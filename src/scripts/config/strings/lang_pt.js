@@ -87,6 +87,7 @@ angular
     first_name_error: 'O nome é obrigatório',
     first_name: 'Primeiro nome',
     follow: 'Segue',
+    general_stats: 'Estatísticas gerais',
     guide: 'Guia',
     guides: 'Guias',
     hide: 'ocultar',

@@ -89,6 +89,7 @@ angular
     first_name_error: 'El campo nombre es obligatorio',
     follow: 'Seguir',
     full_notification: '<strong>{{assignment.student.first_name}} {{assignment.student.last_name}}"</strong> te hizo una pregunta en el ejercicio <strong>"{{assignment.exercise.name}}"</strong> de la guía <strong>"{{assignment.guide.name}}"</strong> que se encuentra en <strong>"{{assignment.guide.parent.name}}"</strong>',
+    general_stats: 'Estadísticas generales',
     guide: 'Guía',
     guides: 'Guías',
     hide: 'Ocultar',
