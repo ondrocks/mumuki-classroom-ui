@@ -19,7 +19,8 @@ angular
       list: data.guideProgress,
       itemTemplate: 'views/templates/item-guide-progress.html',
       uidField: 'student.uid',
-      responseField: 'guideProgress'
+      responseField: 'guideProgress',
+      apiEndpoint: null
     });
 
     const guide = Guide.from(data.guide);
