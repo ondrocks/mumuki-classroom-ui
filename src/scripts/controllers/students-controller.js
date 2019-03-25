@@ -86,11 +86,7 @@ angular
       Modal.transfer(student, () => $state.reload());
     };
 
-    $scope.exportStudents = () => {
-      return Api
-        .getAllStudents({})
-        .then((data) => Download.json("students", data.students))
-        .catch((e) => toastr.error(e));
+    $scope.reportUrl = () => {
+      return `${Domain.classroomApiURL()}/students/report`;
     };
-
   });

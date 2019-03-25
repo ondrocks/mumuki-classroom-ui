@@ -58,7 +58,7 @@
     .row(ng-if='withStudentExport')
       .col-md-3.pull-right.report
         div
-          a(href="" ng-click='exportStudents()' download)
+          a(href='{{ reportUrl() }}' download)
             span.view-mode {{ 'export_students' | translate }}
             i.fa.fa-download
           a#downloadAnchor(style='display:none')
