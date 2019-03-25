@@ -17,6 +17,7 @@ angular
 
     if ($stateParams.course) {
       Breadcrumb.setCourse($stateParams.course);
+      $scope.setCount(students.total);
     }
 
     $scope.Humanizer = Humanizer;
@@ -28,9 +29,6 @@ angular
     $scope.canTransfer = Permissions.isJanitor();
     $scope.canDetach = Permissions.isJanitor();
     $scope.canAddStudent = Permissions.isJanitor();
-
-    //TODO: Uncouple from course controller
-    $scope.setCount && $scope.setCount(students.total);
 
     $scope.stats = (student, field) => student.stats[field] * 100 / student.totalStats();
 
