@@ -63,6 +63,10 @@ angular
       return this._students;
     };
 
+    this.inCoursesNamespace = () => {
+      return $state.current.name != 'classroom.students.list';
+    };
+
     this._course = null;
     this._guide = null;
     this._student = null;
