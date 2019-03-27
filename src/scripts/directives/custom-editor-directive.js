@@ -9,6 +9,7 @@ angular
       scope: {
         language: '=',
         content: '=',
+        extra: '=',
         extraAttributes: '='
       },
       controller: ($scope) => {
