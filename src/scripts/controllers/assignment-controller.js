@@ -218,6 +218,7 @@ angular
       };
 
       $scope.renderCustomEditor = false;
+      $scope.lastSolutionExtra = assignment.exercise.extra;
       $scope.lastSolutionContent = _.get(assignment.diffs.last(), 'right.content', '');
       $timeout(() => $scope.renderCustomEditor = true);
 

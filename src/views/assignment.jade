@@ -47,7 +47,7 @@
 
                   div(ng-if="hasSubmissions()")
                     div(ng-if='assignment.exercise.usesCustomEditor()')
-                      custom-editor(ng-if="renderCustomEditor", language="assignment.guide.language", content='lastSolutionContent', extra-attributes="'read-only=true'")
+                      custom-editor(ng-if="renderCustomEditor", language="assignment.guide.language", content='lastSolutionContent', extra='lastSolutionExtra', extra-attributes="'read-only=true'")
                     div(ng-if='assignment.exercise.usesFreeFormEditor()')
                       div(ng-bind-html='assignment.exercise.trustedFreeFormEditorSource()')
                     div(ng-if='!assignment.exercise.usesCustomEditor() && !assignment.exercise.usesFreeFormEditor()')
