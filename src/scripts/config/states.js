@@ -69,6 +69,31 @@ angular
         }
       })
       .state('classroom.students', {
+        authenticated: true,
+        abstract: true
+      })
+      .state('classroom.students.list', {
+        authenticated: true,
+        url: '/students',
+        params: {
+          withStudentExport: true
+        },
+        views: {
+          'content@classroom': {
+            templateUrl: 'views/students.html',
+            controller: 'StudentsController',
+            resolve: {
+              students: ($state, $stateParams, Api) => {
+                return Api
+                  .getAllStudents($stateParams)
+                  .catch(() => $state.go('classroom.courses.course.guides', $stateParams, { location: 'replace' }));
+              }
+            }
+          }
+        }
+
+      })
+      .state('classroom.students.new', {
         url: '/students/:course',
         authenticated: true,
         views: {

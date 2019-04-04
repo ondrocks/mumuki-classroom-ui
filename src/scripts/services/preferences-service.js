@@ -12,14 +12,14 @@ angular
     const toggleField = (field) => {
       preferences[field] = !preferences[field];
       $cookies.putObject(field, { value: preferences[field] });
-    }
+    };
 
     const getField = (field) => {
       if (_.isNull(preferences[field])) {
         preferences[field] = _.get($cookies.getObject(field), 'value');
       }
       return preferences[field];
-    }
+    };
 
     const Preferences = (scope, key) => {
       const cookieName = $state.current.name + "-" + key;

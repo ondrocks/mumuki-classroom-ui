@@ -1,5 +1,7 @@
 .container
 
+
+
   .input-group
     i.input-group-addon.fa.fa-search
     input.form-control(id='filter', placeholder='{{ inputPlaceholder | translate }}', ng-model='listSearch')
@@ -16,6 +18,9 @@
         span.badge.badge-notifications {{ notifications(item).length }}
     label(ng-if='!(list | orderBy: sortCriteria() | filter:listSearch:searchComparator).length')
       | {{ noItemsToShow | translate }}
+
+  button.btn.btn-primary(ng-if='isJanitor()', ui-sref='classroom.students.list')
+    | {{ 'general_stats' | translate }}
 
   button.btn.btn-success.pull-right(ng-if='isJanitor()', ui-sref='classroom.courses.new')
     | {{ 'new_course' | translate }}

@@ -1,4 +1,3 @@
-
 angular
   .module('classroom')
   .constant('LANG_EN', {
@@ -76,6 +75,7 @@ angular
     export_solutions_button: 'Export solutions',
     export_solutions_disclaimer: 'Warning! This data is sensitive. Do not use or distribute it without explicit users consent.<br><br>Do you want to continue anyway?',
     export_solutions_title: 'Export solutions of {{courseName}}',
+    export_students: 'Export student data',
     failed: "Failed",
     filter_available_courses: 'Filter available courses',
     filter_available_exams: 'Filter available exams',
@@ -87,6 +87,7 @@ angular
     first_name_error: 'First name is mandatory',
     first_name: 'First name',
     follow: 'Follow',
+    general_stats: 'General stats',
     guide: 'Guide',
     guides: 'Guides',
     hide: 'Hide',

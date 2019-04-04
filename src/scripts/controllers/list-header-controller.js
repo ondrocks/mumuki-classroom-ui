@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('ListHeaderController', function ($scope, $stateParams, $filter, $timeout, list, responseField, uidField, itemTemplate, Api, Auth, Preferences, Followers, Domain, Permissions) {
+  .controller('ListHeaderController', function ($scope, $stateParams, $filter, $timeout, list, responseField, uidField, apiEndpoint, itemTemplate, Api, Auth, Preferences, Followers, Domain, Permissions) {
 
     const filter = $filter('filter');
 
@@ -39,6 +39,7 @@ angular
     $scope.withDetails = true;
     $scope.withFollowers = true;
     $scope.withDetachedStudents = Permissions.isTeacher();
+    $scope.withStudentExport = $stateParams.withStudentExport;
 
     $scope.list = list;
     $scope.itemTemplate = itemTemplate;
@@ -51,7 +52,7 @@ angular
       Preferences.toggleShowDetachedStudents();
       $scope.params.page = 1;
       $scope.params.with_detached = $scope.showDetachedStudents();
-    }
+    };
 
     $scope.onlyFollowers = Preferences.onlyFollowers;
     $scope.toggleOnlyFollowers = Preferences.toggleOnlyFollowers;
@@ -66,16 +67,16 @@ angular
       with_detached: $scope.showDetachedStudents(),
       order_by: mapOrderBy(),
       query_criteria: ''
-    }
+    };
 
     $scope.selectPage = (n) => {
       $scope.params.page = n;
-    }
+    };
 
     $scope.toggleIsAscending = () => {
       $scope.options.isAscending = !$scope.options.isAscending;
       $scope.params.order_by = mapOrderBy();
-    }
+    };
 
     $scope.course = () => $stateParams.course;
     $scope.courseSlug = () => `${Domain.tenant()}/${$scope.course()}`;
@@ -98,7 +99,7 @@ angular
 
     $scope.$watch('options.sortingType', (newValue) => {
       $scope.params.sort_by = newValue;
-    })
+    });
 
     let delayQueryChange;
     $scope.queryChange = () => {
@@ -109,17 +110,18 @@ angular
         $scope.params.query_criteria = $scope.currentFilter.queryCriteria;
         $scope.params.query_operand = _.get($scope.currentQueryOperand, 'text');
       }, 750);
-    }
+    };
 
     const camel = (string) => {
       return string.replace(/^(.)/g, (char) => char.toUpperCase());
-    }
+    };
 
     let delayParamsChange;
     $scope.$watch('params', () => {
       $timeout.cancel(delayParamsChange);
       delayParamsChange = $timeout(() => {
-        Api[`get${camel(responseField)}`]($stateParams, $scope.params).then((response) => {
+        apiEndpoint = apiEndpoint ? apiEndpoint : `get${camel(responseField)}`;
+        Api[apiEndpoint]($stateParams, $scope.params).then((response) => {
           $scope.list = response[responseField];
           $scope.actualPage = response.page;
           $scope.totalCount = response.total;

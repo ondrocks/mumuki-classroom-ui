@@ -1,4 +1,3 @@
-
 angular
   .module('classroom')
   .service('Api', function ($http, $location, Course, Guide, Student, Teacher, GuideProgress, Assignment, Exam, Auth, Domain, Organization, CONFIG) {
@@ -18,7 +17,7 @@ angular
         .then((res) => _.map(res.data.courses, Course.from))
     };
 
-    this.getCourse = ({course}) => {
+    this.getCourse = ({ course }) => {
       return $http
         .get(`${API()}/courses/${course}`)
         .then((res) => Course.from(res.data.course))
@@ -39,7 +38,7 @@ angular
         .then((res) => res.data.guides)
     };
 
-    this.getBibliothecaGuide = ({org, repo}) => {
+    this.getBibliothecaGuide = ({ org, repo }) => {
       return $http
         .get(`${BIBLIOTHECA()}/guides/${org}/${repo}/markdown`)
         .then((res) => Guide.from(res.data))
@@ -53,7 +52,7 @@ angular
 
     this.getGuideProgress = ({ org, course, repo }, params = {}) => {
       return $http
-        .get(`${API()}/courses/${course}/guides/${org}/${repo}`, {params})
+        .get(`${API()}/courses/${course}/guides/${org}/${repo}`, { params })
         .then((res) => ({
           page: res.data.page,
           total: res.data.total,
@@ -114,7 +113,7 @@ angular
     this.getStudent = (course, uid) => {
       return $http
         .get(`${API()}/courses/${course}/student/${uid}`)
-      };
+    };
 
     this.updateTeacher = (course, teacher) => {
       return $http
@@ -139,6 +138,15 @@ angular
     this.getStudents = ({ course }, params = {}) => {
       return $http
         .get(`${API()}/courses/${course}/students`, { params })
+        .then((res) => {
+          res.data.students = _.map(res.data.students, Student.from);
+          return res.data;
+        })
+    };
+
+    this.getAllStudents = ({}, params = {}) => {
+      return $http
+        .get(`${API()}/students`, { params })
         .then((res) => {
           res.data.students = _.map(res.data.students, Student.from);
           return res.data;
@@ -176,7 +184,7 @@ angular
         .post(`${API()}/courses/${course}/messages`, data);
     };
 
-    this.getMessages = ({course, org, repo, student, exercise}) => {
+    this.getMessages = ({ course, org, repo, student, exercise }) => {
       const eid = exercise.eid;
       const language = exercise.language;
       return $http
@@ -235,7 +243,7 @@ angular
       return $http
         .get(`${API()}/notifications?page=${page}&per_page=${perPage}`)
         .then((res) => res.data)
-        .catch(() => ({total: 0, page: 1, notifications: []}));
+        .catch(() => ({ total: 0, page: 1, notifications: [] }));
     };
 
     this.putNotification = (notificationId, action) => {
@@ -263,13 +271,17 @@ angular
 
     this.postInvitation = (course, expiration) => {
       return $http
-        .post(`${API()}/courses/${course}/invitation`, {expiration_date: expiration})
+        .post(`${API()}/courses/${course}/invitation`, { expiration_date: expiration })
         .then((res) => _.get(res, 'data.invitation'));
     };
 
-    this.postManualEvaluation = ({course, slug, uid, eid, sid, comment, status}) => {
+    this.postManualEvaluation = ({ course, slug, uid, eid, sid, comment, status }) => {
       return $http
-        .post(`${API()}/courses/${course}/guides/${slug}/${eid}/student/${uid}/manual_evaluation`, {sid, comment, status})
+        .post(`${API()}/courses/${course}/guides/${slug}/${eid}/student/${uid}/manual_evaluation`, {
+          sid,
+          comment,
+          status
+        })
     };
 
     this.getLanguages = () => {

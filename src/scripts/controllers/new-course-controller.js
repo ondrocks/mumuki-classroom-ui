@@ -34,13 +34,13 @@ angular
       { name: 'day_friday', checked: false },
       { name: 'day_saturday', checked: false },
       { name: 'day_sunday', checked: false },
-    ]
+    ];
 
     $scope.shifts = [
       { name: 'shift_morning', checked: false },
       { name: 'shift_afternoon', checked: false },
       { name: 'shift_night', checked: false },
-    ]
+    ];
 
     $scope.updateArray = (type) => $scope.course[type] = _.filter($scope[type], 'checked');
 
@@ -49,7 +49,7 @@ angular
         .filter((checkable) => checkable.checked)
         .map((checkable) => checkable.name)
         .map((name) => translate(name))
-        .value()
+        .value();
 
     $scope.getShiftsString = (course) => course.shifts.join('-');
 
@@ -60,7 +60,7 @@ angular
       course.period = course.period.toLowerCase();
       course.slug   = `${Api.subdomain()}/${course.period}-${course.code}`.toLowerCase();
       return course;
-    }
+    };
 
     $scope.create = () => {
       const course = $scope.getCourseToPost();

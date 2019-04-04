@@ -1,6 +1,5 @@
 .panel.panel-default
   .panel-heading
-
     .row
       .col-md-8.col-sm-6.list-header-options
         div.list-header-option(ng-if='withDetachedStudents')
@@ -55,6 +54,14 @@
 
           input.form-control(id='filter', placeholder='{{ currentFilter.text | translate }}', ng-model='listOptions.search', ng-change="queryChange()")
 
+
+    .row(ng-if='withStudentExport')
+      .col-md-3.pull-right.report
+        div
+          a(href='{{ reportUrl() }}' download)
+            span.view-mode {{ 'export_students' | translate }}
+            i.fa.fa-download
+          a#downloadAnchor(style='display:none')
   .panel-content
     div.col-md-4.col-sm-6.floating-card(ng-repeat='item in list')
       div(ng-include='itemTemplate')

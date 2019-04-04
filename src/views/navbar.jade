@@ -5,7 +5,7 @@
         li.mu-breadcrumb-list-item.brand
           a(ui-sref='classroom.home')
             i.da.da-mumuki
-        li.mu-breadcrumb-list-item(ng-class='{ "last": Breadcrumb.list().length === 0 }')
+        li.mu-breadcrumb-list-item(ng-class='{ "last": Breadcrumb.list().length === 0 }' ng-if='Breadcrumb.inCoursesNamespace()')
           a(ui-sref='classroom.home') {{ 'courses' | translate}}
         li.mu-breadcrumb-list-item(ng-repeat='item in Breadcrumb.list()', ng-class='{"dropdown": item.student, "last": $last && !item.student }')
           a(ng-if='!item.student', href='', ng-click='Breadcrumb.goTo(item)') {{ item.name() | translate }}

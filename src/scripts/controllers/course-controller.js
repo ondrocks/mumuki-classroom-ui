@@ -8,7 +8,7 @@ angular
       students: 'classroom.courses.course.students',
       teachers: 'classroom.courses.course.teachers',
       exams: 'classroom.courses.course.exams'
-    }
+    };
 
     $scope.course = CurrentCourse.get();
 
@@ -22,7 +22,7 @@ angular
           })
           .catch((e) => toastr.error(e));
       });
-    }
+    };
 
     $scope.tabs = _.keys(tabs);
     $scope.open = (tab) => $state.go(tabs[tab], $stateParams, { location: 'replace' });
@@ -30,7 +30,7 @@ angular
 
     $scope.setCount = (count) => $scope.count = count;
 
-    $scope.goToAddStudents = () => $state.go('classroom.students', $stateParams);
+    $scope.goToAddStudents = () => $state.go('classroom.students.new', $stateParams);
 
     $scope.export = () => {
       Modal.exportCourseDataToJson($stateParams.course, () => {
@@ -39,11 +39,11 @@ angular
           .then((data) => Download.json($stateParams.course, data.exercise_student_progress))
           .catch((e) => toastr.error(e));
       });
-    }
+    };
 
     $scope.reportUrl = () => {
       return `${Domain.classroomApiURL()}/courses/${$stateParams.course}/report`;
-    }
+    };
 
     $scope.copy = (link) => {
       clipboard.copyText(link);
