@@ -1,7 +1,9 @@
 
 angular
   .module('classroom')
-  .controller('NavbarController', function ($scope, $state, $timeout, $sce, $filter, hotkeys, notifications, Student, Auth, Breadcrumb, Permissions, Notification, Api) {
+  .controller('NavbarController', function ($scope, $state, $timeout, $interval, $sce, $filter, hotkeys, notifications, Student, Auth, Breadcrumb, Permissions, Notification, Api) {
+
+    const INTERVAL_DELAY = 10 * 1000;
 
     $scope.filter = { search: '' };
 
@@ -14,9 +16,11 @@ angular
     $scope.isTeacher = Permissions.isTeacher;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.Breadcrumb = Breadcrumb;
-    $scope.trust = (notification) => $sce.trustAsHtml($filter('translate')(notification.type.toLowerCase(), notification));
+    $scope.trust = (notification) => $sce.trustAsHtml($filter('translate')(_.get(notification, 'type', '').toLowerCase(), notification));
 
     $scope.goToAssignment = Notification.goToAssignment;
+
+    $interval(() => Api.getNotifications().then(Notification.set), INTERVAL_DELAY);
 
     let delaySearch;
     $scope.search = () => {
