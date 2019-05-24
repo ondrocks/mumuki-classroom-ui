@@ -111,7 +111,7 @@
                         i.fa.fa-fw.fa-spinner.fa-spin(ng-if='spin', style='margin: 6px auto')
                       li(class='{{messageSenderClass(message)}}' ng-repeat='message in assignment.lastSubmission().messages')
                         div.message
-                          p(ng-bind-html='trust(message.content)')
+                          p(ng-bind-html='message.content')
                           .sender {{message.sender}}
                           time {{Humanizer.date(message.created_at)}}
                   button.btn.btn-success.btn-block(ng-click='newMessage()')
