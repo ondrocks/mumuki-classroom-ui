@@ -1,7 +1,7 @@
 
 angular
   .module('classroom')
-  .controller('CourseController', function ($scope, $state, $stateParams, $timeout, clipboard, toastr, Api, Download, Modal, CurrentCourse, Domain) {
+  .controller('CourseController', function ($scope, $state, $stateParams, $timeout, clipboard, toastr, Api, Download, Modal, CurrentCourse, Domain, Permissions) {
 
     const tabs = {
       guides: 'classroom.courses.course.guides',
@@ -40,6 +40,8 @@ angular
           .catch((e) => toastr.error(e));
       });
     };
+
+    $scope.isOwner = Permissions.isOwner();
 
     $scope.reportUrl = () => {
       return `${Domain.classroomApiURL()}/courses/${$stateParams.course}/report`;

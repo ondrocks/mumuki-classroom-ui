@@ -26,7 +26,6 @@ angular
       }
     }
 
-
     this.set = (permissions = {}) => {
       store.set(PERMISSIONS_KEY, _.pick(permissions, availableScopes));
     };
@@ -40,7 +39,7 @@ angular
     };
 
     this.ownerPermissions = () => {
-      return  this.get('owner');
+      return this.get('owner');
     };
 
     this.teacherPermissions = () => {
