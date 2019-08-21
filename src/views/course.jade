@@ -21,7 +21,7 @@
         span &nbsp;
         span.mu-disabled(ng-if='isCopied') {{ 'copied' | translate }}
     .col-md-3.pull-right.report
-      div(ng-if="isOwner")
+      div(ng-if="isAdmin")
         a(ng-click='export()')
           span.view-mode {{ 'export_solutions_button' | translate }}
           i.fa.fa-download

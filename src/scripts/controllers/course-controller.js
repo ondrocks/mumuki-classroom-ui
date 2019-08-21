@@ -41,7 +41,7 @@ angular
       });
     };
 
-    $scope.isOwner = Permissions.isOwner();
+    $scope.isAdmin = Permissions.isAdmin();
 
     $scope.reportUrl = () => {
       return `${Domain.classroomApiURL()}/courses/${$stateParams.course}/report`;

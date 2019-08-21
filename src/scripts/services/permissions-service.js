@@ -4,7 +4,7 @@ angular
   .service('Permissions', function ($injector, store, Domain) {
 
     const PERMISSIONS_KEY = 'permissions';
-    const availableScopes = ['teacher', 'headmaster', 'janitor', 'owner'];
+    const availableScopes = ['teacher', 'headmaster', 'janitor', 'admin', 'owner'];
 
     class PermissionSlug {
       constructor(slug = '') {
@@ -42,6 +42,10 @@ angular
       return this.get('owner');
     };
 
+    this.adminPermissions = () => {
+      return this.get('admin');
+    };
+
     this.teacherPermissions = () => {
       return this.get('teacher');
     };
@@ -58,8 +62,12 @@ angular
       return this.is('owner');
     };
 
+    this.isAdmin = () => {
+      return this.is('admin') || this.isOwner();
+    };
+
     this.isJanitor = () => {
-      return this.is('janitor') || this.isOwner();
+      return this.is('janitor') || this.isAdmin();
     };
 
     this.isHeadmaster = () => {
