@@ -25,7 +25,7 @@ angular
     $scope.withDetails = false;
 
     $scope.totalCount = students.total;
-    $scope.isOwner = Permissions.isOwner();
+    $scope.isAdmin = Permissions.isAdmin();
     $scope.canTransfer = Permissions.isJanitor();
     $scope.canDetach = Permissions.isJanitor();
     $scope.canAddStudent = Permissions.isJanitor();
