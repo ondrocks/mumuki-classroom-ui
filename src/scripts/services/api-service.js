@@ -234,7 +234,7 @@ angular
 
     this.getNotifications = () => {
       return $http
-        .get(`${API()}/notifications/unread`)
+        .get(`${API()}/notifications/unread`, { ignoreLoadingBar: true })
         .then((res) => res.data)
         .catch(() => []);
     };
