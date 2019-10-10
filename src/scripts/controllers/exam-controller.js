@@ -2,6 +2,10 @@
 angular
   .module('classroom')
   .controller('ExamController', function ($scope, $state, $stateParams, $filter, toastr, Api, Modal) {
+    $scope.inputType = {
+      isMultiple: false
+    };
+    $scope.titleKey = 'exam_students';
 
     const isBefore = () =>
       !!$scope.exam &&
