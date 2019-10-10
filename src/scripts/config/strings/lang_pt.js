@@ -58,6 +58,7 @@ angular
     end_time: 'Fim do tempo',
     evaluate: 'Avalie',
     exam_link: 'Link de exame',
+    exam_students: 'Estudantes do exame', 
     exam_updated: 'Exame atualizado com sucesso',
     exam: 'Exame',
     exams: 'Exames',

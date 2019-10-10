@@ -57,6 +57,7 @@ angular
     end_time: 'End time',
     evaluate: 'Evaluate',
     exam_link: 'Exam link',
+    exam_students: 'Exam students',
     exam_updated: 'Exam updated successfully',
     exam: 'Exam',
     exams: 'Exams',

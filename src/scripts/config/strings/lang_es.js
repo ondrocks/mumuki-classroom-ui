@@ -59,6 +59,7 @@ angular
     evaluate: 'Corregir',
     exam: 'Examen',
     exam_link: 'Link al examen',
+    exam_students: 'Estudiantes del examen',
     exam_updated: 'Examen guardado satisfactoriamente',
     exams: 'Exámenes',
     example: 'Ejemplo',
