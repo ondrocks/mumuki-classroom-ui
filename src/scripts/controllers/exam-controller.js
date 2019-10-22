@@ -6,6 +6,14 @@ angular
       isMultiple: false
     };
     $scope.titleKey = 'exam_students';
+    $scope.csv = {
+      content: null,
+      header: true,
+      headerVisible: true,
+      separator: ',',
+      result: null,
+      uploadButtonLabel: "Seleccionar"
+    };
 
     const isBefore = () =>
       !!$scope.exam &&
@@ -100,4 +108,8 @@ angular
 
       return criterion;
     }
+    $scope.givePermissions = () => {
+      console.log("Dando permisos");
+    };
+
   });
