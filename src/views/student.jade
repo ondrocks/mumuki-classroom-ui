@@ -34,3 +34,4 @@
           input.form-control(ng-model='student.personal_id', type='text', placeholder='{{ "personal_id_placeholder" | translate }}')
     .row(ng-if='csv.result')
       button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudents()') {{ 'confirm' | translate }}
+      button.btn.modal-form-input.pull-right(ng-click='setAsPristine()') {{ 'cancel' | translate }}

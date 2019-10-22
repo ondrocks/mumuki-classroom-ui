@@ -132,6 +132,7 @@
             input.form-control(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}')
       .row(ng-if='csv.result')
         button.btn.btn-success.modal-form-input.pull-right(ng-click='givePermissions()') {{ 'confirm' | translate }}
+        button.btn.modal-form-input.pull-right(ng-click='setAsPristine()') {{ 'cancel' | translate }}
 
     .single-student(ng-switch-when="false")
       .row
