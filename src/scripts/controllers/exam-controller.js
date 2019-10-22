@@ -5,7 +5,7 @@ angular
     $scope.inputType = {
       isMultiple: false
     };
-    $scope.titleKey = 'exam_students';
+    $scope.titleKey = 'exam_enable_students';
     $scope.csv = {
       content: null,
       header: true,
