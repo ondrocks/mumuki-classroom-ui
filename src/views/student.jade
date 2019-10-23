@@ -36,3 +36,4 @@
     .row(ng-if='csv.result')
       button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudents()') {{ 'confirm' | translate }}
       button.btn.modal-form-input.pull-right(ng-click='setAsPristine()') {{ 'cancel' | translate }}
+    button.btn.modal-form-input.pull-right(ng-click='cancelSubmission()', ng-if='!csv.result') {{ 'cancel' | translate }}
