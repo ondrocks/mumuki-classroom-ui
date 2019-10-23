@@ -124,7 +124,7 @@
       h3 {{ 'add_multiple_students' | translate }}
       h4: small(ng-bind-html='"exam_student_example_csv_link" | translate | trustHtml')
       ng-csv-import.import(content='csv.content', callback='applyCsv', header='csv.header', header-visible='csv.headerVisible', separator='csv.separator', result='csv.result', upload-button-label='csv.uploadButtonLabel')
-      table.table(ng-if='csv.result')
+      table.table.emails-table(ng-if='csv.result')
         tr
           th {{ 'email' | translate }}
         tr(ng-repeat='student in csv.result')
