@@ -49,6 +49,10 @@ angular
         .catch((res) => toastr.error(res.data.message));
     };
 
+    $scope.cancelSubmission = () => {
+      $state.go('classroom.courses.course.students', $stateParams)
+    }
+
     $scope.addStudents = () => {
       _.each($scope.csv.result, (s) => {
         return Api
