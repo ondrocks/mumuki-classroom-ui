@@ -72,3 +72,27 @@ label.mu-checkbox {
 .emails-table {
   width: 60%;
 }
+
+input[type="file"]{
+
+  color: transparent;
+
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  &:lang(es):before {
+    content: 'Seleccionar archivo';
+  }
+  &:lang(en):before {
+    content: 'Choose file';
+  }
+  &:lang(pt):before {
+    content: 'Selecionar arquivos';
+  }
+
+  &:before {
+    -webkit-user-select: none;
+    @extend .btn;
+    @extend .btn-success;
+  }
+}
