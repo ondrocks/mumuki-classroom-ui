@@ -113,9 +113,19 @@ angular
 
       return criterion;
     }
-    $scope.givePermissions = () => {
-      console.log("Dando permisos");
+    $scope.addPermissions = () => {
+      let emails = _.compact(_.map($scope.csv.result, "email"));
+      _.each(emails, (email) => {
+        return Api
+          .addExamPermissions($stateParams.course, $scope.exam.eid, email)
+          .then($scope.setAsPristine)
+          .then(() => setStudentAsSelected(email))
+          .catch((res) => toastr.error(res.data.message));
+      })
     };
 
-
+    setStudentAsSelected = (email) => {
+      let student = _.find($scope.students, (student) => student.email == email)
+      student.isSelected = true
+    };    
   });

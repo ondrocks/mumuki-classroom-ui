@@ -232,6 +232,11 @@ angular
         .post(`${API()}/courses/${course}/students`, student)
     };
 
+    this.addExamPermissions = (course, exam, student) => {
+      return $http
+        .post(`${API()}/courses/${course}/exams/${exam}/students/${student}`)
+    }
+
     this.getNotifications = () => {
       return $http
         .get(`${API()}/notifications/unread`)

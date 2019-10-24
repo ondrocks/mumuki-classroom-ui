@@ -123,8 +123,7 @@
     .masive-students(ng-switch-when="true")
       h3 {{ 'add_multiple_students' | translate }}
       h4: small(ng-bind-html='"exam_student_example_csv_link" | translate | trustHtml')
-      label(for='asdasd')
-        ng-csv-import#asdasd.import(content='csv.content', callback='applyCsv', header='csv.header', header-visible='csv.headerVisible', separator='csv.separator', result='csv.result', upload-button-label='csv.uploadButtonLabel')
+      ng-csv-import.import(content='csv.content', callback='applyCsv', header='csv.header', header-visible='csv.headerVisible', separator='csv.separator', result='csv.result', upload-button-label='csv.uploadButtonLabel')
       table.table.emails-table(ng-if='csv.result')
         tr
           th {{ 'email' | translate }}
@@ -132,7 +131,7 @@
           td
             input.form-control(ng-model='student.email', type='text', placeholder='{{ "email" | translate }}')
       .row(ng-if='csv.result')
-        button.btn.btn-success.modal-form-input.pull-right(ng-click='givePermissions()') {{ 'confirm' | translate }}
+        button.btn.btn-success.modal-form-input.pull-right(ng-click='addPermissions()') {{ 'confirm' | translate }}
         button.btn.modal-form-input.pull-right(ng-click='setAsPristine()') {{ 'cancel' | translate }}
       br
 
