@@ -45,13 +45,13 @@ angular
 
     $scope.getExam = () => {
       throw new Error('Not Implemented');
-    }
+    };
 
     $scope.getExamInLocalTime = (localExam) => {
       localExam.start_time = moment(localExam.start_time).toDate();
       localExam.end_time = moment(localExam.end_time).toDate();
       return localExam;
-    }
+    };
 
     const checkExistenceAndSave = (exam) => {
       return Api.isExamInUsage(exam)
@@ -62,7 +62,7 @@ angular
             doCreate(exam);
           }
         });
-    }
+    };
 
     const doCreate = (exam) => {
       return $scope
@@ -70,7 +70,7 @@ angular
         .then(() => $state.go('classroom.courses.course.exams', $stateParams, { reload: true }))
         .then(() => toastr.success($filter('translate')('exam_updated')))
         .catch((res) => toastr.error(res.data.message));
-    }
+    };
 
     $scope.create = () => {
       const exam = $scope.getExam($scope.exam);
@@ -80,7 +80,7 @@ angular
       } else {
         doCreate(exam);
       }
-    }
+    };
 
     const PASSING_CRITERIA = [
       { key: 'none', isValid: (value) => true },
@@ -104,7 +104,7 @@ angular
       const type = _.find(PASSING_CRITERIA, {key});
 
       return { type, value }
-    }
+    };
 
     $scope.toExamCriterion = (scopeCriterion) => {
       var criterion = { type: scopeCriterion.type.key, value: scopeCriterion.value };
@@ -112,20 +112,21 @@ angular
       if ($scope.isNone(criterion.type)) delete criterion.value;
 
       return criterion;
-    }
+    };
+
     $scope.addPermissions = () => {
-      let emails = _.compact(_.map($scope.csv.result, "email"));
+      const emails = _.compact(_.map($scope.csv.result, 'email'));
       _.each(emails, (email) => {
         return Api
           .addExamPermissions($stateParams.course, $scope.exam.eid, email)
-          .then($scope.setAsPristine)
           .then(() => setStudentAsSelected(email))
+          .then($scope.setAsPristine)
           .catch((res) => toastr.error(res.data.message));
       })
     };
 
-    setStudentAsSelected = (email) => {
-      let student = _.find($scope.students, (student) => student.email == email)
-      student.isSelected = true
-    };    
+    const setStudentAsSelected = (email) => {
+      const student = _.find($scope.students, {email: email});
+      student.isSelected = true;
+    };
   });
