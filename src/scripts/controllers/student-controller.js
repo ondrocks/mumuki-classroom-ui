@@ -1,23 +1,13 @@
-
 angular
   .module('classroom')
-  .controller('StudentController', function ($scope, $state, $filter, $location, $stateParams, $sce, toastr, Auth, Api, Domain, Organization, Breadcrumb) {
+  .controller('StudentController', function ($scope, $controller, $state, $filter, $location, $stateParams, $sce, toastr, Auth, Api, Domain, Organization, Breadcrumb) {
     $scope.inputType = {
       isMultiple: false
     };
-    
-    $scope.setAsPristine = () => {
-      $scope.csv = {
-        content: null,
-        header: true,
-        headerVisible: true,
-        separator: ',',
-        result: null,
-        uploadButtonLabel: "Seleccionar"
-      };
-    };
 
-    $scope.setAsPristine()
+    $controller('CsvController', { $scope: $scope });
+
+    $scope.setAsPristine();
 
     const $translate = $filter('translate');
     const EMAIL_REGEX = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i

@@ -1,24 +1,14 @@
-
 angular
   .module('classroom')
-  .controller('ExamController', function ($scope, $state, $stateParams, $filter, toastr, Api, Modal) {
+  .controller('ExamController', function ($scope, $controller, $state, $stateParams, $filter, toastr, Api, Modal) {
     $scope.inputType = {
       isMultiple: false
     };
     $scope.titleKey = 'exam_enable_students';
 
-    $scope.setAsPristine = () => {
-      $scope.csv = {
-        content: null,
-        header: true,
-        headerVisible: true,
-        separator: ',',
-        result: null,
-        uploadButtonLabel: "Seleccionar"
-      };
-    };
+    $controller('CsvController', { $scope: $scope });
 
-    $scope.setAsPristine()
+    $scope.setAsPristine();
 
     const isBefore = () =>
       !!$scope.exam &&
