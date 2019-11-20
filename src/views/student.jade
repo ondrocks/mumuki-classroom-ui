@@ -13,9 +13,10 @@
       input.form-control(ng-model='student.personal_id', type='text', placeholder='{{ "personal_id_placeholder" | translate }}')
     .row
       button.btn.btn-success.modal-form-input.pull-right(ng-click='submitStudent()') {{ 'confirm' | translate }}
+      button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelSubmission()') {{ 'cancel' | translate }}
   .multiple-student(ng-if='inputType.isMultiple')
     h3 {{ 'add_multiple_students' | translate }}
-    h4: small(ng-bind-html='"example_csv_link" | translate | trustHtml')
+    h4: small(ng-bind-html='"student_example_csv_link" | translate | trustHtml')
     ng-csv-import.import(content='csv.content', callback='applyCsv', header='csv.header', header-visible='csv.headerVisible', separator='csv.separator', result='csv.result', upload-button-label='csv.uploadButtonLabel')
     table.table(ng-if='csv.result')
       tr
@@ -34,3 +35,5 @@
           input.form-control(ng-model='student.personal_id', type='text', placeholder='{{ "personal_id_placeholder" | translate }}')
     .row(ng-if='csv.result')
       button.btn.btn-success.modal-form-input.pull-right(ng-click='addStudents()') {{ 'confirm' | translate }}
+      button.btn.btn-default.modal-form-input.pull-right(ng-click='setAsPristine()') {{ 'cancel' | translate }}
+    button.btn.btn-default.modal-form-input.pull-right(ng-click='cancelSubmission()', ng-if='!csv.result') {{ 'cancel' | translate }}
