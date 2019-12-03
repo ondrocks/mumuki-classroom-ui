@@ -108,15 +108,17 @@ angular
       const emails = _.compact(_.map($scope.csv.result, 'email'));
       _.each(emails, (email) => {
         return Api
-          .addExamPermissions($stateParams.course, $scope.exam.eid, email)
+          .addStudentToExam($stateParams.course, $scope.exam, email)
           .then(() => setStudentAsSelected(email))
           .then($scope.setAsPristine)
           .catch((res) => toastr.error(res.data.message));
-      })
+      });
     };
 
     const setStudentAsSelected = (email) => {
       const student = _.find($scope.students, {email: email});
-      student.isSelected = true;
+      if(student) {
+        student.isSelected = true;
+      }
     };
   });

@@ -125,14 +125,14 @@ angular
         .put(`${API()}/courses/${course}/exams/${exam.eid}`, exam)
     };
 
-    this.addStudentToExam = (course, exam, student) => {
+    this.addStudentToExam = (course, exam, student_uid) => {
       return $http
-        .post(`${API()}/courses/${course}/exams/${exam.eid}/students/${student.uid}`, {});
+        .post(`${API()}/courses/${course}/exams/${exam.eid}/students/${student_uid}`, {});
     };
 
-    this.removeStudentToExam = (course, exam, student) => {
+    this.removeStudentToExam = (course, exam, student_uid) => {
       return $http
-        .delete(`${API()}/courses/${course}/exams/${exam.eid}/students/${student.uid}`);
+        .delete(`${API()}/courses/${course}/exams/${exam.eid}/students/${student_uid}`);
     };
 
     this.getStudents = ({ course }, params = {}) => {
@@ -231,11 +231,6 @@ angular
       return $http
         .post(`${API()}/courses/${course}/students`, student)
     };
-
-    this.addExamPermissions = (course, exam, student) => {
-      return $http
-        .post(`${API()}/courses/${course}/exams/${exam}/students/${student}`)
-    }
 
     this.getNotifications = () => {
       return $http
