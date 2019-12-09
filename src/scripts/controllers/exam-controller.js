@@ -106,13 +106,18 @@ angular
 
     $scope.addPermissions = () => {
       const emails = _.compact(_.map($scope.csv.result, 'email'));
-      _.each(emails, (email) => {
-        return Api
-          .addStudentToExam($stateParams.course, $scope.exam, email)
-          .then(() => setStudentAsSelected(email))
-          .then($scope.setAsPristine)
-          .catch((res) => toastr.error(res.data.message));
-      });
+      Api.addStudentsToExam($stateParams.course, $scope.exam, emails).
+      then(processedStudents => {
+        processedStudents.forEach(student_uid => setStudentAsSelected(student_uid));
+        if(processedStudents.length === emails.length) {
+          toastr.success($filter('translate')('students_added_successfully_to_exam'));
+          $scope.setAsPristine();
+        }
+        else {
+          toastr.error($filter('translate')('students_not_added_to_exam'));
+        }
+      })
+      .catch(res => toastr.error(res.data.message));
     };
 
     const setStudentAsSelected = (email) => {

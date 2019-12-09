@@ -1,9 +1,11 @@
 angular
   .module('classroom')
-  .service('Api', function ($http, $location, Course, Guide, Student, Teacher, GuideProgress, Assignment, Exam, Auth, Domain, Organization, CONFIG) {
+  .service('Api', function ($http, $location, $q, Course, Guide, Student, Teacher, GuideProgress, Assignment, Exam, Auth, Domain, Organization, CONFIG) {
 
     const API = () => Domain.classroomApiURL();
     const BIBLIOTHECA = () => Domain.bibliothecaApiURL();
+    const MASSIVE_BATCH_LIMIT = () => 100;
+    const MASSIVE_API_PREFIX = (course) => `${API()}/api/courses/${course}/massive`
 
     const authenticated = (requestOptions = {}) => _.defaultsDeep(requestOptions, {
       headers: { Authorization: `Bearer ${Auth.token()}` }
@@ -117,12 +119,12 @@ angular
 
     this.updateTeacher = (course, teacher) => {
       return $http
-        .post(`${API()}/courses/${course}/teachers`, teacher)
+        .post(`${API()}/courses/${course}/teachers`, teacher);
     };
 
     this.updateExam = (course, exam) => {
       return $http
-        .put(`${API()}/courses/${course}/exams/${exam.eid}`, exam)
+        .put(`${API()}/courses/${course}/exams/${exam.eid}`, exam);
     };
 
     this.addStudentToExam = (course, exam, student_uid) => {
@@ -133,6 +135,14 @@ angular
     this.removeStudentToExam = (course, exam, student_uid) => {
       return $http
         .delete(`${API()}/courses/${course}/exams/${exam.eid}/students/${student_uid}`);
+    };
+
+    this.addStudentsToExam = (course, exam, students_uids_batch) => {
+      const massiveAddStudentsToExam = (students_uids) => {
+        return $http.
+          post(`${MASSIVE_API_PREFIX(course)}/exams/${exam.eid}/students`, {uids: students_uids})
+      };
+      return this.massiveRequest(massiveAddStudentsToExam, students_uids_batch);
     };
 
     this.getStudents = ({ course }, params = {}) => {
@@ -294,6 +304,13 @@ angular
       return $http
         .post(`${API()}/courses/${course}/guides/${org}/${repo}/report?${queryParams}`, reportParams)
         .then((res) => this.downloadCsv('guide_report.csv', res.data));
+    };
+
+    this.massiveRequest = (request, totalElements) => {
+      const chunks = _.chunk(totalElements, MASSIVE_BATCH_LIMIT());
+      const requests = chunks.map(request);
+      return $q.all(requests)
+        .then(results =>  _.flatMap(results, result => result.data.processed));
     };
 
     this.downloadCsv = (filename, data) => {
