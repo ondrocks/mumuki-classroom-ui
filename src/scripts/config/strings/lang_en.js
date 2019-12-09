@@ -169,6 +169,8 @@ angular
     solved_at: 'Solved {{date}}',
     split: 'Split',
     start_time: 'Start time',
+    students_added_successfully_to_exam: 'The students have been added successfully to the exam',
+    students_not_added_to_exam: 'Some of the students weren\'t added to the exam',
     students_subscription_address: 'Students subscription address',
     students: 'Students',
     submissions_count: '{{submissionsCount}} solutions sent. Last solution: {{lastSubmissionDate}}',

@@ -15,6 +15,7 @@ module.exports = merge(common, {
   },
   devtool: 'inline-source-map',
   devServer: {
+    disableHostCheck: true,
     contentBase: path.join(__dirname, buildFolder),
     compress: true,
     port: process.env.PORT,

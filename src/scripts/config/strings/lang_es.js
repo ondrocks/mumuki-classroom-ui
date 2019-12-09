@@ -172,6 +172,8 @@ angular
     solved_at: 'Resuelto {{date}}',
     split: 'Separado',
     start_time: 'Desde',
+    students_added_successfully_to_exam: 'Los estudiantes fueron agregados al examen con exito',
+    students_not_added_to_exam: 'Algunos estudiantes no pudieron ser agregados al examen',
     students: 'Estudiantes',
     students_subscription_address: 'Dirección de suscripción de estudiantes',
     submissions_count: '{{submissionsCount}} soluciones enviadas. Última solución: {{lastSubmissionDate}}',
