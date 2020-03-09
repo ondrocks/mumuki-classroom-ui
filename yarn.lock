@@ -518,7 +518,7 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@bower_components/angular-csv-import@bahaaldine/angular-csv-import#0.0.37":
+"@bower_components/angular-csv-import@bahaaldine/angular-csv-import#v0.0.37":
   version "0.0.37"
   resolved "https://codeload.github.com/bahaaldine/angular-csv-import/tar.gz/6c78d97dad5ecdcd1be5158abe9a24769e47d954"
 
@@ -534,7 +534,7 @@
   version "3.3.7"
   resolved "https://codeload.github.com/twbs/bootstrap-sass/tar.gz/5d6b2ebba0c2a5885ce2f0e01e9218db3d3b5e47"
 
-"@bower_components/dev-awesome@mumuki/dev-awesome#0.7.0":
+"@bower_components/dev-awesome@mumuki/dev-awesome#0.7.0", "@bower_components/dev-awesome@mumuki/dev-awesome#v0.7.0":
   version "0.7.0"
   resolved "https://codeload.github.com/mumuki/dev-awesome/tar.gz/0615494a40ab6bfece6bc178405803c6c6e210d8"
   dependencies:
@@ -553,7 +553,7 @@
   version "3.1.1"
   resolved "https://codeload.github.com/jquery/jquery-dist/tar.gz/1b30f3ad466ebf2714d47eda34dbd7fdf6849fe3"
 
-"@bower_components/mumuki-emojis@mumuki/mumuki-emojis#1.0.3":
+"@bower_components/mumuki-emojis@mumuki/mumuki-emojis#v1.0.3":
   version "1.0.0"
   resolved "https://codeload.github.com/mumuki/mumuki-emojis/tar.gz/625c522b3e4ab44d8fe982ce8371a306dbf27a7a"
   dependencies:
@@ -563,7 +563,7 @@
     gulp-concat "^2.6.1"
     gulp-replace "^1.0.0"
 
-"@bower_components/mumuki-styles@mumuki/mumuki-styles#1.18.2":
+"@bower_components/mumuki-styles@mumuki/mumuki-styles#v1.18.2":
   version "1.18.2"
   resolved "https://codeload.github.com/mumuki/mumuki-styles/tar.gz/0a803474bb27644a951af6ad398a1449c6bba90f"
   dependencies:

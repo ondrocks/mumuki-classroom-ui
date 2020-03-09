@@ -50,7 +50,7 @@ angular
 
     $scope.edit = (uid) => {
       const course = $scope.course();
-      $state.go('classroom.students.edit', _.defaults({ uid, course }, $stateParams))
+      $state.go('classroom.students.edit', _.defaults({uid, course}, $stateParams))
     };
 
     $scope.remove = (student) => {
