@@ -157,6 +157,7 @@ angular
     registered: 'Registrado',
     remove: 'Eliminar',
     results: 'Resultados',
+    results_hidden_for_choices: 'Ocultar resultados para teóricos',
     save: 'Guardar',
     send: 'Enviar',
     shift: 'Turno',

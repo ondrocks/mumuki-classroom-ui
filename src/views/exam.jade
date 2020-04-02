@@ -82,6 +82,7 @@
             ng-model='exam.max_problem_submissions',
             placeholder='5')
 
+
       .col-sm-4
         label {{ 'max_choice_submissions' | translate }}
         .form-group
@@ -91,7 +92,7 @@
             ng-model='exam.max_choice_submissions',
             placeholder='1')
 
-      .col-sm-6
+      .col-sm-4
         label {{ 'passing_criterion' | translate }}
         .form-group
           .input-group.block
@@ -100,7 +101,7 @@
               ui-select-choices(repeat='passingCriterion in passingCriteria | filter:$select.search')
                 small(ng-bind-html=' "passing_criterion_" + passingCriterion.key | translate | highlight: $select.search')
 
-      .col-sm-6
+      .col-sm-4
         label {{ 'passing_grade' | translate }}
         .form-group
           .input-group.block
@@ -109,6 +110,13 @@
             ng-model='passing_criterion.value',
             ng-disabled='isNone(passing_criterion.type.key)',
             placeholder='1')
+
+      .col-sm-4
+        .form-group
+          span.pull-right(ng-click='exam.results_hidden_for_choices = !exam.results_hidden_for_choices')
+            i.fa.fa-square-o(ng-if='!exam.results_hidden_for_choices')
+            i.fa.fa-check-square-o(ng-if='exam.results_hidden_for_choices')
+          label {{ 'results_hidden_for_choices' | translate }}
 
       .col-sm-12
         button.btn.btn-success.pull-right(ng-disabled='!isValid()')

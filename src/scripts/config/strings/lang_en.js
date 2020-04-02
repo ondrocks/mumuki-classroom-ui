@@ -154,6 +154,7 @@ angular
     registered: 'Registered',
     remove: 'Remove',
     results: 'Results',
+    results_hidden_for_choices: 'Hide results for choices',
     save: 'Save',
     send: 'Send',
     shift_afternoon: 'Afternoon',
